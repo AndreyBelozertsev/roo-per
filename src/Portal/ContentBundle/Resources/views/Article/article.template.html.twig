@@ -1,0 +1,61 @@
+<div class="news-box box flex_item" data-id="{{ article.article_id }}">
+    {% if article.original_article_id is defined and article.original_article_id %}
+        {% set article_id = article.original_article_id %}
+    {% else %}
+        {% set article_id = article.article_id %}
+    {% endif %}
+
+    {% if article.original_instance_code is defined and article.original_instance_code %}
+        {% set href = protocol ~ '://' ~  article.original_instance_code ~ '.' ~ site_name ~ path('article_show', {'id': article_id}) %}
+    {% else %}
+        {% set href = path('article_show', {'id': article_id}) %}
+    {% endif %}
+
+    <a href="{{ href }}" class="news-box__all-box-link">
+        <div class="news-box__main-link" title="{{ 'click_to_view'|trans }}">
+            {% set path = (article.original_file_path is defined and article.original_file_path) ? article.original_file_path : article.article_file_url|thumbImage %}
+            <img src="{{ asset(path|existsImage) }}" alt="{{ article.article_title|sliceFullWord(180, true) }}">
+        </div>
+        <div class="news-box__info">
+            <div class="news-box__title news-box__title_main-page">
+                {{ article.article_title|striptags|sliceFullWord(180, true) }}
+            </div>
+            <div class="clearfix">
+                <div class="news-box__eye">
+                    {{ article.article_manual_views_counter ?: article.article_views_counter }}
+                </div>
+                <div class="news-box__date">{{ article.article_published_at|date('d.m.Y') }}</div>
+            </div>
+        </div>
+    </a>
+</div>
+
+{#<div class="news-box box flex_item" data-id="{{ article.article_id }}">#}
+    {#{% if article.original_article_id is defined and article.original_article_id %}#}
+        {#{% set article_id = article.original_article_id %}#}
+    {#{% else %}#}
+        {#{% set article_id = article.article_id %}#}
+    {#{% endif %}#}
+
+    {#{% if article.original_instance_code is defined and article.original_instance_code %}#}
+        {#{% set href = 'https://' ~  article.original_instance_code ~ '.' ~ site_name ~ path('article_show', { id: article_id }) %}#}
+    {#{% else %}#}
+        {#{% set href = path('article_show', { id: article_id }) %}#}
+    {#{% endif %}#}
+    {#<a href="{{ href }}" class="news-box__main-link tooltip" title="{{ 'click_to_view'|trans }}">#}
+        {#<img src="{{ asset(article.article_file_url|thumbImage ) }}">#}
+    {#</a>#}
+    {#<div class="news-box__info">#}
+        {#<a href="{{ href }}" class="news-box__title tooltip" title="{{ 'click_to_view'|trans }}">#}
+            {#{{ article.article_title|striptags|slice(0,50) }}#}
+        {#</a>#}
+        {#<div class="news-box__content">{{ article.article_content|striptags|slice(0,100)|raw }}</div>#}
+
+        {#<div class="clearfix">#}
+            {#<div class="news-box__eye">#}
+                {#{{ article.article_manual_views_counter ?: article.article_views_counter }}#}
+            {#</div>#}
+            {#<div class="news-box__date">{{ article.article_published_at|date('d.m.Y') }}</div>#}
+        {#</div>#}
+    {#</div>#}
+{#</div>#}

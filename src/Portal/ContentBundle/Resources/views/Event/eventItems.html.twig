@@ -1,0 +1,28 @@
+{% for event in eventList %}
+    <div class="news-box">
+        {% if event.original_instance_code is defined and event.original_instance_code %}
+            {% set href = protocol ~ '://' ~  event.original_instance_code ~ '.' ~ site_name ~ path('event_show', {'id': event.original_event_id}) %}
+            {% set img = event.original_file_path %}
+        {% else %}
+            {% set href = path('event_show', {'id': event.event_id}) %}
+            {% set img = event.file_url %}
+        {% endif %}
+        <a href="{{ href }}" class="news-box__link">
+            {% if img %}
+                <img src="{{ asset(img) }}" alt="{{ event.event_title }}">
+            {% endif %}
+        </a>
+        <div class="news-box__info">
+            <a href="{{ href }}" class="news-box__title">
+                {% autoescape %}{{ event.event_title|raw|sliceFullWord(180, true) }}{% endautoescape %}
+                {{ event.event_start_date|date('d.m.Y') }}
+                {{ (event.event_start_date == event.event_end_date) ? '' : ' - ' ~ event.event_end_date|date('d.m.Y') }}
+            </a>
+            {#<div class="news-box__content">{{ event.event_content|striptags|slice(0,100)|raw }}</div>#}
+            <div class="clearfix">
+                <div class="news-box__date">{{ 'published'|trans }}: {{ event.event_pub_date|date('d.m.Y') }}</div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{#{{ event.event_start_date|date|localizeddate('none', 'none', app.request.locale, null, 'd MMMM YYYY г.') }}#}

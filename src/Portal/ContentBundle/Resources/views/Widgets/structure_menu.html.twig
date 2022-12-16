@@ -1,0 +1,154 @@
+<ul>
+    {% set parent_id = 0 %}
+    {% set count = 0 %}
+    {% set isHideChilds = false %}
+    {% for menuNode in treeMenuMainNodes %}
+        {% if menuNode.parentId == parent_id and menuNode.parentId != 0 %}
+            {% if (isHideChilds) %}
+            {% else %}
+                {% if count == 0 %}
+                    <div class="nav__submenu">
+                {% endif %}
+                {% set count = count + 1 %}
+
+                {% if menuNode.route is not empty %}
+                    {% if custom_router.routeExists(menuNode.route) %}
+                        {% set href = path(menuNode.route) %}
+                    {% else %}
+                        {% set href = menuNode.route %}
+                    {% endif %}
+                {% elseif menuNode.slug is not empty and not menuNode.isLinkOnId %}
+                    {% set href = path('structure_slug', { slug: menuNode.slug }) %}
+                {% else %}
+                    {% set href = path('structure', { id: menuNode.id }) %}
+                {% endif %}
+
+                <a href="{{ href }}" class="nav__link">
+                    {{ menuNode.name }}
+                </a>
+                {% if menuNode.isSeparator %}<hr />{% endif %}
+            {% endif %}
+        {% else %}
+            {% if not loop.first %}
+                {% if count > 0 %}
+                    </div>
+                {% endif %}
+                </li>
+            {% endif %}
+            <li class="nav__item">
+            {% if menuNode.route is not empty %}
+                {% if custom_router.routeExists(menuNode.route) %}
+                    {% set href = path(menuNode.route) %}
+                {% else %}
+                    {% set href = menuNode.route %}
+                {% endif %}
+            {% elseif menuNode.slug is not empty and not menuNode.isLinkOnId %}
+                {% set href = path('structure_slug', { slug: menuNode.slug }) %}
+            {% else %}
+                {% set href = path('structure', { id: menuNode.id }) %}
+            {% endif %}
+
+            <a href="{{ href }}" class="nav__link">
+                {{ menuNode.name }}
+            </a>
+{#            <div class="nav__submenu">#}
+            {% set parent_id = menuNode.id %}
+            {% if (menuNode.isHideChilds is defined and menuNode.isHideChilds) %}
+                {% set isHideChilds = true %}
+            {% else %}
+                {% set isHideChilds = false %}
+            {% endif %}
+            {% set count = 0 %}
+
+            {% if loop.last %}
+{#        </div>>#}
+                </li>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</ul>
+
+{% if treeMenuNodes is not empty %}
+    {% block additionalMenu %}
+        <!--.nav__search-->
+        <div class="nav__newmenu">
+            <span class="nav__button-newmenu"><span></span></span>
+        </div>
+        <!--.nav__search-->
+    {% endblock %}
+    <div class="nav__submenu nav__submenu_all-menu" id="newMenu">
+        <ul>
+            {% set parent_id = 0 %}
+            {% set count = 0 %}
+            {% set separator = 0 %}
+            {% for menuNode in treeMenuNodes %}
+                {% if menuNode.parentId == parent_id and menuNode.parentId != 0 %}
+                    {#TODO: check for system options#}
+                    {#{% if count < 5 %}
+                        {% if menuNode.route is not empty %}
+                            {% if custom_router.routeExists(menuNode.route) %}
+                                {% set href = path(menuNode.route) %}
+                            {% else %}
+                                {% set href = menuNode.route %}
+                            {% endif %}
+                        {% elseif menuNode.slug is not empty %}
+                            {% set href = path('structure_slug', { slug: menuNode.slug }) %}
+                        {% else %}
+                            {% set href = path('structure', { id: menuNode.id }) %}
+                        {% endif %}
+                        <div class="">
+                            <a href="{{ href }}" class="nav__link">
+                                {{ menuNode.name }}
+                            </a>
+                        </div>
+                        {% set count = count + 1 %}
+                    {% elseif count == 5 %}
+                        <div class="">
+                            <a href="{{ parent_link }}" class="nav__link">
+                                Показать все >>
+                            </a>
+                        </div>
+                        {% set count = count + 1 %}
+                    {% endif %}#}
+                {% else %}
+                    {% if not loop.first %}
+                        </li>
+                        {% if separator %}
+                            <hr />
+                            {% set separator = 0 %}
+                        {% endif %}
+                    {% endif %}
+                    <li class="nav__item">
+                    {% if menuNode.route is not empty %}
+                        {% if custom_router.routeExists(menuNode.route) %}
+                            {% set href = path(menuNode.route) %}
+                        {% else %}
+                            {% set href = menuNode.route %}
+                        {% endif %}
+                    {% elseif menuNode.slug is not empty and not menuNode.isLinkOnId %}
+                        {% set href = path('structure_slug', { slug: menuNode.slug }) %}
+                    {% else %}
+                        {% set href = path('structure', { id: menuNode.id }) %}
+                    {% endif %}
+
+                    <a href="{{ href }}" class="nav__link nav__link_first">
+                        {{ menuNode.name }}
+                    </a>
+                    {% if loop.last %}
+                        </li>
+                    {% endif %}
+                    {% set parent_id = menuNode.id %}
+                    {% set parent_link = href %}
+                    {% set count = 0 %}
+                    {% if menuNode.isSeparator %}
+                        {% set separator = 1 %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+
+
+

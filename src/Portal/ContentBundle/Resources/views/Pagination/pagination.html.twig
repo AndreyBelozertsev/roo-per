@@ -1,0 +1,57 @@
+{% if not route %}
+    {% set route = app.request.get('_route') %}
+{% endif %}
+
+{% set params = app.request.get('_route_params') %}
+{% if app.request.query.all is not empty %}
+    {% set params = params|merge(app.request.query.all) %}
+{% else %}
+    {% if app.request.request.all is not empty %}
+        {% if app.request.request.all.date is defined and app.request.request.all.date is not empty %}
+            {% set params = params|merge({'date': app.request.request.all.date}) %}
+        {% endif %}
+        {% if app.request.request.all.currentPage is defined and app.request.request.all.currentPage is not empty %}
+            {% set params = params|merge({'page': app.request.request.all.currentPage}) %}
+        {% endif %}
+    {% endif %}
+{% endif %}
+{% if routeParams is not empty %}
+    {% set params = params|merge(routeParams) %}
+{% endif %}
+
+<ul>
+    {% if currentPage != 1 %}
+        <li class="pagination__item pagination__item_first">
+            <a class="pagination__link" href="{{ path(route, params|merge({'page': null})) }}"
+               rel="prev" title="{{ 'First_page'|trans }}">{{ 'First'|trans }}</a>
+        </li>
+        {% set page = (currentPage == 2) ? null : currentPage - 1 %}
+        <li class="pagination__item">
+            <a class="pagination__link pagination__link_arrow_left" href="{{ path(route, params|merge({'page': page})) }}"
+               rel="prev" title="{{ 'Previous_page'|trans }}"></a>
+        </li>
+    {% endif %}
+
+    {% for i in start..end %}
+        {% if i == currentPage %}
+            <li class="pagination__item pagination__item_current-page">{{ i }}</li>
+        {% else %}
+            {% set page = (i == 1) ? null : i %}
+            <li class="pagination__item">
+                <a class="pagination__link" href="{{ path(route, params|merge({'page': page})) }}"
+                   rel="{{ i < currentPage ? 'prev' : 'next' }}">{{ i }}</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+
+    {% if currentPage != totalPages %}
+        <li class="pagination__item">
+            <a class="pagination__link pagination__link_arrow_right" href="{{ path(route, params|merge({'page': currentPage + 1})) }}"
+               rel="next" title="{{ 'Next_page'|trans }}"></a>
+        </li>
+        <li class="pagination__item pagination__item_last">
+            <a class="pagination__link" href="{{ path(route, params|merge({'page': totalPages})) }}"
+               rel="next" title="{{ 'Last_page'|trans }}">{{ 'Last'|trans }}</a>
+        </li>
+    {% endif %}
+</ul>

@@ -1,0 +1,23 @@
+<ul class="pdf-tabs__caption">
+    {% set first = true %}
+    {% for att in attachments %}
+        {% if att.preview %}
+            {% if att.file_type == constant('Portal\\ContentBundle\\Entity\\DocumentAttachment::PDF_MIME_TYPE') %}
+                <li class="pdf-tabs__item tooltip{{ first ? ' pdf-tabs__item_active' : '' }}" title="{{ att.preview }}">
+                    {{ att.preview }}
+                </li>
+                {% set first = false %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</ul>
+
+{% set first = true %}
+{% for att in attachments %}
+    {% if att.preview %}
+        {% if att.file_type == constant('Portal\\ContentBundle\\Entity\\DocumentAttachment::PDF_MIME_TYPE') %}
+            <div class="pdf-tabs__content{{ first ? ' pdf-tabs__content_active' : '' }}" data-link="{{ att.preview_file_url }}"></div>
+            {% set first = false %}
+        {% endif %}
+    {% endif %}
+{% endfor %}

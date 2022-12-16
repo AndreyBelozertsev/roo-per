@@ -1,0 +1,26 @@
+{% for head in headList %}
+    <div class="text-page__inform-block">
+
+        {% set href = path('head_show', { id:head.id }) %}
+        
+        <div class="text-page__pic">
+            <a href="{{ href }}" class="">
+                {% set path = (head.original_file_path is defined and head.original_file_path) ? head.original_file_path : head.head_file_url|thumbImage %}
+                <img src="{{ asset(path|existsImage) }}">
+            </a>
+        </div>
+        <div class="text-page__content">
+            <a href="{{ href }}">
+                <div class="text-page__name">
+                    {{ head.firstname }}
+                    {{ head.middlename ?: '' }}
+                    {{ head.lastname }}
+                </div>
+            </a>
+            <div class="text-page__text">
+                {{ head.position }}
+            </div>
+        </div>
+
+    </div>
+{% endfor %}

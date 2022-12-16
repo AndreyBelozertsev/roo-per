@@ -1,0 +1,106 @@
+<div id="map" style="width: 100%; height: 400px"></div>
+<script>
+    ymaps.ready(init);
+
+    function init() {
+        let myMap = new ymaps.Map("map", {
+                center: [44.96, 34.09],
+                zoom: 12
+            }),
+            myPlacemark,
+            mapCodeInput = $('#{{ inputId }}'),
+            mapCodeInputVal = '{{ inputVal }}',
+            balloonText = '{{ balloonTxt }}',
+            isContactPage = mapCodeInput.is(":visible"),
+            coordInput = $('#{{ coordInp is defined ? coordInp : 'none' }}');
+
+        ymaps.geocode(mapCodeInputVal, {
+            results: 1
+        }).then(function (res) {
+            let firstGeoObject = res.geoObjects.get(0),
+                coords = firstGeoObject.geometry.getCoordinates(),
+                bounds = firstGeoObject.properties.get('boundedBy');
+            createPlacemark(coords);
+            myMap.setBounds(bounds, {checkZoomRange: true});
+            getAddress(coords);
+        });
+
+        if (!isContactPage) {
+            myMap.events.add('click', function (e) {
+                let coords = e.get('coords');
+                if (myPlacemark) {
+                    myPlacemark.geometry.setCoordinates(coords);
+                } else {
+                    createPlacemark(coords);
+                }
+                getAddress(coords);
+            });
+        }
+
+        function createPlacemark(coords) {
+            myPlacemark = presetPlacemark(coords);
+            myMap.geoObjects.add(myPlacemark);
+            myPlacemark.events.add('dragend', function () {
+                getAddress(myPlacemark.geometry.getCoordinates());
+            });
+        }
+
+        function presetPlacemark(coords) {
+            return new ymaps.Placemark(coords, {
+                iconCaption: 'поиск...'
+            }, {
+                preset: 'islands#violetDotIconWithCaption',
+                draggable: true
+            });
+        }
+
+        function getAddress(coords) {
+            myPlacemark.properties.set('iconCaption', 'поиск...');
+            ymaps.geocode(coords).then(function (res) {
+                let firstGeoObject = res.geoObjects.get(0);
+                myPlacemark.properties
+                    .set({
+                        iconCaption: balloonText,
+                        balloonContent: firstGeoObject.getAddressLine()
+                    });
+                let val = isContactPage ? firstGeoObject.getAddressLine() : coords;
+                mapCodeInput.val(val);
+                coordInput.val(coords);
+            });
+        }
+
+        mapCodeInput.on('change', function () {
+            ymaps.geocode($(this).val(), {
+                results: 1
+            }).then(function (res) {
+                let firstGeoObject = res.geoObjects.get(0),
+                    coords = firstGeoObject.geometry.getCoordinates(),
+                    bounds = firstGeoObject.properties.get('boundedBy');
+                if (myPlacemark) {
+                    myPlacemark.geometry.setCoordinates(coords);
+                } else {
+                    createPlacemark(coords);
+                }
+                myMap.setBounds(bounds, {checkZoomRange: true});
+                getAddress(coords);
+            });
+        });
+
+        $('.find_on_map').on('click', function () {
+            ymaps.geocode($(this).siblings('.find_on_map_src').val(), {
+                results: 1
+            }).then(function (res) {
+                let firstGeoObject = res.geoObjects.get(0),
+                    coords = firstGeoObject.geometry.getCoordinates(),
+                    bounds = firstGeoObject.properties.get('boundedBy');
+                if (myPlacemark) {
+                    myPlacemark.geometry.setCoordinates(coords);
+                } else {
+                    createPlacemark(coords);
+                }
+                myMap.setBounds(bounds, {checkZoomRange: true});
+                getAddress(coords);
+            });
+        });
+    }
+</script>

@@ -1,0 +1,31 @@
+{{ searchForm() | raw }}
+<div class="text-page">
+    {% for item in items.currentPageResults %}
+        <div class="text-page__inform-block">
+            <div class="text-page__content text-page__content_document">
+                <div class="text-page__document">
+                    <a href="{{ path(route,{ id: item.id }) }}">
+                        {{ item.title }}
+                    </a>
+                </div>
+                <div class="text-page__doc-link">
+                    {#{% if item.approval_date is defined %}#}
+                        {#<a href="#" class="text-page__doc-date">#}
+                            {#{{ item.approval_date|date('d.m.Y') }}#}
+                        {#</a>#}
+                    {#{% endif %}#}
+                    {#{% if item.approval_date is not defined and item.published_at is defined %}#}
+                        <a href="#" class="text-page__doc-date">
+                            {{ item.published_at|date('d.m.Y') }}
+                        </a>
+                    {#{% endif %}#}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    {% if itemsStructure.documents.haveToPaginate %}
+        <div class="pagerfanta">
+            {{ pagerfanta(items, 'default', { 'previous_message': 'pagination.prev'|trans(), 'next_message' : 'pagination.next'|trans()}) }}
+        </div>
+    {% endif %}
+</div>

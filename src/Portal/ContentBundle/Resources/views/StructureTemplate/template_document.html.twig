@@ -1,0 +1,27 @@
+<div class="text-page">
+    {{ searchForm() | raw }}
+    {% for item in items %}
+        <div class="text-page__inform-block">
+            <div class="text-page__content text-page__content_document">
+                <div class="text-page__document">
+                    <a href="{{ path(route,{ id: item.id }) }}" title="{{ 'click_to_view'|trans() }}">
+                        {{ item.title }}
+                    </a>
+                </div>
+                <div class="text-page__doc-link">
+                    {% if item.approvalDate is defined %}
+                        <a href="#" class="text-page__doc-date">
+                            {{ item.approvalDate|date('d.m.Y') }}
+                        </a>
+                    {% endif %}
+                    {% if item.approvalDate is not defined and item.publishedAt is defined %}
+                        <a href="#" class="text-page__doc-date">
+                            {{ item.publishedAt|date('d.m.Y') }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="pagination clearfix">{{ pagination|raw }}</div>
+</div>

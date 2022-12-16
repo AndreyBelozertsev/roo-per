@@ -1,0 +1,51 @@
+{{ form_start(form, {'attr': {'class': 'comments__form comments__form_open', 'id': 'form_feedback' }}) }}
+<div class="content__title">{{ attribute(feedbackFormData, 'title' ~ app.request.locale|capitalize)|raw }}</div>
+
+<div class="form-success-message">
+    {% for flashMessage in app.session.flashbag.get('message') %}
+        <div class="comments__title">{{ flashMessage }}</div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error_message') %}
+        <div class="comments__title">{{ flashMessage }}</div>
+    {% endfor %}
+</div>
+{% set isForm = false %}
+{% for field in fieldList %}
+    {% if field is not empty %}
+        {% set isForm = true %}
+        <div class="comments__form-row">
+            {% if form[field] is defined %}
+                {{ form_label(form[field], null, {'label_attr': {'class': 'comments__form-lable' }}) }}
+                {{ form_widget(form[field], {'attr': {'class': 'comments__form__pole' }}) }}
+            {% endif %}
+            <div class="page-form__feedback-error"></div>
+            {% for error in form[field].vars.errors %}
+                <div class="comments__form-error">{{ error.message|trans }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endfor %}
+
+<div class="comments__form-row">
+    {{ form_label(form.captcha, '', {'label_attr': {'class': 'comments__form-lable' }}) }}
+    {{ form_widget(form.captcha, {'attr': {'class': 'comments__form__pole' }}) }}
+    <div class="page-form__feedback-error"></div>
+    {% for error in form.captcha.vars.errors %}
+        <div class="comments__form-error">{{ error.message|trans }}</div>
+    {% endfor %}
+</div>
+
+{% if form.agree is defined %}
+    <div class="comments__form-row">
+        {{ form_widget(form.agree, {'attr': {'class': 'checkbox check-agree' }}) }}
+        {{ form_label(form.agree, '', {'label_attr': {'class': 'comments__form-lable' }}) }}
+        {{ form_errors(form.agree) }}
+    </div>
+{% endif %}
+
+{% if isForm %}
+    <div class="comments__form-row">
+        <input id="feedback_button_submit" type="submit" value="{{ 'Send'|trans }}" class="button">
+    </div>
+{% endif %}
+{{ form_end(form) }}

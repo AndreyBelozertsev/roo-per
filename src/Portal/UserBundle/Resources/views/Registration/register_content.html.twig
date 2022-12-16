@@ -1,0 +1,14 @@
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'form-signin'}}) }}
+    <div class="form-login_title">{{ 'register'|trans }}</div>
+    {{ form_widget(form.username, {'attr' : {'class': 'form-control form-login-inp', 'placeholder': 'username'|trans }}) }}
+    {{ form_widget(form.email, {'attr' : {'class': 'form-control form-login-inp', 'placeholder': 'email'|trans}}) }}
+    {{ form_widget(form.plainPassword.first, {'attr' : {'class': 'form-control form-login-inp', 'placeholder': 'password'|trans}}) }}
+    {{ form_widget(form.plainPassword.second, {'attr' : {'class': 'form-control form-login-inp', 'placeholder': 'password_confirmation'|trans}}) }}
+    {{ form_widget(form.lastName, {'attr' : {'class': 'form-control form-login-inp', 'placeholder': 'lastname'|trans}}) }}
+    {{ form_widget(form.firstName, {'attr' : {'class': 'form-control form-login-inp', 'placeholder': 'firstname'|trans}}) }}
+    {{ form_widget(form.middleName, {'attr' : {'class': 'form-control form-login-inp', 'placeholder': 'middlename'|trans}}) }}
+
+    <input class="btn btn-lg btn-primary btn-block btn-signin form-register-button" type="submit" id="_submit" name="_submit" value="{{ 'registration.submit'|trans }}" />
+
+    <div class="clear"></div>
+{{ form_end(form) }}

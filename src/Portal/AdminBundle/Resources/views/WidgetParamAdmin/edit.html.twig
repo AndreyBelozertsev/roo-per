@@ -1,0 +1,55 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'widget_param.title'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'widget_param.title'|trans }} {{ widgetTitle is defined ? '"' ~ widgetTitle ~ '"' : '' }}
+{% endblock %}
+
+{% block topbuttons %}
+    <a class="btn btn-success" href="{{ path('admin_instance_widget_viewall', {'instanceCode': instanceCode}) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+{% endblock %}
+
+{% block body %}
+    {% if params is defined %}
+        <div class="form-group">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+                <strong>{{ 'parameter'|trans }}</strong>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <form method="POST" id="widget-params">
+            {% for param in params %}
+                <div class="form-group">
+                    <div class="col-sm-3 text-right">{{ param.param_title }}</div>
+                    <div class="col-sm-9">
+                        {% if param.param_type == constant('Portal\\ContentBundle\\Entity\\WidgetParam::WIDGET_PARAM_TEXT_TYPE') %}
+                            <input class="form-control" type="text" name="{{ param.param_name }}" value="{{ param.param_value }}">
+                        {% elseif param.param_type == constant('Portal\\ContentBundle\\Entity\\WidgetParam::WIDGET_PARAM_SELECT_TYPE') %}
+                            <select name="{{ param.param_name }}">
+                                {% for k, option in param.param_options %}
+                                    <option value="{{ k }}"{% if param.param_value == k %} selected{% endif %}>
+                                        {{ option }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            {% endfor %}
+            <div class="form-group">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-9">
+                    <button class="btn btn-success" type="submit">{{ 'save'|trans }}</button>
+                </div>
+            </div>
+        </form>
+        <br>
+    {% endif %}
+{% endblock %}

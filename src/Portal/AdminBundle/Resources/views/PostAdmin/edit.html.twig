@@ -1,0 +1,59 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'post_form.opinion'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'post_form.action_edit'|trans }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/portaladmin/RCropper/dist/rcrop.min.js') }}"></script>
+    <script src="{{ asset('bundles/portaladmin/script/crop-image/crop-image-attachment.js') }}"></script>
+    <script src="{{ asset('bundles/portaladmin/script/slug-form/slug-form.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/portaladmin/RCropper/dist/rcrop.min.css') }}" media="screen" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/portaladmin/css/slug.css') }}" media="screen" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+
+{% block topbuttons %}
+    <a class="btn btn-success back-to-list" href="{{ path('admin_instance_post_view_all') }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+    {% if sa %}
+        <a class="btn btn-success" href="{{ path('admin_instance_post_create') }}">
+            <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+        </a>
+    {% endif %}
+    {% if sa %}
+        <a class="btn btn-warning soft-delete-btn" onclick="adminPage.post.removeItem({{ post.id }});">
+            <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <div id="form-body" class="clearfix">
+        {% include 'PortalAdminBundle:PostAdmin:includeForm.html.twig' %}
+        <div class="form-group">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <div id="btn_post" class="form-actions">
+                    <button id="btn_create_and_edit" class="btn btn-success" type="submit" name="btn_create_and_edit">
+                        <i class="glyphicon glyphicon-floppy-disk"></i> {{ 'save'|trans }}
+                    </button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

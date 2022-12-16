@@ -1,0 +1,34 @@
+<div class="tabs-content_news-horizontal">
+{% for item in items %}
+    <div class="news-box">
+        <a href="{{ path(route, {'id': item.id}) }}" class="news-box__link">
+            {% set src = (item.attachment.previewFileUrl is defined) ?
+                item.attachment.previewFileUrl|thumbImage :
+                'bundles/portalcontent/image/image.png'
+            %}
+            <img src="{{ asset(src) }}" alt="{{ item.title }}">
+        </a>
+        <div class="news-box__info">
+            <a href="{{ path('event_show', {'id': item.id}) }}" class="news-box__title">
+                {{ item.title }}
+                {% if item.startDate is defined and item.endDate is defined %}
+                    {{ item.startDate|date('d.m.Y') }}
+                    {{ (item.startDate == item.endDate) ? '' : '- ' ~ item.endDate|date('d.m.Y') }}
+                {% endif %}
+            </a>
+            {% if item.content is defined %}
+                <div class="news-box__content">{{ item.content|slice(0,100)|raw }}</div>
+            {% elseif item.description is defined %}
+                <div class="news-box__content">{{ item.description|slice(0,100)|raw }}</div>
+            {% endif %}
+            <div class="clearfix">
+                <div class="news-box__date">
+                    {% if item.startDate is defined %}
+                        {{ item.startDate|date('d.m.Y') }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>

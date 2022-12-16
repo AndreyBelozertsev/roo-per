@@ -1,0 +1,263 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'event.title'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'event.edit'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+
+{% block topbuttons %}
+    <a class="btn btn-success back-to-list" href="{{ path('admin_instance_event_index', {'instanceCode': instanceCode}) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+    {% if form.menuNode.vars.value and (sa or 'edit_structure' in permissions.getCode()) %}
+        <a class="btn btn-success" href="{{ path('admin_instance_structure_index', {
+            'instanceCode' : app.request.get('instanceCode'),
+            'selected_node' : form.menuNode.vars.value
+        }) }}">
+            <i class="glyphicon glyphicon-share-alt"></i> {{ 'to_structure'|trans }}
+        </a>
+    {% endif %}
+    {% if form.vars.value.id %}
+        {% if sa or 'create_event' in permissions.code() %}
+            <a class="btn btn-success" href="{{ path('admin_instance_event_edit', {id:0, 'instanceCode':instanceCode}) }}">
+                <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+            </a>
+        {% endif %}
+        {% if sa or 'delete_event' in permissions.code() or event.author == app.user.id %}
+            <a class="btn btn-warning" onclick="adminPage.event.removeItem({{ form.vars.value.id }}, '{{ instanceCode }}');">
+                <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+            </a>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/portaladmin/RCropper/dist/rcrop.min.js') }}"></script>
+    <script src="{{ asset('bundles/portaladmin/script/crop-image/crop-image-attachment.js') }}"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script src="{{ asset('bundles/portaladmin/script/slug-form/slug-form.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/portaladmin/RCropper/dist/rcrop.min.css') }}" media="screen" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/portaladmin/css/slug.css') }}" media="screen" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block body %}
+    {% if form is defined %}
+        {{ form_start(form) }}
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.title) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                <div class="errors">
+                    {% for error in form.title.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.subtitle) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.subtitle, {'attr': {'class': 'form-control'}}) }}
+                <div class="errors">
+                    {% for error in form.subtitle.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        {% if slug %}
+            <div class="form-group">
+                <div class="col-md-3 text-right">{{ form_label(form.slug) }}</div>
+                <div class="col-sm-9">
+                    <div class="add-link-container">
+                        <div class="add-link-con1">
+                            {% set subDomain = (instanceCode == 'main') ? '' : instanceCode ~ '.' %}
+                            {{ protocol ~ '://' ~ subDomain }}{{ app.request.getHttpHost }}{{ path('event_show_slug') }}/
+                            <input type="hidden" id="input_copy_ref"
+                                   value="{{ protocol ~ '://' ~ subDomain }}{{ app.request.getHttpHost }}{{ path('event_show_slug', {slug: event.slug}) }}">
+                        </div>
+                        <div class="add-link-con2">
+                            {{ form_widget(form.slug, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="add-link-con3">
+                            <a class="btn btn-success" id="button_copy_ref" title="{{ 'click_to_copy'|trans }}">
+                                <i class="fa fa-copy"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="errors">
+                        {% for error in form.slug.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        {% endif %}
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.startDate) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.startDate, {'attr': {'class': 'form-control js-datepicker'}}) }}
+                <div class="errors">
+                    {% for error in form.startDate.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.endDate) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.endDate, {'attr': {'class': 'form-control js-datepicker'}}) }}
+                <div class="errors">
+                    {% for error in form.endDate.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group" {{ instanceCode == constant('Portal\\AdminBundle\\Entity\\Instance::MAIN_SITE_INSTANCE_CODE') ? 'style="display: none"' : '' }}>
+            <div class="col-sm-3 text-right">{{ form_label(form.isImportant) }}</div>
+            <div class="col-sm-9">{{ form_widget(form.isImportant) }}</div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.menuNode) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.menuNode, {'attr': {'class': 'form-control'}}) }}
+                <div class="errors">
+                    {% for error in form.menuNode.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.isPublished) }}</div>
+            <div class="col-sm-9">{{ form_widget(form.isPublished) }}</div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.publishedAt) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.publishedAt, {'attr': {'class': 'form-control js-datepicker'}}) }}
+                <div class="errors">
+                    {% for error in form.publishedAt.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.photoReport) }}</div>
+            <div class="col-sm-9">
+                {% if event.photoReport and event.photoReport.attachments[0] %}
+                    <img src="{{ asset(event.photoReport.attachments[0].previewFileUrl) }}" width="200">
+                {% endif %}
+                {{ form_widget(form.photoReport, {'attr': {'class': 'form-control'}}) }}
+                <div class="errors">
+                    {% for error in form.photoReport.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.content) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+                <div class="errors">
+                    {% for error in form.content.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.attachment) }}</div>
+            <div class="col-sm-9">
+                <div class="preview-form">
+                    <div class="rcrop-wrapper">
+                        {% if event.attachment %}
+                            <img id="loadImg" class="preview-image" src="{{ asset(event.attachment.previewFileUrl) }}">
+                        {#{% else %}#}
+                            {#<img class="load-img preview-image" id="loadImg">#}
+                        {% endif %}
+                    </div>
+                    {{ form_widget(form.attachment) }}
+                </div>
+                <div class="errors">
+                    {% for error in form.attachment.file.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.place) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.place, {'attr': {'class': 'form-control find_on_map_src'}}) }}
+                <button class="find_on_map btn btn-primary" type="button">{{ 'find_on_map'|trans }}</button>
+                <div class="errors">
+                    {% for error in form.place.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.location) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.location) }}
+                {% include 'PortalAdminBundle:Yandex:yandexMap.html.twig' with {
+                    'inputId': 'none',
+                    'inputVal': form.location.vars.value,
+                    'balloonTxt': form.title.vars.value,
+                    'coordInp': form.location.vars.id
+                } only %}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.tags) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.tags) }}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-success'}}) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+    {% endif %}
+    <br>
+{% endblock %}
+
+{% block history %}
+    {% if form.vars.value.id is defined and form.vars.value.id %}
+        {{ entityLog.renderHistory(form.vars.value.id, instanceCode, constant('Portal\\HelperBundle\\Entity\\Log::ENTITY_TYPE_EVENT'))|raw }}
+    {% endif %}
+{% endblock %}

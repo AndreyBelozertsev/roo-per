@@ -1,0 +1,45 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'comment_form.action_title'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'comment_form.action_list'|trans }}
+{% endblock %}
+
+{% block body %}
+    <table class="table table-striped table-middle-aligned">
+        <thead>
+            <tr>
+                <th>{{ 'username'|trans }}</th>
+                <th>{{ 'title'|trans }}</th>
+                <th>{{ 'comment_form.text'|trans }}</th>
+                <th>{{ 'is_published'|trans }}</th>
+                <th>{{ 'action'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in pagerFanta.currentPageResults %}
+            <tr>
+                <td>{{ comment.name }}</td>
+                <td>{{ comment.title }}</td>
+                <td>{{ comment.text }}</td>
+                <td>{{ comment.ispublished ? '<i class="glyphicon glyphicon-ok"></i>' : '' }}</td>
+                <td>
+                    <a href="{{ path('admin_admin_comment_edit', { 'id': comment.id }) }}" class="btn btn-sm btn-primary">
+                        <i class="glyphicon glyphicon-edit"></i> {{ 'edit'|trans }}
+                    </a>
+                    <a class="btn btn-sm btn-warning" onclick="adminPage.comment.removeItem({{ comment.id }});">
+                        <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagerfanta">
+        {{ pagerfanta(pagerFanta, 'twitter_bootstrap3') }}
+    </div>
+{% endblock %}

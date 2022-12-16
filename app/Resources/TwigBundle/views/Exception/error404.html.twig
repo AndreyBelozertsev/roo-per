@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<title>{{ 'site_title'|trans }}</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description"/>
+<meta name="keywords"/>
+<link rel="stylesheet" href="{{ asset('themes/public/style.css') }}"/>
+<script src="{{ asset('themes/public/script.js') }}"></script>
+
+<body class="page">
+<div class="header clearfix">
+    <a href="{{ path('portal_content_homepage') }}" class="logo"></a>
+    <div class="nav clearfix"></div>
+</div>
+<div class="wrapper">
+    <div style="text-align: center; width: 100%; margin: 50px 0 90px; font-size: 350%; color: #888;">
+        <h1>404</h1>
+        <h2>{{ 'error_page.text_404'|trans }}</h2>
+    </div>
+</div>
+<div class="footer">
+    <div class="footer__nav-posit">
+        <div class="footer__nav-bg">
+            <div class="footer__nav"></div>
+        </div>
+    </div>
+    <div class="footer__info clearfix">
+        <div class="footer__copright">2019 © {{ 'site_title'|trans }}. {{ 'rights'|trans }}.</div>
+        <div class="footer__link">{{ 'Development'|trans }} - <a href="https://krtech.ru/">ГУП РК «Крымтехнологии»</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

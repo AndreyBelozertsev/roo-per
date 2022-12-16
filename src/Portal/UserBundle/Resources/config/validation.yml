@@ -1,0 +1,41 @@
+#Portal\UserBundle\Entity\User:
+#    constraints:
+#        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+#            fields: username
+#            errorPath: username
+#            groups: [rest, profile]
+#    properties:
+#        username:
+#            - NotBlank: { groups: [rest, profile] }
+#            - Length:
+#                min: 2
+#                max: 255
+#        email:
+#            - NotBlank: { groups: [rest, profile] }
+#            - Length:
+#                min: 2
+#                max: 255
+#            - Email: { groups: [rest, profile] }
+#        firstName:
+#            - NotBlank: { groups: [rest, profile] }
+#        lastName:
+#            - NotBlank: { groups: [rest, profile] }
+#        phone:
+#            - NotBlank: { groups: [rest, profile] }
+#        plainPassword:
+#            - Portal\UserBundle\Validator\Constraints\CustomPasswordStrength: { groups: [rest] }
+
+Portal\UserBundle\Entity\User:
+    properties:
+        email:
+            - NotBlank:
+                message: 'fos_user.email.blank'
+                groups: [edit_email]
+            - Email:
+                message: 'fos_user.email.invalid'
+                checkMX: true
+                groups: [edit_email]
+            - Length:
+                max: 255
+                maxMessage: 'fos_user.email.long'
+                groups: [edit_email]

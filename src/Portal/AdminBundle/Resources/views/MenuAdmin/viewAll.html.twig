@@ -1,0 +1,64 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'menu_category.title'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'menu_category.title'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permission_codes = permissions.code() %}
+{% set allowEdit = constant('Portal\\ContentBundle\\Entity\\Menu::PERMISSIONS_MENU')['edit'] in permission_codes %}
+
+{% block topbuttons %}
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\Menu::PERMISSIONS_MENU')['create'] in permission_codes %}
+        <a class="btn btn-success" href="{{ path('admin_instance_menu_edit', {'menuId': 0, 'instanceCode': instanceCode }) }}">
+            <i class="glyphicon glyphicon-plus-sign"></i> {{ 'menu_page.add_new'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{{ 'label'|trans }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for menu in pagerFanta.currentPageResults %}
+            <tr>
+                <td>
+                    {% if sa or allowEdit %}
+                        <a href="{{ path('admin_instance_menu_edit', { 'menuId': menu.id, 'instanceCode': instanceCode }) }}">
+                            {{ menu.title }}
+                        </a>
+                    {% else %}
+                        {{ menu.title }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if sa or allowEdit %}
+                        <a href="{{ path('admin_instance_menu_edit', { 'menuId': menu.id, 'instanceCode': instanceCode }) }}"
+                           class="btn btn-sm btn-primary">
+                            <i class="glyphicon glyphicon-edit"></i> {{ 'edit'|trans }}
+                        </a>
+                    {% endif %}
+                    {% if sa or constant('Portal\\ContentBundle\\Entity\\Menu::PERMISSIONS_MENU')['delete'] in permission_codes %}
+                        <button class="btn btn-sm btn-warning" onclick="adminPage.menu.removeItem({{ menu.id }}, '{{ instanceCode }}')">
+                            <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+                        </button>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagerfanta">
+        {{ pagerfanta(pagerFanta, 'twitter_bootstrap3') }}
+    </div>
+{% endblock %}

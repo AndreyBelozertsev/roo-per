@@ -1,0 +1,78 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'internet_resources.title'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'internet_resources.edit'|trans }}
+{% endblock %}
+
+{% block topbuttons %}
+    <a class="btn btn-success back-to-list" href="{{ path('admin_instance_internet_resources_index', {'instanceCode': instanceCode}) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+    {% if form.vars.value.id %}
+        <a class="btn btn-warning " onclick="adminPage.internetResources.removeItem({{ form.vars.value.id }}, '{{ instanceCode }}');">
+            <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% if form is defined %}
+        {{ form_start(form) }}
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.title) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.title, {'attr':{'class':'form-control'} }) }}
+                <div class="errors">
+                    {% for error in form.title.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.url) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.url, {'attr':{'class':'form-control'} }) }}
+                <div class="errors">
+                    {% for error in form.url.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.file) }}</div>
+            <div class="col-sm-9">
+                {% if resource.preview %}
+                    <img src="{{ vich_uploader_asset(resource, 'file') }}"/>
+                {% endif %}
+                {{ form_widget(form.file) }}
+                <div class="errors">
+                    {% for error in form.file.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.isPublished) }}</div>
+            <div class="col-sm-9">{{ form_widget(form.isPublished) }}</div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 text-right"></div>
+            <div class="col-sm-9">
+                {{ form_widget(form.submit, {'attr':{'class':'btn btn-success'} } ) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+    {% endif %}
+    <br>
+{% endblock %}

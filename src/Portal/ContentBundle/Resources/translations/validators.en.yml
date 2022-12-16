@@ -1,0 +1,19 @@
+feedback_form_value:
+  email_or_phone_blank: 'Check phone fields or email address. One of the fields must be filled in TTTTTTTTT'
+  not_blank: 'Should not be empty'
+  too_much: 'Maximum number of characters: {{limit}}'
+  captcha_error: 'CAPTCHA: check failed, please try again'
+  agree: 'Must give consent'
+# subject.not_blank: Should not be empty
+# message.not_blank: Should not be empty
+# author.not_blank: Should not be empty
+# email.not_blank: Should not be empty
+# phone.not_blank: Should not be empty
+  email.email: 'This address {{value}} is an incorrect email address'
+  category: 'You must select a category'
+  previews:
+    max: 'The number of attachments should not exceed {{limit}}'
+
+subs:
+  email_not_valid: 'Не правильный e-mail'
+  not_unique: 'Вы уже подписаны на данную рассылку'

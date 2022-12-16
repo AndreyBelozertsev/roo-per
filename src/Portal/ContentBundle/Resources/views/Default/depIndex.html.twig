@@ -1,0 +1,50 @@
+{% extends 'PortalContentBundle::depBase.html.twig' %}
+
+{% block headerPanel %}
+    {{ panelWidget.renderPanel('header-panel', 'dep_main_page')|raw }}
+{% endblock %}
+
+{% block sideBar %}
+ {#        {{ slider.renderSlider('informbloksbig')|raw }}#}
+   {#{{ slider.renderSlider('informbloksbig')|raw }}#}
+    {{parent()}}
+    {{ panelWidget.renderPanel('side-panel', 'dep_main_page')|raw }}
+{% endblock %}
+
+{% block footerSocialPanel %}
+    {{ panelWidget.renderPanel('footer-panel', 'dep_main_page')|raw }}
+    {#{{ slider.renderSlider('informblokssmall-box')|raw }}#}
+{% endblock %}
+
+{% block bottomPanel %}
+    {{ panelWidget.renderPanel('bottom-panel', 'dep_main_page')|raw }}
+{% endblock %}
+
+{% block beforeContentBlock %}
+{#    {{ slider.renderSlider("informblokssmall-box")|raw }}#}
+    {% if instanceCode is defined and instanceCode == 'glava' %}
+        {{ slider.renderMainPageTopSlider()|raw }}
+    {% endif %}
+{% endblock %}
+
+{% block innerContent %}
+    <div class="tabs-content_news-horizontal">
+        <div class="tabs-content__white">
+            {{ articleWidget.renderDepPageArticle(app.request)|raw }}
+        </div>
+    </div>
+
+{#    <div class="right-box">#}
+{#        <div class="inform-bloks box">
+            {{ articleWidget.renderPopularNews()|raw }}
+        </div>
+        {{ slider.renderSlider('informbloksmiddle')|raw }}#}
+{#        <div class="datepicker-events__box">
+            <input type="text" value="14.06.2017" class="datepicker-events">
+        </div>#}
+{#    </div>#}
+    <!--.inform-bloks.inform-bloks_big.box-->
+
+    <a href="#" class="scroll-top tooltip" title="{{ 'go_to_top'|trans() }}"></a>
+
+{% endblock %}

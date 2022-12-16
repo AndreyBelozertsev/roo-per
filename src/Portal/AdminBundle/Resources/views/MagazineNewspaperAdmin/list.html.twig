@@ -1,0 +1,78 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'magazine_newspaper_form.opinion'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'magazine_newspaper_form.action_list'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+
+{% block topbuttons %}
+    {% if sa %}
+        <a class="btn btn-success" href="{{ path('admin_instance_magazine_newspaper_create') }}">
+            <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+        </a>
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <table class="table table-striped table-middle-aligned">
+        <thead>
+        <tr>
+            <th>{{ 'title'|trans }}</th>
+            <th>{{ 'magazine_newspaper_form.type_of'|trans }}</th>
+            <th>{{ 'is_published'|trans }}</th>
+            <th>{{ 'action'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for magazine_newspaper in pagerFanta.currentPageResults %}
+            <tr>
+            {% if magazine_newspaper.isDeleted %}
+                <td>
+                    <span class="grey-text">{{ magazine_newspaper.titleUk }} {{ 'is_deleted'|trans }}</span>
+                </td>
+                <td colspan="2">{{ magazine_newspaper.typeOf|trans }}</td>
+                <td>
+                    {% if sa %}
+                        <a class="btn btn-sm btn-default" onclick="adminPage.magazineNewspaper.restoreItem({{ magazine_newspaper.id }});">
+                            <i class="glyphicon glyphicon-repeat"></i> {{ 'restore'|trans }}
+                        </a>
+                    {% endif %}
+                </td>
+            {% else %}
+                <td>
+                    {% if sa %}
+                        <a href="{{ path('admin_instance_magazine_newspaper_edit', {'id': magazine_newspaper.id}) }}">
+                            {{ magazine_newspaper.titleUk }}
+                        </a>
+                    {% else %}
+                        {{ magazine_newspaper.titleUk }}
+                    {% endif %}
+                </td>
+                <td>{{ magazine_newspaper.typeOf|trans }}</td>
+                <td>{{ magazine_newspaper.isPublished ? '<i class="glyphicon glyphicon-ok"></i>' : '' }}</td>
+                <td>
+                    {% if sa %}
+                        <a href="{{ path('admin_instance_magazine_newspaper_edit', { 'id': magazine_newspaper.id }) }}" class="btn btn-sm btn-primary">
+                            <i class="glyphicon glyphicon-edit"></i> {{ 'edit'|trans }}
+                        </a>
+                        <a class="btn btn-sm btn-warning" onclick="adminPage.magazineNewspaper.removeItem({{ magazine_newspaper.id }});">
+                            <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+                        </a>
+                    {% endif %}
+                </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagerfanta">
+        {{ pagerfanta(pagerFanta, 'twitter_bootstrap3') }}
+    </div>
+{% endblock %}

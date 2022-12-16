@@ -1,0 +1,52 @@
+{% extends isDepartment ? 'PortalContentBundle::depBase.html.twig' : 'PortalContentBundle::innerPageBase.html.twig' %}
+
+{% block pageTitle %}{% endblock %}
+
+{% block innerContent %}
+    <div class="tabs-content__white">
+        <div class="title _sample">{{ title }}</div>
+        <div class="text-page">
+            {% for child in itemsStructure.childs %}
+                {% if isStructure == true %}
+                    {% set href = path('structure', { id: child.id }) %}
+                {% else %}
+                    {% if child.route is not empty %}
+                        {% if custom_router.routeExists(child.route) %}
+                            {% set href = path(child.route) %}
+                        {% else %}
+                            {% set href = child.route %}
+                        {% endif %}
+                    {% elseif child.slug is not empty %}
+                        {% set href = path('structure_slug', { slug: child.slug }) %}
+                    {% else %}
+                        {% set href = path('structure', { id: child.id }) %}
+                    {% endif %}
+                {% endif %}
+                <div class="text-page__block">
+                    <a href="{{ href }}" class="text-page__link-block text-page__desk">{{ child.title }}</a>
+                </div>
+            {% endfor %}
+            {% for article in itemsStructure.articles %}
+                <div class="text-page__block">
+                    <a href="{{ path("article_show",{ id: article.id }) }}" class="text-page__link-block text-page__desk">{{ article.title }}</a>
+                </div>
+            {% endfor %}
+            {% for document in itemsStructure.documents %}
+                <div class="text-page__block">
+                    <a href="{{ path("document_show",{ id: document.id }) }}" class="text-page__link-block text-page__desk">{{ document.title }}</a>
+                </div>
+            {% endfor %}
+            {% for page in itemsStructure.pages %}
+                <div class="text-page__block">
+                    <a href="{{ path("inform_page",{ id: page.id }) }}" class="text-page__link-block text-page__desk">{{ page.title }}</a>
+                </div>
+            {% endfor %}
+            {% for feedback in itemsStructure.feedbacks %}
+                <div class="text-page__block">
+                    <a href="{{ path("feedback_page",{ id: feedback.id }) }}" class="text-page__link-block text-page__desk">{{ feedback.label }}</a>
+                </div>
+            {% endfor %}
+{#                    <div class="text-page__logo"><img src="{{ asset('themes/public/img/gossluzhba_gov.png') }}"></div>#}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+services:
+  user_manager:
+    class: Portal\UserBundle\Model\UserManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    
+  wsse.security.authentication.provider:
+    class:  Portal\UserBundle\Security\Authentication\Provider\WsseProvider
+    arguments: ["", "%kernel.cache_dir%/security/nonces"]
+
+  wsse.security.authentication.listener:
+    class:  Portal\UserBundle\Security\Firewall\WsseListener
+    arguments: ["@security.token_storage", "@security.authentication.manager", "@service_container"]
+
+  portal.form.registration:
+    class: Portal\UserBundle\Form\RegistrationType
+    tags:
+        - { name: form.type, alias: portal_user_registration }
+
+  portal.form.profile.edit:
+    class: Portal\UserBundle\Form\ProfileType
+    tags:
+        - { name: form.type, alias: portal_user_profile }
+    arguments: ["%fos_user.model.user.class%"]
+
+  user_role_manager:
+    class: Portal\UserBundle\Model\UserRoleManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  user_permission_manager:
+    class: Portal\UserBundle\Model\UserPermissionManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]

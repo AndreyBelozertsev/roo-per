@@ -1,0 +1,74 @@
+{% extends 'PortalContentBundle::innerPageBase.html.twig' %}
+
+{% block title %}
+    {{ 'news'|trans() }} | {{ parent() }}
+{% endblock %}
+
+{% block pageTitle %}
+    {{ 'news'|trans() }}
+{% endblock %}
+
+{% block headerPanel %}
+    {{ panelWidget.renderPanel('header-panel', 'article_all_page')|raw }}
+{% endblock %}
+
+{% block sideBar %}
+{#    {{parent()}}#}
+    {{ panelWidget.renderPanel('side-panel', 'article_all_page')|raw }}
+{% endblock %}
+{#{% block sideBar %}{{parent()}}{% endblock %}#}
+
+{% block beforeContentBlock %}
+    {{ panelWidget.renderPanel('before-content-panel', 'article_all_page')|raw }}
+{% endblock %}
+
+{% block bottomPanel %}
+    {{ panelWidget.renderPanel('bottom-panel', 'article_all_page')|raw }}
+{% endblock %}
+
+{% block footerSocialPanel %}
+    {{ panelWidget.renderPanel('footer-panel', 'article_all_page')|raw }}
+{% endblock %}
+
+{% block innerContent %}
+    <div class="tabs-content_news-horizontal">
+        <div class="tabs-content__white">
+            <div class="title">{{ 'news'|trans() }}</div>
+            <div class="tabs">
+                {% if instanceCategoryList is not empty %}
+
+                    <ul class="tabs__caption">
+                        {% for category in instanceCategoryList %}
+                            <li class="tabs__item {{ loop.first ? 'tabs__item_active' : '' }}"
+                                data-catid="{{ category.instance_category_id }}">
+                                {{ category.instance_category_title }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    {% for category in instanceCategoryList %}
+                        <div class="tabs__content {{ loop.first ? 'tabs__content_active' : '' }}"
+                             data-catid="{{ category.instance_category_id }}" data-time="{{ ignoreTime }}"
+                             data-artcount="{{ category.article_count }}" data-showbtn="1"
+                             data-date="{{ date }}">
+                            <div class="flex_space">
+                                {% if articleList is not empty %}
+                                    {% if loop.first %}
+                                        {% include 'PortalContentBundle:Article:newsItem.html.twig' %}
+                                    {% endif %}
+                                {% else %}
+                                    <p>{{ 'no_news'|trans() }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <a id="get-more" href="#" class="download" data-locale="{{ app.request.locale }}">
+                        {{ 'show_more'|trans() }}
+                    </a>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

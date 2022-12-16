@@ -1,0 +1,85 @@
+<ul>
+{% for menuNode in menuList %}
+    <li class="nav__item">
+
+    {% if menuNode.route is not empty %}
+        {% if custom_router.routeExists(menuNode.route) %}
+            {% set href = path(menuNode.route) %}
+        {% else %}
+            {% set href = menuNode.route %}
+        {% endif %}
+    {% elseif menuNode.slug is not empty %}
+        {% set href = path('structure_slug', { slug: menuNode.slug }) %}
+    {% else %}
+        {% set href = path('structure', { id: menuNode.id }) %}
+    {% endif %}
+    <a href="{{ href }}" class="nav__link">
+        <span>{{ menuNode.title }}</span>
+    </a>
+
+{#    {% if menuNode.route is not empty %}
+        {% if custom_router.routeExists(menuNode.route) %}
+            {% set href = path(menuNode.route) %}
+        {% else %}
+            {% set href = menuNode.route %}
+        {% endif %}
+    {% elseif menuNode.slug is not empty %}
+        {% set href = path('structure_slug', { slug: menuNode.slug }) %}
+    {% else %}
+        {% set href = path('structure', { id: menuNode.id }) %}
+    {% endif %}#}
+
+    {% if menuNode.childs is defined and menuNode.childs is not empty %}
+        {% set hasChilds = 0 %}
+{#        <div class="nav__submenu">#}
+            {% for menuSubNode in menuNode.childs %}
+                {% if not menuSubNode.isHidden and not menuSubNode.isHidden and menuSubNode.isPublished %}
+                    {% if not hasChilds %}<div class="nav__submenu">{% endif %}
+                    {% if custom_router.routeExists(menuSubNode.route) %}
+                        <a href="{{ path(menuSubNode.route) }}" class="nav__link">
+                            <span>{{ menuSubNode.title }}</span>
+                        </a>
+                    {% else %}
+                        <a href="{{ menuSubNode.route }}" class="nav__link">
+                            <span>{{ menuSubNode.title }}</span>
+                        </a>
+                    {% endif %}
+                    {% set hasChilds = 1 %}
+                {% endif %}
+            {% endfor %}
+            {% if hasChilds %}</div>{% endif %}
+{#        </div>#}
+    {% endif %}
+    </li>
+{% endfor %}
+{% if official is defined and official %}
+{#    <li class="nav__item">
+        <a href="#" class="nav__link">
+            <span>Портал Правительства РК</span>
+        </a>
+    </li>
+    <li class="nav__item">
+        <a href="#" class="nav__link">
+            <span>Глава Республики Крым</span>
+        </a>
+    </li>
+    <li class="nav__item">
+        <a href="#" class="nav__link">
+            <span>Государственный совет Республики Крым</span>
+        </a>
+    </li>#}
+    <li class="nav__item official-resources">
+
+
+
+
+        <a href="#" class="nav__link">
+            <span>Официальные ресурсы</span>
+        </a>
+
+
+
+
+    </li>
+{% endif %}
+</ul>

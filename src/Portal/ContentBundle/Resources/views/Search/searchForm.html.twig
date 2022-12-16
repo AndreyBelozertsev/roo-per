@@ -1,0 +1,65 @@
+<div class="open-search">
+    <span class="open-search__button">
+        Открыть поиск
+        <span class="open-search__text">Закрыть поиск</span>
+    </span>
+</div>
+
+<div class="search-document-box">
+    {#<h3>{% trans from "messages" %}searchDocuments{% endtrans %}</h3>#}
+    <form action="{{ path('search_documents_index') }}" name="searchDocumentsForm" class="search-form">
+        <div class="row">
+            <div class="form-group">
+                <label>{% trans from "messages" %}searchForm.label.documents.title{% endtrans %}: </label>
+                <input type="text" name="query" {% if data.tsv is defined and data.tsv is not empty %} value="{{data.tsv}}" {% endif %} class=""/>
+            </div>
+        </div>
+{#        <div class="row">
+            <div class="form-group">
+                <label>{% trans from "messages" %}searchForm.label.documents.docTags{% endtrans %}: </label>
+                <select name="documentTags[]" data-placeholder="Выберите из списка" multiple class="chosen-select">
+                    <option value=""></option>
+                    {% for tag in tags %}
+                        <option value="{{ tag.tag }}" {% if data.documentTags is defined and data.documentTags is not empty and tag.tag in data.documentTags %} selected {% endif %}>{{ tag.tag }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>#}
+
+        <div class="row">
+{#            <div class="form-group width-50">
+                <label>{% trans from "messages" %}searchForm.label.documents.docType{% endtrans %}: </label>
+                <select name="documentType" data-placeholder="Выберите из списка" class="chosen-select">
+                    <option value=""></option>
+                    {% for key,value in document_types %}
+                        <option value="{{  key }}" {% if data.documentType is defined and data.documentType is not empty and data.documentType == key %} selected {% endif %}>{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>#}
+            <div class="form-group width-50">
+                <label>{% trans from "messages" %}searchForm.label.documents.approvalDate{% endtrans %}: </label>
+                <div class="width-50">
+                    c <input type="text" id="dateFrom" name="dateFrom" {% if data.dateFrom is defined and data.dateFrom is not empty %}value="{{data.dateFrom}}"{% endif %} class="form-control js-datepicker hasDatepicker"/>
+                </div>
+                <div class="width-50">
+                    по <input type="text" id="dateTo" name="dateTo" {% if data.dateTo is defined and data.dateTo is not empty %}value="{{data.dateTo}}"{% endif %} class="form-control js-datepicker hasDatepicker"/>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <input type="checkbox" value="1" name="globalSearch"
+                    {% if data.globalSearch is defined and data.globalSearch is not empty %} checked {% endif %}/>
+            {% trans from "messages" %}searchForm.label.globalSearch{% endtrans %}
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="float-container">
+                    <input type="submit" value="{% trans from "messages" %}searchForm.button.search{% endtrans %}" class="search-form__button" />
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>

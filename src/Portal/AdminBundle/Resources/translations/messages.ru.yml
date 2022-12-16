@@ -1,0 +1,778 @@
+create: Создать
+edit: Редактировать
+delete: Удалить
+restore: Восстановить
+add_new: Добавить
+close: Закрыть
+send: Отправить
+action: Действия
+done: Действие произведено успешно!
+add_to_db_fail: Ошибка! При добавлении в базу даннных
+admin_panel: Административная Панель
+logout: Выход
+menu: Меню
+not_granted: У Вас нет прав на использование данного раздела, попробуйте войти под своей учетной записью
+successfully_save: Успешно сохранено!
+come_back: Назад к списку
+are_you_sure: Вы уверены?
+title: Заголовок
+subtitle: Подзаголовок
+form_not_valid: Форма содержит ошибки
+cancel: Отмена
+unexpected_error: Непредвиденная ошибка
+published: Опубликовано
+content: Содержимое
+date_start: Дата начала
+date_end: Дата завершения
+to_public: Публиковать
+open_in_new_tab: Открыть в новой вкладке
+publish_date: Дата публикации
+social_networks: Социальные сети
+make_some_choices: Сделайте выбор
+make_your_choice: Выберите один из вариантов
+label: Наименование
+filter: Фильтровать
+news_title: Заголовок новости
+sort: Сортировка
+extension: Сортировка по расширению
+image: Изображения
+sort_by_asc: Cортировка по возрастанию
+sort_by_desc: Cортировка по убыванию
+select_extension: Выберите расширение
+select_type: Выберите тип
+audio: Аудио
+video: Видео
+documents: Документы
+previous: Назад
+next: Вперед
+extension_by_type: Сортировка по типу
+create_date: Дата создания
+from: от
+to: до
+subs_news_title: НОВОСТИ
+subs_news_title important: ВАЖНЫЕ НОВОСТИ
+go_to_site: Перейти на сайт
+unsubs_propos: Если вы хотите отписаться от новостной рассылки министерства, нажмите
+here: здесь
+instances: Сайты
+manuals: Руководства
+main_site: Структура сайта
+welcome_admin_dashboard_message: Добро пожаловать в административную панель портала правительства Республики Крым
+administration: Администрирование
+can_not_delete: Не удается удалить данный объект, возможно, он используется в другом месте.
+last_shown: Последние просмотренные
+entity_log: История действий
+description: Описание
+click_to_copy: Копировать ссылку в буфер обмена
+drpo_file_here: Перетащите сюда ваши файлы
+to_structure: К разделу
+rename: Переименовать
+slug: URL псевдоним
+published_only: Опубликованные
+not_published_only: Не опубликованные
+no_news: Нет новостей в данной категории
+placeholder_select: Выбрать при необходимости
+is_deleted: (удален)
+author: Aвтор
+days: дней
+days_pluralize: 'день|дня|дней'
+no_result: Нет результатов удовлетворяющих данному фильтру
+or: или
+select_image: Выбрать изображение
+
+feedback_form:
+  menu_title: Форма обратной связи
+  sub_menu_title: Список форм
+  name: Название
+  resp-email: e-mail ответственного
+  theme: Тема сообщения
+  category: Категория сообщения
+  body: Тело сообщения
+  file: Прикрепить файл
+  author: Автор сообщения
+  phone: Телефон
+  email: e-mail
+  address_group: 'Место проживания'
+  sex_group: 'Пол'
+  age_group: 'Возрастная группа'
+  social_group: 'Социальная группа'
+  privilege_group: 'Категория'
+  action_list: Список форм обратной связи
+  action_create: Создать форму обратной связи
+  action_edit: Редактировать форму обратной связи
+  add_new: Добавить новую форму
+  title: Заголовок
+  delete_title: Удаление формы обратной связи
+  sort: Порядок сортировки
+  visible: Доступные поля
+  message_error: При отправке сообщения произошла ошибка.
+  message_success: Ваше сообщение успешно отправлено.
+  form_message_error: Уведомление при ошибке отправки сообщения
+  form_message_success: Уведомление при успешной отправке сообщения
+  is_published: Активна
+  relationship_error: Удаление не возможно! Возможно форма обратной связи с чемто связана!
+  sorted.not_null: Необходимо выбрать доступные поля
+  description: 'Описание'
+  slug: 'Адрес формы обратной связи:'
+  is_registered_user: 'Для зарегистрированных пользователей'
+  is_agree_personal_data: 'Согласие на обработку персональных данных'
+
+
+feedback_category_form:
+  menu_title: Категории сообщений обратной связи
+  name: Название
+  category: Категория сообщения
+  action_list: Список категорий сообщения
+  action_create: Создать категорию сообщения
+  action_edit: Редактировать категорию сообщения
+  add_new: Добавить категорию сообщения
+  code: Код
+  label: Заголовок
+  delete_title: Удаление категории сообщения
+  is_published: Активна
+  relationship_error: Удаление не возможно! Возможно категория сообщения с чемто связана!
+
+
+article_form:
+  menu_title: Новости
+  title: Заголовок
+  subtitle: Подзаголовок
+  content: Содержимое
+  preview: Титульное изображение
+  bloc: Раздел
+  photo_report: Фоторепортаж
+  video_report: Видео
+  is_hot: Горячая новость
+  is_important: Важная новость
+  social_enabled: Социальные сети
+  action_list: Список новостей
+  action_create: Создать новость
+  action_edit: Редактировать новость
+  delete_title: Удаление новости
+  restore: Восстановление новости
+  is_published_empty: Не опубликована
+  is_published: Опубликовано
+  published_date: Дата публикации
+  placeholder_photo: Выбрать при необходимости
+  placeholder_media: Выбрать при необходимости
+  counter: Счетчик просмотров
+  slug: Адрес новости:
+  author: Aвтор
+  media_file: Медиа файл
+  show_in_slider: Отображать в слайдере на главной
+  
+head_form:
+  menu_title: Руководство
+  firstname: Имя
+  lastname: Фамилия
+  middlename: Отчество
+  fio: ФИО
+  position: Должность
+  contactInformation: Контактная информация
+  biography: Биография
+  education: Образование
+  activity: Трудовая деятельность
+  awards: Награды и звания
+  preview: Титульное изображение
+  bloc: Раздел
+  action_list: Список рокуводителей
+  action_create: Создать руководителя
+  action_edit: Редактировать руководителя
+  delete_title: Удаление руководителя
+  restore_title: Восстановление руководителя
+  is_published_empty: Не опубликована
+  is_published: Опубликовано
+  published_date: Дата публикации
+  placeholder_photo: Выбрать при необходимости
+  placeholder_media: Выбрать при необходимости
+  counter: Счетчик просмотров
+  slug: Адрес страницы руководителя:
+  author: Aвтор
+  address: Адрес
+  phone: Телефон
+  fax: Факс
+  email: Email
+  no_head: Руководители отсутствуют
+document:
+  title: Документы
+  create: Создать документ
+  delete_title: Удаление документа
+  internal: Внутренний
+  public: Общедоступный
+  restore_title: Восстановление документа
+
+save: Сохранить
+sand: Отправить
+comment: Ваш комментарий:
+typo: Ошибка
+upload: Загрузить
+all_documents: Список документов
+all_categoryes: Список видов документов
+make_thumb: Сделать миниатюру
+all_departments: Все департаменты
+
+document_form:
+  category_label: Вид документа
+  category_empty: Выберите вид документа
+  type_empty: Выберите тип документа
+  select_menu_node: Выберите раздел документа
+  title: Заголовок
+  bloc: Раздел
+  content: Описание
+  public: Публиковать
+  pub_date: Дата публикации
+  doc_number: Номер документа
+  approv_date: Дата утверждения
+  doc_type: Тип документа
+  modal_message_delete: Удалить документ
+  slug: Адрес документа:
+
+Document: Документ
+Attachment: Вложенные файлы
+File: Файл
+no_file: нет файлов
+not_allowed_file_type: не допустимый тип файла
+to_big_file: слишком большой файл
+no_dir_code: папка не найдена
+no_path: путь не найден
+file_not_select: файл не выбран
+
+interview_form:
+  menu_title: Опрос
+  action_list: Список опросов
+  action_create: Создать опрос
+  action_edit: Редактировать опрос
+  title: Заголовок
+  subtitle: Подзаголовок
+  date_start: Дата начала
+  date_end: Дата окончания
+  is_published: Активный
+  is_registered_user: Для зарегистрированных пользователей
+  is_view_result: Просмотр результатов
+  result: 'Результат'
+  result_view_graf: 'В виде графика'
+  result_view_voting: 'По проголосовавшим'
+  label_cell_date: 'Дата'
+  no_result: 'Результатов нет'
+  message_end: Сообщение
+  description: Описание
+  modal_message_delete: Удалить опрос
+  period: Период проведения
+  author: Автор
+  is_published_empty: Не активен
+  add_new: Добавить новый опрос
+  btn_add_question: Добавить вопрос
+  add_db_error: Произошла ошибка при создании опроса
+  edit_db_error: Произошла ошибка при обновлении опроса
+  slug: Адрес опроса:
+  restore_title: Восстановление фоторепортажа
+  message_not_user: 'Сообщение для не зарегистрированных пользователей'
+  export_xls: 'Экспорт в xls файл'
+  interview_filter:
+    not_published_only: Не активные
+    published_only: Активные
+    interview_title: Заголовок Опроса
+    is_deleted_only: Удаленные опросы
+    date_start: Дата начала проведения
+    date_end: Дата окончания проведения
+
+interview_question_form:
+  content: Вопрос
+  is_required: Обязательный
+  is_dependent: Зависимый от ответа
+  question_type: Тип ответа
+  btn_remove_question: Удалить вопрос
+  btn_add_answer: Добавить ответ
+
+interview_answer_form:
+  content: Ответ
+  btn_remove_answer: Удалить ответ
+
+quiz_form:
+  menu_title: Викторина
+  action_list: Список викторин
+  action_create: Создать викторину
+  action_edit: Редактировать викторину
+  title: Заголовок
+  subtitle: Подзаголовок
+  date_start: Дата начала
+  date_end: Дата окончания
+  is_published: Активный
+  criterion: Критерий
+  good_result: Результат хорошо
+  bad_result: Результат плохо
+  period: Период проведения
+  author: Автор
+  is_published_empty: Не активен
+  add_new: Добавить новую викторину
+  btn_add_question: Добавить вопрос
+  add_db_error: Произошла ошибка при создании викторины
+  edit_db_error: Произошла ошибка при обновлении викторины
+  slug: Адрес викторины:
+
+quiz_question_form:
+  content: Вопрос
+  btn_remove_question: Удалить вопрос
+  btn_add_answer: Добавить ответ
+
+quiz_answer_form:
+  content: Ответ
+  is_correct: Верный
+  btn_remove_answer: Удалить ответ
+
+users_form: 
+  menu_title: Пользователи
+  action_list: Список пользователей
+  add_new: Добавить нового пользователя
+  instance: Сайт
+  role: Роль
+  lastname: Фамилия
+  firstname: Имя
+  middlename: Отчество
+  save: Сохранить
+  new_password: Пароль
+  repeat_password: Повторите пароль
+  username: Логин
+  email: Электронная почта
+  phone: Телефон
+  repeat_password_error: Пароли не совпадают
+  role_operator: Оператор
+  role_admin: Администратор
+  already_deleted: Пользователь уже удален!
+  successfully_delete: Успешно удалено!
+  not_granted: Недостаточно прав
+  error_remove: Непредвиденная ошибка. Удаление невозможно!
+  add: Добавление
+  edit: Редактирование
+  users: пользователя
+  delete_title: Удаление пользователя
+  btn_add_roles: Добавить роль
+  btn_remove_role: Удалить роль
+  role: Роль
+
+widget_to_panel_form:
+  menu_title: Виджеты
+  action_list: Список виджетов
+  action_create: Создать виджет
+  action_edit: Редактировать виджет
+  label: Название виджета
+  widget_label: Тип виджета
+  is_published: Активна
+  view_widget_type: Тип подключения
+  is_published_empty: Не активна
+  add_new: Создать новый виджет
+  modal_message_delete: Удалить виджет
+  widget_id: Тип виджета
+  panel_id: Панель
+  template_id: Шаблон страницы
+  instance_id: Сайт
+  widget_order: Очередность
+  sort: Сортировать виджеты
+  do_sort: Отсортируйте виджеты в порядке отображения
+  save_sort: Применить сортировку
+  not_changes_for_sort: Вы не меняли порядок сортировки
+  successfully_sorted: Сортировка произведена успешно
+  error_sorted: Сортировка не удалась по неизвестной причине. Свяжитесь с администратором системы.
+  
+instance_form:
+  menu_title: Дочерние сайты
+  instance_list: Список сайтов
+  instance_category_list: Список категорий сайтов
+  add_new: Добавить новый сайт
+  site_title: Название сайта
+  site_code: Код сайта
+  instance_category: Категория сайта
+  parent_instance: Вышестоящая организация
+  title: Название
+  domain: Домен
+  code: Код сайта
+  save: Сохранить
+  already_deleted: Сайт уже удален!
+  successfully_delete: Успешно удалено!
+  not_granted: Недостаточно прав
+  error_remove: Непредвиденная ошибка. Удаление невозможно!
+  add: Добавление
+  edit: Редактирование
+  instances: сайта
+  remove_instance: Удаление сайта
+
+instance_category_form:
+  successfully_save: Успешно сохранено
+  save: Сохранить
+  title: Название
+  add_new: Добавить новую категорию сайтов
+  instance_category_list: Список категорий сайтов
+  already_deleted: Категория сайта уже удалена!
+  successfully_delete: Успешно удалено!
+  not_granted: Недостаточно прав
+  error_remove: Непредвиденная ошибка. Удаление невозможно!
+  add: Добавление
+  edit: Редактирование
+  instance_categories: категории сайта
+  remove_instance_category: Удаление категории сайта
+
+widget_param:
+  title: Настройка параметров виджета
+  button: Параметры виджета
+
+resource: Ресурс
+group_link: Ccылка на группу
+parameter: Параметр
+no_widget: такого вида виджета не существует
+no_widget_to_panel: такого виджета не существует
+no_widget_params: у данного виджета нет параметров
+embed_code: Код для вставки
+image: Картинка
+find_on_map: Найти на карте
+widget_fail: Виджет не может быть показан
+
+inform_page:
+  title: Страница информации
+  list: Все страницы информации
+  new: Новая Страница
+  edit: Редактирование страницы
+  type: Тип страницы
+  not_found: Страница не найдена
+  structure: Структура
+  delete_title: Удаление страницы
+
+standart_template: Стандартная страница
+interactive_map_template: Интерактивная карта
+visitcard_template: Визитка
+table_template: Таблица
+contact_template: Контакты
+site_map_template: Карта сайта
+template_page: Шаблон страницы
+
+template:
+  content: Содержимое
+  interactive_map: Карта региона
+  link: Ссылка
+  root_link: Корневая ссылка
+  table: Таблица
+  address: Адрес
+  delete_confirm_msg: Удалить страницу
+  contact: Контакты
+
+bloc_structure:
+  bloc: Структура
+  title: Название
+  parent: Родительский раздел
+  route: Маршрут
+  is_published: Активен
+  not_is_published: Неактивен
+  list: Список структур
+  status: Статус
+  not_data: Нет данных
+  not_move: Перемещение не выполнено
+  move_complite: перемещение выполнено успешно
+  request_error: Ошибка выполнения запроса
+  relationship_error: Удаление не возможно! Имеются связи с типовыми страницами
+  selected: Выбран раздел:
+  edit: Редактировать раздел
+  create_in_structure: Добавить в раздел
+  create_article: Новость
+  create_document: Документ
+  create_event: Мероприятие
+  create_feedback_form: Обратную связь
+  create_photo_report: Фоторепортаж
+  create_video_report: Видеорепортаж
+  create_structure: Раздел
+  create_interview: Опрос
+  create_quiz: Викторина
+  create_head: Руководитель
+  feedbacks: Форма обратной связи:
+  articles: Новости:
+  documents: Документы:
+  photo_reports: Фоторепортажи:
+  video_reports: Видеорепортажи:
+  events: Мероприятия:
+  heads: Руководители:
+  heads: Руководители:
+  interviews: Опросы
+  quizzes: Викторины
+  materials: Информационные материалы
+
+structure_form:
+  modal_message_delete: Удалить
+  action_create: Создать раздел
+  label: Наименование раздела
+  parent: Родительский раздел
+  order: Позиция
+  menu: Меню
+  route: Путь
+  edit: Редактирование пункта меню
+  save: Сохранить
+  delete_title: Удаление элемента структуры
+  restore_title: Восстановление элемента структуры
+
+document_category:
+  title: Категории документов
+  create: Создать категорию документов
+  delete_title: Удаление категории документов
+
+event:
+  title: Мероприятия
+  edit: Редактирование мероприятия
+  all: Список мероприятий
+  preview: Титульное изображение
+  period: Период проведения
+  place: Место проведения
+  impo: Важное
+  important: Важное мероприятие
+  delete_title: Удаление мероприятия
+  long_title: Период и место проведения
+  from: с
+  to: по
+
+tag:
+  tag: Тег
+  title: Теги
+  all: Список тегов
+  edit: Редактирование тегов
+  delete_title: Удаление тега
+document_tag:
+  title: Теги документа
+
+menu_page:
+  title: Меню
+  edit: Редактирование меню
+  add_new: Добавить меню
+  all: Список меню
+  delete_title: Удаление меню
+  all_menu: Список пунктов меню
+  all_menu_categories: Список категорий меню
+  label: Название
+  route: Ссылка
+  menu: Категория меню
+  parent: Родительское меню
+  select_empty_category: Выберите меню
+  select_empty_parent: Выберите родительский пункт меню
+  delete_node_title: Удаление пункта меню
+  delete_title: Удаление меню
+  already_deleted: Пункт меню уже удален!
+  successfully_delete: Успешно удалено!
+  error_remove: Непредвиденная ошибка. Удаление невозможно!
+  menu_node_title: Наименование меню
+  menu_node_slug: Адрес раздела:
+  select_empty_structure_template: Выберите шаблон раздела
+  structure_template: Шаблон раздела
+  before_text: Текст перед
+  after_text: Текст после
+  is_separator: Разделитель
+  is_hidden: Скрытый раздел
+  is_main: Основной пункт меню
+  is_hide_childs: Скрыть дочерние элементы
+  is_published: Опубликовать
+  is_link_on_id: Ссылка по id
+  manual_create_date: Дата создания (видимая)
+  manual_upadate_date: Дата обновления (видимая)
+
+menu_category:
+    title: Категория меню
+    edit: Редактирование категории меню
+
+photo_report_form:
+  menu_title: Фоторепортажи
+  action_list: Список Фоторепортажей
+  action_create: Создать Фоторепортаж
+  action_edit: Редактировать фоторепортаж
+  title: Заголовок
+  is_published: Активный
+  description: Описание
+  preview: Титульное изображение
+  published_at: Дата
+  is_published_empty: Не активна
+  add_new: Добавить фоторепортаж
+  delete_title: Удаление фоторепортажа
+  restore_title: Восстановление фоторепортажа
+  successfully_delete: Успешно удалено!
+  error_remove: Непредвиденная ошибка. Удаление невозможно!
+  already_deleted: Фоторепортаж уже удален!
+  photo_list: Фотографии в фоторепортаже
+  add_photo: Добавить фото
+  upload_photo: Загрузить
+  description: Описоние
+
+report_a_typo: Сообщение об ошибке
+typo_text: Текст с ошибкой
+captcha: Защитный код
+wrong_captcha: Защитный код введен неверно
+
+#File manager
+media_manager:
+  menu_title: Библиотека файлов
+  menu_title_document: Библиотека документов
+  file_list: Список файлов
+button:
+  delete:
+    selected: Удалить помеченные
+    current: Удалить папку
+  add:
+    folder: Создать папку
+    files: Добавить файлы
+  tree: Боковая панель
+  refresh: Обновить
+table:
+  name: Наименование
+  date: Дата
+  size: Размер
+  dimension: Разрешение
+  actions: Действия
+
+internet_resources:
+  title: Интернет ресурсы
+  edit: Редактирование интернет ресурсов
+  delete_title: Удаление интернет ресурса
+
+subscribe:
+  subject: Ежедневная рассылка
+
+files:
+  delete_title: Удаления Файлов
+
+
+#system mode
+system_mode_form:
+  menu_title: Сервисный режим
+  system_mode_list: Список сервисных режимов
+  code: Код
+  notification_message: Уведомление
+  mode_message: Сообщение в режиме
+  is_active_notification: Активировать сообщение
+  is_active_mode: Активировать режим
+
+user_roles_form:
+  menu_title: Роли
+  action_list: Список ролей
+  add_new: Добавить новую роль
+  save: Сохранить
+  already_deleted: Роль уже удалена!
+  successfully_delete: Успешно удалено!
+  not_granted: Недостаточно прав
+  error_remove: Непредвиденная ошибка. Удаление невозможно!
+  add: Добавление
+  edit: Редактирование
+  roles: роли
+  delete_title: Удаление роли
+  permissions: Права доступа
+
+user_permissions_form:
+  menu_title: Права доступа
+  action_list: Список прав доступа
+  add_new: Добавить новое право доступа
+  save: Сохранить
+  already_deleted: Право доступа уже удалено!
+  successfully_delete: Успешно удалено!
+  not_granted: Недостаточно прав
+  error_remove: Непредвиденная ошибка. Удаление невозможно!
+  add: Добавление
+  edit: Редактирование
+  permissions: права доступа
+  delete_title: Удаление права доступа
+
+user_permission:
+  code: Код
+  label: Наименование
+
+user_role:
+  code: Код
+  label: Наименование
+  
+slider:
+  title: Слайдер
+  list: Список слайдеров
+  slide_duration: Время перелистывания
+#  frontend_class: Класс для фронтенда (css)
+  frontend_class: Формат блока
+  form_title: Название
+  type: Тип
+  delete_title: Удаление слайдера
+  action_edit: Редактирование слайдера
+  actions: действия
+
+banner:
+  title: Баннер
+  list: Список баннеров
+  form_title: Название
+  delete_title: Удаление баннера
+  actions: действия
+  choice_slider: Выберите слайдер для отображения
+  action_edit: Редактирование баннера
+  reference: Ссылка
+  relationship_error: Удаление не возможно! Данный баннер привязан к одному из слайдеров!
+
+video_report_form:
+  menu_title: Видеорепортажи
+  action_list: Список Видеорепортажей
+  add_new: Добавить видеорепортаж
+  action_edit: Редактировать видеорепортаж
+  file: Файл видеорепортажа
+  delete_title: Удаление видеорепортажа
+
+typo_report:
+  title: Список опечаток на сайте
+  text: Текст с ошибкой
+  link: Путь к странице с ошибкой
+
+instance_option:
+  title: Настройки
+  save: Сохранить
+
+#article_form:
+#    menu_title: Новости
+#    title: Заголовок
+#    subtitle: Подзаголовок
+#    content: Содержимое
+#    preview: Титульное изображение
+#    bloc: Раздел
+#    photo_report: Фоторепортаж
+#    video_report: Видео
+#    is_hot: Горячая новость
+#    is_important: Важная новость
+#    social_enabled: Социальные сети
+#    action_list: Список новостей
+#    action_create: Создать новость
+#    action_edit: Редактировать новость
+#    delete_title: Удаление новости
+#    is_published_empty: Не опубликована
+#    is_published: Опубликовано
+#    placeholder_photo: Выбрать при необходимости
+#    placeholder_media: Выбрать при необходимости
+
+file:
+  to_big: Слишком большой файл
+  wrong_type: Недопустимый тип файла
+  to_small: Слишком маленькое изображение
+  not_null: Необходимо выбрать изображение
+
+site_name_form:
+  menu_title: Название сайта
+  site_name: Название сайта
+  action_edit: Редактирование названия сайта
+
+good_result: Сообщение отображаемое после успешного прохождения викторины
+bad_result: Сообщение отображаемое после неудачного прохождения викторины
+criterion: Критерий успешного прохождения викторины в (%)
+
+material:
+  title: Информационные материалы
+  file: Файл материала
+  edit: Редактирование материала
+  delete_title: Удаление материала
+
+statistics:
+  title: Статистика обращений граждан
+  overdue: Просроченные обращения
+
+overdue:
+  register: Просрочка регистрации
+  response: Просрочка ответа
+
+guide:
+  superadmin: 'Руководство суперадминистратора'
+  admin: 'Руководство администратора'
+  operator: 'Руководство оператора'
+
+social_network:
+  action_list: 'Список социальных сетей'

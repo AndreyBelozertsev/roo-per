@@ -1,0 +1,54 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'tag.title'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'tag.edit'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permission_codes = permissions.code() %}
+
+{% block topbuttons %}
+    <a class="btn btn-success back-to-list" href="{{ path('admin_instance_tag_index', { 'instanceCode': instanceCode }) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+    {% if form.vars.value.id %}
+        {% if sa or constant('Portal\\ContentBundle\\Entity\\Tag::PERMISSIONS_TAG')['create'] in permission_codes %}
+            <a class="btn btn-success" href="{{ path('admin_instance_tag_edit', { 'id': 0, 'instanceCode': instanceCode }) }}">
+                <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+            </a>
+        {% endif %}
+        {% if sa or constant('Portal\\ContentBundle\\Entity\\Tag::PERMISSIONS_TAG')['delete'] in permission_codes %}
+            <a class="btn btn-warning" onclick="adminPage.tag.removeItem({{ form.vars.value.id }}, '{{ instanceCode }}');">
+                <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+            </a>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <div class="form-group">
+        <div class="col-sm-3 text-right">{{ form_label(form.tag) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.tag, {'attr': {'class': 'form-control'}}) }}
+            <div class="errors">
+                {% for error in form.tag.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+            {{ form_widget(form.submit, {'attr': {'class': 'btn btn-success'}}) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+    <br>
+{% endblock %}

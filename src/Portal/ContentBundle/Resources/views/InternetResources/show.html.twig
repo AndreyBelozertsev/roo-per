@@ -1,0 +1,23 @@
+{% extends 'PortalContentBundle::innerPageBase.html.twig' %}
+
+{% block title %}
+    {{ resource.title }} | {{ parent() }}
+{% endblock %}
+
+{% block pageTitle %}
+    {{ 'internet_resources.title'|trans() }}
+{% endblock %}
+
+{% block innerContent %}
+    <div class="tabs-content__white tabs-content__white_nopad">
+        <div class="info">
+            {% if resources %}
+                {% for resource in resources %}
+                    <a href="{{ resource.url }}" title="{{ resource.title }}">
+                        <img src="{{ vich_uploader_asset(resource, 'file') }}" alt="{{ resource.title }}" title="{{ resource.title }}">
+                    </a>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

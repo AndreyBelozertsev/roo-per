@@ -1,0 +1,57 @@
+{% extends isDepartment ? 'PortalContentBundle::depBase.html.twig' : 'PortalContentBundle::innerPageBase.html.twig' %}
+
+{% block title %}
+    {{ videoReport.title }} | {{ parent() }}
+{% endblock %}
+
+{% block headerPanel %}
+    {{ panelWidget.renderPanel('header-panel', 'video_report_page')|raw }}
+{% endblock %}
+
+{% block beforeContentBlock %}
+    {{ panelWidget.renderPanel('before-content-panel', 'video_report_page')|raw }}
+{% endblock %}
+
+{% block bottomPanel %}
+    {{ panelWidget.renderPanel('bottom-panel', 'video_report_page')|raw }}
+{% endblock %}
+
+{% block footerSocialPanel %}
+    {{ panelWidget.renderPanel('footer-panel', 'video_report_page')|raw }}
+{% endblock %}
+
+{% block sideBar %}{% endblock %}
+
+{% block content %}
+    <div class="media-top">
+
+        <div class="media _big">
+            <div class="media__content">
+                <div class="data-content">
+                    {% set url = videoReport.attachment.previewFileUrl|split('.', -1)|join('.') ~ '.thumb.png' %}
+                    <video width="576" height="320" poster="{{ asset(url) }}" controls>
+                        <source src="{{ asset(videoReport.attachment.previewFileUrl) }}" type="{{ videoReport.attachment.fileType }}">
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <div class="media-top__right">
+            <div class="media-top__title">{{ videoReport.title }}</div>
+            <div class="media-top__text">{{ videoReport.description|raw }}</div>
+            <div class="media-top__date">{{ videoReport.publishedAt|date('d.m.Y') }}</div>
+            {#<div class="media-top__eye">{{ videoReport.viewsCounter }}</div>#}
+            <div class="media-top__buttons">{{ share.render()|raw }}</div>
+        </div>
+
+        {% if tags is defined and tags is not empty %}
+            <div class="tags">
+                <div class="tags__title">{{ 'tags'|trans }}</div>
+                {% for tag in tags %}
+                    <a href="#{{ tag.id }}" class="tags__link">{{ tag.tag }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}

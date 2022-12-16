@@ -1,0 +1,99 @@
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.titleUk) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.titleUk, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.titleUk.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.titleRu) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.titleRu, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.titleRu.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.titleEn) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.titleEn, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.titleEn.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<hr>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ 'image'|trans }}</div>
+    <div class="col-sm-10">
+        <div class="preview-form">
+            <div class="rcrop-wrapper" data-min-width="200" data-min-height="200">
+                {% if magazine_newspaper.attachment %}
+                    <img class="preview-image" id="loadImg" src="{{ asset(magazine_newspaper.attachment.previewFileUrl) }}">
+                {% endif %}
+            </div>
+            {{ form_widget(form.attachment.file) }}
+            {{ form_widget(form.attachment.cropStartX) }}
+            {{ form_widget(form.attachment.cropStartY) }}
+            {{ form_widget(form.attachment.cropWidth) }}
+            {{ form_widget(form.attachment.cropHeight) }}
+        </div>
+        <div class="errors">
+            {% for error in form.attachment.file.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<hr>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ 'magazine_newspaper_form.magazine_file'|trans }}</div>
+    <div class="col-sm-10">
+        <div class="preview-form">
+            {{ form_widget(form.document_attachment) }}
+            {% if magazine_newspaper.documentAttachment %}
+                <a target="_blank" href="{{ asset(magazine_newspaper.documentAttachment.previewFileUrl) }}">Посмотреть</a>
+            {% endif %}
+            
+        </div>
+        <div class="errors">
+            {% for error in form.document_attachment.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ 'magazine_newspaper_form.type_of'|trans }}</div>
+    <div class="col-sm-10">
+        <div class="preview-form">
+            {{ form_widget(form.type_of) }}
+        </div>
+        <div class="errors">
+            {% for error in form.type_of.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<hr>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.isPublished) }}</div>
+    <div class="col-sm-10">{{ form_widget(form.isPublished) }}</div>
+    <div class="clearfix"></div>
+</div>

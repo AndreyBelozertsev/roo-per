@@ -1,0 +1,36 @@
+<div class="inform-bloks box">
+    <div class="calendar"></div>
+    <script>
+        setInterval(function () {
+            var d = new Date();
+            var h = d.getHours();
+            var m = d.getMinutes();
+            var s = d.getSeconds();
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+
+            var day = d.toLocaleString("ru", {weekday: 'long'});
+            var date = d.toLocaleDateString("ru") + "<br>";
+            var time = h + ":" + m + "<small>:" + s + "</small>";
+
+            $('.calendar').html('<span class="day">' + day + ', </span><span class="date">' + date + '</span><br>' + '<span class="time">' + time + '</span>');
+        }, 1000);
+    </script>
+    <style>
+        .calendar .day {
+            color: #999;
+            font-size: 14px;
+        }
+        .calendar .date {
+            font-size: 16px;
+        }
+        .calendar .time {
+            font-size: 26px;
+            border-top: 1px solid #ddd;
+            padding: 5px 15px;
+        }
+        .calendar .time small {
+            color: #999;
+        }
+    </style>
+</div>

@@ -1,0 +1,42 @@
+<div class="attachment-form-block">
+    <input type="hidden" name="attachment_ids" value="{{ attachment_ids is defined ? attachment_ids : '' }}"/>
+    <div class="att-wrp">
+        {% if attachments is defined %}
+            {% for file in attachments %}
+                <div class="file-wrp" data-id="{{ file.id }}">
+                    <a class="button delete"><span>×</span></a>
+                    <img src="{{ file.path }}{{ file.filename }}" alt="">
+                    <div class="file-label">{{ file.label }}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-file">{{ 'no_file'|trans }}</div>
+        {% endif %}
+        <br>
+        <button type="button" class="add-file">+ add</button>
+    </div>
+</div>
+
+<script>
+    var attachBlock = $('.attachment-form-block');
+    attachBlock.on('click', '.add-file', function () {
+        $(this).parent('.att-wrp').addClass('active');
+        var fileUploader = $('#file-uploader');
+        if (!fileUploader.length) {
+            $.post('/app_dev.php/admin-portal/get-file-uploader', function (d) {
+                $('body').append(d);
+            });
+        }
+        fileUploader.find('.msg').html('');
+        fileUploader.show();
+    });
+    attachBlock.on('click', '.att-wrp .button.delete', function() {
+        var attWrp = $(this).closest('.att-wrp');
+        var inp = attWrp.siblings('input[name="attachment_ids"]');
+        $(this).parent('.file-wrp').remove();
+        var ids = attWrp.find('.file-wrp').map(function () {
+            return [$(this).data('id')]
+        }).get().join(',');
+        inp.val(ids);
+    });
+</script>

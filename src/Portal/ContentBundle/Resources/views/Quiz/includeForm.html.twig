@@ -1,0 +1,13 @@
+<input type="hidden" name="numQuestion" value="{{ numQuestion }}">
+<input type="hidden" name="questionId" value="{{ question.question_id }}">
+<input type="hidden" name="countCorrectAnswer" value="{{ countCorrectAnswer }}">
+{% if answerList is defined and answerList is not empty %}
+    <div class="quiz__question">{{ question.question_content }}</div>
+    {% for answer in answerList %}
+        <div class="quiz__column">
+            <input type="radio" id="answerq_{{ answer.answer_id }}" class=" answer"
+                   name="answers" value="{{ answer.answer_id }}">
+            <label for="answer_{{answer.answer_id}}" class="label"><span class="checkbox-text">{{ answer.answer_content }}</span></label>
+        </div>
+    {% endfor %}
+{% endif %}

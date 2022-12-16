@@ -1,0 +1,66 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'slider.list'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'slider.list'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permission_codes = permissions.code() %}
+{% set allowEdit = constant('Portal\\ContentBundle\\Entity\\Slider::PERMISSIONS_SLIDER')['edit'] in permission_codes %}
+
+{% block topbuttons %}
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\Slider::PERMISSIONS_SLIDER')['create'] in permission_codes %}
+        <a class="btn btn-success" href="{{ path('admin_instance_slider_edit', { 'instanceCode': instanceCode }) }}">
+            <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+        </a>
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <table class="table table-striped table-middle-aligned">
+        <thead>
+            <tr>
+                <th>{{ 'slider.form_title'|trans }}</th>
+                <th>{{ 'slider.actions'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for slider in pagerFanta.currentPageResults %}
+            <tr>
+                <td>
+                    {% if sa or allowEdit or slider.author == app.user.id %}
+                        <a href="{{ path('admin_instance_slider_edit', { 'id': slider.id, 'instanceCode': instanceCode }) }}">
+                            {{ slider.title }}
+                        </a>
+                    {% else %}
+                        {{ slider.title }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if sa or allowEdit or slider.author == app.user.id %}
+                        <a href="{{ path('admin_instance_slider_edit', { 'id': slider.id, 'instanceCode': instanceCode }) }}"
+                            class="btn btn-sm btn-primary">
+                            <i class="glyphicon glyphicon-edit"></i> {{ 'edit'|trans }}
+                        </a>
+                    {% endif %}
+                    {% if sa or constant('Portal\\ContentBundle\\Entity\\Slider::PERMISSIONS_SLIDER')['delete'] in permission_codes
+                        or slider.author == app.user.id %}
+                        <a class="btn btn-sm btn-warning" onclick="adminPage.slider.removeItem({{ slider.id }}, '{{ instanceCode }}');">
+                            <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagerfanta">
+        {{ pagerfanta(pagerFanta, 'twitter_bootstrap3') }}
+    </div>
+{% endblock %}

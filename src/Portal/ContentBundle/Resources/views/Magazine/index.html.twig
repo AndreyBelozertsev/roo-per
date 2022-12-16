@@ -1,0 +1,31 @@
+{% extends 'PortalContentBundle::base.html.twig' %}
+
+{% block info_page %}
+    <div class="info-page">
+        <div class="info-page__posit">
+            <div class="bread-crumbs">
+                <ul>
+                    <li><a href="{{ path('portal_content_homepage') }}">{{ 'Home'|trans }}</a></li>
+                    <li>{{ 'Magazine'|trans }}</li>
+                </ul>
+            </div>
+            <div class="title-page">{{ 'Magazine'|trans }}</div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="content content_catalog">
+        {% include 'PortalContentBundle:Magazine:magazineList.html.twig' %}
+
+    </div>
+    <!--.content-->
+    {% if hideButton == false %}
+        <div class="button_posit-box get-more-magazines" data-page="{{ currentPage }}">
+            <div class="button button_center">{{ 'Show more'|trans }}</div>
+        </div>
+    {% endif %}
+    <div class="pagination clearfix">
+        {{ pagination|raw }}
+    </div>
+{% endblock %}

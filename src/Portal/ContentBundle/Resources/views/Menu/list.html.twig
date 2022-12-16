@@ -1,0 +1,16 @@
+{% if child is not empty %}
+    {% for ch in child if (ch.is_published and not ch.is_hidden and not ch.is_deleted) %}
+        <ul>
+            <li>
+                <a href="{{ (ch.route) ?: path('structure', { id: ch.id }) }}" title="{{ ch.title }}">
+                    {{ ch.title }}
+                </a>
+                {% if ch.child is defined %}
+                    {% include 'PortalContentBundle:Menu:list.html.twig' with {'child': ch.child} only %}
+                {% endif %}
+            </li>
+        </ul>
+    {% endfor %}
+{% else %}
+    <p>{{ 'no_path'|trans }}</p>
+{% endif %}

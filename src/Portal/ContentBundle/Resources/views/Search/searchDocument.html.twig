@@ -1,0 +1,35 @@
+{% extends 'PortalContentBundle::base.html.twig' %}
+
+{% block title %}
+    {{ 'searchDocuments'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block pageTitle %}
+    {{ 'searchDocuments'|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="search-box">
+        <h1>{{ 'searchDocuments'|trans }}</h1>
+        {{ searchForm(params)|raw }}
+        {% if data is defined and data is not empty %}
+            <ul class="search-results">
+                {% include '@PortalContent/Search/resultDocumentsElement.html.twig' %}
+            </ul>
+            {% if hideButton == false %}
+                <div style="text-align: center;">
+                    <button id="more-results" class="download tooltipstered"
+                            data-route="search_more_documents" data-page="{{ params.page + 1 }}" data-locale="ru">
+                        {{ 'searchForm.button.loadMore'|trans }}
+                    </button>
+                </div>
+            {% endif %}
+            <div class="pagination clearfix">{{ pagination|raw }}</div>
+            <p>{{ 'searchTotal'|trans }}: {{ data[0].total_results }}</p>
+        {% else %}
+            {% if params is defined and params is not empty %}
+                <p>{{ 'noSearchResults'|trans }}</p>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

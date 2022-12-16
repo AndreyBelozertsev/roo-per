@@ -1,0 +1,9 @@
+portal_pdf_js_homepage:
+    path: /{_locale}{trailingSlashLang}pdf-viewer{trailingSlash}
+    defaults: { _controller: PortalPdfJSBundle:PdfJS:index, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true

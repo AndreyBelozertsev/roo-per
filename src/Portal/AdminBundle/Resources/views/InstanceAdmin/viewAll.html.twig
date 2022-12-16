@@ -1,0 +1,48 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | {{ 'instance_form.instance_list'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'instance_form.instance_list'|trans }}
+{% endblock %}
+
+{% block topbuttons %}
+    <a class="btn btn-success" href="{{ path('admin_admin_instance_edit', {instanceId:0}) }}">
+        <i class="glyphicon glyphicon-plus-sign"></i> {{ 'instance_form.add_new'|trans }}
+    </a>
+{% endblock %}
+
+{% block body %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{{ 'instance_form.site_title'|trans }}</th>
+            <th>{{ 'instance_form.site_code'|trans }}</th>
+            <th>{{ 'action'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for instance in listInstance %}
+            <tr>
+                <td>
+                    <a href="{{ path('admin_admin_instance_edit', {instanceId:instance.id }) }}">{{instance.title}}</a>
+                </td>
+                <td>
+                    <a href="{{ path('admin_admin_instance_edit', {instanceId:instance.id }) }}">{{instance.code}}</a>
+                </td>
+                <td>
+                    <button class="btn btn-warning" href="#" onclick="adminPage.instance.removeItem({{instance.id}})">
+                        {{ 'delete'|trans }}
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

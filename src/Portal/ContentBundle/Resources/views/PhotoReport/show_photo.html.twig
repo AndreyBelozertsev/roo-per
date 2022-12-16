@@ -1,0 +1,32 @@
+{% extends 'PortalContentBundle::base.html.twig' %}
+
+{% block info_page %}
+    <div class="info-page">
+        <div class="info-page__posit">
+            <div class="bread-crumbs">
+                <ul>
+                    <li><a href="{{ path('portal_content_homepage') }}">{{ 'Home'|trans }}</a></li>
+                    <li>{{ 'Gallery'|trans }}</li>
+                </ul>
+            </div>
+            <div class="info-page__right">
+                <div class="title-page">{{ 'Gallery'|trans }}</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="photo">
+        <div class="photo__slider">
+            <div data-nav="thumbs" data-width="100%" data-height="auto" data-thumbheight="99" data-thumbwidth="176" class="fotorama photo__fotorama">
+                {% if photoList is defined %}
+                    {% for photo in photoList %}
+                        <img src="{{ asset(photo.preview_file_url) }}" data-caption="{{ attribute(photo, 'file_description_' ~ app.request.locale)|raw }}">
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <p>{{ attribute(photoReport, 'description' ~ app.request.locale|capitalize)|raw }}</p>
+    </div>
+{% endblock %}

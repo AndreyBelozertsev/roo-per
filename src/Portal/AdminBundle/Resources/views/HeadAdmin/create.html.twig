@@ -1,0 +1,46 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'head_form.action_create'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'head_form.action_create'|trans }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/portaladmin/RCropper/dist/rcrop.min.js') }}"></script>
+    <script src="{{ asset('bundles/portaladmin/script/crop-image/crop-image-attachment.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/portaladmin/RCropper/dist/rcrop.min.css') }}" media="screen" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block topbuttons %}
+    <a class="btn btn-success" href="{{ path('admin_instance_head_list', { 'instanceCode': instanceCode }) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+{% endblock %}
+
+{% block body %}
+    <input type="hidden" value="{{ instanceCode }}" id="instanceCode">
+    {{ form_start(form) }}
+        <div id="form-body" class="clearfix">
+            {% include 'PortalAdminBundle:HeadAdmin:includeForm.html.twig' %}
+            <div class="form-group">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-9">
+                    <div id="btn_head" class="form-actions">
+                        <button id="btn_create_and_edit" class="btn btn-success" type="submit" name="btn_create_and_edit">
+                            <i class="glyphicon glyphicon-floppy-disk"></i> {{ 'save'|trans }}
+                        </button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

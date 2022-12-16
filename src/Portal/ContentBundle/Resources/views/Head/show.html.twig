@@ -1,0 +1,79 @@
+{% extends isDepartment ? 'PortalContentBundle::depBase.html.twig' : 'PortalContentBundle::innerPageBase.html.twig' %}
+
+{% block title %}
+    {{ head.lastname }} {{ head.firstname }} {{ head.middlename }} | {{ 'portal'|trans() }}
+{% endblock %}
+
+{% block pageTitle %}{% endblock %}
+
+{% block headerPanel %}
+    {{ panelWidget.renderPanel('header-panel', 'head_page')|raw }}
+{% endblock %}
+
+{% block sideBar %}
+{#    {{parent()}}#}
+    {{ panelWidget.renderPanel('side-panel', 'head_page')|raw }}
+{% endblock %}
+{#{% block sideBar %}{{parent()}}{% endblock %}#}
+
+{% block beforeContentBlock %}
+    {{ panelWidget.renderPanel('before-content-panel', 'head_page')|raw }}
+{% endblock %}
+
+{% block bottomPanel %}
+    {{ panelWidget.renderPanel('bottom-panel', 'head_page')|raw }}
+{% endblock %}
+
+{% block footerSocialPanel %}
+    {{ panelWidget.renderPanel('footer-panel', 'head_page')|raw }}
+{% endblock %}
+
+{% block innerContent %}
+    <div class="tabs-content__white">
+        <div class="text-page">
+            <div class="text-page__img-box">
+                {% if head.originalFilePath is defined and head.originalFilePath %}
+                    {% set path = (head.originalFilePath is defined and head.originalFilePath) ? head.originalFilePath %}
+                {% elseif head.attachment is not empty and head.attachment.previewFileUrl is defined and head.attachment.previewFileUrl %}
+                    {% set path = head.attachment.previewFileUrl %}
+                {% else %}
+                    {% set path = '/bundles/portalcontent/image/image.png' %}
+                {% endif %}
+                {#{% set description = (head.attachment.fileDescription is defined and head.attachment.fileDescription) ? head.attachment.fileDescription : '' %}#}
+                <img src="{{ asset(path|existsImage) }}" style="width: 150px; margin: 0 20px 20px 0;">
+            </div>
+            <div class="text-page__inform-box">
+                <div class="text-page__name" style="text-transform: none; font-size:20px;">
+                    {{ head.lastname }} {{ head.firstname }} {{ head.middlename ?: '' }}
+                </div>
+                <div style="font-size:16px;">{{ head.position|raw }}</div>
+            </div>
+            <div class="clearfix"></div>
+
+            {% if head.address|trim or head.phone or head.fax or head.email %}
+                <div>
+                    <h3>{{ 'head_form.contactInformation'|trans() }}</h3>
+                    {% if head.address %}
+                        <p><strong>{{ 'head_form.address'|trans() }}:</strong> {{ head.address }}</p>
+                    {% endif %}
+                    {% if head.phone %}
+                        <p><strong>{{ 'head_form.phone'|trans() }}:</strong> {{ head.phone }}</p>
+                    {% endif %}
+                    {% if head.fax %}
+                        <p><strong>{{ 'head_form.fax'|trans() }}:</strong> {{ head.fax }}</p>
+                    {% endif %}
+                    {% if head.email %}
+                        <p><strong>{{ 'head_form.email'|trans() }}:</strong> {{ head.email }}</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            {% if head.biography|trim is not empty %}
+                <div>
+                    <h3>{{ 'head_form.biography'|trans() }}</h3>
+                    {{ head.biography|raw }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

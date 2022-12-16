@@ -1,0 +1,32 @@
+imports:
+    - { resource: config.yml }
+
+#framework:
+#    validation:
+#        cache: validator.mapping.cache.apc
+#    serializer:
+#        cache: serializer.mapping.cache.apc
+
+#doctrine:
+#    orm:
+#        metadata_cache_driver: apc
+#        result_cache_driver: apc
+#        query_cache_driver: apc
+
+#monolog:
+#    channels: ['db', 'main', 'nested', 'console']
+#    handlers:
+#        db:
+#            channels: ['db']
+#            type: service
+#            id: monolog.db_handler
+#        main:
+#            type:         fingers_crossed
+#            action_level: error
+#            handler:      nested
+#        nested:
+#            type:  stream
+#            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+#            level: debug
+#        console:
+#            type:  console

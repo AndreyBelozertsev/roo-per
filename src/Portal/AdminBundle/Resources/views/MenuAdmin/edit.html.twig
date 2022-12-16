@@ -1,0 +1,48 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'menu_category.title'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'menu_category.edit'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+
+{% block topbuttons %}
+    <a class="btn btn-success back-to-list" href="{{ path('admin_instance_menu_viewall', {'instanceCode': instanceCode}) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+    {% if form.vars.value.id and (sa or constant('Portal\\ContentBundle\\Entity\\Menu::PERMISSIONS_MENU')['delete'] in permissions.code()) %}
+        <a class="btn btn-warning" onclick="adminPage.menuNode.removeItem({{ form.vars.value.id }}, '{{ instanceCode }}');">
+            <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% if form is defined %}
+        {{ form_start(form) }}
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.title) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                <div class="errors">
+                    {% for error in form.title.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-success'}} ) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+    {% endif %}
+    <br>
+{% endblock %}

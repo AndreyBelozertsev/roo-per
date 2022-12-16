@@ -1,0 +1,320 @@
+<input id="const_text_type_select" type="hidden" data-text-type="{{ constant('Portal\\ContentBundle\\Entity\\InterviewQuestion::TYPE_TEXT') }}">
+<input id="num_min_answers" type="hidden" data-num-min-answers="{{ constant('Portal\\ContentBundle\\Entity\\InterviewQuestion::NUM_MIN_ANSWERS') }}">
+<div class="row">
+    <div class="form-group">
+        <div class="col-sm-3 text-right control-label">
+            {{ form_label(form.title, '', {'label_attr': {'class': 'control-label'}}) }}
+        </div>
+        <div class="col-sm-9">
+            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+            <div class="errors">
+                {% for error in form.title.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    {% if slug %}
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(form.slug) }}</div>
+            <div class="col-sm-9">
+                <div class="add-link-container">
+                    <div class="add-link-con1">
+                        {% set subDomain = (instanceCode == 'main') ? '' : instanceCode ~ '.' %}
+                        {{ protocol ~ '://' ~ subDomain }}{{ app.request.getHttpHost }}{{ path('interview_show_slug') }}/
+                        <input type="hidden" id="input_copy_ref"
+                               value="{{ protocol ~ '://' ~ subDomain }}{{ app.request.getHttpHost }}{{ path('interview_show_slug', {slug: interview.slug}) }}">
+                    </div>
+                    <div class="add-link-con2">
+                        {{ form_widget(form.slug, {'attr': {'class': 'form-control'} }) }}
+                    </div>
+                    <div class="add-link-con3">
+                        <a class="btn btn-success" id="button_copy_ref" title="{{ 'click_to_copy'|trans }}">
+                            <i class="fa fa-copy"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="errors">
+                    {% for error in form.slug.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    {% endif %}
+    <div class="form-group">
+        <div class="col-sm-3 text-right">
+            {{ form_label(form.subTitle, '', {'label_attr': {'class': 'control-label'}}) }}
+        </div>
+        <div class="col-sm-9">
+            {{ form_widget(form.subTitle, {'attr': {'class': 'form-control'}}) }}
+            <div class="errors">
+                {% for error in form.subTitle.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right">
+            {{ form_label(form.messageNotRegisteredUser, '', {'label_attr': {'class': 'control-label'}}) }}
+        </div>
+        <div class="col-sm-9">
+            {{ form_widget(form.messageNotRegisteredUser, {'attr': {'class': 'form-control'}}) }}
+            <div class="errors">
+                {% for error in form.messageNotRegisteredUser.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3 text-right">{{ form_label(form.menuNode) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.menuNode) }}
+            <div class="errors">
+                {% for error in form.menuNode.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right">
+            {{ form_label(form.dateStart, '', {'label_attr': {'class': 'control-label'}}) }}
+        </div>
+        <div class="col-sm-9">
+            {{ form_widget(form.dateStart, {'attr': {'class': 'form-control js-datepicker'}}) }}
+            <div class="errors">
+                {% for error in form.dateStart.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right">
+            {{ form_label(form.dateEnd, '', {'label_attr': {'class': 'control-label'}}) }}
+        </div>
+        <div class="col-sm-9">
+            {{ form_widget(form.dateEnd, {'attr': {'class': 'form-control js-datepicker'}}) }}
+            <div class="errors">
+                {% for error in form.dateEnd.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right">
+            {{ form_label(form.isPublished, '', {'label_attr': {'class': 'control-label'}}) }}
+        </div>
+        <div class="col-sm-9">
+            {{ form_widget(form.isPublished, {'attr': {'class': ''}}) }}
+            <div class="errors">
+                {% for error in form.isPublished.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right">
+            {{ form_label(form.isRegisteredUser, '', {'label_attr': {'class': 'control-label'}}) }}
+        </div>
+        <div class="col-sm-9">
+            {{ form_widget(form.isRegisteredUser, {'attr': {'class': ''}}) }}
+            <div class="errors">
+                {% for error in form.isRegisteredUser.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right">
+            {{ form_label(form.isViewResult, '', {'label_attr': {'class': 'control-label'}}) }}
+        </div>
+        <div class="col-sm-9">
+            {{ form_widget(form.isViewResult, {'attr': {'class': ''}}) }}
+            <div class="errors">
+                {% for error in form.isViewResult.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right">
+            {{ form_label(form.messageEnd, '', {'label_attr': {'class': 'control-label'}}) }}
+        </div>
+        <div class="col-sm-9">
+            {{ form_widget(form.messageEnd, {'attr': {'class': 'form-control'}}) }}
+            <div class="errors">
+                {% for error in form.messageEnd.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right">
+            {{ form_label(form.description, '', {'label_attr': {'class': 'control-label'}}) }}
+        </div>
+        <div class="col-sm-9">
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            <div class="errors">
+                {% for error in form.description.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-9">
+        <div class="questions"
+             data-prototype-answer="{{ form_widget(form.questions.vars.prototype.answers.vars.prototype)|e('html_attr') }}"
+             data-prototype="{{ form_widget(form.questions.vars.prototype)|e('html_attr') }}">
+            {% for question in form.questions %}
+                <div class="question-form well row" data-question-index="{{ loop.index - 1 }}"
+                        {{ question.vars.data.dependentInterviewAnswerId != null ? 'data-dependent-answer-id='~(question.vars.data.dependentInterviewAnswerId|number_format) : '' }}>
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            {{ form_label(question.content, '', {'label_attr': {'class': 'control-label'}}) }}
+                        </div>
+                        <div class="col-sm-9">
+                            {{ form_widget(question.content, {'attr': {'class': 'form-control question-content'}}) }}
+                            <div class="errors">
+                                {% for error in question.content.vars.errors %}
+                                    <div class="alert alert-danger">{{ error.message }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            {{ form_label(question.description, '', {'label_attr': {'class': 'control-label'}}) }}
+                        </div>
+                        <div class="col-sm-9">
+                            {{ form_widget(question.description, {'attr':{'class':'form-control'}}) }}
+                            <div class="errors">
+                                {% for error in question.description.vars.errors %}
+                                    <div class="alert alert-danger">{{ error.message }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            {{ form_label(question.isRequired, '', {'label_attr': {'class': 'control-label'}}) }}
+                        </div>
+                        <div class="col-sm-9">
+                            {% if question.questionType.vars.value == constant('Portal\\ContentBundle\\Entity\\InterviewQuestion::TYPE_TEXT') %}
+                                {{ form_widget(question.isRequired, {'attr': {'disabled': 'disabled', 'class': 'form-control question-required-checked'}}) }}
+                            {% else %}
+                                {{ form_widget(question.isRequired, {'attr': {'class': 'form-control question-required-checked'}}) }}
+                            {% endif %}
+                            <div class="errors">
+                                {% for error in question.isRequired.vars.errors %}
+                                    <div class="alert alert-danger">{{ error.message }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            {{ form_label(question.questionType, '', {'label_attr': {'class': 'control-label'}}) }}
+                        </div>
+                        <div class="col-sm-9">
+                            {{ form_widget(question.questionType, {'attr':{'class':'form-control select-question-type'}}) }}
+                            <div class="errors">
+                                {% for error in question.questionType.vars.errors %}
+                                    <div class="alert alert-danger">{{ error.message }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div style="{{ loop.first ? 'display: none;' : '' }}">
+                        <div class="form-group">
+                            <div class="col-sm-3 text-right">
+                                {{ form_label(question.isDependent, '', {'label_attr': {'class': 'control-label question-dependent-label'}}) }}
+                            </div>
+                            <div class="col-sm-9">
+                                {{ form_widget(question.isDependent, {'attr': {'class': 'form-control question-dependent-checked'}}) }}
+                                {{ form_widget(question.dependentInterviewAnswerId, {'attr': {'class': 'question-answer-dependent-id'}}) }}
+                                <div class="errors">
+                                    {% for error in question.isDependent.vars.errors %}
+                                        <div class="alert alert-danger">{{ error.message }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div class="question-dependent"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="answers">
+                        {% for error in question.answers.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                        {% for answer in question.answers %}
+                            <div class="answer-form" data-answer-index="{{ loop.index - 1 }}" data-answer-id="{{ answer.vars.data.id }}">
+                                {{ form_label(answer.content) }}
+                                {{ form_widget(answer.content, {'attr': {'class': 'answer-content'}}) }}
+                                <div class="errors">
+                                    {% for error in answer.content.vars.errors %}
+                                        <div class="alert alert-danger">{{ error.message }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div style="{{ loop.index - 1 < constant('Portal\\ContentBundle\\Entity\\InterviewQuestion::NUM_MIN_ANSWERS') ? 'display: none;' : '' }}">
+                                    <button type="button" class="remove-answer btn btn-warning btn-xs">
+                                        {{ 'interview_answer_form.btn_remove_answer'|trans }}
+                                    </button>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% if question.questionType.vars.value == constant('Portal\\ContentBundle\\Entity\\InterviewQuestion::TYPE_TEXT') %}
+                        {{ form_widget(question.addAnswer, {'attr': {'disabled': 'disabled'}}) }}
+                    {% else %}
+                        {{ form_widget(question.addAnswer) }}
+                    {% endif %}
+                    {{ form_row(question.addAnswer) }}
+                    <div style="{{ loop.first ? 'display: none;' : '' }}">
+                        {{ form_row(question.removeQuestion) }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-9">
+        {{ form_widget(form.addQuestion, {'attr': {'class': 'btn btn-success add_question_link'}}) }}
+        <div class="errors">
+            {% for error in form.questions.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>

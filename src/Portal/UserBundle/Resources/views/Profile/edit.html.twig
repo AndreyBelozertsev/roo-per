@@ -1,0 +1,18 @@
+{% extends "PortalProfileBundle::profileBase.html.twig" %}
+
+{% block title %}
+    {{ parent() }}
+{% endblock %}
+
+{% block pageheaderblock %}
+{% endblock %}
+
+{% block topbuttonsblock %}
+{% endblock %}
+
+{% block body %}
+    {% block fos_user_content %}
+        {% include "PortalUserBundle:Profile:edit_content.html.twig" %}
+    {% endblock fos_user_content %}
+{% endblock %}
+

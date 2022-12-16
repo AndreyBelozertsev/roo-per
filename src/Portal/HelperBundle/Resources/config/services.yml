@@ -1,0 +1,43 @@
+services:
+#  access_log_manager:
+#    class: Portal\HelperBundle\Model\AccessLogManager
+#    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+#  access_log_manager:
+#    class: Portal\HelperBundle\Model\AccessLogManager
+#    arguments: ["@doctrine.orm.log_entity_manager", "@service_container"]
+#
+#  entity_log_manager:
+#    class: Portal\HelperBundle\Model\LogManager
+#    arguments: ["@doctrine.orm.log_entity_manager", "@service_container"]
+
+  user_helper:
+    class: Portal\HelperBundle\Helper\UserHelper
+    arguments: ["@service_container", "@doctrine.orm.entity_manager"]
+
+#  monolog.db_handler:
+#    class: Portal\HelperBundle\Util\MonologDBHandler
+#    arguments: ['@doctrine.orm.log_entity_manager']
+
+#  petition_search:
+#    class: Portal\ProfileBundle\Model\Search\PetitionSearch
+#    arguments: ["@service_container", "@doctrine.orm.entity_manager"]
+
+  # Vich Uploader
+  vich_uploader.directory_namer:
+    class: Portal\ContentBundle\Service\AttachmentDirectoryNamer
+    arguments: []
+    arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+
+  vich_uploader.petition_directory_namer:
+    class: Portal\ContentBundle\Service\PetitionAttachmentDirectoryNamer
+    arguments: []
+    arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+
+  app.vich_uploader_post_listener:
+    class: Portal\HelperBundle\EventListener\VichUploadListener
+    tags:
+      - { name: kernel.event_listener, event: vich_uploader.post_upload }
+  app.vich_uploader_pre_listener:
+    class: Portal\HelperBundle\EventListener\VichUploadListener
+    tags:
+      - { name: kernel.event_listener, event: vich_uploader.pre_upload }

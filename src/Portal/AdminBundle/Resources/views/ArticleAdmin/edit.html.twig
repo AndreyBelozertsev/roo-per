@@ -1,0 +1,71 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'article_form.action_edit'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'article_form.action_edit'|trans }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/portaladmin/RCropper/dist/rcrop.min.js') }}"></script>
+    <script src="{{ asset('bundles/portaladmin/script/crop-image/crop-image-attachment.js') }}"></script>
+    <script src="{{ asset('bundles/portaladmin/script/slug-form/slug-form.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/portaladmin/RCropper/dist/rcrop.min.css') }}" media="screen" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/portaladmin/css/slug.css') }}" media="screen" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permission_codes = permissions.getCode() %}
+
+{% block topbuttons %}
+    <a class="btn btn-success back-to-list" href="{{ path('admin_instance_article_list', { 'cat': app.request.get('cat') }) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\Article::PERMISSIONS_ARTICLE')['create'] in permission_codes %}
+        <a class="btn btn-success" href="{{ path('admin_instance_article_form_create', { 'cat': app.request.get('cat') }) }}">
+            <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+        </a>
+    {% endif %}
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\Article::PERMISSIONS_ARTICLE')['delete'] in permission_codes or article.author == app.user.id %}
+        <a class="btn btn-warning soft-delete-btn" onclick="adminPage.article.removeItem({{ article.id }}, {{ app.request.get('cat') }});">
+            <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+        <div id="form-body" class="clearfix">
+            <div class="form-group">
+                <div class="col-sm-2 text-right"><label>{{ 'category_title'|trans }}</label></div>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" disabled="disabled" value="{{ category.titleRu }}">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            {% include 'PortalAdminBundle:ArticleAdmin:includeForm.html.twig' %}
+            <div class="form-group">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-10">
+                    <div id="btn_article" class="form-actions">
+                        <button id="btn_edit" class="btn btn-success" type="submit" name="btn_edit">
+                            <i class="glyphicon glyphicon-floppy-disk"></i> {{ 'save'|trans }}
+                        </button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block history %}
+    {{ entityLog.renderHistory(article.id, instanceCode, constant('Portal\\HelperBundle\\Entity\\Log::ENTITY_TYPE_ARTICLE'))|raw }}
+{% endblock %}

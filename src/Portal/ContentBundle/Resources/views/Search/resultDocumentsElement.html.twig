@@ -1,0 +1,19 @@
+{% for result in data %}
+    <li>
+        <p><a href="{{ result.link }}" class="search-link">{{ result.title|strip|raw }}</a></p>
+        {% if result.preview_text is defined and result.preview_text is not empty %}
+            <div class="preview">{{ result.preview_text|strip|raw }}</div>
+        {% endif %}
+        {% if result.pub_date is defined and result.pub_date is not empty or
+        result.tags_clean is defined and result.tags_clean is not empty %}
+            <ul class="result-category">
+                {% if result.pub_date is defined and result.pub_date is not empty %}
+                    <li>{{ 'publish_date'|trans }}: <span>{{ result.pub_date|date_ru }}</span></li>
+                {% endif %}
+                {% if result.tags_clean is defined and result.tags_clean is not empty %}
+                    <li>{{ 'tags'|trans }}: <span>{{ result.tags_clean }}</span></li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </li>
+{% endfor %}

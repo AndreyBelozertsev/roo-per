@@ -1,0 +1,13 @@
+<div class="text-page">
+    {% for item in items %}
+        {% if route is defined %}
+            <div class="text-page__block">
+                <a href="{{ path(route,{ id:item.id }) }}" class="text-page__link-block text-page__desk">
+                    {{ item.title }}
+                </a>
+            </div>
+        {% else %}
+            {{ item.title }}
+        {% endif %}
+    {% endfor %}
+</div>

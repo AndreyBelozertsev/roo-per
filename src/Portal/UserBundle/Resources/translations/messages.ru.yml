@@ -1,0 +1,51 @@
+remember_me: Запомнить меня
+username: Логин
+password: Пароль
+no_user: Пользователь не найден
+error: Произошла ошибка
+wrong_pass: Не правильный пароль
+no_user_id: id пользователя не найден
+select_dep: Вы не выбрали организацию
+input_pass: Пароль необходимо заполнить
+pass_not_match: Пароли не совпадают
+cant_del_user: Не удается удалить пользователя
+empty_query_string: Пустая строка запроса
+lastname: Фамилия
+firstname: Имя
+middlename: Отчество
+email: Электронная почта
+work_email: 'Рабочая электроная почта'
+phone: Телефон
+login: Логин
+logining: 'Вход в систему'
+register: Регистрация
+current_password: 'Текущий пароль'
+password_confirmation: 'Подтвердите пароль'
+new_password: 'Новый пароль'
+new_password_confirmation: 'Подтвердите пароль'
+registration:
+    check_email: 'Письмо отправлено на адрес %email%. В нём содержится ссылка, по которой вы можете подтвердить свою регистрацию.'
+    confirmed: 'Поздравляем %username%, ваш аккаунт подтвержден.'
+    back: 'Вернуться на предыдущую страницу.'
+    submit: Зарегистрироваться
+    flash:
+        user_created: 'Пользователь успешно создан.'
+    email:
+        subject: 'Добро пожаловать, %username%!'
+        message: |
+            Приветствуем, %username%!
+
+            Для подтверждения вашей регистрации, пройдите по ссылке %confirmationUrl%
+
+            Эта ссылка может быть использована только единожды для подтверждения вашей учетной записи.
+
+            С наилучшими пожеланиями,
+            команда сайта.
+
+profile:
+    edit:
+        submit: Обновить
+    flash:
+        updated: 'Профиль пользователя обновлен.'
+
+successfully_change: 'Успешно изменено'

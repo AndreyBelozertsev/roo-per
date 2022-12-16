@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<title>{% trans from "messages" %}government{% endtrans %}</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description"/>
+<meta name="keywords"/>
+<link rel="stylesheet" href="{{ asset('themes/public/style.css') }}"/>
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+<body class="page error"><a href="/" class="logo"><span>{% trans from "messages" %}government{% endtrans %}</span>{% trans from "messages" %}portal{% endtrans %}</a>
+<div class="error__message">
+    <div class="error__number"><b>{{ status_code }}</b>{{ status_text }}</div>
+    <div class="error__content">
+        <div class="error__title">{% trans from "messages" %}error_page.error{% endtrans %}<b>{% trans from "messages" %}error_page.error_message_500{% endtrans %}</b></div>
+        <div class="error__text">
+            {% trans from "messages" %}error_page.text_500{% endtrans %} {{ errorMessage }}
+        </div><a href="{{ path('portal_content_homepage') }}" class="error__link">{% trans from "messages" %}to_home_page{% endtrans %}</a>
+    </div>
+</div>
+</body>
+</html>

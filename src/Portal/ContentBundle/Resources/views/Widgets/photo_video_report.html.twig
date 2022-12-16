@@ -1,0 +1,98 @@
+{% if photoReportList is defined and videoReportList is defined %}
+    {% if photoReportList is not empty or videoReportList is not empty %}
+        <div class="tabs-photo-video">
+            {% if photoReportList is not empty %}
+                <a href="{{ path('photo_report') }}" class="news-box__link-all-mews">{{ 'all_photo'|trans }}</a>
+            {% endif %}
+            {% if videoReportList is not empty %}
+                <a href="{{ path('video_report') }}" class="news-box__link-all-mews {{ photoReportList is not empty ? 'news-box__link-all-mews__hide' : '' }}">
+                    {{ 'all_video'|trans }}
+                </a>
+            {% endif %}
+
+            <div class="tabs">
+                <ul class="tabs__caption">
+                    {% if photoReportList is not empty %}
+                        <li class="tabs__item {{ photoReportList is not empty ? 'tabs__item_active' : '' }}">
+                            {{ 'photo'|trans }}
+                        </li>
+                    {% endif %}
+                    {% if videoReportList is not empty %}
+                        <li class="tabs__item {{ photoReportList is empty ? 'tabs__item_active' : '' }}">
+                            {{ 'video'|trans }}
+                        </li>
+                    {% endif %}
+                </ul>
+
+                {% if photoReportList is not empty %}
+                <div class="tabs__content {{ photoReportList is not empty ? 'tabs__content_active' : '' }}">
+                    <div class="owl-carousel owl-theme owl-photo">
+                    {% for photoReport in photoReportList %}
+                        <div class="item">
+                            <div class="owl-photo__photo">
+                                <a href="{{ path('photo_report_show', {'id': photoReport.photo_report_id}) }}" class="owl-photo__link">
+                                    <img src="{{ asset(photoReport.photo_report_file_url|thumbImage) }}">
+                                </a>
+                                <div class="owl-photo__date">{{ photoReport.photo_report_published_at|date('d.m.Y') }}</div>
+                                <div class="owl-photo__numb">{{ photoReport.count }}</div>
+                            </div>
+                            <a href="{{ path('photo_report_show', {'id': photoReport.photo_report_id}) }}" class="owl-photo__title">
+                                {{ photoReport.photo_report_title|slice(0,100) }}
+                            </a>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if videoReportList is not empty %}
+                <div class="tabs__content {{ photoReportList is empty ? 'tabs__content_active' : '' }}">
+                    <div class="owl-carousel owl-theme owl-photo">
+                    {% for videoReport in videoReportList %}
+                        <div class="item">
+                            <div class="owl-photo__photo">
+                                <a href="{{ path('video_report_show', {'id': videoReport.video_report_id}) }}" class="owl-photo__link owl-photo__link_video">
+                                    <img src="{{ asset(videoReport.video_report_file_url|thumbVideo) }}"
+                                         {#onError="this.onerror=null;this.src='{{ asset('bundles/portalcontent/image/video.png') }}';"#}
+                                         alt="{{ videoReport.video_report_title }}">
+                                </a>
+                                <div class="owl-photo__date">{{ videoReport.video_report_published_at|date('d.m.Y') }}</div>
+                                <div class="owl-photo__numb"></div>
+                            </div>
+                            <a href="{{ path('video_report_show', {'id': videoReport.video_report_id}) }}" class="owl-photo__title">
+                                {{ videoReport.video_report_title|slice(0,100) }}
+                            </a>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endif %}
+
+<script>
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        dots: false,
+        margin: 10,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1,
+                nav: true
+            },
+            600: {
+                items: 3,
+                nav: false
+            },
+            1000: {
+                items: 4,
+                nav: true,
+                loop: false,
+                margin: 20
+            }
+        }
+    });
+</script>

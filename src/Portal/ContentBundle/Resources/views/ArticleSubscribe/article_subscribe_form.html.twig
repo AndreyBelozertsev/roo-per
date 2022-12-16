@@ -1,0 +1,39 @@
+<div class="mail-delivery__title">{{ 'subs.title'|trans() }}</div>
+
+{{ form_start(form) }}
+    <label class="mail-delivery__text">{{ 'subs.text'|trans() }}</label>
+
+    {{ form_widget(form.email, {'attr':{'class':'mail-delivery__pole'} }) }}
+    <div class="errors">
+        {% for error in form.email.vars.errors %}
+            <div class="alert alert-danger">{{ error.message }}</div>
+        {% endfor %}
+    </div>
+
+    {{ form_widget(form.instance) }}
+
+    <div class="mail-delivery__button">
+        <input type="button" value="{{ 'subs.btn'|trans() }}">
+    </div>
+{{ form_end(form) }}
+
+<script>
+    var subsWrp = $('.mail-delivery.box');
+    subsWrp.on('click', '.mail-delivery__button input', function (e) {
+        e.preventDefault();
+        $(this).remove();
+        $.ajax({
+            type: 'POST',
+            url: Routing.generate('article_subscribe_form'),
+            data: subsWrp.find('form').serialize(),
+            success: function (d) {
+                if (d.error) {
+                    subsWrp.find('form').remove();
+                    subsWrp.append(d.error);
+                } else {
+                    subsWrp.html(d.content);
+                }
+            }
+        });
+    });
+</script>

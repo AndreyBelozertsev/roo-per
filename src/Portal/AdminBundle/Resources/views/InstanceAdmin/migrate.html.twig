@@ -1,0 +1,15 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}{{ parent() }} | {{ 'instances'|trans }}{% endblock %}
+{% block pageheaderblock %}{% endblock %}
+
+{% block topbuttonsblock %}
+{% endblock %}
+
+{% block body %}
+    {{message}}
+{% endblock %}

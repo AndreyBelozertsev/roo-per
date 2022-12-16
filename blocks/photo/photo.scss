@@ -1,0 +1,129 @@
+.photo
+{
+    font-size: 16px;
+
+    &__slider
+    {
+        margin-bottom: 30px;
+    }
+
+    p
+    {
+        line-height: 1.5;
+    }
+
+    &__fotorama
+    {
+        position: relative;
+
+        background: #fff;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+
+        .fotorama__arr
+        {
+            width: 50px;
+            height: 50px;
+            //margin-top: -27px;
+            margin-top: -24px;
+
+            background: none;
+        }
+
+        .fotorama__arr--prev
+        {
+            &::before
+            {
+                font-family: FontAwesome;
+                font-size: 38px;
+
+                display: block;
+
+                width: 50px;
+                height: 50px;
+
+                content: '\f053';
+                text-align: center;
+
+                color: #fff;
+                text-shadow: 0 0 9px rgba(0,0,0,0.2);
+            }
+        }
+
+        .fotorama__arr--next
+        {
+            &::before
+            {
+                font-family: FontAwesome;
+                font-size: 38px;
+
+                display: block;
+
+                width: 50px;
+                height: 50px;
+
+                content: '\f054';
+                text-align: center;
+
+                color: #fff;
+                text-shadow: 0 0 9px rgba(0,0,0,0.2);
+            }
+        }
+
+        .ft-rama__arr
+        {
+            width: 50px;
+            height: 50px;
+            margin-top: -27px;
+
+            background: none;
+        }
+
+        .ft-rama__arr--prev
+        {
+            &::before
+            {
+                font-family: FontAwesome;
+                font-size: 38px;
+
+                display: block;
+
+                width: 50px;
+                height: 50px;
+
+                content: '\f053';
+                text-align: right;
+
+                color: #fff;
+                text-shadow: 0 0 9px rgba(0,0,0,0.2);
+            }
+        }
+
+        .ft-rama__arr--next
+        {
+            &::before
+            {
+                font-family: FontAwesome;
+                font-size: 38px;
+
+                display: block;
+
+                width: 50px;
+                height: 50px;
+
+                content: '\f054';
+
+                color: #fff;
+                text-shadow: 0 0 9px rgba(0,0,0,0.2);
+            }
+        }
+    }
+
+    .fotorama__thumb-border
+    {
+        width: 100%;
+        height: 100%;
+
+        border-color: $gray-dark;
+        background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+    }
+}

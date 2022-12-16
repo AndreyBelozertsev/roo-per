@@ -1,0 +1,53 @@
+html
+{
+    font-size: 62.5%;
+}
+
+html,
+body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+img
+{
+    border: none;
+}
+
+.clearfix:after
+{
+    display: table;
+    clear: both;
+
+    content: '';
+}
+
+*:focus
+{
+    outline: none;
+}
+
+a,
+button
+{
+    -webkit-appearance: none;
+}
+
+a::-moz-focus-inner,
+button::-moz-focus-inner
+{
+    border: 0;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+#mt_c
+{
+    display: none;
+}

@@ -1,0 +1,79 @@
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permissionCodes = permissions.getCode() %}
+
+{% for key, items in itemsStructure %}
+    {% if items is not empty %}
+        <div class="page-header">{{ ('bloc_structure.'~key)|trans }}</div>
+
+        {% if key == 'articles' %}
+            {% set route, jsBtnEntity = 'admin_instance_article_form_edit', 'article' %}
+        {% elseif key == 'events' %}
+            {% set route, jsBtnEntity = 'admin_instance_event_edit', 'event' %}
+        {% elseif key == 'pages' %}
+            {% set route, jsBtnEntity, permission = 'admin_instance_inform_page_edit', 'informPage', 'inform_page' %}
+        {% elseif key == 'photo_reports' %}
+            {% set route, jsBtnEntity, permission = 'admin_instance_photo_report_edit', 'photoReport', 'photo_report' %}
+        {% elseif key == 'feedbacks' %}
+            {% set route, jsBtnEntity, permission = 'admin_admin_feedback_form_edit', 'feedbackForm', 'feedback_form' %}
+        {% elseif key == 'interviews' %}
+            {% set route, jsBtnEntity = 'admin_instance_interview_form_edit', 'interview' %}
+        {% elseif key == 'quizzes' %}
+            {% set route, jsBtnEntity = 'admin_instance_quiz_form_edit', 'quiz' %}
+        {% elseif key == 'video_reports' %}
+            {% set route, jsBtnEntity, permission = 'admin_instance_video_report_edit', 'videoReport', 'video_report' %}
+        {% elseif key == 'materials' %}
+            {% set route, jsBtnEntity = 'admin_instance_material_edit', 'material' %}
+        {% endif %}
+
+        {% if key == 'heads' %}
+            {% set route, jsBtnEntity = 'admin_instance_head_form_edit', 'head' %}
+            <ul id="sortable">
+                {% for item in items %}
+                    <li data-id="{{ item.id }}">
+                        {% set title = item.firstname~' '~item.middlename~' '~item.lastname %}
+                        {{ include('@PortalAdmin/Structure/content_structure_item.html.twig') }}
+                    </li>
+                {% endfor %}
+            </ul>
+            {% if sa or ('edit_head') in permissionCodes %}
+                <script>
+                    $('#sortable').sortable({
+                        stop: function () {
+                            $.post(Routing.generate('admin_instance_head_sort', {
+                                instanceCode: $('#instanceCode').val()
+                            }), {
+                                ids: $('.ui-sortable-handle').map(function () {
+                                    return $(this).data('id');
+                                }).get().join(',')
+                            });
+                        }
+                    });
+                </script>
+            {% endif %}
+        {% else %}
+
+            {% for item in items %}
+                <div class="row structure-content-row">
+                    {{ include('@PortalAdmin/Structure/content_structure_item.html.twig') }}
+                </div>
+            {% endfor %}
+
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+{% if pagerfantaDocument %}
+    <div class="page-header">{{ 'bloc_structure.documents'|trans }}</div>
+
+    {% for item in pagerfantaDocument.currentPageResults %}
+        <div class="row structure-content-row">
+            {% set route = 'admin_instance_document_edit' %}
+            {% set jsBtnEntity = 'document' %}
+            {{ include('@PortalAdmin/Structure/content_structure_item.html.twig') }}
+        </div>
+    {% endfor %}
+
+    <div class="pagerfanta">
+        {{ pagerfanta(pagerfantaDocument, 'twitter_bootstrap3') }}
+    </div>
+{% endif %}

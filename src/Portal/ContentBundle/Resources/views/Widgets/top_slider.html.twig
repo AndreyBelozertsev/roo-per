@@ -1,0 +1,53 @@
+<div class="slider-photo slider-photo_index-page">
+    <div data-width="100%" data-height="auto" class="fotorama slider-photo__fotorama">
+        {% for slide in sliderList %}
+            {% if slide.original_article_id is defined and slide.original_article_id %}
+                {% set id = slide.original_article_id %}
+            {% else %}
+                {% set id = slide.id %}
+            {% endif %}
+
+            {% if slide.original_instance_code is defined and slide.original_instance_code %}
+                {% set href = 'https://' ~  slide.original_instance_code ~ '.' ~ site_name ~ path('article_show', {'id': id}) %}
+            {% else %}
+                {% set href = path('article_show', {'id': id}) %}
+            {% endif %}
+
+            {% set imgSrc = (slide.original_file_path) ?: slide.preview_file_url %}
+            <img src="{{ asset(imgSrc) }}" alt="{{ slide.title|sliceFullWord(180, true) }}" data-caption="
+                 <a href='{{ href }}'>{{ slide.title }}</a><div class='slider-photo__inf-box clearfix'>&lt;b class='slider-photo__date'&gt;{{ slide.published_at|date('d.m.Y') }}&lt;/b&gt;
+                 <div class='slider-photo__eye slider-photo__eye_idex-page'>{{ (slide.manual_views_counter ?: slide.views_counter)|pluralize('plural_views'|trans) }}</div></div>"
+            >
+        {% endfor %}
+    </div>
+</div>
+<!--.slider-->
+
+<div class="top-news-block">
+    <div class="top-news-block__name">{{ 'main_news'|trans }}</div>
+    <div class="top-news-block__box">
+        {% for slide in sliderList %}
+            {% if slide.original_article_id is defined and slide.original_article_id %}
+                {% set id = slide.original_article_id %}
+            {% else %}
+                {% set id = slide.id %}
+            {% endif %}
+
+            {% if slide.original_instance_code is defined and slide.original_instance_code %}
+                {% set href = 'https://' ~  slide.original_instance_code ~ '.' ~ site_name ~ path('article_show', {'id': id}) %}
+            {% else %}
+                {% set href = path('article_show', {'id': id}) %}
+            {% endif %}
+
+            <div class="top-news-block__content">
+                <div class="top-news-block__title">
+                    <a href="{{ href }}">{{ slide.title }}</a>
+                </div>
+                <div class="top-news-block__date">
+                    {{ slide.published_at|date('d.m.Y, H:i') }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<!--.slider-->

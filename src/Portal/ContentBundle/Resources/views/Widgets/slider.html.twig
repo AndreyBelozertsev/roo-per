@@ -1,0 +1,19 @@
+{% if bannerListInSlider is not empty %}
+    <div class="{{divClass}}">
+        <section class="{{ slider.frontendClass is defined ? slider.frontendClass : '' }} slider">
+            {% for banner in bannerListInSlider %}
+                <div>
+                    {% if banner.ref %}
+                        <a href="{{ banner.ref }}" class="inform-bloks__link" {% if banner.open_in_a_new_tab %}target="_blank"{% endif %}>
+                            <img src="{{ banner.attachment_path }}">
+                        </a>
+                    {% else %}
+                        <div class="inform-bloks__link">
+                            <img src="{{ banner.attachment_path }}">
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </section>
+    </div>
+{% endif %}

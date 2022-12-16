@@ -1,0 +1,66 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'feedback_form.action_list'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'feedback_form.action_list'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permission_codes = permissions.code() %}
+{% set allowEdit = constant('Portal\\ContentBundle\\Entity\\FeedbackForm::PERMISSIONS_FEEDBACK_FORM')['edit'] in permission_codes %}
+
+{% block topbuttonsblock %}
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\FeedbackForm::PERMISSIONS_FEEDBACK_FORM')['create'] in permission_codes %}
+        <a class="btn btn-success" href="{{ path("admin_instance_feedback_form_create", { 'instanceCode': instanceCode }) }}">
+            <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <table class="table table-striped table-middle-aligned">
+        <thead>
+            <tr>
+                <th>{{ 'feedback_form.title'|trans }}</th>
+                <th>{{ 'feedback_form.resp-email'|trans }}</th>
+                <th>{{ 'action'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for feedbackForm in pagerFanta.currentPageResults %}
+                <tr>
+                    <td>
+                        {% if sa or allowEdit or feedbackForm.author_id == app.user.id %}
+                            <a href="{{ path('admin_admin_feedback_form_edit', { 'instanceCode': instanceCode, 'id': feedbackForm.feedback_form_id }) }}">
+                                {{ feedbackForm.feedback_form_title }}
+                            </a>
+                        {% else %}
+                            {{ feedbackForm.feedback_form_title }}
+                        {% endif %}
+                    </td>
+                    <td>{{ feedbackForm.feedback_form_email_responsible }}</td>
+                    <td>
+                        {% if sa or allowEdit or feedbackForm.author_id == app.user.id %}
+                            <a href="{{ path('admin_admin_feedback_form_edit', { 'instanceCode': instanceCode, 'id': feedbackForm.feedback_form_id }) }}"
+                                class="btn btn-sm btn-primary ">
+                                <i class="glyphicon glyphicon-edit"></i> {{ 'edit'|trans }}
+                            </a>
+                        {% endif %}
+                        {% if sa or constant('Portal\\ContentBundle\\Entity\\FeedbackForm::PERMISSIONS_FEEDBACK_FORM')['delete'] in permission_codes
+                            or feedbackForm.author_id == app.user.id %}
+                            <a class="btn btn-sm btn-warning" onclick="adminPage.feedbackForm.removeItem({{ feedbackForm.feedback_form_id }}, '{{ instanceCode }}');">
+                                <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagerfanta">
+        {{ pagerfanta(pagerFanta, 'twitter_bootstrap3') }}
+    </div>
+{% endblock %}

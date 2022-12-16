@@ -1,0 +1,20 @@
+<div id="reportFilter" class="well">
+    <div class="clearfix">
+        <div class="form-group clearfix col-lg-5">
+            <label for="published">{{ 'published_only'|trans }}:</label>
+            <input id="filterPublished" name="filterPublished" type="checkbox"
+                    {{ (filterParams.filterPublished is defined and filterParams.filterPublished == 'false') ? '' : ' checked' }}/>
+            <label for="filterNotPublished">{{ 'not_published_only'|trans }}:</label>
+            <input id="filterNotPublished" name="filterNotPublished" type="checkbox"
+                    {{ (filterParams.filterNotPublished is defined and filterParams.filterNotPublished == 'false') ? '' : ' checked' }}/>
+        </div>
+    </div>
+
+    <br>
+    <input type="hidden" name="instanceCode" value="{{ instanceCode }}">
+    <button id="filterArticle" class="btn btn-sm btn-primary">{{ 'filter'|trans }}</button>
+</div>
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/portaladmin/js/event-filter.js') }}"></script>
+{% endblock %}

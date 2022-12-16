@@ -1,0 +1,185 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | 
+    {% if add is defined and add %}
+        {{ 'users_form.add'|trans }}
+    {% else %}
+        {{ 'users_form.edit'|trans }}
+    {% endif %}
+    {{ 'users_form.users'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {% if add is defined and add %}
+        {{ 'users_form.add'|trans }}
+    {% else %}
+        {{ 'users_form.edit'|trans }}
+    {% endif %}
+    {{ 'users_form.users'|trans }}
+{% endblock %}
+
+{% block topbuttons %}
+    <a class="btn btn-success " href="{{ path('admin_admin_user_viewall') }}"><i class="glyphicon glyphicon-repeat"></i>
+        {{ 'come_back'|trans }}
+    </a>
+    {% if not add %}
+        <a class="btn btn-warning " href="#" onclick="adminPage.user.removeItem({{userId}});"><i class="glyphicon glyphicon-trash"></i>
+            {{ 'delete'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <form name="form" method="post">
+    {{ form_start(form) }}
+        <div id="form-body" class="clearfix">
+            <div class="form-group">
+                <div class="col-sm-3">
+                    {{ form_label(form.lastName) }}
+                </div>
+                <div class="col-sm-9">
+                    {{ form_widget(form.lastName, {'attr':{'class':'form-control'} }) }}
+                    <div class="errors">
+                        {% for error in form.lastName.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    {{ form_label(form.firstName) }}
+                </div>
+                <div class="col-sm-9">
+                    {{ form_widget(form.firstName, {'attr':{'class':'form-control'} }) }}
+                    <div class="errors">
+                        {% for error in form.firstName.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    {{ form_label(form.middleName) }}
+                </div>
+                <div class="col-sm-9">
+                    {{ form_widget(form.middleName, {'attr':{'class':'form-control'} }) }}
+                    <div class="errors">
+                        {% for error in form.middleName.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    {{ form_label(form.email) }}
+                </div>
+                <div class="col-sm-9">
+                    {{ form_widget(form.email, {'attr':{'class':'form-control'} }) }}
+                    <div class="errors">
+                        {% for error in form.email.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    {{ form_label(form.phone) }}
+                </div>
+                <div class="col-sm-9">
+                    {{ form_widget(form.phone, {'attr':{'class':'form-control'} }) }}
+                    <div class="errors">
+                        {% for error in form.phone.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    {{ form_label(form.username) }}
+                </div>
+                <div class="col-sm-9">
+                    {{ form_widget(form.username, {'attr':{'class':'form-control'} }) }}
+                    <div class="errors">
+                        {% for error in form.username.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            {% if add is defined and add %}
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        {{ form_label(form.password.first) }}
+                    </div>
+                    <div class="col-sm-9">
+                        {{ form_widget(form.password.first, {'attr':{'class':'form-control'} }) }}
+                        <div class="errors">
+                            {% for error in form.password.first.vars.errors %}
+                                <div class="alert alert-danger">{{ error.message }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        {{ form_label(form.password.second) }}
+                    </div>
+                    <div class="col-sm-9">
+                        {{ form_widget(form.password.second, {'attr':{'class':'form-control'} }) }}
+                        <div class="errors">
+                            {% for error in form.password.second.vars.errors %}
+                                <div class="alert alert-danger">{{ error.message }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            {% endif %}
+            <hr />
+            <div class="form-group">
+                <div class="col-sm-3">
+                </div>
+                <div class="col-sm-9">
+                    <a class="add_user_role_link" href="#">{{ 'users_form.btn_add_roles'|trans }}</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="row">
+                <hr />
+                <div class="user-form-user-roles">
+                    {% for roleForm in form.userRoles %}
+                        {% include 'PortalAdminBundle:UserAdmin/part:_role.html.twig' %}
+                    {% endfor %}
+                </div>
+            </div>
+            <hr />
+            <div class="form-group">
+                <div class="col-sm-3">
+                </div>
+                <div class="col-sm-9">
+                    {{ form_widget(form.save, {'attr':{'class':'btn btn-success'} }) }}
+                </div>
+            </div>
+        </div>
+    {{ form_end(form) }}
+    </form>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script defer src="{{ asset('bundles/portaladmin/script/user-form/role-embed-form.js') }}"></script>
+{% endblock %}
+
+

@@ -1,0 +1,83 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'document.title'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'all_documents'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permission_codes = permissions.code() %}
+
+{% block topbuttons %}
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\Document::PERMISSIONS_DOCUMENT')['create'] in permission_codes %}
+        <a class="btn btn-success" href="{{ path('admin_instance_document_edit', { 'id':0, 'instanceCode':instanceCode }) }}">
+            <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% include 'PortalAdminBundle:DocumentAdmin:filters.html.twig' %}
+
+    <table class="table table-striped table-middle-aligned">
+        <thead>
+            <tr>
+                <th>{{ 'document_form.title'|trans }}</th>
+                <th>{{ 'document_form.content'|trans }}</th>
+                <th>{{ 'document_form.pub_date'|trans }}</th>
+                <th>{{ 'document_form.approv_date'|trans }}</th>
+                <th>{{ 'document_form.doc_type'|trans }}</th>
+                <th>{{ 'action'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for document in pagerFanta.currentPageResults %}
+            <tr>
+                {% if document.is_deleted %}
+                    <td colspan="5">
+                        <span class="grey-text">{{ document.title }} {{ 'is_deleted'|trans }}</span>
+                    </td>
+                    <td>
+                        {% if sa or constant('Portal\\ContentBundle\\Entity\\Document::PERMISSIONS_DOCUMENT')['restore'] in permission_codes
+                            or document.author_id == app.user.id %}
+                            <a class="btn btn-sm btn-default"
+                               onclick="adminPage.document.restoreItem({{ document.id }}, '{{ instanceCode }}');">
+                                <i class="glyphicon glyphicon-repeat"></i> {{ 'restore'|trans }}
+                            </a>
+                        {% endif %}
+                    </td>
+                {% else %}
+                    <td>{{ document.title }}</td>
+                    <td>{{ document.content|striptags }}</td>
+                    <td>{{ document.published_at ? document.published_at|date('d.m.Y') : '' }}</td>
+                    <td>{{ document.approval_date ? document.approval_date|date('d.m.Y') : '' }}</td>
+                    <td>{{ constant('Portal\\ContentBundle\\Entity\\Document::DOC_TYPES')[document.document_type]|trans }}</td>
+                    <td>
+                        {% if sa or constant('Portal\\ContentBundle\\Entity\\Document::PERMISSIONS_DOCUMENT')['edit'] in permission_codes
+                            or document.author_id == app.user.id %}
+                            <a href="{{ path('admin_instance_document_edit', { 'id':document.id, 'instanceCode':instanceCode }) }}"
+                               class="btn btn-sm btn-primary">
+                                <i class="glyphicon glyphicon-edit"></i> {{ 'edit'|trans }}
+                            </a>
+                        {% endif %}
+                        {% if sa or constant('Portal\\ContentBundle\\Entity\\Document::PERMISSIONS_DOCUMENT')['delete'] in permission_codes
+                            or document.author_id == app.user.id %}
+                            <a onclick="adminPage.document.removeItem({{ document.id }},'{{ instanceCode }}');"
+                               class="btn btn-sm btn-warning">
+                                <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+                            </a>
+                        {% endif %}
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagerfanta">
+        {{ pagerfanta(pagerFanta, 'twitter_bootstrap3') }}
+    </div>
+{% endblock %}

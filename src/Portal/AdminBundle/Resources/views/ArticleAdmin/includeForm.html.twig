@@ -1,0 +1,298 @@
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.titleUk) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.titleUk, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.titleUk.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.titleRu) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.titleRu, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.titleRu.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.titleEn) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.titleEn, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.titleEn.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+{#{% if slug %}#}
+    {#<div class="form-group">#}
+        {#<div class="col-sm-2 text-right">{{ form_label(form.slug) }}</div>#}
+        {#<div class="col-sm-10">#}
+            {#<div class="add-link-container">#}
+                {#<div class="add-link-con1">#}
+                    {#{% set subDomain = (instanceCode == 'main') ? '' : instanceCode ~ '.' %}#}
+                    {#{% if (article.slug) %}#}
+                        {#{% set inputValue = protocol ~ '://' ~ subDomain ~ app.request.getHttpHost ~ path('article_show_slug', { slug: article.slug }) %}#}
+                    {#{% else %}#}
+                        {#{% set inputValue = '' %}#}
+                    {#{% endif %}#}
+                    {#{{ protocol ~ '://' ~ subDomain }}{{ app.request.getHttpHost }}{{ path('article_show_slug') }}/#}
+                    {#<input value="{{ inputValue }}" id="input_copy_ref" type="hidden">#}
+                {#</div>#}
+                {#<div class="add-link-con2">#}
+                    {#{{ form_widget(form.slug, {'attr': {'class': 'form-control'}}) }}#}
+                {#</div>#}
+                {#<div class="add-link-con3">#}
+                    {#{% if (article.slug) %}#}
+                    {#<a class="btn btn-success" id="button_copy_ref" title="{{ 'click_to_copy'|trans }}">#}
+                        {#<i class="fa fa-copy"></i>#}
+                    {#</a>#}
+                    {#{% endif %}#}
+                {#</div>#}
+            {#</div>#}
+            {#<div class="errors">#}
+                {#{% for error in form.slug.vars.errors %}#}
+                    {#<div class="alert alert-danger">{{ error.message }}</div>#}
+                {#{% endfor %}#}
+            {#</div>#}
+        {#</div>#}
+    {#</div>#}
+    {#<div class="clearfix"></div>#}
+{#{% endif %}#}
+{#<div class="form-group">#}
+    {#<div class="col-sm-2 text-right">{{ form_label(form.subtitle) }}</div>#}
+    {#<div class="col-sm-10">#}
+        {#{{ form_widget(form.subtitle, {'attr': {'class': 'form-control'}}) }}#}
+        {#<div class="errors">#}
+            {#{% for error in form.subtitle.vars.errors %}#}
+                {#<div class="alert alert-danger">{{ error.message }}</div>#}
+            {#{% endfor %}#}
+        {#</div>#}
+    {#</div>#}
+    {#<div class="clearfix"></div>#}
+{#</div>#}
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.contentUk) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.contentUk, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.contentUk.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.contentRu) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.contentRu, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.contentRu.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.contentEn) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.contentEn, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.contentEn.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+{#<div class="form-group">#}
+    {#<div class="col-sm-2 text-right">{{ form_label(form.menuNode) }}</div>#}
+    {#<div class="col-sm-10">#}
+        {#{{ form_widget(form.menuNode, {'attr': {'class': 'form-control'}}) }}#}
+        {#<div class="errors">#}
+            {#{% for error in form.menuNode.vars.errors %}#}
+                {#<div class="alert alert-danger">{{ error.message }}</div>#}
+            {#{% endfor %}#}
+        {#</div>#}
+    {#</div>#}
+    {#<div class="clearfix"></div>#}
+{#</div>#}
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ 'image'|trans }}</div>
+    <div class="col-sm-10">
+        <div class="preview-form">
+            <div class="rcrop-wrapper">
+                {% if article.attachment %}
+                    <img class="preview-image" id="loadImg" src="{{ asset(article.attachment.previewFileUrl) }}">
+                {% endif %}
+            </div>
+            {{ form_widget(form.attachment.file) }}
+            {{ form_widget(form.attachment.cropStartX) }}
+            {{ form_widget(form.attachment.cropStartY) }}
+            {{ form_widget(form.attachment.cropWidth) }}
+            {{ form_widget(form.attachment.cropHeight) }}
+        </div>
+        <div class="errors">
+            {% for error in form.attachment.file.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+{#<div class="form-group">#}
+    {#<div class="col-sm-2 text-right">{{ form_label(form.photoReport) }}</div>#}
+    {#<div class="col-sm-10">#}
+        {#{% if article.photoReport and article.photoReport.attachments[0] %}#}
+            {#<img src="{{ asset(article.photoReport.attachments[0].previewFileUrl) }}" width="200">#}
+        {#{% endif %}#}
+        {#{{ form_widget(form.photoReport, {'attr': {'class': 'form-control'}}) }}#}
+        {#<div class="errors">#}
+            {#{% for error in form.photoReport.vars.errors %}#}
+                {#<div class="alert alert-danger">{{ error.message }}</div>#}
+            {#{% endfor %}#}
+        {#</div>#}
+    {#</div>#}
+    {#<div class="clearfix"></div>#}
+{#</div>#}
+{#<div class="form-group">#}
+    {#<div class="col-sm-2 text-right">{{ 'article_form.media_file'|trans }}</div>#}
+    {#<div class="col-sm-10">#}
+        {#<div class="preview-form">#}
+            {#{% if article.media %}#}
+                {#{% if mediaFileType is defined and mediaFileType %}#}
+                    {#{% if mediaFileType == 'audio' %}#}
+                        {#<audio controls src="{{ asset(article.media.previewFileUrl) }}"></audio>#}
+                    {#{% endif %}#}
+                    {#{% if mediaFileType == 'video' %}#}
+                        {#<video controls class="preview-image">#}
+                            {#<source src="{{ asset(article.media.previewFileUrl) }}">#}
+                        {#</video>#}
+                    {#{% endif %}#}
+                {#{% endif %}#}
+            {#{% endif %}#}
+            {#{{ form_widget(form.media.file) }}#}
+        {#</div>#}
+        {#<div class="errors">#}
+            {#{% for error in form.media.file.vars.errors %}#}
+                {#<div class="alert alert-danger">{{ error.message }}</div>#}
+            {#{% endfor %}#}
+        {#</div>#}
+    {#</div>#}
+    {#<div class="clearfix"></div>#}
+{#</div>#}
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.isPublished) }}</div>
+    <div class="col-sm-10">{{ form_widget(form.isPublished) }}</div>
+    <div class="clearfix"></div>
+</div>
+{#<div class="form-group">#}
+    {#<div class="col-sm-2 text-right">{{ 'publish_date'|trans }}</div>#}
+    {#<div class="col-sm-10">#}
+    {#{% if form.publishedAt is defined %}#}
+        {#{{ form_widget(form.publishedAt, {'attr': {'class': 'form-control datepicker'}}) }}#}
+        {#<div class="errors">#}
+            {#{% for error in form.publishedAt.vars.errors %}#}
+                {#<div class="alert alert-danger">{{ error.message }}</div>#}
+            {#{% endfor %}#}
+        {#</div>#}
+    {#{% else %}#}
+        {#<div class="add-link-container">#}
+            {#{{ form.vars.value.publishedAt ? form.vars.value.publishedAt|date('d.m.Y') : '' }}#}
+        {#</div>#}
+    {#{% endif %}#}
+    {#</div>#}
+    {#<div class="clearfix"></div>#}
+    {#<script>#}
+        {#$('.datepicker').datetimepicker({#}
+            {#timepicker: true,#}
+            {#lang: 'ru',#}
+            {#format: 'd.m.Y H:i',#}
+            {#dayOfWeekStart: 1#}
+        {#});#}
+    {#</script>#}
+{#</div>#}
+{#<div class="form-group">#}
+    {#<div class="col-sm-2 text-right">{{ form_label(form.isHot) }}</div>#}
+    {#<div class="col-sm-10">#}
+        {#{{ form_widget(form.isHot) }}#}
+    {#</div>#}
+    {#<div class="clearfix"></div>#}
+{#</div>#}
+{#<div class="form-group" style="display:none">#}
+    {#<div class="col-sm-2 text-right">{{ form_label(form.socialEnabled) }}</div>#}
+    {#<div class="col-sm-10">#}
+        {#{{ form_widget(form.socialEnabled) }}#}
+    {#</div>#}
+    {#<div class="clearfix"></div>#}
+{#</div>#}
+{#<div class="form-group">#}
+    {#<div class="col-sm-2 text-right">{{ form_label(form.tags) }}</div>#}
+    {#<div class="col-sm-10">#}
+        {#{{ form_widget(form.tags) }}#}
+        {#<div class="errors">#}
+            {#{% for error in form.tags.vars.errors %}#}
+                {#<div class="alert alert-danger">{{ error.message }}</div>#}
+            {#{% endfor %}#}
+        {#</div>#}
+    {#</div>#}
+    {#<div class="clearfix"></div>#}
+{#</div>#}
+{#{% if sa or 'set_important_news' in permissions %}#}
+    {#<div class="form-group" {{ instanceCode == constant('Portal\\AdminBundle\\Entity\\Instance::MAIN_SITE_INSTANCE_CODE') ? 'style="display: none"' : '' }}>#}
+        {#<div class="col-sm-2 text-right">{{ form_label(form.isImportant) }}</div>#}
+        {#<div class="col-sm-10">#}
+            {#{{ form_widget(form.isImportant) }}#}
+        {#</div>#}
+        {#<div class="clearfix"></div>#}
+    {#</div>#}
+{#{% endif %}#}
+    <div class="form-group">
+        <div class="col-sm-2 text-right">{{ form_label(form.showInSlider) }}</div>
+        <div class="col-sm-10">
+            {{ form_widget(form.showInSlider) }}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+{#<div class="form-group">#}
+    {#<div class="col-sm-2 text-right">{{ 'related'|trans }}</div>#}
+    {#<div class="col-sm-10">#}
+        {#<select name="related[]" multiple="multiple">#}
+            {#{% set selects = article.related|split(',') %}#}
+            {#{% for option in related %}#}
+                {#{% if option.id != article.id %}#}
+                    {#<option value="{{ option.id }}"{% if option.id in selects %} selected{% endif %}>#}
+                        {#{{ option.title }}#}
+                    {#</option>#}
+                {#{% endif %}#}
+            {#{% endfor %}#}
+        {#</select>#}
+    {#</div>#}
+    {#<div class="clearfix"></div>#}
+{#</div>#}
+{#{% if sa or 'edit_manual_view_counter_article' in permissions %}#}
+    {#<div class="form-group">#}
+        {#<div class="col-sm-2 text-right">{{ form_label(form.manualViewsCounter) }}</div>#}
+        {#<div class="col-sm-10">#}
+            {#{{ form_widget(form.manualViewsCounter, {'attr': {'class': 'form-control'}}) }}#}
+            {#<div class="errors">#}
+                {#{% for error in form.manualViewsCounter.vars.errors %}#}
+                    {#<div class="alert alert-danger">{{ error.message }}</div>#}
+                {#{% endfor %}#}
+            {#</div>#}
+        {#</div>#}
+        {#<div class="clearfix"></div>#}
+    {#</div>#}
+{#{% endif %}#}

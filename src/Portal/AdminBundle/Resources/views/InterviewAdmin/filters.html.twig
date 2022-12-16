@@ -1,0 +1,43 @@
+<div id="reportFilter" class="well">
+    <div class="clearfix">
+        <div class="form-group clearfix col-lg-6">
+            <label>{{ 'interview_form.interview_filter.interview_title'|trans }}:</label>
+            <input id="filterTitle" name="filterTitle" class="form-control" type="text" placeholder="{{ 'title'|trans }}"
+                   value="{{ filterParams.filterTitle is defined ? filterParams.filterTitle : '' }}"/>
+            <br>
+            <label for="filterPublished">{{ 'interview_form.interview_filter.published_only'|trans }}:</label>
+            <input id="filterPublished" name="filterPublished" type="checkbox"
+                    {{ (filterParams.filterPublished is defined and filterParams.filterPublished == 'false') ? '' : ' checked' }}/>
+            <br>
+            <label for="filterNotPublished">{{ 'interview_form.interview_filter.not_published_only'|trans }}:</label>
+            <input id="filterNotPublished" name="filterNotPublished" type="checkbox"
+                    {{ (filterParams.filterNotPublished is defined and filterParams.filterNotPublished == 'false') ? '' : ' checked' }}/>
+            <br>
+            <label for="filterIsDeleted">{{ 'interview_form.interview_filter.is_deleted_only'|trans }}:</label>
+            <input id="filterIsDeleted" name="filterIsDeleted" type="checkbox"
+                    {{ (filterParams.filterIsDeleted is defined and filterParams.filterIsDeleted == 'true') ? ' checked' : '' }}/>
+        </div>
+
+        <div class="form-group clearfix col-lg-3">
+            <label>{{ 'interview_form.interview_filter.date_start'|trans }}:</label>
+            <input id="filterDateStartFrom" name="filterDateStartFrom" class="form-control js-datepicker" placeholder="{{ 'from'|trans }}"
+                   value="{{ filterParams.filterDateStartFrom is defined ? filterParams.filterDateStartFrom : '' }}" type="date"/>
+            <input id="filterDateStartTo" name="filterDateStartTo" class="form-control js-datepicker" placeholder="{{ 'to'|trans }}"
+                   value="{{ filterParams.filterDateStartTo is defined ? filterParams.filterDateStartTo : '' }}" type="date"/>
+        </div>
+
+        <div class="form-group clearfix  col-lg-3">
+            <label>{{ 'interview_form.interview_filter.date_end'|trans }}:</label>
+            <input id="filterDateEndFrom" name="filterDateEndFrom" class="form-control js-datepicker" placeholder="{{ 'from'|trans }}"
+                   value="{{ filterParams.filterDateEndFrom is defined ? filterParams.filterDateEndFrom : '' }}" type="date"/>
+            <input id="filterDateEndTo" name="filterDateEndTo" class="form-control js-datepicker" placeholder="{{ 'to'|trans }}"
+                   value="{{ filterParams.filterDateEndTo is defined ? filterParams.filterDateEndTo : '' }}" type="date"/>
+        </div>
+    </div>
+    <input type="hidden" name="instanceCode" value="{{ instanceCode }}">
+    <button id="filterArticle" class="btn btn-sm btn-primary">{{ 'filter'|trans }}</button>
+</div>
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/portaladmin/js/interview-filter.js') }}"></script>
+{% endblock %}

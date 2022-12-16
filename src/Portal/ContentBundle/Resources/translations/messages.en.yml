@@ -1,0 +1,82 @@
+site_title: Переяславська рада 2.0
+rights: All rights reserved
+Development: Development
+First: First
+First_page: First page
+Previous_page: Previous page
+Last: Last
+Last_page: Last page
+Next_page: Next page
+thanks_for_comment: Thank you for your comment, it will be published after being moderated!
+
+Home: Home
+Category: Category
+Opinion: Personal opinion
+Magazine: Magazines
+Newspaper: Newspapers
+Magazine_newspaper: Magazines and newspapers
+Gallery: Photo Gallery
+Feedback: Feedback
+'Go to section': Go to section
+'Show more': Show more
+'Latest news': Latest news
+Views: Views
+Views_plural: View|Views|Views
+Name: Name
+Comment: Comment
+Comments: Comments
+Comments_plural: Comment|Comments|Comments
+Comments_: Comments
+view: view
+views: views
+views_: views
+'Post comment': Post comment
+CAPCHA: CAPCHA
+Send: Send
+position: The position of the editors can only be announced by the chief editor. The opinion of the authors and invited guests may not coincide with the position of our editorial board
+
+feedback_form_value:
+  author: Name
+  email: E-mail
+  message: Message
+  agree: I agree to the processing of personal data
+  feedback_from_author: Author
+  title_page: Feedback
+  send: Send
+  subject: Subject
+  category: Category
+  message: Message
+  file: Attach file
+  file_no_selected: 'No file selected'
+  files: Files
+  email: e-mail
+  phone: Phone
+  author: 'Enter your name.'
+  feedback_from_author: 'Appeal from'
+  placeholder_category: Select a category
+  reference: Add link
+  reference_placeholder: Add a link to a file from an external resource
+  address_group: 'Place of residence'
+  placeholder_address_group: 'Place of residence'
+  sex_group: 'Sex'
+  placeholder_sex_group: 'Sex'
+  age_group: 'Age group'
+  placeholder_age_group: 'Age group'
+  social_group: 'Social group'
+  placeholder_social_group: 'Social group'
+  privilege_group: 'Category'
+  placeholder_privilege_group: 'Category'
+  not_blank: Should not be empty
+  too_much: 'Maximum number of characters: {{ limit }}'
+  captcha_error: 'CAPTCHA: check failed, try again'
+  phone.not_blank: 'Check the phone or address fields. One of the fields must be filled'
+  email.email: This address { {value }} is an incorrect email address
+  category: You must select a category
+  choice: 'You must select an option'
+  agree: 'I agree to the processing of personal data'
+  faq: 'Appeal, affecting the interests of an indefinite number of persons'
+  faq-message: 'Do not specify personal contact information in the text of the appeal for open access and/or attached files!'
+  previews:
+    max: 'The number of attached files should not exceed'
+
+copy_message: '<br/><br/>The use of text and photo materials "Pereyaslav Council 2.0" is possible only on condition of registration of a hyperlink to the material posted on the Pereyaslav Council 2.0 Internet resource. <br/> Source: '

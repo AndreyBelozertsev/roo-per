@@ -1,0 +1,84 @@
+<div class="form-group">
+    <div class="col-sm-3 text-right control-label">
+        {{ form_label(form.title, '', {'label_attr': {'class': 'control-label'} }) }}
+    </div>
+    <div class="col-sm-9">
+        {{ form_widget(form.title, {'attr':{'class':'form-control'} }) }}
+        <div class="errors">
+            {% for error in form.title.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-3 text-right control-label">
+        {{ form_label(form.widgetId, '', {'label_attr': {'class': 'control-label'} }) }}
+    </div>
+    <div class="col-sm-9">
+        {{ form_widget(form.widgetId, {'attr':{'class':'form-control'} }) }}
+        <div class="errors">
+            {% for error in form.widgetId.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-3 text-right control-label">
+        {{ form_label(form.panelId, '', {'label_attr': {'class': 'control-label'} }) }}
+    </div>
+    <div class="col-sm-9">
+        {{ form_widget(form.panelId, {'attr':{'class':'form-control'} }) }}
+        <div class="errors">
+            {% for error in form.panelId.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-3 text-right control-label">
+        {{ form_label(form.widgetOrder, '', {'label_attr': {'class': 'control-label'} }) }}
+    </div>
+    <div class="col-sm-9">
+        {{ form_widget(form.widgetOrder, {'attr':{'class':'form-control'} }) }}
+        <div class="errors">
+            {% for error in form.widgetOrder.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-3 text-right control-label">
+        {{ form_label(form.isPublished, '', {'label_attr': {'class': 'control-label'} }) }}
+    </div>
+    <div class="col-sm-9">
+        {{ form_widget(form.isPublished) }}
+        <div class="errors">
+            {% for error in form.isPublished.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-3 text-right control-label">
+        {{ form_label(form.structureTemplate, '', {'label_attr': {'class': 'control-label'} }) }}
+    </div>
+    <div class="col-sm-9">
+        {{ form_widget(form.structureTemplate, {'attr':{'class':'form-control'} }) }}
+        <div class="errors">
+            {% for error in form.structureTemplate.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>

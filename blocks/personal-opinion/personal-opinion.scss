@@ -1,0 +1,48 @@
+.personal-opinion
+{
+    margin-bottom: 30px;
+
+    &__title
+    {
+        background: $gray-light;
+    }
+
+    &__text-title
+    {
+        font-size: 200%;
+        font-weight: 600;
+
+        position: relative;
+
+        overflow: hidden;
+
+        padding-left: 15px;
+        //min-width: 200px;
+
+        color: $red;
+
+        &::after
+        {
+            position: absolute;
+
+            display: inline-block;
+
+            width: 100%;
+            height: 44px;
+
+            content: '';
+
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArAAAAAsBAMAAABvUZaUAAAAD1BMVEUmJibRETr///8mJibRETrqPfOLAAAAA3RSTlMAAAD6dsTeAAABeklEQVRo3u2bQa7DIAxETU8Qc4LSK/gKc/8zdYHSgGlJI9VfQn+6i/qSxZM1IcbIo/4KYHYrAJDvZrd7ewVkMpcYM6FYil1QbFEFzDYBAFUzETNVAJBkBqjmnUlkzpmXWKBeJgWATcykPmQzq//lF6NkvmCc2KbYm0LvbyTzDUOxfyP2SNk2Qfobj6Qh85lpXl5dyroE2cO5SxoyE6ZZbnXF7gudzEWGYgPFFtU8pKxPkI5JZM4YqabzkLI+QXpGyZwwu9ih2F2hk7nGPCg2TGzRDUhDyroE8UwiM2VEak9mTFmfIJ5RMlPmEOuK3Rc6mWsMxUaJrV3EMWX7NdobJpGZMQLUtq1L2SFBRkbJTBgB6kaDK/ah0MlcYyg2UiyjICAK+PIKenlxmcR17KJi+Un7609aNmFimjBs97Efu6JYbs1EbM1wMzFmM5Hb1pwrWE0sR4yCRow4FBc1FMfxS87HrimWo/I/HpXn4Y6Ywx08RsRzXhT7z8U+ASX2VpwZWBncAAAAAElFTkSuQmCC);
+            background-repeat: no-repeat;
+            background-position: 0 50%;
+        }
+    }
+
+    &__text
+    {
+        display: inline-block;
+
+        margin-right: 30px;
+        padding: 7px 0;
+    }
+}

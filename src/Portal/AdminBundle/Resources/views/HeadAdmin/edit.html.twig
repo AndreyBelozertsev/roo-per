@@ -1,0 +1,78 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'head_form.action_edit'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'head_form.action_edit'|trans }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/portaladmin/RCropper/dist/rcrop.min.js') }}"></script>
+    <script src="{{ asset('bundles/portaladmin/script/crop-image/crop-image-attachment.js') }}"></script>
+    <script src="{{ asset('bundles/portaladmin/script/slug-form/slug-form.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/portaladmin/RCropper/dist/rcrop.min.css') }}" media="screen" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/portaladmin/css/slug.css') }}" media="screen" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permission_codes = permissions.code() %}
+
+{% block topbuttons %}
+    <a class="btn btn-success back-to-list" href="{{ path('admin_instance_head_list', { 'instanceCode': instanceCode }) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+    {% if form.menuNode.vars.value and (sa or 'edit_structure' in permission_codes) %}
+        <a class="btn btn-success" href="{{ path('admin_instance_structure_index', {
+            'instanceCode': instanceCode,
+            'selected_node': form.menuNode.vars.value
+        }) }}">
+            <i class="glyphicon glyphicon-share-alt"></i> {{ 'to_structure'|trans }}
+        </a>
+    {% endif %}
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\Head::PERMISSIONS_HEAD')['create'] in permission_codes %}
+        <a class="btn btn-success" href="{{ path('admin_instance_head_form_create', { 'instanceCode': instanceCode }) }}">
+            <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+        </a>
+    {% endif %}
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\Head::PERMISSIONS_HEAD')['delete'] in permission_codes
+        or head.author == app.user.id %}
+        <a class="btn btn-warning soft-delete-btn" onclick="adminPage.head.removeItem({{ head.id }}, '{{ instanceCode }}');">
+            <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+        <div id="form-body" class="clearfix">
+            <div class="form-group">
+                <div class="col-sm-3 text-right">{{ 'head_form.author'|trans }}</div>
+                <div class="col-sm-9">{{ users[head.author] }}</div>
+                <div class="clearfix"></div>
+            </div>
+            {% include 'PortalAdminBundle:HeadAdmin:includeForm.html.twig' %}
+            <div class="form-group">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-9">
+                    <div id="btn_head" class="form-actions">
+                        <button id="btn_edit" class="btn btn-success" type="submit" name="btn_edit">
+                            <i class="glyphicon glyphicon-floppy-disk"></i> {{ 'save'|trans }}
+                        </button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block history %}
+    {{ entityLog.renderHistory(head.id, instanceCode, constant('Portal\\HelperBundle\\Entity\\Log::ENTITY_TYPE_HEAD'))|raw }}
+{% endblock %}

@@ -1,0 +1,8 @@
+<div class="social-networks clearfix">
+    {% for socialNetwork in socialNetworks %}
+        <a href="http://{{ socialNetwork.link }}" title="{{ socialNetwork.name }}" target="_blank"
+           class="social-networks__item social-networks__item_{{ socialNetwork.prefix }} icons_{{ socialNetwork.prefix }}">
+        </a>
+    {% endfor %}
+    <div class="search__icon search__icon_open"></div>
+</div>

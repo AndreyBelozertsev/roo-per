@@ -1,0 +1,88 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'event.title'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'event.all'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set allowEdit = 'edit_event' in permissions.code() %}
+{% set allowDel = 'delete_event' in permissions.code() %}
+
+{% block topbuttons %}
+    {% if sa or 'create_event' in permissions.code() %}
+        <a class="btn btn-success" href="{{ path('admin_instance_event_edit', {id:0, 'instanceCode':instanceCode}) }}">
+            <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% include 'PortalAdminBundle:EventAdmin:filters.html.twig' %}
+
+    <table class="table table-striped table-middle-aligned">
+        <thead>
+            <tr>
+                <th>{{ 'title'|trans }}</th>
+                <th>{{ 'event.long_title'|trans }}</th>
+                <th>{{ 'publish_date'|trans }}</th>
+                <th>{{ 'event.impo'|trans }}</th>
+                <th>{{ 'tags'|trans }}</th>
+                {#<th>{{ 'author'|trans }}</th>#}
+                <th>{{ 'action'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for event in pagerFanta.currentPageResults %}
+
+            <tr>
+                {% if (sa or allowEdit or event.author == app.user.id) and (
+                    event.originalInstanceCode is null or event.originalInstanceCode == instanceCode
+                ) %}
+                    <td>
+                        <a href="{{ path('admin_instance_event_edit', { 'id':event.id, 'instanceCode':instanceCode }) }}">
+                            {{ event.title }}
+                        </a>
+                    </td>
+                {% else %}
+                    <td>{{ event.title }}</td>
+                {% endif %}
+                <td>
+                    {{ event.startDate|date('d.m.Y') }} - {{ event.endDate|date('d.m.Y') }}<br>
+                    {{ event.place }}
+                </td>
+                <td>{{ event.isPublished ? event.publishedAt|date('d.m.Y') : '—' }}</td>
+                <td>{{ event.isImportant ? '<i class="glyphicon glyphicon-ok"></i>' : '' }}</td>
+                <td>
+                    {% for tag in event.tags %}
+                        {{ tag.tag }}{{ not loop.last ? ', ' : ''}}
+                    {% endfor %}
+                </td>
+                {#<td>{{ users[event.author] }}</td>#}
+                <td>
+                    {% if event.originalInstanceCode is null or event.originalInstanceCode == instanceCode %}
+                        {% if sa or allowEdit or event.author == app.user.id %}
+                            <a href="{{ path('admin_instance_event_edit', { 'id':event.id, 'instanceCode':instanceCode }) }}"
+                               class="btn btn-sm btn-primary">
+                                <i class="glyphicon glyphicon-edit"></i> {{ 'edit'|trans }}
+                            </a>
+                        {% endif %}
+                        {% if sa or allowDel or event.author == app.user.id %}
+                            <a class="btn btn-warning" onclick="adminPage.event.removeItem({{ event.id }}, '{{ instanceCode }}');">
+                                <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagerfanta">
+        {{ pagerfanta(pagerFanta, 'twitter_bootstrap3') }}
+    </div>
+{% endblock %}

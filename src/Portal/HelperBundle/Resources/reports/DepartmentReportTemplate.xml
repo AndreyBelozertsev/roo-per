@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" status="Under Construction" lasteditedby="Olga" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+    <title translate="true">Перечень используемых технических средств</title>
+    <body>
+        <header>
+            <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Перечень используемых технических средств</text></para>
+        </header>
+        <para styleclass="Normal"><text styleclass="Normal" translate="true">В таблицах ниже приведён общий перечень технических средств </text><var styleclass="Normal">&lt;%OBJECT_DEF%&gt;</var><text styleclass="Normal" translate="true">. Перечни технических средств отдельных сотрудников приведены в соответствующих частных отчётах о предпроектном обследовании.</text></para>
+    </body>
+</topic>

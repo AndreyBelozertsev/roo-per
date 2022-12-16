@@ -1,0 +1,26 @@
+{% extends isDepartment ? 'PortalContentBundle::depBase.html.twig' : 'PortalContentBundle::innerPageBase.html.twig' %}
+
+{% block title %}
+    {{ 'document_category.title'|trans() }} | {{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/portalcontent/css/document.css') }}">
+{% endblock %}
+
+{% block innerContent %}
+    <div class="tabs-content__white" style="min-height: 300px;">
+        <div class="title">{{ 'docs'|trans() }}</div>
+        {{ searchForm() | raw }}
+        <div class="text-page">
+            <ul class="document-categories-list">
+                {% for docCat in docCategories %}
+                    <li>
+                        <a href="{{ path('document_category', { id: docCat.id }) }}">{{ docCat.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

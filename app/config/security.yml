@@ -1,0 +1,51 @@
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    role_hierarchy:
+        ROLE_ADMIN:       [ROLE_OPERATOR, ROLE_SONATA_ADMIN]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+        ROLE_PROFILE_OPERATOR: ROLE_USER
+        ROLE_PROFILE_ADMIN:    ROLE_PROFILE_OPERATOR
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        secured_area:
+            pattern:    ^/admin-portal
+            anonymous: ~
+            form_login:
+                csrf_token_generator: security.csrf.token_manager
+                provider:    fos_userbundle
+                login_path:  /admin-portal/login
+                check_path:  /admin-portal/login_check
+                default_target_path: portal_admin_homepage
+            logout:
+                target: /
+            switch_user: true
+
+    access_control:
+        - { path: ^/admin-portal/login*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin-portal/admin, role: ROLE_SUPER_ADMIN }
+        - { path: ^/admin-portal/*, role: ROLE_OPERATOR }
+        - { path: ^/admin/sites, role: ROLE_SUPER_ADMIN }
+        - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/*, role: ROLE_OPERATOR }
+#        http://test-portal.krtech.ru/app_dev.php/ru/article/show/59
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/profile/operator/*, role: ROLE_PROFILE_OPERATOR }
+        - { path: ^/profile/admin/*, role: ROLE_PROFILE_ADMIN }
+        - { path: ^/profile/user/oauth-login/*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/profile/user/connect/*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/profile/*, role: ROLE_USER }
+        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/api(?!/logout)/.*, role: ROLE_ADMIN }
+#        - { path: ^/export/.*, role: ROLE_ADMIN }

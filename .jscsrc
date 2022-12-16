@@ -1,0 +1,21 @@
+{
+    "preset": "loris",
+
+    "excludeFiles": [
+        "node_modules/",
+        "blocks/**/lib.*.js",
+        "blocks/modules/modules.js",
+        "blocks/datepicker/datepicker.js",
+        "blocks/baron/baron.js",
+        "blocks/owl-carusel/owl.carousel.js",
+        "blocks/fotorama/fotorama.js",
+        "blocks/slider/slick.js",
+        "blocks/datepicker-events/datepicker-events.js",
+        "blocks/datepicker-events/jquery.textmistake.js",
+        "blocks/bootstrap-dialog/bootstrap-dialog.js",
+        "blocks/datepicker-news/datepicker-news.js",
+        "blocks/bootstrap-dialog/bootstrap.js",
+        "blocks/owl-carusel/owl-carusel.js"
+    ],
+    "fileExtensions": [".js"]
+}

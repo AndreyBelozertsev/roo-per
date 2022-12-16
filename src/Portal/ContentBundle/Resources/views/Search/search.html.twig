@@ -1,0 +1,110 @@
+{% extends 'PortalContentBundle::base.html.twig' %}
+
+{% block title %}
+    {{ 'search'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block pageTitle %}
+    {{ 'search'|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="search-box">
+        {% if params.queryString is not defined or params.queryString is empty %}
+            <h1>{{ 'search'|trans }}</h1>
+        {% endif %}
+        <div class="search-document-box search-document-box_open">
+            <form action="{{ path('search_index') }}" name="searchForm" class="search-form">
+
+                {% if errors is defined and errors is not empty %}
+                    <div class="alert alert-danger">{{ errors }}</div>
+                {% endif %}
+
+                <div class="row">
+                    <div class="form-group">
+                        <input type="text" name="query"
+                            {% if params.queryString is defined and params.queryString is not empty %}
+                                value="{{ params.queryString }}"
+                            {% endif %}>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group width-50">
+                        <label>{{ 'searchForm.label.pubDate'|trans }}: </label>
+                        <div class="width-50">
+                            от <input type="text" id="fromDate" name="fromDate" class="form-control js-datepicker hasDatepicker"
+                                {% if params.publishedStart is defined and params.publishedStart is not empty %}
+                                    value="{{params.publishedStart}}"
+                                {% endif %}>
+                        </div>
+                        <div class="width-50">
+                            до <input type="text" id="toDate" name="toDate" class="form-control js-datepicker hasDatepicker"
+                                {% if params.publishedEnd is defined and params.publishedEnd is not empty %}
+                                    value="{{params.publishedEnd}}"
+                                {% endif %}>
+                        </div>
+                    </div>
+                    <div class="form-group width-50">
+                        <label>{{ 'searchForm.label.sorByPubDate'|trans }}: </label>
+                        <select name="sortOrder">
+                            <option value="0" {% if params.sortOrder is defined and params.sortOrder == 0 %} selected {% endif %}>
+                                {{ 'searchForm.label.newToOld'|trans }}
+                            </option>
+                            <option value="1" {% if params.sortOrder is defined and params.sortOrder == 1 %} selected {% endif %}>
+                                {{ 'searchForm.label.oldToNew'|trans }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <input type="checkbox" value="1" name="globalSearch"
+                                {% if params.globalSearch is defined and params.globalSearch is not empty and params.globalSearch == 1 %} checked {% endif %}>
+                        {{ 'searchForm.label.globalSearch'|trans }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="float-container">
+                            <input type="submit" value="{{ 'searchForm.button.search'|trans }}" class="search-form__button">
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        {% if params.queryString is defined and params.queryString is not empty %}
+            <h1>{{ 'searchResults'|trans }}</h1>
+            <p>{{ 'searchQuery'|trans }}: "{{ params.queryString }}"</p>
+        {% endif %}
+        {% if data is defined and data is not empty %}
+            <ul class="search-results">
+                {% for result in data %}
+                    <li>
+                        <h3><a href="{{ result.link }}" class="search-link">{{ result.title|strip|raw }}</a></h3>
+                        <div class="preview">{{ result.preview_text|strip|raw }}</div>
+                        <ul class="result-category">
+                            <li>{{ result.entity_type|trans }}</li>
+                            <li>{{ result.published_at|date_ru }}</li>
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% if hideButton == false %}
+                <div style="text-align: center;">
+                    <button id="more-results" class="download tooltipstered"
+                            data-route="search_more" data-page="{{ params.page + 1 }}" data-locale="ru">
+                        {{ 'searchForm.button.loadMore'|trans }}
+                    </button>
+                </div>
+            {% endif %}
+            <div class="pagination clearfix">{{ pagination|raw }}</div>
+            <p>{{ 'searchTotal'|trans }}: {{ data[0].total_results  }}</p>
+        {% else %}
+            {% if params.queryString is defined and params.queryString is not empty %}
+                <p>{{ 'noSearchResults'|trans }}</p>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

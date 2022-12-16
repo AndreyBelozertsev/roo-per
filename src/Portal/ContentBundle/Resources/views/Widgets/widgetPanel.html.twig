@@ -1,0 +1,12 @@
+{#{% if codePanel == 'side-panel' %}
+        <div class="right-box">
+{% endif %}#}
+{% if panelWidgetList is not empty %}
+    {% for widget in panelWidgetList %}
+        <div class="widget-wrapper" data-widget-id="{{ widget.widget_to_panel_id }}"></div>
+    {% endfor %}
+{% endif %}
+
+{#{% if codePanel == 'side-panel' %}
+        </div>
+{% endif %}#}

@@ -1,0 +1,46 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | {{ 'instance_category_form.instance_category_list'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'instance_category_form.instance_category_list'|trans }}
+{% endblock %}
+
+{% block topbuttons %}
+    <a class="btn btn-success" href="{{ path('admin_admin_instance_category_edit', {instanceCategoryId:0}) }}">
+        <i class="glyphicon glyphicon-plus-sign"></i> {{ 'instance_category_form.add_new'|trans }}
+    </a>
+{% endblock %}
+
+{% block body %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{{ 'instance_form.site_title'|trans }}</th>
+            <th>{{ 'action'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for instanceCategory in listInstanceCategory %}
+            <tr>
+                <td>
+                    <a href="{{ path('admin_admin_instance_category_edit', {instanceCategoryId:instanceCategory.id }) }}">
+                        {{instanceCategory.title}}
+                    </a>
+                </td>
+                <td>
+                    <button class="btn btn-warning" href="#" onclick="adminPage.instanceCategory.removeItem({{instanceCategory.id}})">
+                        {{ 'delete'|trans }}
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

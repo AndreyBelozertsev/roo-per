@@ -1,0 +1,34 @@
+{% extends 'PortalContentBundle::base.html.twig' %}
+
+{% block info_page %}
+    <div class="info-page">
+        <div class="info-page__posit">
+            <div class="bread-crumbs">
+                <ul>
+                    <li><a href="#">{{ 'Home'|trans }}</a></li>
+                    <li>{{ 'Feedback'|trans }}</li>
+                </ul>
+            </div>
+            <div class="title-page">{{ 'Feedback'|trans }}</div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="content__contact-info">
+        {{ feedback.content|raw }}
+    </div>
+
+    {%  if (feedback.isFormShown) %}
+        {% include 'PortalContentBundle:FeedbackForm:form.html.twig' %}
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            $('select').chosen()
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends 'PortalContentBundle:InformPage:informPage.html.twig' %}
+
+{% block informPageContent %}
+    <img class="text-page__wid-page" src="{{ template.attachment.previewFileUrl }}" alt="">
+    {{ template.content|raw }}
+{% endblock %}

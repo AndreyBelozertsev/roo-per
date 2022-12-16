@@ -1,0 +1,296 @@
+# main
+portal_content_homepage:
+    path: /{_locale}{trailingSlashLang}
+    defaults: { _controller: PortalContentBundle:Default:index, trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+
+# personal opinion
+post:
+    path: /{_locale}{trailingSlashLang}post/view-all{trailingSlash}
+    defaults: { _controller: PortalContentBundle:Post:index, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+post_show:
+    path: /{_locale}{trailingSlashLang}post/show/{id}{trailingSlash}
+    defaults: { _controller: PortalContentBundle:Post:show, id: "0", trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        id: \d+
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+get_more_posts:
+    path: /{_locale}{trailingSlashLang}post/get-more-post{trailingSlash}
+    defaults: { _controller: PortalContentBundle:Post:getPosts, page: "0", trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+# magazine-newspaper
+magazine-newspaper:
+    path: /{_locale}{trailingSlashLang}magazine-newspaper/view-all{trailingSlash}
+    defaults: { _controller: PortalContentBundle:Magazine:index, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+# magazine
+magazine:
+    path: /{_locale}{trailingSlashLang}magazine-newspaper/magazine/view-all{trailingSlash}
+    defaults: { _controller: PortalContentBundle:Magazine:index, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+get_more_magazines:
+    path: /{_locale}{trailingSlashLang}magazine-newspaper/magazine/get-more-magazines{trailingSlash}
+    defaults: { _controller: PortalContentBundle:Magazine:getMoreMagazines, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+# newspaper
+newspaper:
+    path: /{_locale}{trailingSlashLang}magazine-newspaper/newspaper/view-all{trailingSlash}
+    defaults: { _controller: PortalContentBundle:Newspaper:index, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+get_more_newspapers:
+    path: /{_locale}{trailingSlashLang}magazine-newspaper/newspaper/get-more-newspapers{trailingSlash}
+    defaults: { _controller: PortalContentBundle:Newspaper:getMoreNewspapers, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+# articles
+article_show:
+    path: /{_locale}{trailingSlashLang}article/show/{id}{trailingSlash}
+    defaults: { _controller: PortalContentBundle:Article:show, id: "0", trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        id: \d+
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+view_all_articles:
+    path: /{_locale}{trailingSlashLang}article/category/{cat}{trailingSlash}
+    defaults: { _controller: PortalContentBundle:Article:viewAll, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        cat: \d+
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+get_more_articles:
+    path: /{_locale}{trailingSlashLang}article/get-more-articles{trailingSlash}
+    defaults: { _controller: PortalContentBundle:Article:getMoreArticles, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+# # photo reports
+# photo_report:
+#     path: /{_locale}{trailingSlashLang}photo-report/view-all{trailingSlash}
+#     defaults: { _controller: PortalContentBundle:PhotoReport:photoList, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+#     requirements:
+#         trailingSlash : "[/]{0,1}"
+#         trailingSlashLang : "[/]{0,1}"
+#         _locale: "%available_lang%"
+#     options:
+#         expose: true
+    
+# photo_report_show:
+#     path: /{_locale}{trailingSlashLang}photo-report/show/{id}{trailingSlash}
+#     defaults: { _controller: PortalContentBundle:PhotoReport:showPhotoReport, id: "0", trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+#     requirements:
+#         id: \d+
+#         trailingSlash : "[/]{0,1}"
+#         trailingSlashLang : "[/]{0,1}"
+#         _locale: "%available_lang%"
+#     options:
+#         expose: true
+
+# load_next_photo_report:
+#     path: /{_locale}{trailingSlashLang}photo-report/get-next-photo-report{trailingSlash}
+#     defaults: { _controller: PortalContentBundle:PhotoReport:getNextPhotoReport, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+#     requirements:
+#         trailingSlash : "[/]{0,1}"
+#         trailingSlashLang : "[/]{0,1}"
+#         _locale: "%available_lang%"
+#     options:
+#         expose: true
+
+# article subscribe form
+article_subscribe_form:
+    path: /{_locale}{trailingSlashLang}subscribe{trailingSlash}
+    defaults: { _controller: PortalContentBundle:ArticleSubscribeForm:subscribe, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+article_unsubscribe_form:
+    path: /{_locale}{trailingSlashLang}unsubscribe/{hash}{trailingSlash}{instanceId}
+    defaults: { _controller: PortalContentBundle:ArticleSubscribeForm:unsubscribe, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%", instanceId: "" }
+    requirements:
+        hash: \w+
+        instanceId: \d*
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+# widgets
+load_widget:
+    path: /{_locale}{trailingSlashLang}load-widget{trailingSlash}
+    defaults: { _controller: PortalContentBundle:Widget:loadWidget, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+load_weather:
+    path: /{_locale}{trailingSlashLang}weather{trailingSlash}
+    defaults: { _controller: PortalContentBundle:Widget:weather, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+# site map
+sitemap:
+    path: /{_locale}{trailingSlashLang}sitemap{trailingSlash}
+    defaults: { _controller: PortalContentBundle:SiteMap:index, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+
+site_map:
+    path: /{_locale}{trailingSlashLang}site-map{trailingSlash}
+    defaults: { _controller: PortalContentBundle:SiteMap:getMap, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+#FeedbackForm
+feedback_page:
+    path: /{_locale}{trailingSlashLang}feedback/show/{id}{trailingSlash}
+    defaults: { _controller: PortalContentBundle:FeedbackForm:index, id: "0", trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        id: \d+
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+feedback_page_slug:
+    path: /{_locale}{trailingSlashLang}feedback/show/{slug}{trailingSlash}
+    defaults: { _controller: PortalContentBundle:FeedbackForm:index, slug: "/", trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        slug: \w+|\-
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+feedback_login_esia:
+    path: /{_locale}{trailingSlashLang}feedback/show/{slug}/auth{trailingSlash}
+    defaults: { _controller: PortalContentBundle:FeedbackForm:authEsiaLogin, slug: "/", trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        slug: \w+
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+
+#search
+search:
+    path: /{_locale}{trailingSlashLang}search{trailingSlash}
+    defaults: { _controller: PortalContentBundle:Search:search, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+
+get_more_results:
+    path: /{_locale}{trailingSlashLang}article/get-more-results{trailingSlash}
+    defaults: { _controller: PortalContentBundle:Search:getMoreResults, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+    options:
+        expose: true
+
+#captcha
+captcha_resource:
+    path: /{_locale}{trailingSlashLang}captcha-resource/{filename}
+    defaults: { _controller: CaptchaBundle:CaptchaResource:index, filename: none, _locale: "%locale%", trailingSlashLang: "/" }
+    methods: [GET]
+    requirements:
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+
+captcha_layout_stylesheet_url:
+    path: /{_locale}{trailingSlashLang}captcha-resource/bdc-layout-stylesheet.css
+    defaults: { _controller: CaptchaBundle:CaptchaResource:index, filename: bdc-layout-stylesheet.css, _locale: "%locale%", trailingSlashLang: "/" }
+    methods: [GET]
+    requirements:
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"
+
+captcha_handler:
+    path: /{_locale}{trailingSlashLang}captcha-handler
+    defaults: { _controller: CaptchaBundle:CaptchaHandler:index, _locale: "%locale%", trailingSlashLang: "/" }
+    methods: [GET]
+    requirements:
+        trailingSlashLang : "[/]{0,1}"
+        _locale: "%available_lang%"

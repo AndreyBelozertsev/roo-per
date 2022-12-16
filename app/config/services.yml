@@ -1,0 +1,68 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+
+services:
+#    request_listener:
+#        class: Portal\HelperBundle\EventListener\RequestListener
+#        arguments: ['@portal_logger']
+#        tags:
+#            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+#    portal_logger:
+#        class: Portal\HelperBundle\Helper\PortalLogger
+#        arguments: ['@security.token_storage', '@access_log_manager', "@service_container"]
+        
+#    portal_entity_logger:
+#        class: Portal\HelperBundle\Helper\PortalEntityLogger
+#        arguments: ['@security.token_storage', '@entity_log_manager', "@service_container"]
+
+#    Portal\HelperBundle\EventListener\AdminEntitiesListener:
+#        arguments: ["@portal_entity_logger", "@service_container"]
+#        tags:
+#            - { name: doctrine.event_subscriber, event: postPersist }
+#            - { name: doctrine.event_subscriber, event: postUpdate }
+#            - { name: doctrine.event_subscriber, event: postDelete }
+
+#    app.form.registration:
+#        class: Portal\UserBundle\Form\RegistrationType
+#        tags:
+#            - { name: form.type, alias: app_user_registration }
+
+#    menu_builder:
+#        class: Portal\HelperBundle\Menu\Builder
+#        arguments: ["@knp_menu.factory", "@service_container"]
+
+#    structure_menu:
+#        class: Knp\Menu\MenuItem # the service definition requires setting the class
+#        factory: ["@menu_builder", createStructureMenu]
+#        arguments: ["@request_stack"]
+#        tags:
+#           - { name: knp_menu.menu, alias: structure } # The alias is what is used to retrieve the menu
+
+#    breadcrumbs_menu:
+#        class: Knp\Menu\MenuItem # the service definition requires setting the class
+#        factory: ["@menu_builder", breadcrumbsMenu]
+#        arguments: ["@request_stack"]
+#        tags:
+#           - { name: knp_menu.menu, alias: breadcrumbs } # The alias is what is used to retrieve the menu
+
+#    esia.oauth_aware.user_provider.service:
+#        class: HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider
+#        arguments:
+#            - '@fos_user.user_manager'
+#            - { esia: esiaId }
+
+#    esia.custom.user_provider:
+#        class:        Portal\EsiaBundle\Security\EsiaFOSUBUserProvider
+#        arguments: ['@fos_user.user_manager', { esia: esiaId }]
+
+#    guzzle_client.hwi_special:
+#        class: Http\Adapter\Guzzle6\Client
+#        factory:
+#            - Http\Adapter\Guzzle6\Client
+#            - createWithConfig
+#        arguments:
+#            - timeout: 10
+#              verify_peer: false
+#              max_redirects: 5
+#              ignore_errors: false

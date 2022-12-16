@@ -1,0 +1,53 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'bloc_structure.list'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'bloc_structure.list'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permission_codes = permissions.getCode() %}
+
+{% block topbuttons %}
+    <div style="display: inline-block;">
+        {% if sa or constant('Portal\\ContentBundle\\Entity\\MenuNode::PERMISSIONS_STRUCTURE')['create'] in permission_codes %}
+            <button id="structureCreateBtn" class="btn btn-success btn-sm">
+                <i class="glyphicon glyphicon-asterisk"></i> {{ 'create'|trans }}
+            </button>
+        {% endif %}
+        <button id="structureRenameBtn" class="btn btn-warning btn-sm">
+            <i class="glyphicon glyphicon-pencil"></i> {{ 'rename'|trans }}
+        </button>
+        {% if sa or constant('Portal\\ContentBundle\\Entity\\MenuNode::PERMISSIONS_STRUCTURE')['delete'] in permission_codes %}
+            <button id="structureDeleteBtn" class="btn btn-danger btn-sm">
+                <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+            </button>
+        {% endif %}
+    </div>
+    <div id="button_menu_node" style="display: inline-block;"></div>
+{% endblock %}
+
+{% block body %}
+    <div id="structures" class="column structures word-spaces">
+
+    </div>
+    <div id="goods" class="column"></div>
+    <div id="structure_content" style="margin: 5px"></div>
+    <input id="ref" type="hidden" value="{{ ref }}">
+    <input id="instanceCode" type="hidden" value="{{ instanceCode }}">
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/portaladmin/script/sort-selected/sort-selected-style.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script defer src="{{ asset('bundles/portaladmin/script/structure-tree/main.js') }}"></script>
+    <script src="{{ asset('bundles/portaladmin/jquery-ui/jquery-ui.js') }}"></script>
+    <script defer src="{{ asset('bundles/portaladmin/script/sort-selected/sort-order.js') }}"></script>
+{% endblock %}

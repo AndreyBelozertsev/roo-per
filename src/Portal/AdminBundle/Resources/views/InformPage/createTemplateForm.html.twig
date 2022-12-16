@@ -1,0 +1,11 @@
+{% if form is defined %}
+    {{ form_start(form, {
+        'action': path('admin_instance_inform_page_template_create', {'instanceCode': instanceCode})
+    }) }}
+
+    {% include 'PortalAdminBundle:InformPage:templateFormUni.html.twig' %}
+
+    <input type="hidden" name="templateId" value="{{ templateId }}">
+
+    {{ form_end(form) }}
+{% endif %}

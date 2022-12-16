@@ -1,0 +1,13 @@
+portal_admin_homepage:
+    path:     /
+    defaults: { _controller: PortalAdminBundle:Default:index, trailingSlash : "/" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+        
+portal_admin_admin:
+    resource: "@PortalAdminBundle/Resources/config/routing_admin.yml"
+    prefix:   /
+
+portal_admin_instance:
+    resource: "@PortalAdminBundle/Resources/config/routing_instance.yml"
+    prefix:   /

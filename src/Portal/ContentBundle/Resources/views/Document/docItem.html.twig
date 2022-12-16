@@ -1,0 +1,16 @@
+{% for doc in documents %}
+    <div class="text-page__inform-block">
+        <div class="text-page__content text-page__content_document">
+            <div class="text-page__document">
+                <a href="{{ path('document_show', {'id': doc.document_id}) }}" title="{{ 'click_to_view'|trans }}">
+                    {{ doc.document_title }}
+                </a>
+            </div>
+            <div class="text-page__doc-link">
+                <a href="#" class="text-page__doc-date">
+                    {{ doc.document_published_at|date('d.m.Y') }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endfor %}

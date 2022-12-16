@@ -1,0 +1,102 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'article_form.action_edit'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'article_form.action_edit'|trans }}
+{% endblock %}
+
+{% block topbuttons %}
+    {{ form_start(delete_form) }}
+        <button id="btn_delete" class="btn btn-danger" type="submit" name="btn_delete" data-toggle="modal" data-target="#myModal"><i class="fa fa-minus-circle"></i> {{ 'delete'|trans }}</button>
+    {{ form_end(delete_form) }}
+{% endblock %}
+
+{% block body %}
+    {{ form_start(edit_form) }}
+    <div class="form-group">
+        <div class="col-sm-3">
+            {{ form_label(edit_form.label) }}
+        </div>
+        <div class="col-sm-9">
+            {{ form_widget(edit_form.label, {'attr':{'class':'form-control'} }) }}
+            <div class="errors">
+                {% for error in edit_form.label.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">
+            {{ form_label(edit_form.parent) }}
+        </div>
+        <div class="col-sm-9">
+            {{ form_widget(edit_form.parent, {'attr':{'class':'form-control'} }) }}
+            <div class="errors">
+                {% for error in edit_form.parent.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">
+            {{ form_label(edit_form.order) }}
+        </div>
+        <div class="col-sm-9">
+            {{ form_widget(edit_form.order, {'attr':{'class':'form-control'} }) }}
+            <div class="errors">
+                {% for error in edit_form.order.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">
+            {{ form_label(edit_form.menu) }}
+        </div>
+        <div class="col-sm-9">
+            {{ form_widget(edit_form.menu, {'attr':{'class':'form-control'} }) }}
+            <div class="errors">
+                {% for error in edit_form.menu.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">
+            {{ form_label(edit_form.route) }}
+        </div>
+        <div class="col-sm-9">
+            {{ form_widget(edit_form.route, {'attr':{'class':'form-control'} }) }}
+            <div class="errors">
+                {% for error in edit_form.route.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">
+            {{ form_label(edit_form.save) }}
+        </div>
+        <div class="col-sm-9">
+            {{ form_widget(edit_form.save, {'attr':{'class':'btn btn-success'} }) }}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+        {{ form_end(edit_form) }}
+
+
+{% endblock %}

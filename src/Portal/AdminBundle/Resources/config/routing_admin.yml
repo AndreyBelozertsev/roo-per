@@ -1,0 +1,301 @@
+admin_admin:
+    path:     /admin
+    defaults: { _controller: PortalAdminBundle:Default:admin, trailingSlash : "/" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+
+#users
+admin_admin_user_viewall:
+    path: /admin/user/view-all/
+    defaults: { _controller: PortalAdminBundle:User:viewAll, trailingSlash : "/" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+
+admin_admin_user_edit:
+    path: /admin/user/edit/{userId}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:User:edit, trailingSlash : "/" }
+    requirements:
+        userId: \d+
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+
+admin_admin_user_remove:
+    path: /admin/user/remove/{userId}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:User:remove, trailingSlash : "/" }
+    requirements:
+        userId: \d+
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+
+#instances && instance categories
+admin_admin_instance_viewall:
+    path: /admin/instance/view-all{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InstanceAdmin:viewAll, trailingSlash : "/" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+
+admin_admin_instance_edit:
+    path: /admin/instance/edit/{instanceId}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InstanceAdmin:edit, trailingSlash : "/" }
+    requirements:
+        instanceId: \d+
+        trailingSlash : "[/]{0,1}"
+
+admin_admin_instance_remove:
+    path: /admin/instance/remove/{instanceId}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InstanceAdmin:remove, trailingSlash : "/" }
+    requirements:
+        instanceId: \d+
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+        
+admin_admin_instance_migrate:
+    path: /admin/instance/migrate{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InstanceAdmin:migrate, trailingSlash : "/" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+
+admin_admin_instance_category_viewall:
+    path: /admin/instance-category/view-all{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InstanceCategoryAdmin:viewAll, trailingSlash : "/" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+
+admin_admin_instance_category_edit:
+    path: /admin/instance-category/edit/{instanceCategoryId}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InstanceCategoryAdmin:edit, trailingSlash : "/" }
+    requirements:
+        instanceCategoryId: \d+
+        trailingSlash : "[/]{0,1}"
+        
+admin_admin_instance_category_remove:
+    path: /admin/instance-category/remove/{instanceCategoryId}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InstanceCategoryAdmin:remove, trailingSlash : "/" }
+    requirements:
+        instanceCategoryId: \d+
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+
+#SystemMode
+admin_admin_system_mode_viewall:
+    path: /admin/system-mode/view-all{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:SystemModeAdmin:viewAll, trailingSlash : "/" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+
+admin_admin_system_mode_edit:
+    path: /admin/system-mode/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:SystemModeAdmin:edit, id: "0", trailingSlash : "/" }
+    requirements:
+        id: \d+
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+
+#user roles
+admin_admin_role_viewall:
+    path: /admin/role/view-all/
+    defaults: { _controller: PortalAdminBundle:UserRole:viewAll, trailingSlash : "/" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+
+admin_admin_role_edit:
+    path: /admin/role/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:UserRole:edit, trailingSlash : "/" }
+    requirements:
+        id: \d+
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+
+admin_admin_role_remove:
+    path: /admin/role/remove/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:UserRole:remove, trailingSlash : "/" }
+    requirements:
+        id: \d+
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+
+admin_admin_user_add_new_role_form:
+    path: /admin/user/addNewRoleForm/{roleIndex}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:User:addNewRoleForm, roleIndex: 0, trailingSlash : "/" }
+    requirements:
+        roleIndex: \d+
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+
+admin_admin_user_remove_role_form_item:
+    path: /admin/user/removeRoleFormItem{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:User:removeRoleFormItem, trailingSlash : "/" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+
+#user permissions
+admin_admin_permission_viewall:
+    path: /admin/permission/view-all/
+    defaults: { _controller: PortalAdminBundle:UserPermission:viewAll, trailingSlash : "/" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+
+admin_admin_permission_edit:
+    path: /admin/permission/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:UserPermission:edit, trailingSlash : "/" }
+    requirements:
+        id: \d+
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+
+admin_admin_permission_remove:
+    path: /admin/permission/remove/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:UserPermission:remove, trailingSlash : "/" }
+    requirements:
+        id: \d+
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+
+#comments
+admin_admin_comment_viewall:
+    path: /admin/comment/view-all/
+    defaults: { _controller: PortalAdminBundle:CommentAdmin:index, trailingSlash : "/" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+
+admin_admin_comment_edit:
+    path: /admin/comment/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:CommentAdmin:edit, trailingSlash : "/" }
+    requirements:
+        id: \d+
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+
+admin_admin_comment_remove:
+    path: /admin/comment/remove/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:CommentAdmin:delete, trailingSlash : "/" }
+    requirements:
+        id: \d+
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+
+#admin_admin_comment_new:
+#    path: /admin/comment/new/
+#    defaults: { _controller: PortalAdminBundle:CommentAdmin:new, trailingSlash : "/" }
+#    requirements:
+#        trailingSlash : "[/]{0,1}"
+
+#feedback
+admin_admin_feedback_form_edit:
+    path: /admin/feedbackform/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:FeedbackFormAdmin:edit, id: "0", trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_admin_feedback_form_create:
+    path: /admin/feedbackform/create{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:FeedbackFormAdmin:create, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+#category
+admin_admin_category_viewall:
+    path: /admin/category/view-all/
+    defaults: { _controller: PortalAdminBundle:CategoryAdmin:index, trailingSlash : "/" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+admin_admin_category_create:
+    path: /admin/category/create{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:CategoryAdmin:create, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+admin_admin_category_edit:
+    path: /admin/category/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:CategoryAdmin:edit, id: "0", trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+admin_admin_category_delete:
+    path: /admin/category/remove/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:CategoryAdmin:delete, trailingSlash : "/" }
+    requirements:
+        id: \d+
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+
+#social network
+admin_admin_socialnetwork_list:
+    path: /admin/socialnetwork/list{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:SocialNetworkAdmin:list, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+
+admin_admin_socialnetwork_create:
+    path: /admin/socialnetwork/create{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:SocialNetworkAdmin:create, trailingSlash : "/" }
+    requirements:
+        trailingSlash : "[/]{0,1}"
+
+admin_admin_socialnetwork_edit:
+    path: /admin/socialnetwork/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:SocialNetworkAdmin:edit, trailingSlash : "/" }
+    requirements:
+        id: \d+
+        trailingSlash : "[/]{0,1}"
+
+admin_admin_socialnetwork_remove:
+    path: /admin/socialnetwork/remove/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:SocialNetworkAdmin:delete, trailingSlash : "/" }
+    requirements:
+        id: \d+
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+
+admin_admin_socialnetwork_restore:
+    path: /admin/socialnetwork/restore/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:SocialNetworkAdmin:restore, trailingSlash : "/" }
+    requirements:
+        id: \d+
+        trailingSlash : "[/]{0,1}"
+    options:
+        expose: true
+
+
+admin_admin_param_edit:
+    path: /admin/param/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:ParamAdmin:edit, trailingSlash : "/" }
+    requirements:
+        id: \d+
+        trailingSlash : "[/]{0,1}"
+
+admin_admin_param_list:
+    path: /admin/param/list{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:ParamAdmin:list, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        trailingSlash: "[/]{0,1}"

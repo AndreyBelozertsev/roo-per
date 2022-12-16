@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="{% block keywords %}{% endblock %}">
+    <meta name="description" content="{% block description %}{% endblock %}">
+
+    {# <link href="{{ asset('themes/base/images/sed/login/favicon.ico') }}" rel="shortcut icon" type="image/x-icon"/>#}
+    <title>{% block title %}{{ 'login'|trans }}{% endblock %}</title>
+
+    {% block stylesheets %}
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/portaladmin/bootstrap/css/bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css"
+              href="{{ asset('bundles/portaladmin/BootplyAdminTemplate/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css"
+              href="{{ asset('bundles/portaladmin/BootplyAdminTemplate/css/styles.css') }}">
+
+        <!-- Theme CSS -->
+        <link rel="stylesheet" href="{{ asset('bundles/portaladmin/css/main.css') }}">
+    {% endblock %}
+
+    {% block javascripts %}
+        <script src="{{ asset('bundles/portaladmin/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('bundles/portaladmin/BootplyAdminTemplate/js/bootstrap.min.js') }}"></script>
+    {% endblock %}
+</head>
+<body class="form-login">
+<div class="container">
+
+    <a class="logo" href="/"></a>
+
+    <div class="login-card login-card-container form-login-wid">
+        <form class="form-signin" novalidate action="{{ path("fos_user_security_check") }}" method="post">
+            <div class="form-login_title">{{ 'logining'|trans }}</div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+            <input class="form-control form-login-inp" placeholder="{{ 'username'|trans }}" autofocus type="text"
+                   id="username" name="_username" value="{{ last_username }}" required="required"/>
+            <input class="form-control form-login-inp" placeholder="{{ 'password'|trans }}" type="password"
+                   id="password" name="_password" required="required"/>
+            <div>
+                <div id="remember" class="checkbox">
+                    <label>
+                        <input type="checkbox" id="remember_me" name="_remember_me"
+                               value="on"/>{{ 'remember_me'|trans }}
+                    </label>
+                </div>
+                <input class="btn btn-lg btn-primary btn-block btn-signin form-login-button" type="submit" id="_submit"
+                       name="_submit" value="{{ 'login'|trans }}"/>
+
+                <div class="clear"></div>
+            </div>
+
+        </form><!-- /form -->
+    </div><!-- /card-container -->
+</div><!-- /container -->
+</body>
+</html>

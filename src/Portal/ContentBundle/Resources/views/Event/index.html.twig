@@ -1,0 +1,84 @@
+{% extends isDepartment ? 'PortalContentBundle::depBase.html.twig' : 'PortalContentBundle::innerPageBase.html.twig' %}
+
+{% block title %}
+    {{ 'events'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block pageTitle %}
+    {{ 'events'|trans }}
+{% endblock %}
+
+{% block headerPanel %}
+    {{ panelWidget.renderPanel('header-panel', 'event_all_page')|raw }}
+{% endblock %}
+
+{% block sideBar %}
+    {{ panelWidget.renderPanel('side-panel', 'event_all_page')|raw }}
+{% endblock %}
+
+{% block beforeContentBlock %}
+    {{ panelWidget.renderPanel('before-content-panel', 'event_all_page')|raw }}
+{% endblock %}
+
+{% block bottomPanel %}
+    {{ panelWidget.renderPanel('bottom-panel', 'event_all_page')|raw }}
+{% endblock %}
+
+{% block footerSocialPanel %}
+    {{ panelWidget.renderPanel('footer-panel', 'event_all_page')|raw }}
+{% endblock %}
+
+{% block innerContent %}
+    <div class="tabs-content__white tabs-content_news-horizontal">
+        <div class="title">{{ 'events'|trans }}</div>
+        <div class="tabs__content tabs__content_active">
+            <div id="event_content" class="flex_space">
+                <div class="page-form page-form_event">
+                    {% set month = ['Все', 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'] %}
+                    {% set year = {'': '', 2010: '2010', 2011: '2011', 2012: '2012', 2013: '2013', 2014: '2014', 2015: '2015', 2016: '2016', 2017: '2017', 2018: '2018'} %}
+                    <form class="clearfix">
+                        <div class="page-form__row">
+                            <div class="page-form__column page-form__column_bottom _size_240">
+                                <label class="page-form__label">{{ '_month'|trans }}</label>
+                                <select name="event-month" tabindex="2" class="chosen-select page-form__pole">
+                                    {% for k,mon in month %}
+                                        <option value="{{ k }}"{{ (paramDate and paramDate|split('.')[1] == k) ? ' selected' : '' }}>
+                                            {{ mon }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="page-form__column page-form__column_bottom _size_240">
+                                <label class="page-form__label">{{ '_year'|trans }}</label>
+                                <select name="event-year" data-placeholder="{{ 'select_year'|trans }}" tabindex="2" class="chosen-select page-form__pole">
+                                    {% for k,yr in year %}
+                                        <option value="{{ k }}"{{ (paramDate and paramDate|split('.')[2] == yr) ? ' selected' : '' }}>
+                                            {{ yr }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="page-form__column page-form__column_bottom _size_240">
+                                <input id="event-filter" class="page-form__button page-form__button_small" type="button" value="{{ 'find'|trans }}">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {% if eventList is defined and eventList is not empty %}
+                    {% include 'PortalContentBundle:Event:eventItems.html.twig' %}
+                {% else %}
+                    <div class="news-box">
+                        <div class="share__title">{{ 'no_events'|trans }}</div>
+                    </div>
+                {% endif %}
+            </div>
+            {% if pageCount > 1 %}
+                <button id="get_more" class="download" {{ hideButton is defined and hideButton ? ' style="display: none"' : ''}}
+                        data-pagecount="{{ pageCount }}" data-page="{{ currentPage }}" data-date="{{ paramDate }}">
+                    {{ 'show_more'|trans }}
+                </button>
+            {% endif %}
+            <div class="pagination clearfix">{{ pagination|raw }}</div>
+        </div>
+    </div>
+{% endblock %}

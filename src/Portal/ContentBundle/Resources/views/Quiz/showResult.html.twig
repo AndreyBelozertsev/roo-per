@@ -1,0 +1,33 @@
+{% extends isDepartment ? 'PortalContentBundle::depBase.html.twig' : 'PortalContentBundle::innerPageBase.html.twig' %}
+
+{% block pageTitle %}
+    {% if errorMessage is defined %} {{errorMessage}} {% endif %}
+    {{ 'quiz.content_title'|trans() }}
+{% endblock %}
+
+{% block innerContent %}
+    <div class="tabs-content__white">
+        <div class="quiz">
+            {#<div class="page-form page-form_doc-page _no-pad">#}
+            <div class="quiz__header clearfix">
+                <div class="quiz__title quiz__left">{{ quiz.title }}</div>
+            </div>
+            <div class="quiz__inform clearfix">
+                <div class="quiz__open quiz__left">{{ 'quiz.quiz_open'|trans() }}<span class="quiz__date">{{ quiz.dateStart|date('d.m.Y') }}</span>{{ 'quiz.quiz_close'|trans() }}<span class="quiz__date">{{ quiz.dateEnd|date('d.m.Y') }}</span></div>
+            </div>
+            <div class="quiz__body">
+                <div class="quiz__text">
+                    {% if quizFinish is defined and quizFinish %}
+                        <div><p>{{ 'quiz.good_answers'|trans() }} {{ countCorrectAnswer }} {{ 'quiz.good_answers_from'|trans() }} {{ countQuizAnswer }}</p></div>
+                        {{  goodResult ? quiz.goodResult : quiz.badResult }}
+                    {% endif %}
+                </div>
+            </div>
+            {#</div>#}
+            <div class="quiz__footer clearfix">
+                <div class="quiz__voted quiz__left">{{ 'quiz.participated'|trans() }}:<b>{{ quiz.respondentsCounter }}</b></div>
+                <div class="quiz__voted quiz__right">{{ 'quiz.voted'|trans() }}:<b>{{ quiz.goodRespondentsCounter }}</b></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

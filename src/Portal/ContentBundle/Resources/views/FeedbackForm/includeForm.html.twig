@@ -1,0 +1,116 @@
+<div class="title _sample2 clearfix">
+    {{ feedbackFormData.title }}
+</div>
+
+<div class="form-success-message">
+    {#{% block formMessage %}#}
+    {% for flashMessage in app.session.flashbag.get('message') %}
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error_message') %}
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {#{% endblock %}#}
+</div>
+{% if descriptionFeedbackForm %}
+    <div class="info">
+        <div class="info__img-text">
+            {{ descriptionFeedbackForm|raw }}
+        </div>
+    </div>
+{% endif %}
+
+{% if user %}
+    <div class="page-form page-form_doc-page _no-pad">
+        {{ form_start(form, {'attr':{'class':'clearfix', 'id':'form_feedback'}}) }}
+        {% set isForm = false %}
+        {% for field in fieldList %}
+            {% if field is not empty %}
+                {% set isForm = true %}
+                <div class="page-form__row">
+                    {% if field != "previews" %}
+                        <div class="page-form__column">
+                            {% if form[field] is not defined and esiaValue[field] is not null %}
+                                <label class="page-form__label" for="form_phone">{{ field|trans() }}</label>
+                                <p>{{ esiaValue[field] }}</p>
+                            {% endif %}
+                            {% if form[field] is defined %}
+                                {{ form_label(form[field], null, {'label_attr':{'class':'page-form__label'}}) }}
+                                {{ form_widget(form[field]) }}
+                            {% endif %}
+                            <div class="page-form__feedback-error"></div>
+                            <div class="errors">
+                                {% for error in form[field].vars.errors %}
+                                    <div class="page-form__feedback-error">{{ error.message }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if field == "previews" %}
+                        <div class="page-form__column page-form__column_posit_top">
+                            <div class="previews"
+                                 data-prototype-file="{{ form_widget(form.previews.vars.prototype)|e('html_attr') }}"
+                                 data-prototype-references="&lt;input id=&quot;form_references__file_file&quot; type=&quot;text&quot; name=&quot;form[previews][][file][file]&quot;&gt;"
+                                 data-max-counter="{{ constant('Portal\\ContentBundle\\Entity\\FeedbackFormAttachment::MAX_FILE_ATTACHMENT') }}">
+                                <label class="page-form__label _block _posit">{{ 'feedback_form_value.files'|trans() }}</label>
+                                {{ form_label(form.previews, '', {'label_attr':{'class':'page-form__label _block _posit'}}) }}
+                                <label class="page-form__label _top">До 10 файлов не более 10Мб каждый.
+                                    <input type="text" placeholder="Добавить ссылку на файл с внешнего ресурса" class="page-form__pole link-res">
+                                </label>
+                                <span class="page-form__upload page-form__upload_first">
+                            <label class="file_upload">
+                                <span class="page-form__button button-file">Прикрепить файл</span>
+                                <mark>Файл не выбран</mark>
+                            </label>
+                            <span class="page-form__close"></span>
+                        </span>
+                                {% for preview in form.previews %}
+                                    {{ form_label(preview.file, '', {'label_attr':{'class':'page-form__label _block _posit'}}) }}
+                                    {{ form_widget(preview.file, {'attr': {'style': 'display:none'}}) }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+        <div class="page-form__row">
+            <div class="page-form__column">
+                {{ form_label(form.captcha, '', {'label_attr':{'class':'page-form__label' }}) }}
+                {{ form_widget(form.captcha, {'attr':{'class':'page-form__pole _pole_captcha' }}) }}
+                <div class="page-form__feedback-error"></div>
+                <div class="errors">
+                    {% for error in form.captcha.vars.errors %}
+                        <div class="page-form__feedback-error">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% if form.agree is defined %}
+        <div class="page-form__row">
+            <div class="page-form__column">
+                {{ form_widget(form.agree, {'attr':{'class':'checkbox check-agree' }}) }}
+                {{ form_label(form.agree, '', {'label_attr':{'class':'label' }}) }}
+                {{ form_errors(form.agree) }}
+                <div class="page-form__feedback-error"></div>
+            </div>
+        </div>
+        {% endif %}
+        {% if isForm %}
+            <input id="feedback_button_submit" type="submit" value="{{ 'feedback_form_value.send'|trans() }}"
+                   class="page-form__button agree-button" data-form-slug="{{ feedbackFormData.slug }}">
+        {% endif %}
+        {{ form_end(form) }}
+    </div>
+{% else %}
+    <a href="{{ path('feedback_login_esia', {'slug' : feedbackFormData.slug}) }}" class="button _blue">
+        <b>{{ 'interview.esia_login'|trans() }}</b>
+    </a>
+{% endif %}

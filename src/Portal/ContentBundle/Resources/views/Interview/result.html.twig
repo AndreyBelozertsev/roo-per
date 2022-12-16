@@ -1,0 +1,41 @@
+{% if results is defined and results is not empty and voted %}
+    <div class="quiz__body">
+        <div class="quiz__text">
+            {% set question = null %}
+            {% for result in results %}
+            {% if question != result.question %}
+            {{ loop.first ? '' : '</div>' }}
+            <div class="quiz__box">
+                {% if result.question_voted %}
+                    {% set questionVoted = result.question_voted %}
+                {% else %}
+                    {% set questionVoted = 0 %}
+                {% endif %}
+                <div class="quiz__question{{ result.is_required ? ' required' : '' }}">
+                    {{ result.question }} ({{ questionVoted }} {{ 'interview.question_voted'|trans }})
+                </div>
+                {% set question = result.question %}
+                {% endif %}
+                {% if result.answer is not null %}
+                    {% set result_p = result.percent / 100 %}
+                    {% set class_p = (result_p - (result_p % 5))//1 %}
+                    <div class="quiz__graf">
+                        <div class="quiz__graf-title">{{ result.answer }}</div>
+                        <div class="quiz__graf-pic quiz__graf-pic_gray" data-percent="{{ result.percent }}">
+                            <div class="quiz__graf-line quiz__graf-line_{{ class_p }}"></div>
+                            <div class="quiz__graf-percent quiz__graf-percent_gray">{{ result.voted }} ({{ result_p }}%)</div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="quiz__footer clearfix">
+        <div class="quiz__voted quiz__right">
+            {{ 'interview.voted'|trans }}: <b>{{ voted }}</b>
+        </div>
+    </div>
+{% else %}
+    <p>{{ 'interview.not_result'|trans }}</p>
+{% endif %}

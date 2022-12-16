@@ -1,0 +1,29 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}{{ parent() }} | {{ 'user_roles_form.menu_title'|trans }}{% endblock %}
+{% block pageheader %}
+    {{ 'instance_option.title'|trans }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <form method="POST" action="{{ path('admin_instance_option_update', {'instanceCode':instanceCode}) }}">
+            {% for option in optionList %}
+                <div class="row">
+                    {% set optionName = option.name|split('.') %}
+                    <input name="options[{{ optionName[2] }}]" type="{{ option.typeOption }}"
+                           {% if option.extraOption %} {{ option.extraOption }} {% endif %}
+                           {% if option.value %} value="{{ option.value }}" {% endif %}
+                           {% if option.typeOption is defined and option.typeOption == constant('Portal\\ContentBundle\\Entity\\Option::OPTION_TYPE_CHECKBOX') and option.value == 1 %}checked{% endif %} /> {{ option.label }}
+                </div>
+            {% endfor %}
+            <div class="row">
+                <button class="btn btn-success" type="submit" name="btn_save"><i class="glyphicon glyphicon-floppy-disk"></i> {{ 'instance_option.save'|trans }}</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

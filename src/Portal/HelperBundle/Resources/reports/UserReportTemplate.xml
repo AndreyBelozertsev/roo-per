@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" status="Under Construction" lasteditedby="O" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+    <title translate="true">Перечень технических средств и программного обеспечения</title>
+    <body>
+        <header>
+            <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Обследование комплекса технических средств</text></para>
+        </header>
+        <para styleclass="Normal"><text styleclass="Normal" style="background-color:#ffffff;" translate="true">В таблице ниже приведен перечень технических средств сотрудника с их краткими техническими характеристиками, а также программное обеспечение, требуемое сотруднику для выполнения функциональных обязанностей, и пожелания сотрудника к техническому обеспечению рабочего места. </text></para>
+        <para styleclass="Normal"></para>
+        <para styleclass="Normal"><text styleclass="Normal" translate="true">Таблица 1. Используемые технические средства и программное обеспечение</text></para>
+        <para styleclass="Normal">
+            <table styleclass="Default" rowcount="0" colcount="3" style="border-width:0px; border-spacing:0px; border-collapse:collapse; cell-border-width:1px; border-color:#000000; border-style:solid;">
+                <tr style="vertical-align:top">
+                    <td style="height:24px;">
+                        <para styleclass="Table_Header"><text styleclass="Table_Header" style="font-size:12pt;" translate="true"># АРМ</text></para>
+                    </td>
+                    <td style="height:24px;">
+                        <para styleclass="Table_Header"><text styleclass="Font Style" style="font-family:Arial; font-size:12pt; font-weight:bold; font-style:normal; text-decoration:none; text-transform:none; vertical-align:baseline; color:#000000; background-color:transparent; letter-spacing:normal; letter-scaling:100%;" translate="true">Группа свойств</text></para>
+                    </td>
+                    <td style="height:24px;">
+                        <para styleclass="Table_Header"><text styleclass="Table_Header" style="font-size:12pt;" translate="true">Свойство</text></para>
+                    </td>
+                    <td style="height:24px;">
+                        <para styleclass="Table_Header"><text styleclass="Table_Header" style="font-size:12pt;" translate="true">Значение</text></para>
+                    </td>
+                </tr>
+            </table>
+        </para>
+        <para styleclass="Normal"></para>
+        <para styleclass="Normal"></para>
+    </body>
+</topic>

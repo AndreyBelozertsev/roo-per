@@ -1,0 +1,53 @@
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.name) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.name.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.link) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.link, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.link.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.sort) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.sort, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.sort.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.prefix) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.prefix, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.prefix.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.isPublished) }}</div>
+    <div class="col-sm-10">{{ form_widget(form.isPublished) }}</div>
+    <div class="clearfix"></div>
+</div>

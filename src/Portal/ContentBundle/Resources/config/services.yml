@@ -1,0 +1,531 @@
+services:
+#    portal_content.example:
+#        class: Portal\ContentBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    menu_manager:
+        class: Portal\ContentBundle\Model\MenuManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_menu_manager:
+        class: Portal\ContentBundle\Model\MenuManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    structure_template_manager:
+        class: Portal\ContentBundle\Model\StructureTemplateManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_structure_template_manager:
+            class: Portal\ContentBundle\Model\StructureTemplateManager
+            arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    menu_node_manager:
+        class: Portal\ContentBundle\Model\MenuNodeManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_menu_node_manager:
+        class: Portal\ContentBundle\Model\MenuNodeManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    instance_category_manager:
+        class: Portal\ContentBundle\Model\InstanceCategoryManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    article_manager:
+        class: Portal\ContentBundle\Model\ArticleManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_article_manager:
+        class: Portal\ContentBundle\Model\ArticleManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    head_manager:
+        class: Portal\ContentBundle\Model\HeadManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_head_manager:
+        class: Portal\ContentBundle\Model\HeadManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    slider_manager:
+        class: Portal\ContentBundle\Model\SliderManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_slider_manager:
+        class: Portal\ContentBundle\Model\SliderManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    banner_manager:
+        class: Portal\ContentBundle\Model\BannerManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_banner_manager:
+        class: Portal\ContentBundle\Model\BannerManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    event_manager:
+        class: Portal\ContentBundle\Model\EventManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_event_manager:
+        class: Portal\ContentBundle\Model\EventManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    photo_report_manager:
+        class: Portal\ContentBundle\Model\PhotoReportManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_photo_report_manager:
+        class: Portal\ContentBundle\Model\PhotoReportManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    video_report_manager:
+        class: Portal\ContentBundle\Model\VideoReportManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_video_report_manager:
+        class: Portal\ContentBundle\Model\VideoReportManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    document_manager:
+        class: Portal\ContentBundle\Model\DocumentManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_document_manager:
+        class: Portal\ContentBundle\Model\DocumentManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    document_category_manager:
+        class: Portal\ContentBundle\Model\DocumentCategoryManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_document_category_manager:
+        class: Portal\ContentBundle\Model\DocumentCategoryManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    attachment_manager:
+        class: Portal\ContentBundle\Model\AttachmentManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_attachment_manager:
+        class: Portal\ContentBundle\Model\AttachmentManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+#    quote_manager:
+#        class: Portal\ContentBundle\Model\QuoteManager
+#        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+#    customer_quote_manager:
+#        class: Portal\ContentBundle\Model\QuoteManager
+#        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    vich_uploader.attachment_namer_origname:
+        class: Portal\ContentBundle\Service\AttachmentOrignameNamer
+        arguments: []
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    vich_uploader.attachment_namer_document:
+        class: Portal\ContentBundle\Service\AttachmentDocumentNamer
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    interview_manager:
+        class: Portal\ContentBundle\Model\InterviewManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_interview_manager:
+        class: Portal\ContentBundle\Model\InterviewManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    customer_interview_question_manager:
+        class: Portal\ContentBundle\Model\InterviewQuestionManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    customer_interview_answer_manager:
+        class: Portal\ContentBundle\Model\InterviewAnswerManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    customer_interview_user_answer_manager:
+        class: Portal\ContentBundle\Model\InterviewUserAnswerManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    widget_to_panel_manager:
+        class: Portal\ContentBundle\Model\WidgetToPanelManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_widget_to_panel_manager:
+        class: Portal\ContentBundle\Model\WidgetToPanelManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    widget_manager:
+        class: Portal\ContentBundle\Model\WidgetManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_widget_manager:
+        class: Portal\ContentBundle\Model\WidgetManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    widget_param_manager:
+        class: Portal\ContentBundle\Model\WidgetParamManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_widget_param_manager:
+        class: Portal\ContentBundle\Model\WidgetParamManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    page_manager:
+        class: Portal\ContentBundle\Model\PageManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_page_manager:
+        class: Portal\ContentBundle\Model\PageManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    feedback_form_manager:
+        class: Portal\ContentBundle\Model\FeedbackFormManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_feedback_form_manager:
+        class: Portal\ContentBundle\Model\FeedbackFormManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    customer_feedback_category_manager:
+        class: Portal\ContentBundle\Model\FeedbackCategoryManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    tag_manager:
+        class: Portal\ContentBundle\Model\TagManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_tag_manager:
+        class: Portal\ContentBundle\Model\TagManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    document_tag_manager:
+        class: Portal\ContentBundle\Model\DocumentTagManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_document_tag_manager:
+        class: Portal\ContentBundle\Model\DocumentTagManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    internet_resources_manager:
+        class: Portal\ContentBundle\Model\InternetResourcesManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_internet_resources_manager:
+        class: Portal\ContentBundle\Model\InternetResourcesManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+#    customer_feedback_category_manager:
+#        class: Portal\ContentBundle\Model\FeedbackCategoryManager
+#        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+#    customer_feedback_form_value_manager:
+#        class: Portal\ContentBundle\Model\FeedbackFormValueManager
+#        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    customer_document_attachment_manager:
+        class: Portal\ContentBundle\Model\DocumentAttachmentManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    system_mode_manager:
+        class: Portal\ContentBundle\Model\SystemModeManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    article_subscribe_manager:
+        class: Portal\ContentBundle\Model\ArticleSubscribeManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_subscribe_article_manager:
+        class: Portal\ContentBundle\Model\ArticleSubscribeManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    customer_typo_report_manager:
+        class: Portal\ContentBundle\Model\TypoReportManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    customer_quiz_manager:
+        class: Portal\ContentBundle\Model\QuizManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    customer_quiz_to_user_manager:
+        class: Portal\ContentBundle\Model\QuizToUserManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    slider_to_banner_manager:
+        class: Portal\ContentBundle\Model\SliderToBannerManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_slider_to_banner_manager:
+        class: Portal\ContentBundle\Model\SliderToBannerManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    material_manager:
+        class: Portal\ContentBundle\Model\MaterialManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    customer_material_manager:
+        class: Portal\ContentBundle\Model\MaterialManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+
+    # Widgets
+    custom_router:
+        class: Portal\ContentBundle\Widgets\CustomRouter
+        arguments: ["@session", "@doctrine.orm.entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.custom_router:
+        class: Portal\ContentBundle\Extensions\CustomRouterTwigExtension
+        arguments: ["@custom_router"]
+        tags:
+            - { name: twig.extension }
+            
+    menu:
+        class: Portal\ContentBundle\Widgets\WidgetMenu
+        arguments: ["@session", "@doctrine.orm.entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.menu:
+        class: Portal\ContentBundle\Extensions\MenuTwigExtension
+        arguments: ["@menu"]
+        tags:
+            - { name: twig.extension }
+
+#    breadcrumbs:
+#        class: Portal\ContentBundle\Widgets\WidgetBreadcrumbs
+#        arguments: ["@session", "@doctrine.orm.entity_manager"]
+#        calls:
+#            - [ setContainer,[ "@service_container" ] ]
+#    twig.extension.breadcrumbs:
+#        class: Portal\ContentBundle\Extensions\BreadcrumbsTwigExtension
+#        arguments: ["@breadcrumbs"]
+#        tags:
+#            - { name: twig.extension }
+
+    main_slider:
+        class: Portal\ContentBundle\Widgets\WidgetMainSlider
+        arguments: ["@session", "@doctrine.orm.entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.main_slider:
+        class: Portal\ContentBundle\Extensions\MainSliderTwigExtension
+        arguments: ["@main_slider"]
+        tags:
+            - { name: twig.extension }
+
+    category_list:
+        class: Portal\ContentBundle\Widgets\WidgetCategoryList
+        arguments: ["@session", "@doctrine.orm.customer_entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container"] ]
+    twig.extension.category_list:
+        class: Portal\ContentBundle\Extensions\CategoryListTwigExtension
+        arguments: ["@category_list"]
+        tags:
+            - { name: twig.extension }
+
+    calendar:
+        class: Portal\ContentBundle\Widgets\WidgetCalendar
+        arguments: ["@session", "@doctrine.orm.customer_entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.calendar:
+        class: Portal\ContentBundle\Extensions\CalendarTwigExtension
+        arguments: ["@calendar"]
+        tags:
+            - { name: twig.extension }
+
+    portal_helper_widget:
+        class: Portal\ContentBundle\Widgets\WidgetPortalHelper
+        arguments: ["@session", "@doctrine.orm.entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.portal_helper_widget:
+        class: Portal\ContentBundle\Extensions\WidgetPortalHelperTwigExtension
+        arguments: ["@portal_helper_widget"]
+        tags:
+            - { name: twig.extension }
+
+    article:
+        class: Portal\ContentBundle\Widgets\WidgetArticle
+        arguments: ["@session", "@doctrine.orm.customer_entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.articleWidget:
+        class: Portal\ContentBundle\Extensions\ArticleTwigExtension
+        arguments: ["@article"]
+        tags:
+            - { name: twig.extension }
+
+    currency:
+        class: Portal\ContentBundle\Widgets\WidgetCurrency
+        arguments: ["@session", "@doctrine.orm.customer_entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.currency:
+        class: Portal\ContentBundle\Extensions\CurrencyTwigExtension
+        arguments: ["@currency"]
+        tags:
+            - { name: twig.extension }
+
+    weather:
+        class: Portal\ContentBundle\Widgets\WidgetWeather
+        arguments: ["@session", "@doctrine.orm.customer_entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.weather:
+        class: Portal\ContentBundle\Extensions\WeatherTwigExtension
+        arguments: ["@weather"]
+        tags:
+            - { name: twig.extension }
+            
+    subscribe_form:
+        class: Portal\ContentBundle\Widgets\WidgetSubscribeForm
+        arguments: ["@session", "@doctrine.orm.customer_entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.subscribe_form:
+        class: Portal\ContentBundle\Extensions\SubscribeFormTwigExtension
+        arguments: ["@subscribe_form"]
+        tags:
+            - { name: twig.extension }
+            
+    popular_news:
+        class: Portal\ContentBundle\Widgets\WidgetPopularArticle
+        arguments: ["@session", "@doctrine.orm.customer_entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+
+    quiz:
+        class: Portal\ContentBundle\Widgets\WidgetQuiz
+        arguments: ["@session", "@doctrine.orm.customer_entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.quiz:
+        class: Portal\ContentBundle\Extensions\QuizTwigExtension
+        arguments: ["@quiz"]
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+    last_photo_video_reports:
+        class: Portal\ContentBundle\Widgets\WidgetPhotoVideoReport
+        arguments: ["@session", "@doctrine.orm.customer_entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.photo_video_report:
+        class: Portal\ContentBundle\Extensions\PhotoVideoTwigExtension
+        arguments: ["@last_photo_video_reports"]
+        tags:
+            - { name: twig.extension }
+
+    quote:
+        class: Portal\ContentBundle\Widgets\WidgetQuote
+        arguments: ["@session", "@doctrine.orm.customer_entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.quote:
+        class: Portal\ContentBundle\Extensions\QuoteTwigExtension
+        arguments: ["@quote"]
+        tags:
+            - { name: twig.extension }
+
+    follow_us:
+        class: Portal\ContentBundle\Widgets\WidgetFollowUs
+        arguments: ["@session", "@doctrine.orm.customer_entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.follow_us:
+        class: Portal\ContentBundle\Extensions\FollowUsTwigExtension
+        arguments: ["@follow_us"]
+        tags:
+            - { name: twig.extension }
+
+    panel_widget:
+        class: Portal\ContentBundle\Widgets\WidgetPanel
+        arguments: ["@session", "@doctrine.orm.customer_entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.panel_widget:
+        class: Portal\ContentBundle\Extensions\PanelWidgetTwigExtension
+        arguments: ["@panel_widget"]
+        tags:
+            - { name: twig.extension }
+
+    channel:
+        class: Portal\ContentBundle\Widgets\WidgetChannel
+        arguments: ["@session", "@doctrine.orm.customer_entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.channel:
+        class: Portal\ContentBundle\Extensions\ChannelTwigExtension
+        arguments: ["@channel"]
+        tags:
+            - { name: twig.extension }
+
+    resource:
+        class: Portal\ContentBundle\Widgets\WidgetResource
+        arguments: ["@session", "@doctrine.orm.customer_entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.resource:
+        class: Portal\ContentBundle\Extensions\ResourceTwigExtension
+        arguments: ["@resource"]
+        tags:
+            - { name: twig.extension }
+
+    share:
+        class: Portal\ContentBundle\Widgets\WidgetShare
+        arguments: ["@session", "@doctrine.orm.customer_entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.share:
+        class: Portal\ContentBundle\Extensions\ShareTwigExtension
+        arguments: ["@share"]
+        tags:
+            - { name: twig.extension }
+            
+    system_mode:
+        class: Portal\ContentBundle\Widgets\WidgetSystemMode
+        arguments: ["@session", "@doctrine.orm.entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.system_mode:
+        class: Portal\ContentBundle\Extensions\SystemModeTwigExtension
+        arguments: ["@system_mode"]
+        tags:
+            - { name: twig.extension }
+
+    social_network:
+        class: Portal\ContentBundle\Widgets\WidgetSocialNetwork
+        arguments: ["@session", "@doctrine.orm.entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+
+    twig.extension.social_network:
+        class: Portal\ContentBundle\Extensions\SocialNetworkTwigExtension
+        arguments: ["@social_network"]
+        tags:
+            - { name: twig.extension }
+
+    search_manager:
+        class: Portal\ContentBundle\Model\SearchManager
+        arguments: ["@service_container"]
+
+    twig.extension.date_ru:
+        class: Portal\ContentBundle\Extensions\DateRuTwigExtension
+        tags:
+            - { name: twig.extension }
+    twig.extension.strip:
+            class: Portal\ContentBundle\Extensions\StripTwigExtension
+            tags:
+                - { name: twig.extension }
+    twig.extension.thumb_image:
+        class: Portal\ContentBundle\Extensions\ThumbnailImageTwigExtension
+        tags:
+            - { name: twig.extension }
+    twig.extension.thumb_video:
+        class: Portal\ContentBundle\Extensions\ThumbnailVideoTwigExtension
+        tags:
+            - { name: twig.extension }
+    twig.extension.search_documents:
+        class: Portal\ContentBundle\Extensions\SearchDocumentsTwigExtension
+        arguments: ["@service_container"]
+        tags:
+            - { name: twig.extension }
+    option_manager:
+        class: Portal\ContentBundle\Model\OptionManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+
+    twig.extension.slice_full_word:
+        class: Portal\ContentBundle\Extensions\SliceFullWordTwigExtension
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.pluralize:
+        class: Portal\ContentBundle\Extensions\PluralizeTwigExtension
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.exists_image:
+        class: Portal\ContentBundle\Extensions\FileImageExistsTwigExtension
+        tags:
+            - { name: twig.extension }
+
+    instagram:
+        class: Portal\ContentBundle\Widgets\WidgetInstagram
+        arguments: ["@session", "@doctrine.orm.customer_entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.instagram:
+        class: Portal\ContentBundle\Extensions\InstagramTwigExtension
+        arguments: ["@instagram"]
+        tags:
+            - { name: twig.extension }
+
+    news_calendar:
+        class: Portal\ContentBundle\Widgets\WidgetCalendarNews
+        arguments: ["@session", "@doctrine.orm.customer_entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.news_calendar:
+        class: Portal\ContentBundle\Extensions\CalendarNewsTwigExtension
+        arguments: ["@news_calendar"]
+        tags:
+            - { name: twig.extension }
+    social_network_manager:
+        class: Portal\ContentBundle\Model\SocialNetworkManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+
+    feedback_manager:
+        class: Portal\ContentBundle\Model\FeedbackManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+
+    param:
+        class: Portal\ContentBundle\Widgets\WidgetParam
+        arguments: ["@session", "@doctrine.orm.entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container"] ]
+    twig.extension.param:
+        class: Portal\ContentBundle\Extensions\ParamTwigExtension
+        arguments: ["@param"]
+        tags:
+            - { name: twig.extension }

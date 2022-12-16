@@ -1,0 +1,24 @@
+<div class="events-box clearfix">
+    <div class="title">{{ 'events'|trans }}</div>
+    <a href="{{ path('event') }}" class="news-box__link-all-mews events-box__link-all-events">
+        {{ 'all_events'|trans }}
+    </a>
+    <div class="datepicker-events__box">
+        <input type="text" class="datepicker-events" value="{{ 'now'|date('d.m.Y') }}">
+    </div>
+    <div class="scrol-box box">
+        <div class="scrol-box__posit">
+            <div class="main__clipper horizont">
+                <div class="main__scroller">
+                    {% include 'PortalContentBundle:Event:eventScroller.html.twig' %}
+                </div>
+                <div class="baron__track">
+                    <div class="baron__control baron__rigth baron__rigth_disabled"></div>
+                    <div class="baron__free"><div class="main__bar"></div></div>
+                    <div class="baron__control baron__left baron__left_disabled1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--.events-box-->

@@ -1,0 +1,10 @@
+{% for result in data %}
+    <li>
+        <h3><a href="{{ result.link }}" class="search-link">{{ result.title|strip|raw }}</a></h3>
+        <div>{{ result.preview_text|strip|raw }}</div>
+        <ul class="result-category">
+            <li>{{ result.entity_type | trans }}</li>
+            <li>{{ result.published_at | date_ru }}</li>
+        </ul>
+    </li>
+{% endfor %}

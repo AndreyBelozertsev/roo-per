@@ -1,0 +1,52 @@
+{% extends isDepartment ? 'PortalContentBundle::depBase.html.twig' : 'PortalContentBundle::innerPageBase.html.twig' %}
+
+{% block pageTitle %}
+    {% if errorMessage is defined %} {{ errorMessage }} {% endif %}
+    {{ 'interview.title'|trans() }}
+{% endblock %}
+
+{% block headerPanel %}
+    {{ panelWidget.renderPanel('header-panel', 'interview_page')|raw }}
+{% endblock %}
+
+{% block sideBar %}
+{#    {{parent()}}#}
+    {{ panelWidget.renderPanel('side-panel', 'interview_page')|raw }}
+{% endblock %}
+
+{% block beforeContentBlock %}
+    {{ panelWidget.renderPanel('before-content-panel', 'interview_page')|raw }}
+{% endblock %}
+
+{% block bottomPanel %}
+    {{ panelWidget.renderPanel('bottom-panel', 'interview_page')|raw }}
+{% endblock %}
+
+{% block footerSocialPanel %}
+    {{ panelWidget.renderPanel('footer-panel', 'interview_page')|raw }}
+{% endblock %}
+
+{% block innerContent %}
+    <div class="tabs-content__white">
+        {% if user %}
+            <div class="quiz">
+                <div class="quiz__header clearfix">
+                    <div class="quiz__title quiz__left">{{ interview.title }}</div>
+                </div>
+                {% if interview.description %}
+                    <div class="info">
+                        <div class="info__img-text">
+                            {{ interview.description|raw }}
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="info">{{ interview.messageEnd|raw }}</div>
+                {% if interview.isViewResult %}
+                    {% include 'PortalContentBundle:Interview:result.html.twig' %}
+                {% endif %}
+            </div>
+        {% else %}
+            <p class="quiz__graf-title">{{ 'interview.not_access'|trans() }}</p>
+        {% endif %}
+    </div>
+{% endblock %}

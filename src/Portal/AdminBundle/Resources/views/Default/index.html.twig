@@ -1,0 +1,16 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} |
+    {{ 'main_site'|trans }}
+{% endblock %}
+
+{% block pageheaderblock %}
+{% endblock %}
+
+{% block topbuttonsblock %}
+{% endblock %}
+
+{% block body %}
+    {{ 'welcome_admin_dashboard_message'|trans }}
+{% endblock %}

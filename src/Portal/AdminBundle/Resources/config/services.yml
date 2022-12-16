@@ -1,0 +1,171 @@
+services:
+    admin.tag:
+        class: Portal\AdminBundle\Admin\TagAdmin
+        arguments: ['', 'Portal\ContentBundle\Entity\Tag', '']
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Tag }
+    admin.instanceCategory:
+        class: Portal\AdminBundle\Admin\InstanceCategoryAdmin
+        arguments: ['', 'Portal\ContentBundle\Entity\InstanceCategory', '']
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: "Тип сайта" }
+    admin.banner:
+        class: Portal\AdminBundle\Admin\BannerAdmin
+        arguments: ['', 'Portal\ContentBundle\Entity\Banner', '']
+        tags:
+             - { name: sonata.admin, manager_type: orm, label: Banner }
+    admin.document:
+        class: Portal\AdminBundle\Admin\DocumentAdmin
+        arguments: ['', 'Portal\ContentBundle\Entity\Document', '']
+        tags:
+             - { name: sonata.admin, manager_type: orm, label: Document }
+        calls:
+             - [ setContainer,[ "@service_container" ] ]
+    admin.documentCategory:
+        class: Portal\AdminBundle\Admin\DocumentCategoryAdmin
+        arguments: ['', 'Portal\ContentBundle\Entity\DocumentCategory', '']
+        tags:
+             - { name: sonata.admin, manager_type: orm, label: DocumentCategory }
+    admin.event:
+        class: Portal\AdminBundle\Admin\EventAdmin
+        arguments: ['', 'Portal\ContentBundle\Entity\Event', '']
+        tags:
+             - { name: sonata.admin, manager_type: orm, label: Event }
+        calls:
+             - [ setContainer,[ "@service_container" ] ]
+    admin.location:
+        class: Portal\AdminBundle\Admin\LocationAdmin
+        arguments: ['', 'Portal\ContentBundle\Entity\Location', '']
+        tags:
+              - { name: sonata.admin, manager_type: orm, label: Location }
+    admin.feedbackCategory:
+        class: Portal\AdminBundle\Admin\FeedbackCategoryAdmin
+        arguments: ['', 'Portal\ContentBundle\Entity\FeedbackCategory', '']
+        tags:
+              - { name: sonata.admin, manager_type: orm, label: FeedbackCategory }
+    admin.feedbackFormValue:
+        class: Portal\AdminBundle\Admin\FeedbackFormValueAdmin
+        arguments: ['', 'Portal\ContentBundle\Entity\FeedbackFormValue', '']
+        tags:
+              - { name: sonata.admin, manager_type: orm, label: FeedbackFormValue }
+    admin.menu:
+        class: Portal\AdminBundle\Admin\MenuAdmin
+        arguments: ['', 'Portal\ContentBundle\Entity\Menu', '']
+        tags:
+              - { name: sonata.admin, manager_type: orm, label: "Категория меню" }
+        calls:
+             - [ setContainer,[ "@service_container" ] ]
+    admin.menuNode:
+        class: Portal\AdminBundle\Admin\MenuNodeAdmin
+        arguments: ['', 'Portal\ContentBundle\Entity\MenuNode', '']
+        tags:
+              - { name: sonata.admin, manager_type: orm, label: "Пункт меню" }
+    admin.page:
+        class: Portal\AdminBundle\Admin\PageAdmin
+        arguments: ['', 'Portal\ContentBundle\Entity\Page', '']
+        tags:
+              - { name: sonata.admin, manager_type: orm, label: Page }
+    admin.pageType:
+        class: Portal\AdminBundle\Admin\PageTypeAdmin
+        arguments: ['', 'Portal\ContentBundle\Entity\PageType', '']
+        tags:
+              - { name: sonata.admin, manager_type: orm, label: PageType }
+    admin.slider:
+        class: Portal\AdminBundle\Admin\SliderAdmin
+        arguments: ['', 'Portal\ContentBundle\Entity\Slider', '']
+        tags:
+              - { name: sonata.admin, manager_type: orm, label: Slider }
+        calls:
+              - [ setContainer,[ "@service_container" ] ]
+    admin.widget:
+        class: Portal\AdminBundle\Admin\WidgetAdmin
+        arguments: ['', 'Portal\ContentBundle\Entity\Widget', '']
+        tags:
+              - { name: sonata.admin, manager_type: orm, label: Widget }
+    admin.instance:
+        class: Portal\AdminBundle\Admin\InstanceAdmin
+        arguments: ['', 'Portal\AdminBundle\Entity\Instance', '', '@service_container']
+        tags:
+              - { name: sonata.admin, manager_type: orm, label: Сайт}
+    instance_manager:
+        class: Portal\AdminBundle\Model\InstanceManager
+        arguments: ['@doctrine.orm.entity_manager', '@service_container']
+        
+    # Widgets
+    instance:
+        class: Portal\AdminBundle\Widgets\WidgetInstance
+        arguments: ["@session", "@doctrine.orm.entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.instance:
+        class: Portal\AdminBundle\Extensions\InstanceTwigExtension
+        arguments: ["@instance"]
+        tags:
+            - { name: twig.extension }
+    last_shown:
+        class: Portal\AdminBundle\Widgets\WidgetLastShown
+        arguments: ["@session", "@doctrine.orm.entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.last_shown:
+        class: Portal\AdminBundle\Extensions\LastShownTwigExtension
+        arguments: ["@last_shown"]
+        tags:
+            - { name: twig.extension }
+    entity_log:
+        class: Portal\AdminBundle\Widgets\WidgetEntityLog
+        arguments: ["@session", "@doctrine.orm.entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.entity_log:
+        class: Portal\AdminBundle\Extensions\EntityLogTwigExtension
+        arguments: ["@entity_log"]
+        tags:
+            - { name: twig.extension }
+    top_menu:
+        class: Portal\AdminBundle\Widgets\WidgetTopMenu
+        arguments: ["@session", "@doctrine.orm.entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.top_menu:
+        class: Portal\AdminBundle\Extensions\TopMenuTwigExtension
+        arguments: ["@top_menu"]
+        tags:
+            - { name: twig.extension }
+    side_menu:
+        class: Portal\AdminBundle\Widgets\WidgetSideMenu
+        arguments: ["@session", "@doctrine.orm.entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.side_menu:
+        class: Portal\AdminBundle\Extensions\SideMenuTwigExtension
+        arguments: ["@side_menu"]
+        tags:
+            - { name: twig.extension }
+
+    sync_manager:
+        class: Portal\AdminBundle\Model\SyncManager
+        arguments: ["@doctrine.orm.customer_entity_manager"]
+
+    permissions:
+        class: Portal\AdminBundle\Widgets\WidgetPermissions
+        arguments: ["@session", "@doctrine.orm.entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+    twig.extension.permissions:
+        class: Portal\AdminBundle\Extensions\PermissionsTwigExtension
+        arguments: ["@permissions"]
+        tags:
+            - { name: twig.extension }
+
+    json_decode.extension:
+        class: Portal\AdminBundle\Extensions\JsonDecodeTwigExtension
+        arguments: ["@service_container"]
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.file_exists:
+        class: Portal\AdminBundle\Extensions\FileExistsTwigExtension
+        tags:
+            - { name: twig.extension }
+

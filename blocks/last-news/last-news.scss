@@ -1,0 +1,55 @@
+.last-news
+{
+    margin-bottom: 60px;
+    padding: 25px 15px;
+
+    border: 1px solid $gray-light-medium;
+
+    &__title
+    {
+        font-size: 220%;
+        font-weight: bold;
+
+        margin-bottom: 27px;
+
+        color: $red;
+    }
+
+    &__block
+    {
+        margin-bottom: 32px;
+    }
+
+    &__date
+    {
+        font-size: 120%;
+
+        margin-bottom: 13px;
+
+        color: $gray;
+    }
+
+    &__text
+    {
+        font-size: 160%;
+        font-weight: 600;
+        line-height: 1.2;
+
+        color: $gray-dark;
+
+        &:visited,
+        &:focus
+        {
+            text-decoration: none;
+
+            color: $gray-dark;
+        }
+
+        &:hover
+        {
+            text-decoration: none;
+
+            color: $red;
+        }
+    }
+}

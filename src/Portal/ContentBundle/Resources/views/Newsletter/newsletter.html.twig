@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{{ 'rss.title'|trans() }}</title>
+    <style>
+        @media only screen and (max-width: 620px) {
+            table[class=body] h1 {
+                font-size: 28px !important;
+                margin-bottom: 10px !important;
+            }
+
+            table[class=body] p,
+            table[class=body] ul,
+            table[class=body] ol,
+            table[class=body] td,
+            table[class=body] span,
+            table[class=body] a {
+                font-size: 16px !important;
+            }
+
+            table[class=body] .wrapper,
+            table[class=body] .article {
+                padding: 10px !important;
+            }
+
+            table[class=body] .content {
+                padding: 0 !important;
+            }
+
+            table[class=body] .container {
+                padding: 0 !important;
+                width: 100% !important;
+            }
+
+            table[class=body] .main {
+                border-left-width: 0 !important;
+                border-radius: 0 !important;
+                border-right-width: 0 !important;
+            }
+
+            table[class=body] .btn table {
+                width: 100% !important;
+            }
+
+            table[class=body] .btn a {
+                width: 100% !important;
+            }
+
+            table[class=body] .img-responsive {
+                height: auto !important;
+                max-width: 100% !important;
+                width: auto !important;
+            }
+        }
+        @media all {
+            .ExternalClass {
+                width: 100%;
+            }
+
+            .ExternalClass,
+            .ExternalClass p,
+            .ExternalClass span,
+            .ExternalClass font,
+            .ExternalClass td,
+            .ExternalClass div {
+                line-height: 100%;
+            }
+
+            .apple-link a {
+                color: inherit !important;
+                font-family: inherit !important;
+                font-size: inherit !important;
+                font-weight: inherit !important;
+                line-height: inherit !important;
+                text-decoration: none !important;
+            }
+
+            .btn-primary table td:hover {
+                background-color: #34495e !important;
+            }
+
+            .btn-primary a:hover {
+                background-color: #34495e !important;
+                border-color: #34495e !important;
+            }
+        }
+    </style>
+</head>
+
+
+
+<body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+<table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0; background-color: #f6f6f6; width: 100%;" width="100%" bgcolor="#f6f6f6">
+    <tr>
+        <td style="font-family: sans-serif; font-size: 14px;">&nbsp;</td>
+        <td class="container" style="font-family: sans-serif; font-size: 14px; display: block; max-width: 800px; width: 800px; Margin: 0 auto;" width="800">
+            <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 800px;">
+
+                <!-- START CENTERED WHITE CONTAINER -->
+                {% for id, title in instances %}
+                    {% if articles[id] is defined %}
+                    <!--<span class="preheader">{{ title }} | {{ 'news_title'|trans() }}</span>-->
+                    <br>
+                    <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0; background: #ffffff; border-radius: 3px; width: 100%;" width="100%">
+
+                    <!-- START MAIN CONTENT AREA -->
+                    <tr>
+                        <td class="wrapper" style="font-family: sans-serif; font-size: 14px; box-sizing: border-box; padding: 20px;">
+                            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0; width: 100%;" width="100%">
+                                <tr>
+                                    <td style="font-family: sans-serif; font-size: 14px;">
+                                        <div class="email-logo" style="width: 222px; height: 78px; margin: 0 auto;"><img src="https://{{ site_name }}/themes/email/logo.png" width="222" height="78" style="border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;" alt=""></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="title-email" style="font-family: Arial, Helvetica, Geneva, sans-serif; font-size: 18px; font-weight: bold; color: #0078bf; background-color: #e5f3fc; padding: 10px 20px;" bgcolor="#e5f3fc">
+                            {{ title }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="news-title-important" style="font-family: Arial, Helvetica, Geneva, sans-serif; font-size: 16px; font-weight: bold; padding: 30px 20px 0 20px; text-transform: uppercase; color: #0078bf;">
+                            {{ 'subs_news_title'|trans() }}
+                        </td>
+                    </tr>
+
+                    {% for article in articles[id] %}<tr>
+                        <td style="font-family: sans-serif; font-size: 14px;">
+                            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0; width: 100%;" width="100%">
+                                <tr>
+                                    <td class="news-title" style="font-family: sans-serif; font-size: 14px;"><a class="news-link" href="https://{% if article.instanceCode != constant('Portal\\AdminBundle\\Entity\\Instance::MAIN_SITE_INSTANCE_CODE') %}{{article.instanceCode}}.{% endif %}{{ site_name ~ path('article_show', { id: article.id }) }}" target="_blank" style="color: #0078bf; text-decoration: underline; display: block; padding: 10px 20px; font-family: Arial, Helvetica, Geneva, sans-serif; font-size: 16px; font-weight: bold;">{{ article.title }}</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="news-content" style="font-family: Arial, Helvetica, Geneva, sans-serif; font-size: 15px; padding: 0 20px 20px 20px;">{{ article.content|slice(0,200) }}</td>
+                                </tr>
+                                {% if not loop.last %}<tr>
+                                    <td style="font-family: sans-serif; font-size: 14px;">
+                                        <hr style="border: 0; border-bottom: 1px solid #e4e4e4; Margin: 0px 20px;">
+                                    </td>
+                                </tr>{% endif %}
+                            </table>
+                        </td>
+                    </tr>{% endfor %}
+
+                    <!-- END MAIN CONTENT AREA -->
+                </table>
+
+                <!-- START FOOTER -->
+                <div class="footer" style="font-family: Arial, Helvetica, Geneva, sans-serif; font-size: 15px; padding-top: 10px; clear: both; text-align: center; width: 100%; background-color: #ffffff;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0; width: 100%;">
+                        <tr>
+                            <td class="net-box" valign="middle" align="center" style="font-family: sans-serif; padding: 15px 0; border-top: 1px solid #e4e4e4; border-bottom: 1px solid #e4e4e4; font-size: 14px; text-align: center;">
+                                <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0; width: 100%;" width="100%">
+                                    <tr>
+                                        <td valign="middle" align="center" style="font-family: sans-serif; font-size: 14px; text-align: center;">
+
+                                        </td>
+                                        <td width="200" style="font-family: sans-serif; font-size: 14px; text-align: center;" align="center">
+                                            <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0; text-align: right; box-sizing: border-box; width: 100%;" width="100%" align="right">
+                                                <tbody>
+                                                <tr>
+                                                    <td style="font-family: sans-serif; font-size: 14px; text-align: center;" align="center">
+                                                        <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-spacing: 0; width: auto;">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td style="font-family: sans-serif; font-size: 14px; border-radius: 5px; text-align: center; background-color: #0078bf;" align="center" bgcolor="#0078bf"> <a href="https://{{ site_name }}" target="_blank" style="text-align: center; border: solid 1px #0078bf; box-sizing: border-box; cursor: pointer; display: inline-block; font-size: 14px; margin: 0; padding: 7px 20px; text-decoration: none; background-color: #0078bf; border-color: #0078bf; color: #ffffff;">{{ 'go_to_site'|trans() }}</a> </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="content-block" style="font-family: sans-serif; padding-bottom: 20px; padding-top: 20px; font-size: 14px; text-align: center;" align="center">
+                                {{ 'unsubs_propos'|trans() }} <a href="https://{{ site_name ~ path('article_unsubscribe_form', {'hash': hash, 'instanceId': id}) }}" style="color: #0078bf; text-decoration: underline; font-size: 14px; text-align: center;">{{ 'here'|trans() }}</a>.
+                            </td>
+                        </tr>
+                    </table>
+                </div><br>
+                <!-- END FOOTER -->
+                {% endif %}
+                {% endfor %}
+                <!-- END CENTERED WHITE CONTAINER -->
+            </div>
+        </td>
+        <td style="font-family: sans-serif; font-size: 14px;">&nbsp;</td>
+    </tr>
+</table>
+</body>
+</html>

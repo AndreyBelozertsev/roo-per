@@ -1,0 +1,22 @@
+# User
+portal_logout:
+    path:  /admin-portal/logout
+    defaults: { _controller: FOSUserBundle:Security:logout }
+
+fos_user_register:
+    path: /register
+    defaults: { _controller: PortalUserBundle:Registration:register }
+
+fos_user_profile_edit:
+    path: profile/user/edit
+    defaults: { _controller: PortalUserBundle:Profile:edit }
+
+fos_user_profile_show:
+    path: profile/user/show
+    defaults: { _controller: PortalUserBundle:Profile:show }
+
+fos_user_profile_edit_operator_email:
+    path: profile/user/email-edit
+    defaults: { _controller: PortalUserBundle:Profile:emailEdit }
+    options:
+        expose: true

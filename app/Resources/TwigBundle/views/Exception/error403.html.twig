@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ 'government'|trans() }}</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description"/>
+        <meta name="keywords"/>
+        <link rel="stylesheet" href="{{ asset('themes/public/style.css') }}"/>
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    </head>
+
+    <body class="page error">
+        <a href="/" class="logo">
+            <span>{{ 'government'|trans() }}</span>{{ 'portal'|trans() }}
+        </a>
+        <div class="error__message">
+            <div class="error__number">
+                <b>{{ status_code }}</b>{{ status_text }}
+            </div>
+            <div class="error__content">
+                <div class="error__title">
+                    {{ 'error_page.error'|trans() }}
+                    <b>{{ 'error_page.error_message_403'|trans() }}</b>
+                </div>
+                <div class="error__text">
+                    {{ 'error_page.text_403'|trans() }}
+                    {{ errorMessage }}
+                </div>
+                <a href="{{ path('portal_content_homepage') }}" class="error__link">
+                    {{ 'to_home_page'|trans() }}
+                </a>
+            </div>
+        </div>
+    </body>
+</html>

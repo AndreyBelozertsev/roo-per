@@ -1,0 +1,22 @@
+{% set href = path('video_report_show', {'id': item.video_report_id}) %}
+
+<div class="media__content">
+    <div class="data-content">
+        <img src="{{ asset(item.video_report_file_url|thumbVideo) }}" alt="{{ item.video_report_description|striptags|sliceFullWord(180, true)|raw }}">
+    </div>
+    <a href="{{ href }}" class="media__play"></a>
+</div>
+<div class="media__info">
+    <div class="media__title">
+        <a href="{{ href }}" title="{{ 'click_to_view'|trans }}">{{ item.video_report_title }}</a>
+    </div>
+    <div class="media__text">{{ item.video_report_description|striptags|sliceFullWord(180, true)|raw }}</div>
+    
+{#    <div class="media__date">{{ item.video_report_published_at|date('d.m.Y') }}</div>#}
+    <div class="clearfix">
+        <div class="news-box__eye">
+            {{ item.views_counter }}
+        </div>
+        <div class="news-box__date">{{ item.video_report_published_at|date('d.m.Y') }}</div>
+    </div>
+</div>

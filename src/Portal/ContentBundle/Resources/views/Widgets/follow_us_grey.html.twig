@@ -1,0 +1,7 @@
+<div class="header__icons">
+    {% if socials is defined %}
+        {% for soc in socials %}
+            <a target="_blank" href="{{ soc.param_value }}" class="tooltip icon icon_pos {{ soc.css_grey }}" title="{{ soc.param_title }}"></a>
+        {% endfor %}
+    {% endif %}
+</div>

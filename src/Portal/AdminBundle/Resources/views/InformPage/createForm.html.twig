@@ -1,0 +1,45 @@
+{% if form is defined %}
+    {{ form_start(form) }}
+
+    <input type="hidden" name="instanceCode" value="{{ instanceCode }}">
+    <div class="form-group">
+        <div class="col-sm-3 text-right">{{ form_label(form.title) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.title, {'attr':{'class':'form-control'}}) }}
+            <div class="errors">
+                {% for error in form.title.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right">{{ form_label(form.templateId) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.templateId, {'attr':{'class':'form-control'}}) }}
+            <div class="errors">
+                {% for error in form.templateId.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right">{{ form_label(form.isPublished) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.isPublished) }}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+            {{ form_widget(form.submit, {'attr':{'class':'btn btn-success'}}) }}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    {{ form_end(form) }}
+{% endif %}

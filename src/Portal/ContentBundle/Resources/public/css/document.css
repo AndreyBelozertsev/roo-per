@@ -1,0 +1,14 @@
+ul.document-categories-list {
+    list-style: none;
+    width: 100%;
+    overflow: hidden;
+}
+
+ul.document-categories-list li {
+    float: left;
+    display: inline;
+    margin-left: 1%;
+    width: 47%;
+    margin-bottom: 10px;
+    text-align: left;
+}

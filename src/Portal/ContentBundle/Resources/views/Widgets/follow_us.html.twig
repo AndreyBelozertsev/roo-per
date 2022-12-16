@@ -1,0 +1,15 @@
+<div class="networks">
+{#    <div class="networks__title">{{ 'networks'|trans() }}</div>#}
+    {% if socials is defined %}
+        <div class="networks__icon">
+            {% for soc in socials %}
+                <a target="_blank" href="{{ soc.param_value }}" class="tooltip icon icon_blue icon_pos_small {{ soc.css }}" title="{{ soc.param_title }}"></a>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {#<a href="#" class="icon icon_mailing-letters icon_pos_small tooltip" title="{{ 'subscribe'|trans() }}">#}
+        {#<b>{{ 'subscribe'|trans() }}</b>#}
+        {#<span>{{ 'subs_to'|trans() }} rk.gov.ru</span>#}
+    {#</a>#}
+</div>
+<!--.networks-->

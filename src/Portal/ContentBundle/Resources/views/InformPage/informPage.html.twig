@@ -1,0 +1,15 @@
+{% extends 'PortalContentBundle::innerPageBase.html.twig' %}
+
+{% block title %}
+    {{ 'inform_page.type'|trans() }} | {{ parent() }}
+{% endblock %}
+
+{% block innerContent %}
+    <div class="tabs-content__white">
+        <div class="title _sample">{{ page.title }}</div>
+
+        <div class="text-page">
+            {% block informPageContent %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'widget_to_panel_form.action_create'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'widget_to_panel_form.action_create'|trans }}
+{% endblock %}
+
+{% block topbuttons %}
+    <a class="btn btn-success" href="{{ path('admin_instance_widget_viewall', {'instanceCode': instanceCode}) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+{% endblock %}
+
+{% block body %}
+    <form name="form" method="post">
+        {{ form_start(form) }}
+            <div id="form-body" class="clearfix">
+                {% include 'PortalAdminBundle:WidgetToPanelAdmin:includeForm.html.twig' %}
+                <hr/>
+                <div class="form-group">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-9">
+                        <div id="btn_interview" class="form-actions">
+                            <button id="btn_create_interview" class="btn btn-success" type="submit" name="btn_create_interview">
+                                <i class="glyphicon glyphicon-floppy-disk"></i> {{ 'create'|trans }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </form>
+{% endblock %}

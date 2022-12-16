@@ -1,0 +1,24 @@
+<div class="fine-vision-pagination">
+    <div class="clearfix">
+        {{ pagerfanta(pagerFanta, 'twitter_bootstrap_translated') }}
+    </div>
+</div>
+
+<div class="scrol-box-fine-vision">
+    {% for event in pagerFanta.currentPageResults %}
+        <div class="scrol-box__item">
+            <a href="{{ path('event_show', {id:event.id}) }}" class="scrol-box__info">
+                <div class="scrol-box__title-text">{{ event.title|striptags }}</div>
+                {% if event.start_date == event.end_date %}
+                    <div class="scrol-box__title-date">
+                        {{ event.start_date|date('d.m.Y') }}
+                    </div>
+                {% else %}
+                    <div class="scrol-box__title-date">
+                        {{ event.start_date|date('d.m.Y') }} - {{ event.end_date|date('d.m.Y') }}
+                    </div>
+                {% endif %}
+            </a>
+        </div>
+    {% endfor %}
+</div>

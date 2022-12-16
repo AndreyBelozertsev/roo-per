@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="{% block keywords %}{% endblock %}">
+    <meta name="description" content="{% block description %}{% endblock %}">
+
+    <link href="{{ asset('bundles/portaladmin/images/favicon.ico') }}" rel="shortcut icon" type="image/x-icon"/>
+    <title>{% block title %}{{ 'admin_panel'|trans }}{% endblock %}</title>
+
+    {% block stylesheets %}
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/portaladmin/bootstrap/css/bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css"
+              href="{{ asset('bundles/portaladmin/BootplyAdminTemplate/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css"
+              href="{{ asset('bundles/portaladmin/BootplyAdminTemplate/css/styles.css') }}">
+
+        <!-- Chosen -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/portaladmin/chosen_v1.6.2/chosen.min.css') }}">
+
+        <!-- Theme CSS -->
+        <link rel="stylesheet" href="{{ asset('bundles/portaladmin/css/main.css') }}">
+
+        <!-- Bootstrap Dialog -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/portaladmin/css/bootstrap-dialog.min.css') }}">
+
+        {# Datetime picker #}
+        <link rel="stylesheet"
+              href="{{ asset('bundles/portaladmin/jquery.datetimepicker/css/jquery.datetimepicker.css') }}">
+
+        {# font-awesome#}
+        <link rel="stylesheet" href="{{ asset('bundles/portaladmin/font-awesome/css/font-awesome.min.css') }}">
+
+        {# table #}
+        <link rel="stylesheet" type="text/css"
+              href="{{ asset('bundles/portaladmin/jquery-tablesorter/css/theme.bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css"
+              href="{{ asset('bundles/portaladmin/jquery-tablesorter/css/jquery.tablesorter.pager.css') }}">
+
+        {# jquery UI #}
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/portaladmin/jquery-ui/jquery-ui.min.css') }}">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
+
+        {# popup #}
+        <link rel="stylesheet" href="{{ asset('bundles/portaladmin/css/popup.css') }}">
+
+        {# portal style #}
+        <link rel="stylesheet" href="{{ asset('bundles/portaladmin/portal-style.css') }}">
+    {% endblock %}
+
+    {% block javascripts %}
+        <script src="{{ asset('bundles/portaladmin/js/jquery.min.js') }}"></script>
+        {#<script src="{{ asset('themes/public/script.js') }}"></script>#}
+
+        <script src="{{ asset('bundles/portaladmin/BootplyAdminTemplate/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bundles/portaladmin/BootplyAdminTemplate/js/scripts.js') }}"></script>
+
+        <!-- FOS Routing -->
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+        <!-- Chosen -->
+        <script src="{{ asset('bundles/portaladmin/chosen_v1.6.2/chosen.jquery.js') }}"></script>
+        <script src="{{ asset('bundles/portaladmin/js/chosen-readonly.js') }}"></script>
+
+        <!-- jQuery validation plugin -->
+        <script src="{{ asset('bundles/portaladmin/js/jquery-validate.min.js') }}"></script>
+
+        <!-- Bootstrap Dialog -->
+        <script src="{{ asset('bundles/portaladmin/js/bootstrap-dialog.js') }}"></script>
+
+        <!-- Bazinga JS Translator -->
+        <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+        <script src="{{ path('bazinga_jstranslation_js', { 'domain': 'messages'}) }}"></script>
+
+        {# notification #}
+        <script src="{{ asset('bundles/portaladmin/js/popup.js') }}"></script>
+
+        {#MAIN#}
+        <script src="{{ asset('bundles/portaladmin/js/main.js') }}"></script>
+
+        {# Table #}
+        <script src="{{ asset('bundles/portaladmin/jquery-tablesorter/js/jquery.tablesorter.js') }}"></script>
+        <script src="{{ asset('bundles/portaladmin/jquery-tablesorter/js/jquery.tablesorter.widgets.js') }}"></script>
+        <script src="{{ asset('bundles/portaladmin/jquery-tablesorter/js/jquery.tablesorter.pager.js') }}"></script>
+
+        {# jquery UI #}
+        {#<script src="{{ asset('bundles/portaladmin/jquery-ui/jquery-ui.js') }}"></script>#}
+        {#<script src="{{ asset('bundles/portaladmin/jquery-ui/i18n/datepicker-ru.js') }}"></script>#}
+
+        <script src="{{ asset('bundles/portaladmin/js/admin.js') }}"></script>
+
+        <script src="{{ asset('bundles/portaladmin/js/jstree.min.js') }}"></script>
+        <script src="{{ asset('bundles/portaladmin/ckeditor/ckeditor.js') }}"></script>
+
+        <script src="{{ asset('bundles/portaladmin/jquery.datetimepicker/js/jquery.datetimepicker.js') }}"></script>
+        <script src="{{ asset('bundles/portaladmin/js/modernizr.min.js') }}"></script>
+
+        <script src="{{ asset('bundles/portaladmin/js/back-to-list.js') }}"></script>
+        <script>
+            $(document).ready(function () {
+
+                // include jquery-datepicker for old browser
+                if (!Modernizr.inputtypes.date) {
+                    // bootstrap datetimepicker
+                    $('.js-datepicker').datetimepicker({
+                        timepicker: false,
+                        lang: 'ru',
+                        format: 'Y-m-d',
+                        dayOfWeekStart: 1
+                    });
+                }
+
+                $('select').chosen({
+                    no_results_text: 'Ничего не найдено!',
+                    disable_search_threshold: 10,
+                    search_contains: true,
+                    width: '100%'
+                });
+
+                // Init Table
+                mainPage.common.initTable();
+
+                // Init CKEDITOR
+                $('textarea').each(function () {
+                    CKEDITOR.replace(this, {
+                        extraPlugins: 'colorbutton,video',
+                        filebrowserUploadUrl: Routing.generate('admin_instance_file_upload', {
+                            id: '{{ app.request.attributes.get('id') }}'
+                        }),
+                        removePlugins: 'font,about',
+                        allowedContent: true
+                        // colorButton_colors: 'CF5D4E,454545,FFF,CCC,DDD,CCEAEE,66AB16'
+                        // allowedContent: 'div script iframe area'
+                        //  protectedSource: [
+                             // /<(script)[^>]*>[^>]*<\/script>/ig,
+                             // /<(iframe)[^>]*>[^>]*<\/iframe>/ig,
+                             // /<(div)[^>]*>[^>]*<\/div>/ig,
+                             // /<(style)[^>]*>[^>]*<\/style>/ig,
+                             // /<(link)[^>]*>/ig,
+                             // /<(area)[^>]*>/ig
+                         // ]
+                    });
+                });
+            });
+        </script>
+    {% endblock %}
+</head>
+<body>
+<div class="wrapper">
+
+    <div class="page-content">
+        <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-main">
+                    {{ topMenu.render()|raw }}
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="{{ path('portal_content_homepage') }}">{{ 'to_site'|trans }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('portal_logout') }}">
+                                <i class="glyphicon glyphicon-lock"></i>&nbsp;{{ 'logout'|trans }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /navbar -->
+
+        {% set rout = app.request.get('_route') %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2">
+                    {% if rout starts with 'admin_admin' or rout starts with 'admin_instance' %}
+                        <div class="page-header">{{ 'menu'|trans }}</div>
+                        {{ sideMenu.render()|raw }}
+                    {% endif %}
+                </div>
+                <div class="col-sm-10">
+                    {% if rout starts with 'admin_instance' %}
+                        <div class="instance-title">
+                            {{ instance.showInstanceTitle(app.request.get('instanceCode'))|raw }}
+                        </div>
+                    {% endif %}
+
+                    {% block pageheaderblock %}
+                        <div class="page-header">{% block pageheader %}{% endblock %}</div>
+                    {% endblock %}
+
+                    {% block topbuttonsblock %}
+                        <div class="top-buttons">{% block topbuttons %}{% endblock %}</div>
+                    {% endblock %}
+
+                    <div class="form-success-message">
+                        {% block formMessage %}
+                            {% for flashMessage in app.session.flashbag.get('message') %}
+                                <div class="alert alert-success">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    {{ flashMessage }}
+                                </div>
+                            {% endfor %}
+                            {% for flashMessage in app.session.flashbag.get('error_message') %}
+                                <div class="alert alert-warning">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    {{ flashMessage }}
+                                </div>
+                            {% endfor %}
+                        {% endblock %}
+                    </div>
+
+                    <div class="content" data-action="{{ app.request.get('_controller')|split('\\')|last }}">
+                        {% block body %}{% endblock %}
+                    </div>
+                </div>
+                {#<div class="col-sm-2 last-shown">#}
+                    {#{% block history %}{% endblock %}#}
+                    {#<div class="page-header">{{ 'last_shown'|trans }}</div>#}
+                    {#{% if lastShown.urlList() is not empty %}#}
+                        {#<ul class="nav nav-stacked">#}
+                            {#{% for link in lastShown.urlList() %}#}
+                                {#<li class="navbar-header">#}
+                                    {#<a href="{{ link.uri }}">{{ link.uri }}</a>#}
+                                {#</li>#}
+                            {#{% endfor %}#}
+                        {#</ul>#}
+                    {#{% endif %}#}
+                {#</div>#}
+            </div>
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /page-content -->
+</div>
+<!-- /wrapper -->
+</body>
+</html>

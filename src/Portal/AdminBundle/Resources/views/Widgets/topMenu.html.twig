@@ -1,0 +1,93 @@
+<style>
+    .adm-top-link {
+        float: left;
+        /*margin-top: -2px;*/
+    }
+
+    .adm-top-link .chosen-drop {
+        min-width: 400px;
+    }
+
+    .adm-top-link .chosen-select_adm-top {}
+
+    /*.chosen-select_adm-top + .chosen-container {}*/
+
+    .adm-top-link .chosen-container-single .chosen-default {
+        font-family: "Roboto Condensed",sans-serif;
+        font-size: 14px;
+        color: #fff;
+    }
+
+    .adm-top-link .chosen-container-single .chosen-single {
+        background: transparent !important;
+    }
+
+    .adm-top-link .chosen-container-active.chosen-with-drop .chosen-single {
+        font-size: 14px;
+        color: #fff;
+        border: 0;
+        box-shadow: none;
+    }
+
+    .adm-top-link .chosen-container-active .chosen-single, .adm-top-link .chosen-container-single .chosen-single {
+        font-size: 14px;
+        padding-bottom: 5px;
+        border: 0;
+        box-shadow: none;
+        color: #fff;
+        /*min-height: 40px;*/
+        /*border: 1px solid #f00;*/
+        height: 40px;
+    }
+
+    .adm-top-link .chosen-container-single .chosen-single span {
+        font-family: "Roboto Condensed",sans-serif;
+        font-size: 14px;
+    }
+
+    .adm-top-link .chosen-container-single .chosen-single div b {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin-left: 2px;
+        vertical-align: middle;
+        border-top: 4px solid;
+        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
+        background: none;
+    }
+</style>
+
+
+<script>
+    $(function(){
+        // bind change event to select
+        $('#dynamic_select').on('change', function () {
+            var url = $(this).val(); // get selected value
+            if (url) { // require a URL
+                window.location = url; // redirect
+            }
+            return false;
+        });
+    });
+</script>
+
+
+<ul class="nav navbar-nav">
+    {% set route = app.request.get('_route') %}
+    {% set instanceCode = app.request.get('instanceCode') %}
+
+    {% if showMain %}
+        <li class="{% if route starts with 'admin_instance' and instanceCode == constant('Portal\\AdminBundle\\Entity\\Instance::MAIN_SITE_INSTANCE_CODE') %}active{% endif %}">
+            <a href="{{ path('admin_instance', {'instanceCode':constant('Portal\\AdminBundle\\Entity\\Instance::MAIN_SITE_INSTANCE_CODE')}) }}">
+                {{ 'main_site'|trans }}
+            </a>
+        </li>
+    {% endif %}
+
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <li class="{% if route starts with 'admin_admin' %}active{% endif %}">
+            <a href="{{ path('admin_admin') }}">{{ 'administration'|trans }}</a>
+        </li>
+    {% endif %}
+</ul>

@@ -1,0 +1,90 @@
+{{ form_start(form) }}
+<div id="form-body" class="clearfix">
+    <div class="form-group">
+        <div class="col-sm-3">{{ form_label(form.title) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.title, {'attr':{'class':'form-control'} }) }}
+            <div class="errors">
+                {% for error in form.title.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">{{ form_label(form.isLinkOnId) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.isLinkOnId) }}
+            <div class="errors">
+                {% for error in form.isLinkOnId.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">{{ form_label(form.menu) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.menu, {'attr':{'class':'form-control'} }) }}
+            <div class="errors">
+                {% for error in form.menu.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">{{ form_label(form.route) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.route, {'attr':{'class':'form-control'} }) }}
+            <div class="errors">
+                {% for error in form.route.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">{{ form_label(form.beforeText) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.beforeText, {'attr':{'class':'form-control'} }) }}
+            <div class="errors">
+                {% for error in form.beforeText.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">{{ form_label(form.afterText) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.afterText, {'attr':{'class':'form-control'} }) }}
+            <div class="errors">
+                {% for error in form.afterText.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">{{ form_label(form.isPublished) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.isPublished) }}
+            <div class="errors">
+                {% for error in form.isPublished.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    {{ form_widget(form.parent) }}
+    {{ form_widget(form.order) }}
+</div>
+{{ form_end(form) }}

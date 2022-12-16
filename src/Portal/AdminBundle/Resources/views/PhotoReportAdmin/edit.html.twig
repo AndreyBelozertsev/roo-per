@@ -1,0 +1,45 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'photo_report_form.action_edit'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'photo_report_form.action_edit'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permission_codes = permissions.getCode() %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <div id="form-body" class="clearfix">
+        {% include 'PortalAdminBundle:PhotoReportAdmin:includeAddFiles.html.twig' %}
+
+        <div id="photo_report_form">
+            {% include 'PortalAdminBundle:PhotoReportAdmin:includeForm.html.twig' %}
+        </div>
+        <div id="btn_photo_report" class="form-actions">
+            <button id="btn_edit" class="btn btn-success" type="submit" name="btn_edit">
+                <i class="glyphicon glyphicon-floppy-disk"></i> {{ 'save'|trans }}
+            </button>
+        </div>
+        {#</div>#}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/portaladmin/RCropper/dist/rcrop.min.js') }}"></script>
+    <script src="{{ asset('bundles/portaladmin/script/photo-report/image-photo-report.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/portaladmin/RCropper/dist/rcrop.min.css') }}" media="screen" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block history %}
+    {{ entityLog.renderHistory(photoReport.id, instanceCode, constant('Portal\\HelperBundle\\Entity\\Log::ENTITY_TYPE_PHOTO_REPORT'))|raw }}
+{% endblock %}

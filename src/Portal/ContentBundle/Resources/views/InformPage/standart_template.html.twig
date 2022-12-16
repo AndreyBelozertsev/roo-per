@@ -1,0 +1,8 @@
+{% extends 'PortalContentBundle:InformPage:informPage.html.twig' %}
+
+{% block informPageContent %}
+    {{ template.content|raw }}
+    {% if template.attachment.previewFileUrl is not empty %}
+        <img class="text-page__wid-page" src="{{ asset(template.attachment.previewFileUrl) }}">
+    {% endif %}
+{% endblock %}

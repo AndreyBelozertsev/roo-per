@@ -1,0 +1,29 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database_driver: pdo_pgsql
+    database_driver2: pdo_pgsql
+    database_host: 127.0.0.1
+    database_user: roo_uk
+    database_password: lBFnlhG5h
+    database_name: roo
+    database_port: 5432
+    database_host2: 127.0.0.1
+    database_port2: 5432
+    database_name2: roo
+    database_user2: roo_uk
+    database_password2: lBFnlhG5h
+    mailer_auth_mode: login
+    mailer_port: 465
+    mailer_encryption: ssl
+    mailer_transport: smtp
+    mailer_host: smtp.krtech.ru
+    mailer_user: pereyaslavskayarada@krtech.ru
+    mailer_password: G8l2F3n7
+    secret: ThisTokenIsNotSoSecretChangeIt
+    site_name: roo.loc
+    instance_code: main
+    admin_prefix: admin-portal
+    migration_dir: app/DoctrineMigrations
+    protocol: http

@@ -1,0 +1,18 @@
+{% if popularArticleList is not empty %}
+    <div class="inform-bloks box">
+        <div class="popular-news">
+            <div class="popular-news__title">{{ 'popular'|trans }}</div>
+            {% for article in popularArticleList %}
+                <div class="popular-news__block clearfix">
+                    <a class="popular-news__name" href="{{ path('article_show', {'id': article.article_id}) }}">
+                        {{ article.article_title }}
+                    </a>
+                    <div class="popular-news__date">{{ article.article_published_at|date('d.m.Y') }}</div>
+                    <div class="popular-news__eye">
+                        {{ article.article_manual_views_counter ?: article.article_views_counter }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

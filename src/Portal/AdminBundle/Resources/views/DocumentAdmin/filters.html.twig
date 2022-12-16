@@ -1,0 +1,55 @@
+<div id="reportFilter" class="well">
+    <div class="clearfix">
+        <div class="form-group clearfix col-lg-5">
+            <label>{{ 'news_title'|trans }}:</label>
+            <input id="filterTitle" name="filterTitle" class="form-control" type="text"
+                   placeholder="{{ 'title'|trans }}"
+                   value="{{ filterParams.filterTitle is defined ? filterParams.filterTitle : '' }}"/>
+            <br>
+            <label>{{ 'document_form.doc_type'|trans }}:</label>
+            <select name="filterDocType" id="filterDocType">
+                <option value="">-</option>
+                {% for id,type in constant('Portal\\ContentBundle\\Entity\\Document::DOC_TYPES') %}
+                    <option value="{{ id }}" {{ (filterParams.filterDocType is defined and filterParams.filterDocType == id) ? 'selected' : '' }}>
+                        {{ type|trans() }}
+                    </option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <label for="filterPublished">{{ 'published_only'|trans }}:</label>
+            <input id="filterPublished" name="filterPublished" type="checkbox"
+                    {{ (filterParams.filterPublished is defined and filterParams.filterPublished == 'false') ? '' : ' checked' }}/>
+            <label for="filterNotPublished">{{ 'not_published_only'|trans }}:</label>
+            <input id="filterNotPublished" name="filterNotPublished" type="checkbox"
+                    {{ (filterParams.filterNotPublished is defined and filterParams.filterNotPublished == 'false') ? '' : ' checked' }}/>
+        </div>
+
+        <div class="form-group clearfix col-lg-3">
+            <label>{{ 'publish_date'|trans }}:</label>
+            <input id="filterPublishFrom" name="filterPublishFrom" class="form-control js-datepicker"
+                   placeholder="{{ 'from'|trans }}" type="date"
+                   value="{{ filterParams.filterPublishFrom is defined ? filterParams.filterPublishFrom : '' }}"/>
+            <input id="filterPublishTo" name="filterPublishTo" class="form-control js-datepicker"
+                   placeholder="{{ 'to'|trans }}" type="date"
+                   value="{{ filterParams.filterPublishTo is defined ? filterParams.filterPublishTo : '' }}"/>
+        </div>
+
+        <div class="form-group clearfix  col-lg-3">
+            <label>{{ 'document_form.approv_date'|trans }}:</label>
+            <input id="filterApprovFrom" name="filterApprovFrom" class="form-control js-datepicker"
+                   placeholder="{{ 'from'|trans }}" type="date"
+                   value="{{ filterParams.filterApprovFrom is defined ? filterParams.filterApprovFrom : '' }}"/>
+            <input id="filterApprovTo" name="filterApprovTo" class="form-control js-datepicker"
+                   placeholder="{{ 'to'|trans }}" type="date"
+                   value="{{ filterParams.filterApprovTo is defined ? filterParams.filterApprovTo : '' }}"/>
+        </div>
+    </div>
+
+    <br>
+    <input type="hidden" name="instanceCode" value="{{ instanceCode }}">
+    <button id="filterArticle" class="btn btn-sm btn-primary">{{ 'filter'|trans }}</button>
+</div>
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/portaladmin/js/document-filter.js') }}"></script>
+{% endblock %}

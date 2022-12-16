@@ -1,0 +1,203 @@
+<input type="hidden" value="{{instanceCode}}" id="instanceCode">
+<input type="hidden" id="sort" name="sort">
+<input type="hidden" id="esia_fields" name="esiaFields">
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.titleUk) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.titleUk, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.titleUk.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.titleRu) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.titleRu, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.titleRu.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.titleEn) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.titleEn, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.titleEn.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.emailResponsible) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.emailResponsible, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.emailResponsible.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.descriptionUk) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.descriptionUk, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.descriptionUk.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.descriptionRu) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.descriptionRu, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.descriptionRu.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.descriptionEn) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.descriptionEn, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.descriptionEn.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+{#<div class="form-group">#}
+    {#<div class="col-sm-2 text-right">{{ form_label(form.messageSuccess) }}</div>#}
+    {#<div class="col-sm-10">#}
+        {#{{ form_widget(form.messageSuccess, {'attr': {'class': 'form-control'}}) }}#}
+        {#<div class="errors">#}
+            {#{% for error in form.messageSuccess.vars.errors %}#}
+                {#<div class="alert alert-danger">{{ error.message }}</div>#}
+            {#{% endfor %}#}
+        {#</div>#}
+    {#</div>#}
+    {#<div class="clearfix"></div>#}
+{#</div>#}
+{#<div class="form-group">#}
+    {#<div class="col-sm-2 text-right">{{ form_label(form.messageError) }}</div>#}
+    {#<div class="col-sm-10">#}
+        {#{{ form_widget(form.messageError, {'attr': {'class': 'form-control'}}) }}#}
+        {#<div class="errors">#}
+            {#{% for error in form.messageError.vars.errors %}#}
+                {#<div class="alert alert-danger">{{ error.message }}</div>#}
+            {#{% endfor %}#}
+        {#</div>#}
+    {#</div>#}
+    {#<div class="clearfix"></div>#}
+{#</div>#}
+{#<div class="form-group">#}
+    {#<div class="col-sm-2 text-right">{{ form_label(form.menuNode) }}</div>#}
+    {#<div class="col-sm-10">#}
+        {#{{ form_widget(form.menuNode) }}#}
+        {#<div class="errors">#}
+            {#{% for error in form.menuNode.vars.errors %}#}
+                {#<div class="alert alert-danger">{{ error.message }}</div>#}
+            {#{% endfor %}#}
+        {#</div>#}
+    {#</div>#}
+    {#<div class="clearfix"></div>#}
+{#</div>#}
+{#<div class="form-group">#}
+    {#<div class="col-sm-2 text-right">{{ form_label(form.isPublished) }}</div>#}
+    {#<div class="col-sm-10">#}
+        {#{{ form_widget(form.isPublished) }}#}
+        {#<div class="errors">#}
+            {#{% for error in form.isPublished.vars.errors %}#}
+                {#<div class="alert alert-danger">{{ error.message }}</div>#}
+            {#{% endfor %}#}
+        {#</div>#}
+    {#</div>#}
+    {#<div class="clearfix"></div>#}
+{#</div>#}
+{#<div class="form-group">#}
+    {#<div class="col-sm-2 text-right">{{ form_label(form.isRegisteredUser) }}</div>#}
+    {#<div class="col-sm-10">#}
+        {#{{ form_widget(form.isRegisteredUser) }}#}
+        {#<div class="errors">#}
+            {#{% for error in form.isRegisteredUser.vars.errors %}#}
+                {#<div class="alert alert-danger">{{ error.message }}</div>#}
+            {#{% endfor %}#}
+        {#</div>#}
+    {#</div>#}
+    {#<div class="clearfix"></div>#}
+{#</div>#}
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.isAgreePersonalData) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.isAgreePersonalData) }}
+        <div class="errors">
+            {% for error in form.isAgreePersonalData.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.visible) }}</div>
+    <div class="col-sm-10">
+        <div id="fields_esia_list" data-fields-esia="{{ constant('Portal\\ContentBundle\\Entity\\FeedbackForm::FIELD_ESIA_LIST')|join(',') }}"></div>
+        <div id="fields_esia_selected_list" data-fields-selected-esia="{{ esiaFieldsList|join(',') }}"></div>
+        {{ form_widget(form.visible, {'attr': {'class': 'form-control sort-selected'}}) }}
+        <div class="errors">
+            {% for error in form.visible.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ 'feedback_form.sort'|trans }}</div>
+    <div class="col-sm-10">
+        <ul id="sortable">
+            {% if sortFieldList is defined and sortFieldList is not empty %}
+                {% for field in sortFieldList %}
+                    <li id="{{ field }}" value="{{ field }}"></li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+        <div class="errors">
+            <div id="selectedError" class="alert alert-danger selected-no-error">
+                {{ 'feedback_form.sorted.not_null'|trans }}
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-10">
+        <div id="btn_article" class="form-actions">
+            <button id="btn_edit" class="btn btn-success" type="submit" name="btn_edit"
+                    data-form-id="{{ feedbackForm.id }}" data-form-action="{{ feedbackForm.id is null ? 'create' : 'edit' }}">
+                <i class="glyphicon glyphicon-floppy-disk"></i> {{ 'save'|trans }}
+            </button>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>

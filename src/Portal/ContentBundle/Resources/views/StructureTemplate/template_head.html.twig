@@ -1,0 +1,23 @@
+<div class="text-page">
+    {#<div class="tabs-content_news-horizontal"><div class="flex_space">#}
+    {% for item in items %}
+        {% set href = path(route, { id:item.id }) %}
+        <div class="text-page__inform-block">
+            <div class="text-page__pic">
+                <a href="{{ href }}">
+                    {% set path = (item.original_file_path is defined and item.original_file_path) ? item.original_file_path : item.head_file_url|thumbImage %}
+                    <img src="{{ asset(path|existsImage) }}" alt="{{ item.lastname }} {{ item.firstname }} {{ item.middlename }}">
+                </a>
+            </div>
+            <div class="text-page__content">
+                <a href="{{ href }}">
+                    <div class="text-page__name">
+                        {{ item.lastname }} {{ item.firstname }} {{ item.middlename ?: '' }}
+                    </div>
+                </a>
+                <div class="text-page__text">{{ item.position }}</div>
+            </div>
+        </div>
+    {% endfor %}
+    {#</div></div>#}
+</div>

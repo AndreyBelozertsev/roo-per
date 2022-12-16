@@ -1,0 +1,154 @@
+{% extends isDepartment ? 'PortalContentBundle::depBase.html.twig' : 'PortalContentBundle::innerPageBase.html.twig' %}
+
+{% block pageTitle %}{% endblock %}
+
+{% block title %}
+    {{ title }} | {{ 'portal'|trans }}
+{% endblock %}
+
+{% block innerContent %}
+    <div class="tabs-content__white">
+        <div class="title _sample">{{ title }}</div>
+        <div class="text-page">
+            {% if beforeText is defined and beforeText is not empty %}
+                <div class="content _sample">{{ beforeText|raw }}</div>
+            {% endif %}
+            {% if itemsStructure.childs is defined and itemsStructure.childs is not empty %}
+                {% for child in itemsStructure.childs %}
+                    {% if isStructure == true %}
+                        {% set href = (child.route) ?: path('structure', {'id': child.id}) %}
+                    {% else %}
+                        {% if child.route is not empty %}
+                            {% if custom_router.routeExists(child.route) %}
+                                {% set href = path(child.route) %}
+                            {% else %}
+                                {% set href = child.route %}
+                            {% endif %}
+                        {% elseif child.slug is not empty %}
+                            {% set href = path('structure_slug', {'slug': child.slug}) %}
+                        {% else %}
+                            {% set href = path('structure', {'id': child.id}) %}
+                        {% endif %}
+                    {% endif %}
+                    <div class="text-page__block">
+                        <a href="{{ href }}" class="text-page__link-block text-page__desk">{{ child.title }}</a>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% for key, items in itemsStructure %}
+            {% if items is not empty %}
+                {% if key != 'childs' and key != 'feedbacks' and key != 'interviews' and key != 'documents' %}
+                    {% if key == 'articles' %}
+                        {% set route = 'article_show' %}
+                    {% endif %}
+                    {% if key == 'events' %}
+                        {% set route = 'event_show' %}
+                    {% endif %}
+                    {% if key == 'pages' %}
+                        {% set route = 'inform_page' %}
+                    {% endif %}
+                    {% if key == 'photo_reports' %}
+                        {% set route = 'photo_report_show' %}
+                    {% endif %}
+                    {% if key == 'video_reports' %}
+                        {% set route = 'video_report_show' %}
+                    {% endif %}
+                    {% if key == 'heads' %}
+                        {% set route = 'head_show' %}
+                    {% endif %}
+                    {% if key == 'quizzes' %}
+                        {% set route = 'quiz_show' %}
+                    {% endif %}
+                    {% include 'PortalContentBundle:StructureTemplate:template_' ~ structureTemplate ~ '.html.twig' %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        <div class="text-page">
+            {% if itemsStructure.interviews is defined and itemsStructure.interviews is not empty %}
+                {% for interview in itemsStructure.interviews %}
+                    <div class="text-page__block">
+                        <a href="{{ path('interview_show_slug', {'slug': interview.slug}) }}" class="text-page__link-block text-page__desk"
+                           title="{{ interview.title }}">
+                            {{ interview.title }}
+                        </a>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% if itemsStructure.feedbacks is defined and itemsStructure.feedbacks is not empty %}
+                {% for feedback in itemsStructure.feedbacks %}
+                    <div class="text-page__block">
+                        <a href="{{ path('feedback_page_slug', {'slug': feedback.slug}) }}" class="text-page__link-block text-page__desk"
+                           title="{{ feedback.title }}">
+                            {{ feedback.title }}
+                        </a>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        {% if itemsStructure.documents is defined and structureTemplate == 'simple' %}
+            {% if itemsStructure.documents is not empty %}
+                <div class="title _sample">
+                    <small>{{ 'docs'|trans }}:</small>
+                </div>
+            {% endif %}
+            {% set route = 'document_show' %}
+            <div class="text-page">
+                {% for item in itemsStructure.documents %}
+                    <div class="text-page__block">
+                        <a href="{{ path(route, {'id': item.id}) }}" class="text-page__link-block text-page__desk"
+                           title="{{ item.title|sliceFullWord(100, true) }}">
+                            {{ item.title }}
+                        </a>
+                    </div>
+                {% endfor %}
+                <div class="pagination clearfix">{{ pagination|raw }}</div>
+            </div>
+        {% endif %}
+        {% if itemsStructure.documents is defined and structureTemplate == 'document' %}
+            {% set route = 'document_show' %}
+            {% set items = itemsStructure.documents %}
+            {% include 'PortalContentBundle:StructureTemplate:template_' ~ structureTemplate ~ '.html.twig' %}
+        {% endif %}
+        <div class="text-page">
+            {% if afterText is defined and afterText is not empty %}
+                <div class="content _sample">{{ afterText|raw }}</div>
+            {% endif %}
+        </div>
+
+        <div style="text-align:right; padding:0 0 20px; font-size:12px">
+            {% if createdAt %}  {{ 'created'|trans }}: {{ createdAt|date('d.m.Y') }} | {% endif %}
+            {% if updatedAt %}  {{ 'updated'|trans }}: {{ updatedAt|date('d.m.Y') }} {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block headerPanel %}
+    {{ panelWidget.renderPanel('header-panel', structureTemplate)|raw }}
+{% endblock %}
+
+{% block sideBar %}
+    {{ panelWidget.renderPanel('side-panel', structureTemplate)|raw }}
+{% endblock %}
+
+{% block beforeContentBlock %}
+    {{ panelWidget.renderPanel('before-content-panel', structureTemplate)|raw }}
+{% endblock %}
+
+{% block bottomPanel %}
+    {{ panelWidget.renderPanel('bottom-panel', structureTemplate)|raw }}
+{% endblock %}
+
+{% block footerSocialPanel %}
+    {{ panelWidget.renderPanel('footer-panel', structureTemplate)|raw }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .pagerfanta * {
+            margin: 0 5px;
+        }
+    </style>
+{% endblock %}

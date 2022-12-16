@@ -1,0 +1,44 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}{{ parent() }} | {{ 'user_roles_form.menu_title'|trans }}{% endblock %}
+{% block pageheader %}
+    {{ 'user_roles_form.action_list'|trans }}
+{% endblock %}
+
+{% block topbuttons %}
+    <a class="btn btn-success" href="{{ path('admin_admin_role_edit', {id:0 }) }}"><i class="glyphicon glyphicon-plus-sign"></i>
+        {{ 'user_roles_form.add_new'|trans }}
+    </a>
+{% endblock %}
+
+{% block body %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Код</th>
+            <th>Наименование</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for role in roleList %}
+            <tr>
+                <td>
+                    <a href="{{ path('admin_admin_role_edit', {id:role.id }) }}">{{role.code}}</a>
+                </td>
+                <td>
+                    <a href="{{ path('admin_admin_role_edit', {id:role.id }) }}">{{role.label}}</a>
+                </td>
+                <td>
+                    <button class="btn btn-warning" href="#" onclick="adminPage.userRole.removeItem({{role.id}})">
+                        <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}</button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

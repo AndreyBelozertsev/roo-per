@@ -1,0 +1,97 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'material.title'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'material.edit'|trans }}
+{% endblock %}
+
+{% block topbuttons %}
+    {% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+    {% set permissions = permissions.getCode() %}
+
+    <a class="btn btn-success back-to-list" href="{{ path('admin_instance_material_view_all', {'instanceCode':instanceCode}) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+    {% if form.menuNode.vars.value and (sa or 'edit_structure' in permissions) %}
+        <a class="btn btn-success" href="{{ path('admin_instance_structure_index', {
+            'instanceCode':app.request.get('instanceCode'),
+            'selected_node':form.menuNode.vars.value
+        }) }}">
+            <i class="glyphicon glyphicon-share-alt"></i> {{ 'to_structure'|trans }}
+        </a>
+    {% endif %}
+    {% if sa or 'create_material' in permissions %}
+        <a class="btn btn-primary" href="{{ path('admin_instance_material_edit', { 'id':0, 'instanceCode':instanceCode }) }}">
+            <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+        </a>
+    {% endif %}
+    {% if sa or 'delete_material' in permissions or material.author == app.user.id %}
+        <a class="btn btn-warning" onclick="adminPage.material.removeItem({{ material.id }},'{{ instanceCode }}');">
+            <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <div class="form-group">
+        <div class="col-md-3 text-right">{{ form_label(form.title) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.title, {'attr':{'class':'form-control'} }) }}
+            <div class="errors">
+                {% for error in form.title.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3 text-right">{{ 'material.file'|trans }}</div>
+        <div class="col-sm-9">
+            {% if form.file.vars.value.file %}
+                <i class="file-icon {{ form.file.vars.value.file ? form.file.vars.value.file.extension : 'doc' }}"></i>
+                <a href="{{ form.file.vars.download_uri }}" target="_blank">{{ form.file.vars.value.file.filename }}</a>
+            {% endif %}
+            {{ form_widget(form.file) }}
+            <div class="errors">
+                {% for error in form.file.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3 text-right">{{ form_label(form.menuNode) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.menuNode) }}
+            <div class="errors">
+                {% for error in form.menuNode.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3 text-right">{{ form_label(form.isPublished) }}</div>
+        <div class="col-sm-9">{{ form_widget(form.isPublished) }}</div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3"></div>
+        <div class="col-sm-9">
+            {{ form_widget(form.submit, {'attr':{'class':'btn btn-success'}} ) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+    <br>
+{% endblock %}
+
+{% block history %}
+    {{ entityLog.renderHistory(material.id, instanceCode, constant('Portal\\HelperBundle\\Entity\\Log::ENTITY_TYPE_MATERIAL'))|raw }}
+{% endblock %}

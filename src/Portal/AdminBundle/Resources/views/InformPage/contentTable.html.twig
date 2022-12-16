@@ -1,0 +1,74 @@
+<table id="contact-table">
+    <thead>
+    <tr>
+        {% for col in constant('Portal\\ContentBundle\\Entity\\ContactTemplate::TABLE_COLUMN') %}
+            <td>{{ col }}</td>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody></tbody>
+    <tfoot>
+        <tr>
+            <td><a class="button add-table-row">+ add</a></td>
+        </tr>
+    </tfoot>
+</table>
+
+<script>
+    function tryParseJSON(string) {
+        try {
+            let obj = JSON.parse(string);
+            if (obj && typeof obj === "object") {
+                return obj;
+            }
+        }
+        catch (e) {}
+        return [[]];
+    }
+
+    let tableInput = '{{ child.vars.id }}',
+        tableData = tryParseJSON('{{ child.vars.value|raw }}'),
+        tableObj = $('#contact-table'),
+        col = tableObj.find('thead td').length;
+
+    $.each(tableData, function (index, item) {
+        let tableRow = $('<tr>');
+        for (let i = 0; i < col; i++) {
+            let val = item[i] ? item[i] : '';
+            let cell = '<input type="text" value="' + val + '">';
+            tableRow.append($('<td>', {html: cell}));
+        }
+        tableRow.append($('<td>', {html: '<a class="button del-row-table">-</a>'}));
+        tableObj.find('tbody').append(tableRow);
+    });
+
+    function tableToJson() {
+        let tableData = tableObj.find('tbody tr').map(function () {
+            let arr = $(this).find('input').map(function () {
+                return $(this).val();
+            }).get();
+            return [arr];
+        }).get();
+        $('#' + tableInput).val(JSON.stringify(tableData));
+    }
+
+    tableObj.on('change', 'input', function () {
+        tableToJson();
+    });
+
+    $('.add-table-row').on('click', function () {
+        let tBody = tableObj.find('tbody');
+        tBody.find('tr:last').clone().appendTo(tBody);
+        tBody.find('tr:last td').each(function () {
+            $(this).find('input').val('');
+        });
+        tableToJson();
+    });
+
+    tableObj.on('click', '.del-row-table', function () {
+        if (tableObj.find('tbody tr').length > 1) {
+            $(this).parents('tr').remove();
+            tableToJson();
+        }
+    });
+</script>

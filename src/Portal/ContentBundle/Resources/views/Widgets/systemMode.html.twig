@@ -1,0 +1,9 @@
+{% if widgetSystemMode.system_mode_is_active_notification is defined and widgetSystemMode.system_mode_is_active_notification %}
+    <div class="warning-strip">
+        {% if widgetSystemMode.system_mode_is_active_mode %}
+            {{ widgetSystemMode.system_mode_mode_message }}
+        {% else %}
+            {{ widgetSystemMode.system_mode_notification_message }}
+        {% endif %}
+    </div>
+{% endif %}

@@ -1,0 +1,10 @@
+doctrine_migrations: 
+    dir_name: "%kernel.project_dir%/app/DoctrineMigrations/Main"
+    namespace: App\DoctrineMigrations\Main
+    table_name: migration_versions
+    name: Application_Migrations_Main
+
+#name: "Application_Migrations_Main"
+#migrations_namespace: Application\Migrations\Main
+#table_name: "migration_versions"
+#migrations_directory: "%kernel.project_dir%/app/DoctrineMigrations/Main"

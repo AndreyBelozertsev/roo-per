@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<title>{{ 'site_title'|trans }}</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="{{ 'site_title'|trans }}"/>
+<meta name="keywords" content="{{ 'site_title'|trans }}"/>
+{% block meta %}{% endblock %}
+<link rel="stylesheet" href="{{ asset('themes/public/style.css') }}"/>
+<script src="{{ asset('themes/public/script.js') }}"></script>
+<script src="{{ asset('themes/public/lib/lib.fotorama.js') }}"></script>
+{# FOS Routing #}
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{# END FOS Routing #}
+
+<body class="page" data-copy-message="{{ 'copy_message'|trans }}">
+{{ include('@PortalContent/yandex_metrika.html.twig') }}
+<div class="header clearfix">
+    <a href="{{ path('portal_content_homepage') }}" class="logo"></a>
+    <a class="header__logo-cr" href="/"></a>
+
+    {% set categoryList = category_list.getList() %}
+    {% set route_name = app.request.get('_route') %}
+    {% set category_id = app.request.get('cat') %}
+
+    <div class="mobile-nav">
+        <div class="mobile-nav__button"></div>
+        <div class="mobile-nav__menu">
+            <ul class="mobile-nav__list">
+                <li class="mobile-nav__item"></li>
+                <li class="mobile-nav__item">
+                    <b class="mobile-submenu__button"></b><a class="mobile-nav__link">{{ 'Category'|trans }}</a>
+                    <div class="mobile-submenu mobile-submenu-category">
+                        <ul class="mobile-submenu__list">
+                            {% for id,category in categoryList %}
+                                <li class="mobile-submenu__item">
+                                    {% if category_id and category_id == id %}
+                                        <span class="mobile-submenu__link _no-link">{{ category }}</span>
+                                    {% else %}
+                                        <a href="{{ path('view_all_articles', {'cat': id}) }}"
+                                           class="mobile-submenu__link">{{ category }}</a>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% if route_name == 'portal_content_homepage' %}
+                        <span class="mobile-nav__link _no-link">{{ 'Home'|trans }}</span>
+                    {% else %}
+                        <a href="{{ path('portal_content_homepage') }}" class="mobile-nav__link">{{ 'Home'|trans }}</a>
+                    {% endif %}
+                </li>
+                <li class="mobile-nav__item">
+                    {% if route_name == 'post' %}
+                        <span class="mobile-nav__link _no-link">{{ 'Opinion'|trans }}</span>
+                    {% else %}
+                        <a href="{{ path('post') }}" class="mobile-nav__link">{{ 'Opinion'|trans }}</a>
+                    {% endif %}
+                </li>
+                <li class="mobile-nav__item">
+                    <b class="mobile-submenu__button"></b><a class="mobile-nav__link">{{ 'Magazine_newspaper'|trans }}</a>
+                    <div class="mobile-submenu mobile-submenu-magazine-article">
+                        <ul class="mobile-submenu__list">
+                            <li class="mobile-submenu__item">
+                                {% if route_name == 'magazine' %}
+                                    <span class="mobile-submenu__link _no-link">{{ 'Magazine'|trans }}</span>
+                                {% else %}
+                                    <a href="{{ path('magazine') }}"
+                                        class="mobile-submenu__link">{{ 'Magazine'|trans }}</a>
+                                {% endif %}
+                            </li>
+                            <li class="mobile-submenu__item">
+                                {% if route_name == 'newspaper' %}
+                                    <span class="mobile-submenu__link _no-link">{{ 'Newspaper'|trans }}</span>
+                                {% else %}
+                                    <a href="{{ path('newspaper') }}"
+                                        class="mobile-submenu__link">{{ 'Newspaper'|trans }}</a>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="mobile-nav__item">
+                    {% if route_name == 'feedback_page' %}
+                        <span class="mobile-nav__link _no-link">{{ 'Feedback'|trans }}</span>
+                    {% else %}
+                        <a href="{{ path('feedback_page', {'id': 1}) }}" class="mobile-nav__link">{{ 'Feedback'|trans }}</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="nav clearfix">
+        <ul class="nav__list">
+            <li class="nav__item">
+                {% if route_name == 'portal_content_homepage' %}
+                    <span class="nav__link _no-link">{{ 'Home'|trans }}</span>
+                {% else %}
+                    <a href="{{ path('portal_content_homepage') }}" class="nav__link">{{ 'Home'|trans }}</a>
+                {% endif %}
+            </li>
+            <li class="nav__item nav__item_arrow"><a class="nav__link">{{ 'Category'|trans }}</a>
+                <div class="submenu">
+                    <ul class="submenu__list">
+                        {% for id,category in categoryList %}
+                            <li class="submenu__item">
+                                {% if category_id and category_id == id %}
+                                    <span class="submenu__link _no-link">{{ category }}</span>
+                                {% else %}
+                                    <a href="{{ path('view_all_articles', {'cat': id}) }}"
+                                       class="submenu__link">{{ category }}</a>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </li>
+            <li class="nav__item">
+                {% if route_name == 'post' %}
+                    <span class="nav__link _no-link">{{ 'Opinion'|trans }}</span>
+                {% else %}
+                    <a href="{{ path('post') }}" class="nav__link">{{ 'Opinion'|trans }}</a>
+                {% endif %}
+            </li>
+            <li class="nav__item nav__item_arrow"><a class="nav__link">{{ 'Magazine_newspaper'|trans }}</a>
+                <div class="submenu">
+                    <ul class="submenu__list">
+                        <li class="submenu__item">
+                            {% if route_name == 'magazine' %}
+                                <span class="submenu__link _no-link">{{ 'Magazine'|trans }}</span>
+                            {% else %}
+                                <a href="{{ path('magazine') }}"
+                                    class="submenu__link">{{ 'Magazine'|trans }}</a>
+                            {% endif %}
+                        </li>
+                        <li class="submenu__item">
+                            {% if route_name == 'newspaper' %}
+                                <span class="submenu__link _no-link">{{ 'Newspaper'|trans }}</span>
+                            {% else %}
+                                <a href="{{ path('newspaper') }}"
+                                    class="submenu__link">{{ 'Newspaper'|trans }}</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav__item">
+                {% if route_name == 'feedback_page' %}
+                    <span class="nav__link _no-link">{{ 'Feedback'|trans }}</span>
+                {% else %}
+                    <a href="{{ path('feedback_page', {'id': 1}) }}" class="nav__link">{{ 'Feedback'|trans }}</a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+    {{ socialNetworkWidget.render()|raw }}
+    <div class="search search_header">
+        <div class="search__box">
+            <input type="text" placeholder="{{ 'Search'|trans }}" class="search__pole" data-url="{{ path('search') }}">
+            <input type="button" class="search__button search__icon search__icon_search">
+        </div>
+    </div>
+    <div class="languages">
+        <div class="languages__selected icons_lang-black">{{ app.request.locale == 'uk' ? 'ua' : app.request.locale  }}</div>
+        <div class="languages__nav">
+            {% set route = app.request.attributes.get('_route') %}
+            {% set route_params = app.request.attributes.get('_route_params')|merge(app.request.query.all()) %}
+            <a href="{{ path(route, route_params|merge({ 'trailingSlashLang': '/', '_locale': 'uk' })) }}" class="languages__item">ua</a>
+            <a href="{{ path(route, route_params|merge({ 'trailingSlashLang': '/', '_locale': 'ru' })) }}" class="languages__item">ru</a>
+            {#<a href="{{ path(route, route_params|merge({ 'trailingSlashLang': '/', '_locale': 'en' })) }}" class="languages__item">en</a>#}
+        </div>
+    </div>
+</div>
+<!--.header-->
+
+
+{% block info_page %}{% endblock %}
+
+<div class="wrapper">
+    <div class="wrapper__left">
+
+        {% block content %}{% endblock %}
+
+        {% block main_news %}{% endblock %}
+
+        {% block main_grid %}{% endblock %}
+
+        {% block personal_opinion %}{% endblock %}
+
+    </div>
+    <!--.wrapper__left-->
+
+    <div class="wrapper__right">
+        {% block left_col %}
+            <div class="last-news">
+                <div class="last-news__title icons_clock">{{ 'Latest news'|trans }}</div>
+                {% set articleList = articleWidget.renderPopularNews %}
+                {% for article in articleList %}
+                    <div class="last-news__block">
+                        <div class="last-news__date">{{ article.article_published_at|date|localizeddate('none', 'none', app.request.locale, null, 'd MMMM YYYY') }}</div>
+                        <a href="{{ path('article_show', { 'id': article.article_id }) }}" class="last-news__text">
+                            {{ attribute(article, 'article_title_' ~ app.request.locale) }}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <!--.last-news-->
+            <div class="inform-block">
+                {#<div class="inform-block__pic">Image</div>#}
+                {#<div class="inform-block__pic">Image</div>#}
+                {#<div class="inform-block__pic">Image</div>#}
+            </div>
+        {% endblock %}
+    </div>
+    <!--.wrapper__right-->
+</div>
+<!--.wrapper-->
+{% block contacts_below %}
+<div class="contacts-below clearfix"><a href="/" class="logo-small"></a><a href="/" class="logo-second"></a>
+    <a href="{{ path('feedback_page', {'id' : 1}) }}" class="button button_text_red button_left button_border_no">{{ 'Feedback'|trans }}</a>
+    {{ socialNetworkWidget.renderBottom()|raw }}
+    {% set params = paramWidget.getParams() %}
+    <div class="contacts-below__inform">
+        <div class="contacts-below__phone">{{ params.description }}</div>
+        <div class="contacts-below__phone">{{ params.editor }}</div>
+        <div class="contacts-below__addres">{{ params.address }}</div>
+        <div class="contacts-below__addres">{{ params.phone }}</div>
+        <div class="contacts-below__email"><a href="mailto:{{ params.email }}">{{ params.email }}</a></div>
+    </div>
+    <div class="age-limit">
+        <span>{{ params.age }}</span>
+    </div>
+</div>
+<!--.contacts-below-->
+{% endblock %}
+
+<div class="up-button icons_arrow-up-white"></div>
+
+{% block footer %}
+<div class="footer">
+    <div class="footer__nav-posit">
+        <div class="footer__nav-bg">
+            <div class="footer__nav">
+                <ul>
+                    {% for id,category in categoryList %}
+                        <li>
+                            <a href="{{ path('view_all_articles', { 'cat': id }) }}">{{ category }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer__info clearfix">
+        <div class="footer__copright">{{ 'now'|date('Y') }} © {{ 'site_title'|trans }}. {{ 'rights'|trans }}.</div>
+        <div class="footer__link">{{ 'Development'|trans }} - <a href="https://krtech.ru/">АО «Крымтехнологии»</a></div>
+    </div>
+</div>
+<!--.footer-->
+{% endblock %}
+</body>
+</html>

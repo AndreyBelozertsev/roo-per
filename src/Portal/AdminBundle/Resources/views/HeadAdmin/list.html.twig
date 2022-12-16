@@ -1,0 +1,101 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'head_form.action_list'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'head_form.action_list'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permission_codes = permissions.code() %}
+{% set allowEdit = constant('Portal\\ContentBundle\\Entity\\Head::PERMISSIONS_HEAD')['edit'] in permission_codes %}
+
+{% block topbuttons %}
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\Head::PERMISSIONS_HEAD')['create'] in permission_codes %}
+        <a class="btn btn-success" href="{{ path('admin_instance_head_form_create', { 'instanceCode': instanceCode }) }}">
+            <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+        </a>
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+{#    {% include 'PortalAdminBundle:HeadAdmin:filters.html.twig' %}#}
+    <table class="table table-striped table-middle-aligned">
+        <thead>
+            <tr>
+                <th>{{ 'head_form.fio'|trans }}</th>
+                <th>{{ 'head_form.position'|trans }}</th>
+                <th>{{ 'head_form.is_published'|trans }}</th>
+                <th>{{ 'head_form.author'|trans }}</th>
+                <th>{{ 'action'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for head in pagerFanta.currentPageResults %}
+            <tr>
+                {% if head.is_deleted %}
+                    <td>
+                        <span class="grey-text">{{ head.firstname }}
+                        {% if head.middlename %}{{ head.middlename }}{% endif %}
+                        {{ head.lastname }}</span>
+                    </td>
+                    <td><span class="grey-text">{{ head.position }}</span></td>
+                    <td><span class="grey-text">{{ 'is_deleted'|trans }}</span></td>
+                    <td><span class="grey-text">{{ users[head.author_id] }}</span></td>
+                    <td>
+                        {% if sa or constant('Portal\\ContentBundle\\Entity\\Head::PERMISSIONS_HEAD')['restore'] in permission_codes
+                            or head.author_id == app.user.id %}
+                            <a class="btn btn-sm btn-default" onclick="adminPage.head.restoreItem({{ head.id }}, '{{ instanceCode }}');">
+                                <i class="glyphicon glyphicon-repeat"></i> {{ 'restore'|trans }}
+                            </a>
+                        {% endif %}
+                    </td>
+                {% else %}
+                    <td>
+                        {% if sa or allowEdit or head.author_id == app.user.id %}
+                            <a href="{{ path('admin_instance_head_form_edit', { 'id': head.id, 'instanceCode': instanceCode }) }}">
+                                {{ head.firstname }}
+                                {% if head.middlename %}{{ head.middlename }}{% endif %}
+                                {{ head.lastname }}
+                            </a>
+                        {% else %}
+                            {{ head.firstname }}
+                            {% if head.middlename %}{{ head.middlename }}{% endif %}
+                            {{ head.lastname }}
+                        {% endif %}
+                    </td>
+                    <td>{{ head.position }}</td>
+                    <td>
+                        {% if head.published_at %}
+                            {{ head.published_at|date('d.m.Y') }}
+                        {% else %}
+                            {{ 'head_form.is_published_empty'|trans }}
+                        {% endif %}
+                    </td>
+                    <td>{{ users[head.author_id] }}</td>
+                    <td>
+                        {% if sa or allowEdit or head.author_id == app.user.id %}
+                            <a href="{{ path('admin_instance_head_form_edit', { 'id': head.id, 'instanceCode': instanceCode }) }}"
+                               class="btn btn-sm btn-primary">
+                                <i class="glyphicon glyphicon-edit"></i> {{ 'edit'|trans }}
+                            </a>
+                        {% endif %}
+                        {% if sa or constant('Portal\\ContentBundle\\Entity\\Head::PERMISSIONS_HEAD')['delete'] in permission_codes %}
+                            <a class="btn btn-sm btn-warning" onclick="adminPage.head.removeItem({{ head.id }}, '{{ instanceCode }}');">
+                                <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+                            </a>
+                        {% endif %}
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagerfanta">
+        {{ pagerfanta(pagerFanta, 'twitter_bootstrap3') }}
+    </div>
+{% endblock %}

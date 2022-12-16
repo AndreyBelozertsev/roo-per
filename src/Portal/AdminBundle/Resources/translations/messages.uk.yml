@@ -1,0 +1,164 @@
+logining: Вход в систему
+login: Вход
+remember_me: Запомнить меня
+logout: Выход
+to_site: Перейти на сайт
+main_site: Структура сайта
+welcome_admin_dashboard_message: Добро пожаловать в административную панель
+administration: Администрирование
+title: Заголовок
+description: Описание
+descriptionUk: Описание на Украинском
+descriptionRu: Описание на Русском
+descriptionEn: Описание на Английском
+content: Содержимое
+content_uk: Содержимое на украинском
+content_ru: Содержимое на русском
+content_en: Содержимое на английском
+to_public: Публиковать
+image: Изображение
+magazine: журнал
+newspaper: газета
+come_back: Назад к списку
+value: Значение
+action: Действия
+edit: Редактировать
+save: Сохранить
+delete: Удалить
+restore: Восстановить
+add_new: Добавить
+is_published: Опубликовано
+are_you_sure: Вы уверены?
+cancel: Отмена
+filter: Фильтровать
+done: Действие произведено успешно!
+is_deleted: (удален)
+drpo_file_here: Перетащите сюда ваши файлы
+successfully_save: Успешно сохранено!
+comments: Комментарии
+social_networks: Социальные сети
+username: Имя пользователя
+blogger_name: Имя автора публикации
+blogger_name_uk: Имя автора публикации на украинском
+blogger_name_ru: Имя автора публикации на русском
+blogger_name_en: Имя автора публикации на английском
+blogger_position: Статус автора публикации
+blogger_position_uk: Статус автора публикации на украинском
+blogger_position_ru: Статус автора публикации на русском
+blogger_position_en: Статус автора публикации на английском
+category_title: Раздел
+category: Разделы новостей
+title_en: Заголовок на английском
+title_ru: Заголовок на русском
+title_uk: Заголовок на украинском
+wrong_data: Ошибка заполнения формы
+query_error: Ошибка запроса
+params: Параметры сайта
+Is published: Публиковать
+published: Опубликовано
+
+error_page:
+  text_404: Страница не найдена
+  text_403: Отказано в доступе
+
+article_form:
+  all_article: Все новости
+  menu_title: Новости
+  action_create: Создать новость
+  action_edit: Редактировать новость
+  delete_title: Удаление новости
+  action_list: Список новостей
+  restore: Восстановление новости
+  show_in_slider: Отображать в слайдере на главной
+
+photo_report_form:
+  menu_title: Фотогалерея
+  action_list: Список Фотогалерей
+  action_edit: Редактировать Фотогалерею
+
+feedback_form:
+  menu_title: Форма обратной связи
+  sub_menu_title: Список форм
+  name: Название
+  resp-email: e-mail ответственного
+  theme: Тема сообщения
+  category: Категория сообщения
+  body: Тело сообщения
+  file: Прикрепить файл
+  author: Автор сообщения
+  phone: Телефон
+  email: e-mail
+  address_group: Место проживания
+  sex_group: Пол
+  age_group: Возрастная группа
+  social_group: Социальная группа
+  privilege_group: Категория
+  action_list: Список форм обратной связи
+  action_create: Создать форму обратной связи
+  action_edit: Редактировать форму обратной связи
+  add_new: Добавить новую форму
+  title: Заголовок
+  delete_title: Удаление формы обратной связи
+  sort: Порядок сортировки
+  visible: Доступные поля
+  message_error: При отправке сообщения произошла ошибка.
+  message_success: Ваше сообщение успешно отправлено.
+  form_message_error: Уведомление при ошибке отправки сообщения
+  form_message_success: Уведомление при успешной отправке сообщения
+  is_published: Активна
+  relationship_error: Удаление не возможно! Возможно форма обратной связи с чемто связана!
+  sorted.not_null: Необходимо выбрать доступные поля
+  description: Описание
+  slug: Адрес формы обратной связи
+  is_registered_user: Для зарегистрированных пользователей
+  is_agree_personal_data: Согласие на обработку персональных данных
+
+feedback:
+  menu_title: Обратная связь
+  form_shown: Опображать форму
+  action_create: Создать информацию для обратной связи
+  action_edit: Редактировать информацию для обратной связи
+
+file:
+  to_big: Слишком большой файл
+  wrong_type: Недопустимый тип файла
+  to_small: Слишком маленькое изображение
+  not_null: Необходимо выбрать изображение
+
+comment_form:
+  text: Текст комментария
+  action_title: Управление комментариями
+  action_edit: Редактировать комментарий
+  action_list: Список коммнетариев
+  delete_title: Удаление коммнетария
+
+post_form:
+  opinion: Особое мнение
+  action_list: Список публикаций
+  action_edit: Редактировать публикацию
+  delete_title: Удаление публикации
+  restore: Восстановление публикации
+
+article_category:
+  delete_title: Удаление раздела новостей
+  action_list: Управление разделами новостей
+
+social_network:
+  action_list: 'Список социальных сетей'
+  action_create: Создать информацию о социальных сетей
+  action_edit: Редактировать информацию о социальных сетей
+  number_order: Порядковий номер
+  link: Ссылка
+  name: Название
+  prefix: Префикс
+
+magazine_newspaper_form:
+  menu_title: Журналы и газеты
+  opinion: Журналы и газеты
+  action_list: Список публикаций
+  action_edit: Редактировать публикацию
+  delete_title: Удаление публикации
+  restore: Восстановление публикации
+  magazine_file: Файл газеты или журнала
+  type_of: Тип публикации
+  magazine: журнал

@@ -1,0 +1,120 @@
+{% extends isDepartment ? 'PortalContentBundle::depBase.html.twig' : 'PortalContentBundle::innerPageBase.html.twig' %}
+
+{% block title %}
+    {{ event.title }} | {{ 'portal'|trans }}
+{% endblock %}
+
+{% block headerPanel %}
+    {{ panelWidget.renderPanel('header-panel', 'event_page')|raw }}
+{% endblock %}
+
+{% block sideBar %}
+    {{ panelWidget.renderPanel('side-panel', 'event_page')|raw }}
+{% endblock %}
+
+{% block beforeContentBlock %}
+    {{ panelWidget.renderPanel('before-content-panel', 'event_page')|raw }}
+{% endblock %}
+
+{% block bottomPanel %}
+    {{ panelWidget.renderPanel('bottom-panel', 'event_page')|raw }}
+{% endblock %}
+
+{% block footerSocialPanel %}
+    {{ panelWidget.renderPanel('footer-panel', 'event_page')|raw }}
+{% endblock %}
+
+{% block innerContent %}
+    <div class="tabs-content__white tabs-content__white_nopad">
+        {% if event.attachment %}
+            {#<div class="slider-photo _nowid">#}
+                {#<div data-width="100%" data-height="auto" class="fotorama slider-photo__fotorama">#}
+                    {#<img src="{{ asset(event.attachment.previewFileUrl) }}" data-caption="{{ event.attachment.fileDescription }}&lt;div class=&quot;slider-photo__posit-box&quot;&gt;&lt;b class=&quot;slider-photo__date&quot;&gt;&lt;/b&gt;&lt;/div&gt;">#}
+                {#</div>#}
+            {#</div>#}
+            <div class="slider-photo _nowid">
+                <div data-width="100%" data-height="auto" class="ft-rama slider-photo__fotorama">
+                    <img src="{{ asset(event.attachment.previewFileUrl) }}">
+                    <div class="fotorama__caption">
+                        <div class="fotorama__caption__wrap">
+                            <div class="slider-photo__title-block">
+                                {{ event.title|raw }}
+                            </div>
+                            <div class="slider-photo__posit-box">
+                                <b class="slider-photo__date">
+                                    {#{{ 'published'|trans }} {{ event.publishedAt|date|localizeddate('long', 'none', app.request.locale, null, 'd MMMM yyyy, hh:mm') }}#}
+                                    {{ 'published'|trans }} {{ event.publishedAt|date|localizeddate('long', 'none', app.request.locale, null, 'd MMMM yyyy') }}
+                                </b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="info__img-text">
+                {{ event.subtitle|raw }}
+            </div>
+        {% endif %}
+
+        <div class="info">
+            <div class="info__title">{{ event.title|raw }}</div>
+            <div class="info__text">{{ event.content|raw }}</div>
+
+            <div class="media__date">
+                <strong>{{ 'event.period'|trans }}: </strong>
+                {{ 'event.from'|trans }} {{ event.startDate|date('d.m.Y') }}
+                {{ event.startDate == event.endDate ? '' : 'event.to'|trans ~ ' ' ~ event.endDate|date('d.m.Y') }}
+            </div>
+            {% if event.place %}
+                <div class="media__date">
+                    <strong>{{ 'event.place'|trans }}: </strong>
+                    {{ event.place }}
+                </div>
+            {% endif %}
+
+            {% if event.location %}
+                <div id="map" style="width: 100%; height: 400px; margin: 20px 0"></div>
+                <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+                <script>
+                    ymaps.ready(init);
+                    function init () {
+                        var myMap = new ymaps.Map("map", {
+                                center: [{{ event.location }}],
+                                zoom: 13
+                            }, {
+                                searchControlProvider: 'yandex#search'
+                            }),
+                            myPlacemark = new ymaps.Placemark([{{ event.location }}]);
+                        myMap.geoObjects.add(myPlacemark);
+                    }
+                </script>
+            {% endif %}
+
+            {% if photoReport is defined %}
+                <div class="slider-photo _nowid">
+                    <div data-width="100%" data-height="auto" data-nav="thumbs" data-thumbheight="100"
+                         data-thumbwidth="180" class="fotorama slider-photo__fotorama">
+                        {% for photo in photoReport %}
+                            <img src="{{ asset(photo.pr_att_file_url) }}" data-caption="{{ photo.photo_report_attachment_description }}">
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="info"></div>
+            {% endif %}
+
+            <div class="share clearfix">
+                <div class="share__block share__block_network">
+                    <div class="share__title">{{ 'share'|trans }}</div>
+                    {{ share.render()|raw }}
+                </div>
+                {% if tags is defined and tags is not empty %}
+                    <div class="share__block share__block_tags">
+                        <div class="share__title _right">{{ 'tags'|trans }}</div>
+                        {% for tag in tags %}
+                            <a href="#{{ tag.id }}" class="share__tag-link" title="">{{ tag.tag }}</a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

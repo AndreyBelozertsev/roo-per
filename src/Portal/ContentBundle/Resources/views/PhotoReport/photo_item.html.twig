@@ -1,0 +1,21 @@
+{% set href = path('photo_report_show', {'id': item.photo_report_id}) %}
+
+<div class="media__content">
+    <div class="data-content">
+        <img src="{{ asset(item.photo_report_file_url|thumbImage) }}" alt="">
+    </div>
+    <a href="{{ href }}" class="media__play media__play_photo" title="{{ 'click_to_view'|trans }}"></a>
+</div>
+<div class="media__info">
+    <div class="media__title">
+        <a href="{{ href }}" title="{{ 'click_to_view'|trans }}">{{ item.photo_report_title }}</a>
+    </div>
+    <div class="media__text">{{ item.photo_report_description|striptags|slice(0,100)|raw }}</div>
+{#    <div class="media__date">{{ item.photo_report_published_at|date('d.m.Y') }}</div>#}
+    <div class="clearfix">
+        <div class="media__eye">
+            {{ item.views_counter }}
+        </div>
+        <div class="media__date">{{ item.photo_report_published_at|date('d.m.Y') }}</div>
+    </div>
+</div>

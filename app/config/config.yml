@@ -1,0 +1,232 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: "@PortalUserBundle/Resources/config/services.yml" }
+    - { resource: "@PortalHelperBundle/Resources/config/services.yml" }
+    - { resource: "@PortalContentBundle/Resources/config/services.yml" }
+    - { resource: "@PortalAdminBundle/Resources/config/services.yml" }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: uk
+    available_lang: ru|uk|en|
+
+framework:
+    #esi:             ~
+    translator:      { fallback: "%locale%" }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enabled: true, enable_annotations: true }
+    #serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+#    trusted_proxies: ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~
+    fragments:       ~
+    http_method_override: true
+    assets:
+        version: "1.2.3"
+#        json_manifest_path: '%kernel.project_dir%/web/themes/public/rev-manifest.json'
+        base_urls:
+            - '%protocol%://%site_name%'
+
+# Twig Configuration
+twig:
+    cache:              false
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    globals:
+        site_name: '%site_name%'
+        protocol: '%protocol%'
+        locale: '%locale%'
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                mapping_types:
+                    enum: string
+                    department_type: string
+                    attachment_type: string
+                    petition_type: string
+                driver:   "%database_driver%"
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "%database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
+                charset:  UTF8
+                keep_slave: false
+
+            customer:
+                driver:   "%database_driver%"
+                host:     "%database_host2%"
+                port:     "%database_port2%"
+                dbname:   "%database_name2%"
+                user:     "%database_user2%"
+                password: "%database_password2%"
+                charset:  UTF8
+
+    orm:
+        default_entity_manager: default
+        entity_managers:
+            default:
+                connection: default
+                mappings:
+                    PortalAdminBundle:  ~
+                    PortalContentBundle: ~
+                    PortalHelperBundle: ~
+                    PortalUserBundle: ~
+            customer:
+                connection: customer
+                mappings:
+                    PortalAdminBundle:  ~
+                    PortalContentBundle: ~
+                    PortalHelperBundle: ~
+                    PortalUserBundle: ~
+        auto_generate_proxy_classes: "%kernel.debug%"
+#        naming_strategy: doctrine.orm.naming_strategy.underscore
+#        auto_mapping: false
+
+# Doctrine Migrations
+doctrine_migrations:
+    dir_name: "%migration_dir%"
+    namespace: Application\Migrations
+    table_name: migration_versions
+    name: Application Migrations
+    organize_migrations: false
+
+# Swift mailer Configuration
+swiftmailer:
+    transport:  "%mailer_transport%"
+    host:       "%mailer_host%"
+    username:   "%mailer_user%"
+    password:   "%mailer_password%"
+    auth_mode:  "%mailer_auth_mode%"
+    port:       "%mailer_port%"
+    encryption: "%mailer_encryption%"
+    spool:     { type: memory }
+    stream-options:
+        ssl:
+            allow_self_signed : true
+            verify_peer: false
+# FOS User
+fos_user:
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
+    db_driver:      orm
+    firewall_name:  main
+    user_class:     Portal\UserBundle\Entity\User
+    registration:
+        form:
+            type: Portal\UserBundle\Form\RegistrationType
+    profile:
+        form:
+            type: Portal\UserBundle\Form\ProfileType
+
+##Sonata
+#sonata_block:
+#    default_contexts: [cms]
+#    blocks:
+#        # enable the SonataAdminBundle block
+#        sonata.admin.block.admin_list:
+#            contexts: [admin]
+#
+#sonata_admin:
+#    title: The government of the Republic of Crimea
+#    templates:
+#        layout: PortalAdminBundle::layout.html.twig
+
+#knp_menu:
+#    # use "twig: false" to disable the Twig extension and the TwigRenderer
+#    twig:
+#        template: KnpMenuBundle::menu.html.twig
+#    #  if true, enables the helper for PHP templates
+#    templating: false
+#    # the renderer to use, list is also available by default
+#    default_renderer: twig
+
+#Genemu
+genemu_form:
+    date: ~
+
+#Vich Uploader
+vich_uploader:
+    db_driver: orm
+    mappings:
+        attachment_mapping:
+            uri_prefix:         /uploads/%instance_code%/attachments
+            upload_destination: "%kernel.root_dir%/../web/uploads/%instance_code%/attachments"
+            namer:              vich_uploader.attachment_namer_origname
+            directory_namer:    vich_uploader.directory_namer
+            inject_on_load:     true
+            delete_on_update:   true
+            delete_on_remove:   true
+        article_preview_attachment_mapping:
+            uri_prefix:         /uploads/%instance_code%/attachments/articles
+            upload_destination: "%kernel.root_dir%/../web/uploads/%instance_code%/attachments/articles"
+            namer:              vich_uploader.attachment_namer_origname
+            directory_namer:    vich_uploader.directory_namer
+            inject_on_load:     true
+            delete_on_update:   true
+            delete_on_remove:   true
+        head_preview_attachment_mapping:
+            uri_prefix:         /uploads/%instance_code%/attachments/heads
+            upload_destination: "%kernel.root_dir%/../web/uploads/%instance_code%/attachments/heads"
+            namer:              vich_uploader.attachment_namer_origname
+            directory_namer:    vich_uploader.directory_namer
+            inject_on_load:     true
+            delete_on_update:   true
+            delete_on_remove:   true
+        photo_report_attachment_mapping:
+            uri_prefix:         /uploads/%instance_code%/attachments/photo-reports
+            upload_destination: "%kernel.root_dir%/../web/uploads/%instance_code%/attachments/photo-reports"
+            namer:              vich_uploader.attachment_namer_origname
+            directory_namer:    vich_uploader.directory_namer
+            inject_on_load:     true
+            delete_on_remove:   true
+            delete_on_update:   true
+        feedback_form_attachment_mapping:
+            uri_prefix:         /uploads/%instance_code%/attachments/feedbacks
+            upload_destination: "%kernel.root_dir%/../web/uploads/%instance_code%/attachments/feedbacks"
+            namer:              vich_uploader.attachment_namer_origname
+            directory_namer:    vich_uploader.directory_namer
+            inject_on_load:     true
+            delete_on_remove:   true
+            delete_on_update:   true
+        document_attachment_mapping:
+            uri_prefix:         /uploads/%instance_code%/attachments/documents
+            upload_destination: "%kernel.root_dir%/../web/uploads/%instance_code%/attachments/documents"
+            namer:              vich_uploader.attachment_namer_document
+            directory_namer:    vich_uploader.directory_namer
+            inject_on_load:     true
+            delete_on_remove:   true
+            delete_on_update:   true
+
+bazinga_js_translation:
+    locale_fallback:      "%locale%"
+    default_domain:       messages
+
+stof_doctrine_extensions:
+    orm:
+        default:
+            timestampable: true
+            sluggable : true
+        customer:
+            timestampable: true
+            sluggable : true
+
+gregwar_captcha: ~

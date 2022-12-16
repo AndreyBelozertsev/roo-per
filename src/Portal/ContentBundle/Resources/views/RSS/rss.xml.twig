@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+<channel>
+    <title>{{ 'government'|trans() }}</title>
+    <link>{{ url('portal_content_homepage') }}</link>
+    <description>{{ 'rss.title'|trans() }}</description>
+{% for article in articles %}
+    <item>
+        <title>{{ article.title }}</title>
+{% if article.originalInstanceCode is defined and article.originalInstanceCode %}
+    {% set href = 'https://' ~  article.originalInstanceCode ~ '.' ~ site_name ~ path('article_show', { id:article.originalArticleId }) %}
+{% else %}
+    {% set href = url('article_show', { id:article.id }) %}
+{% endif %}
+    <link>{{ href }}</link>
+        <guid isPermaLink="true">{{ href }}</guid>
+        <description>{{ article.subtitle|striptags }}</description>
+        <pubDate>{{ article.publishedAt|date('D, d M Y h:i:s O') }}</pubDate>
+    </item>
+{% endfor %}
+</channel>
+</rss>

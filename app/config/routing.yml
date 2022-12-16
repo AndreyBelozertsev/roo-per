@@ -1,0 +1,56 @@
+
+portal_content_comment:
+    resource: "@PortalAdminBundle/Controller/CommentAdminController.php"
+    type:     annotation
+
+portal_admin:
+    resource: "@PortalAdminBundle/Resources/config/routing.yml"
+    prefix:   /%admin_prefix%
+
+portal_structure:
+    resource: "@PortalContentBundle/Controller/StructureContentController.php"
+    type:     annotation
+
+portal_content:
+    resource: "@PortalContentBundle/Resources/config/routing.yml"
+    prefix:   /
+
+portal_pdf:
+    resource: "@PortalPdfJSBundle/Resources/config/routing.yml"
+    prefix:   /
+
+portal_helper:
+    resource: "@PortalHelperBundle/Resources/config/routing.yml"
+    prefix:   /
+
+portal_user:
+    resource: "@PortalUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+# FOS User
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+    prefix: /admin-portal/
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /change-password
+
+# Bazinga JS Translation
+_bazinga_jstranslation:
+    resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"
+
+gregwar_captcha_routing:
+    resource: "@GregwarCaptchaBundle/Resources/config/routing/routing.yml"
+    prefix: /_gcb

@@ -1,0 +1,66 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'menu_page.title'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'menu_page.title'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permission_codes = permissions.code() %}
+{% set allowEdit = constant('Portal\\ContentBundle\\Entity\\MenuNode::PERMISSIONS_MENU_NODE')['edit'] in permission_codes %}
+
+{% block topbuttons %}
+    {% if sa or 'create_menu_node' in permission_codes %}
+        <a class="btn btn-success" href="{{ path('admin_instance_menu_node_edit', {'menuNodeId': 0, 'instanceCode': instanceCode}) }}">
+            <i class="glyphicon glyphicon-plus-sign"></i> {{ 'menu_page.add_new'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% include 'PortalAdminBundle:MenuNodeAdmin:filters.html.twig' %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{{ 'label'|trans }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for menuNode in pagerFanta.currentPageResults %}
+            <tr>
+                <td>
+                    {% if sa or allowEdit %}
+                        <a href="{{ path('admin_instance_menu_node_edit', { 'menuNodeId': menuNode.id, 'instanceCode': instanceCode }) }}">
+                            {{ menuNode.title }}
+                        </a>
+                    {% else %}
+                        {{ menuNode.title }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if sa or allowEdit %}
+                        <a href="{{ path('admin_instance_menu_node_edit', { 'menuNodeId': menuNode.id, 'instanceCode': instanceCode }) }}"
+                           class="btn btn-sm btn-primary">
+                            <i class="glyphicon glyphicon-edit"></i> {{ 'edit'|trans }}
+                        </a>
+                    {% endif %}
+                    {% if sa or constant('Portal\\ContentBundle\\Entity\\MenuNode::PERMISSIONS_MENU_NODE')['delete'] in permission_codes %}
+                        <button class="btn btn-warning" onclick="adminPage.menuNode.removeItem({{ menuNode.id }}, '{{ instanceCode }}')">
+                            <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+                        </button>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagerfanta">
+        {{ pagerfanta(pagerFanta, 'twitter_bootstrap3') }}
+    </div>
+{% endblock %}

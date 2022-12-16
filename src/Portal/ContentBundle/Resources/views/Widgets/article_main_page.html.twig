@@ -1,0 +1,38 @@
+<div class="title">{{ 'news'|trans() }}</div>
+<a href="{{ path('view_all_articles') }}" class="news-box__link-all-mews">
+    {{ 'all_news'|trans() }}
+</a>
+<div class="tabs tabs_main-page">
+    <div class="tabs__nav">
+        <div class="tooltip tabs__link tabs__link_prev link-arrow-disabled" title="{{ 'arrow.prev'|trans() }}"></div>
+        <div class="tooltip tabs__link tabs__link_next" title="{{ 'arrow.next'|trans() }}"></div>
+    </div>
+    {% if instanceCategoryList is not empty %}
+        <ul class="tabs__caption clearfix">
+            {% for category in instanceCategoryList %}
+                <li class="tabs__item {{ loop.first ? 'tabs__item_active' : '' }}" data-catid="{{ category.instance_category_id }}"  data-page="0">
+                    {{ category.instance_category_title }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if articleList is not empty %}
+        <div id="get-more" data-locale="{{ app.request.locale }}"></div>
+        {% set categoryPrev = 0 %}
+        {% for article in articleList %}
+            {% if article.category_id != categoryPrev %}
+                {% set categoryPrev = article.category_id %}
+                {% if not loop.first %}
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="tabs__content {{ loop.first ? 'tabs__content_active' : '' }}" data-catid="{{ categoryPrev }}">
+                    <div class="flex_space">
+            {% endif %}
+            {% include 'PortalContentBundle:Article:article.template.html.twig' %}
+        {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>

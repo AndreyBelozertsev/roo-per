@@ -1,0 +1,16 @@
+{% if quote %}
+    <div class="headman inform-bloks box">
+        <div class="headman__title">{% if quote_label is defined and quote_label %}{{ quote_label }}{% endif %}</div>
+        <div class="headman__comment">
+            {% if quote_link is defined and quote_link %}
+                <a href="{{quote_link}}">
+                    <div class="open"></div>
+                    {{ quote }}
+                </a>
+            {% else %}
+                <div class="open"></div>
+                {{ quote }}
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

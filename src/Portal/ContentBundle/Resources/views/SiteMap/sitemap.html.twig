@@ -1,0 +1,23 @@
+{% extends isDepartment ? 'PortalContentBundle::depBase.html.twig' : 'PortalContentBundle::innerPageBase.html.twig' %}
+
+{% block title %}
+    {{ 'site_map'|trans() }} | {{ parent() }}
+{% endblock %}
+
+{% block innerContent %}
+    <div class="tabs-content__white tabs-content__white_nopad">
+        {{ parent() }}
+        <div class="info">
+            <div class="info__title">{{ 'site_map'|trans() }}</div>
+            <div class="sitemap">
+                {#{{ knp_menu_render('structure') }}#}
+                {{ siteMap|raw }}
+            </div>
+        </div>
+    </div>
+    <style>
+        .sitemap li {
+            display: block;
+        }
+    </style>
+{% endblock %}

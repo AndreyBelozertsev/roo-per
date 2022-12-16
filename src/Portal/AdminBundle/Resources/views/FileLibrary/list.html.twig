@@ -1,0 +1,69 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'media_manager.file_list'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'media_manager.file_list'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+
+{% block topbuttons %}{% endblock %}
+
+{% block body %}
+    {% include 'PortalAdminBundle:FileLibrary:filters.html.twig' %}
+    <div>
+        {% if sa or constant('Portal\\ContentBundle\\Entity\\Attachment::PERMISSIONS_FILE_LIB')['delete'] in permissions.code() %}
+            <a class="btn btn-warning" onclick="removeAttachment('{{ instanceCode }}', '{{ app.request.get('_route') }}');">
+                <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+            </a>
+        {% endif %}
+        <div>
+            {% for item in files %}
+                {{ item.original_file_name }}
+                <input id="file_{{ item.id }}" type="checkbox" value="{{ item.id }}">
+                <img src="{{ item.preview_file_url }}" width="350" height="250">
+            {% endfor %}
+        </div>
+        <ul class="pagination">
+            {% if pagination.currentPage > 1 %}
+                <li>
+                    <a href="{{ path('admin_instance_file_library', query|merge({'instanceCode': instanceCode, 'page': pagination.currentPage - 1})) }}">
+                        {{ 'previous'|trans }}
+                    </a>
+                </li>
+            {% else %}
+                <li class="disabled"></li>
+            {% endif %}
+            {% for paginationItem in pagination.rangeFirstPage..pagination.lastPage %}
+                {% if paginationItem == 0 %}
+                    <li class="disabled"></li>
+                {% elseif paginationItem == pagination.currentPage %}
+                    <li class="active">
+                        <a href="">{{ paginationItem }}</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ path('admin_instance_file_library', query|merge({'instanceCode': instanceCode, 'page': paginationItem})) }}">
+                            {{ paginationItem }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if pagination.currentPage < pagination.pageCount %}
+                <li>
+                    <a href="{{ path('admin_instance_file_library', query|merge({'instanceCode': instanceCode, 'page': pagination.currentPage + 1})) }}">
+                        {{ 'next'|trans }}
+                    </a>
+                </li>
+            {% else %}
+                <li class="disabled"></li>
+            {% endif %}
+        </ul>
+    </div>
+
+  <script src="{{ asset('bundles/portaladmin/js/attachment.js') }}"></script>
+{% endblock %}

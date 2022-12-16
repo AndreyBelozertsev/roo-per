@@ -1,0 +1,44 @@
+{% extends 'PortalContentBundle::base.html.twig' %}
+
+{% block info_page %}
+    {% set currentCat = categoryList[app.request.get('cat')] %}
+    <div class="info-page">
+        <div class="info-page__posit">
+            <div class="bread-crumbs">
+                <ul>
+                    <li><a href="{{ path('portal_content_homepage') }}">{{ 'Home'|trans }}</a></li>
+                    <li>{{ currentCat }}</li>
+                </ul>
+            </div>
+            <div class="title-page">{{ currentCat }}</div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% set currentCat = categoryList[app.request.get('cat')] %}
+    <div class="content content_catalog">
+        {% for article in articleList %}
+            <a href="{{ path('article_show', { 'id': article.id }) }}"  class="news__item">
+                <div class="news__img"><img src="{{ asset(article.preview_file_url|thumbImage) }}"></div>
+                <div class="news__topic">{{ currentCat }}</div>
+                <div class="news__title">{{ attribute(article, 'title_' ~ app.request.locale) }}</div>
+                <div class="news__info clearfix">
+                    {#<div class="news__views icons_eye-blue">{{ article.views_counter }}</div>#}
+                    <div class="news__coment icons_message-blue">{{ article.comments }}</div>
+                    <div class="news__date">{{ article.created_at|date|localizeddate('full', 'none', app.request.locale, null, 'd MMMM yyyy' ) }}</div>
+                </div>
+            </a>
+            <!--.news__item-->
+        {% endfor %}
+    </div>
+
+    {% if hideButton == false %}
+        <div class="button_posit-box get-more-articles" data-page="{{ currentPage }}"  data-cat="{{ category }}">
+            <div class="button button_center">{{ 'Show more'|trans }}</div>
+        </div>
+    {% endif %}
+    <div class="pagination clearfix">
+        {{ pagination|raw }}
+    </div>
+{% endblock %}

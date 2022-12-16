@@ -1,0 +1,49 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block topbuttons %}
+    <a class="btn btn-success back-to-list" href="{{ path('admin_admin_param_list' ) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+        <div id="form-body" class="clearfix">
+            <div class="form-group">
+                <div class="col-sm-2 text-right">{{ form_label(form.title) }}</div>
+                <div class="col-sm-10">
+                    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                    <div class="errors">
+                        {% for error in form.title.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 text-right">{{ form_label(form.value) }}</div>
+                <div class="col-sm-10">
+                    {{ form_widget(form.value, {'attr': {'class': 'form-control'}}) }}
+                    <div class="errors">
+                        {% for error in form.value.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-10">
+                    <div id="btn_article" class="form-actions">
+                        <button id="btn_edit" class="btn btn-success" type="submit" name="btn_edit">
+                            <i class="glyphicon glyphicon-floppy-disk"></i> {{ 'save'|trans }}
+                        </button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

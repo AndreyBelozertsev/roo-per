@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+            .body {
+                text-align: center;
+                background-color: #f6f6f6;
+                font-family: sans-serif;
+                -webkit-font-smoothing: antialiased;
+                font-size: 14px;
+                line-height: 1.4;
+                margin: 0;
+                padding: 0;
+                -ms-text-size-adjust: 100%;
+                -webkit-text-size-adjust: 100%;
+            }
+
+            .wraper {
+                text-align: left;
+                border-collapse: separate;
+                mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                border-spacing: 0;
+                background-color: #f6f6f6;
+                width: 100%;
+                max-width: 800px;
+                min-width: 350px
+            }
+
+            .title {
+                font-family: sans-serif;
+                font-size: 14px;
+                width: 20%;
+                padding: 10px;
+                vertical-align: top;
+            }
+
+            .container {
+                font-family: sans-serif;
+                font-size: 14px;
+                display: block;
+                margin: 0 auto;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body class="body" style="text-align:center;background-color:#f6f6f6;font-family:sans-serif;-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.4;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;" >
+        <table class="wraper" cellspacing="0" cellpadding="0" border="0" bgcolor="#f6f6f6" style="text-align:left;border-collapse:separate;mso-table-lspace:0pt;mso-table-rspace:0pt;border-spacing:0;background-color:#f6f6f6;width:100%;max-width:800px;min-width:350px;" >
+            <tr>
+                <td>
+                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f6f6f6">
+                        <tbody>
+                        {% if feedbackFormValue.author %}
+                            <tr>
+                                <td class="title" style="font-family:sans-serif;font-size:14px;width:20%;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;vertical-align:top;" >{{ 'feedback_form_value.feedback_from_author'|trans() }}:</td>
+                                <td class="container" style="font-family:sans-serif;font-size:14px;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;" >
+                                    {{ feedbackFormValue.author }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if feedbackFormValue.categoryId %}
+                            <tr>
+                                <td class="title" style="font-family:sans-serif;font-size:14px;width:20%;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;vertical-align:top;" >{{ 'feedback_form_value.category'|trans() }}:</td>
+                                <td class="container" style="font-family:sans-serif;font-size:14px;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;" >
+                                    {{ feedbackFormValue.categoryId.label }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if feedbackFormValue.subject %}
+                            <tr>
+                                <td class="title" style="font-family:sans-serif;font-size:14px;width:20%;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;vertical-align:top;" >{{ 'feedback_form_value.subject'|trans() }}:</td>
+                                <td class="container" style="font-family:sans-serif;font-size:14px;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;" >
+                                    {{ feedbackFormValue.subject }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if feedbackFormValue.message %}
+                            <tr>
+                                <td class="title" style="font-family:sans-serif;font-size:14px;width:20%;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;vertical-align:top;" >{{ 'feedback_form_value.message'|trans() }}:</td>
+                                <td class="container" style="font-family:sans-serif;font-size:14px;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;" >
+                                    {{ feedbackFormValue.message }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Дополнительные данные:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f6f6f6">
+                        <tbody>
+                        {% if feedbackFormValue.email %}
+                            <tr>
+                                <td class="title" style="font-family:sans-serif;font-size:14px;width:20%;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;vertical-align:top;" >{{ 'feedback_form_value.email'|trans() }}:</td>
+                                <td class="container" style="font-family:sans-serif;font-size:14px;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;" >
+                                    {{ feedbackFormValue.email }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if feedbackFormValue.phone %}
+                            <tr>
+                                <td class="title" style="font-family:sans-serif;font-size:14px;width:20%;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;vertical-align:top;" >{{ 'feedback_form_value.phone'|trans() }}:</td>
+                                <td class="container" style="font-family:sans-serif;font-size:14px;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;" >
+                                    {{ feedbackFormValue.phone }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if feedbackFormValue.addressGroup %}
+                            <tr>
+                                <td class="title" style="font-family:sans-serif;font-size:14px;width:20%;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;vertical-align:top;" >{{ 'feedback_form_value.address_group'|trans() }}:</td>
+                                <td class="container" style="font-family:sans-serif;font-size:14px;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;" >
+                                    {{ feedbackFormValue.addressGroup.label }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if feedbackFormValue.sexGroup %}
+                            <tr>
+                                <td class="title" style="font-family:sans-serif;font-size:14px;width:20%;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;vertical-align:top;" >{{ 'feedback_form_value.sex_group'|trans() }}:</td>
+                                <td class="container" style="font-family:sans-serif;font-size:14px;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;" >
+                                    {{ feedbackFormValue.sexGroup.label }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if feedbackFormValue.ageGroup %}
+                            <tr>
+                                <td class="title" style="font-family:sans-serif;font-size:14px;width:20%;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;vertical-align:top;" >{{ 'feedback_form_value.age_group'|trans() }}:</td>
+                                <td class="container" style="font-family:sans-serif;font-size:14px;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;" >
+                                    {{ feedbackFormValue.ageGroup.label }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if feedbackFormValue.socialGroup %}
+                            <tr>
+                                <td class="title" style="font-family:sans-serif;font-size:14px;width:20%;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;vertical-align:top;" >{{ 'feedback_form_value.social_group'|trans() }}:</td>
+                                <td class="container" style="font-family:sans-serif;font-size:14px;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;" >
+                                    {{ feedbackFormValue.socialGroup.label }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if feedbackFormValue.privilegeGroup %}
+                            <tr>
+                                <td class="title" style="font-family:sans-serif;font-size:14px;width:20%;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;vertical-align:top;" >{{ 'feedback_form_value.privilege_group'|trans() }}:</td>
+                                <td class="container" style="font-family:sans-serif;font-size:14px;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;" >
+                                    {{ feedbackFormValue.privilegeGroup.label }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

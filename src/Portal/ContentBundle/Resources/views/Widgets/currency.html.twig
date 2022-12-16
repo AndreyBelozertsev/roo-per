@@ -1,0 +1,18 @@
+{% if error is defined %}
+    {{ error }}
+{% else %}
+    <div class="inform-bloks box">
+        <div class="mail-delivery__title">{{ 'currency'|trans() }} {{ date|date('d.m') }}</div>
+        {% for key, cr in currency %}
+            <div class="currency">
+                <div class="currency-name">
+                    <img src="{{ asset('themes/public/img/' ~ key ~ '.png') }}" alt="{{ key }}"> {{ cr.char_code }}
+                    <span>{{ cr.name }}</span>
+                </div>
+                <div class="currency-val">
+                     <span class="rub"></span>{{ cr.value|round(2) }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

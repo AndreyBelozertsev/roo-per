@@ -1,0 +1,46 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'interview_form.action_list'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'interview_form.action_list'|trans }}
+{% endblock %}
+
+{% block topbuttons %}
+    <a class="btn btn-success" href="{{ path('admin_instance_interview_list', {'instanceCode': instanceCode}) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+{% endblock %}
+
+{% block body %}
+    <div class="quiz quiz_admin">
+        <div class="quiz__header clearfix">
+            <div class="quiz__title quiz__left">{{ interview.title }}</div>
+        </div>
+        {% if results is defined and results is not empty %}
+            <div class="quiz__body">
+                {% set unique = null %}
+                {% set rowNum = 0 %}
+                <table class="quiz-table">
+                {% for result in results %}
+                    <tr>
+                    {% if unique != result.unique %}
+                        {% set unique = result.unique %}
+                        <td rowspan="{{ countQuestion }}" class="quiz-table__date">{{ result.date_pass }}</td>
+                    {% endif %}
+                        <td class="quiz-table__question">{{ result.question }}:</td>
+                        <td class="quiz-table__text-list">{{ result.answer }}</td>
+                    </tr>
+                {% endfor %}
+                </table>
+            </div>
+            <div class="quiz__footer clearfix">
+                <div class="quiz__voted quiz__right">{{ 'interview.voted'|trans }}:<b> {{ voted }}</b></div>
+            </div>
+        {% else %}
+            <p>{{ 'interview.not_result'|trans }}</p>
+        {% endif %}
+    </div>
+{% endblock %}

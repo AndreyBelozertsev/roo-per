@@ -1,0 +1,43 @@
+{% if item is defined and route is defined and jsBtnEntity is defined %}
+    {% set title = item.title is defined ? item.title : title %}
+    {% set permission = permission is defined ? permission : jsBtnEntity  %}
+
+    {% if item.isDeleted is defined and item.isDeleted %}
+        <div class="col-sm-8 grey-text">
+            {{ title }} {{ 'is_deleted'|trans }}
+        </div>
+        <div class="col-sm-4 text-right">
+            {% if sa or ('restore_'~permission) in permissionCodes or item.author == app.user.id %}
+                <a class="btn btn-sm btn-default" onclick="adminPage.{{ jsBtnEntity }}.restoreItem({{ item.id }}, '{{ instanceCode }}');">
+                    <i class="glyphicon glyphicon-repeat"></i> {{ 'restore'|trans }}
+                </a>
+            {% endif %}
+        </div>
+    {% else %}
+        {% set route = path(route, {'id': item.id, 'instanceCode': instanceCode}) %}
+
+        <div class="col-sm-8">
+            {% if sa or ('edit_'~permission) in permissionCodes or item.author == app.user.id %}
+                <a href="{{ route }}" title="{{ title }}">{{ title }}</a>
+            {% else %}
+                {{ title }}
+            {% endif %}
+        </div>
+        <div class="col-sm-4 text-right">
+            {% if sa or ('edit_'~permission) in permissionCodes or item.author == app.user.id %}
+                <a href="{{ route }}" class="btn btn-sm btn-primary">
+                    <i class="glyphicon glyphicon-edit"></i> {{ 'edit'|trans }}
+                </a>
+            {% endif %}
+            {% if sa or ('delete_'~permission) in permissionCodes or item.author == app.user.id %}
+                <a class="btn btn-sm btn-warning"
+                   {#onclick="adminPage.{{ jsBtnEntity }}.removeItem({{ item.id }}, '{{ instanceCode }}', {{ structureId }});">#}
+                   onclick="adminPage.{{ jsBtnEntity }}.removeItem({{ item.id }}, '{{ instanceCode }}');">
+                    <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <div class="clearfix"></div>
+{% endif %}

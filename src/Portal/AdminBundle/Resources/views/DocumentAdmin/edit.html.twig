@@ -1,0 +1,289 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'document.create'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'document.create'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permissionCodes = permissions.getCode() %}
+
+{% block topbuttons %}
+    <a class="btn btn-success back-to-list" href="{{ path('admin_instance_document_view_all', {'instanceCode': instanceCode}) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+    {% if form.menuNode.vars.value and (sa or 'edit_structure' in permissionCodes) %}
+        <a class="btn btn-success" href="{{ path('admin_instance_structure_index', {
+            'instanceCode': instanceCode,
+            'selected_node': form.menuNode.vars.value
+        }) }}">
+            <i class="glyphicon glyphicon-share-alt"></i> {{ 'to_structure'|trans }}
+        </a>
+    {% endif %}
+    {% if form.vars.value.id is defined and form.vars.value.id %}
+        {% if sa or constant('Portal\\ContentBundle\\Entity\\Document::PERMISSIONS_DOCUMENT')['create'] in permissionCodes %}
+             <a class="btn btn-success" href="{{ path('admin_instance_document_edit', {'id': 0, 'instanceCode': instanceCode}) }}">
+                <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+            </a>
+        {% endif %}
+        {% if sa or constant('Portal\\ContentBundle\\Entity\\Document::PERMISSIONS_DOCUMENT')['delete'] in permissionCodes or document.author == app.user.id %}
+            <a class="btn btn-warning soft-delete-btn" onclick="adminPage.document.removeItem({{ form.vars.value.id }}, '{{ instanceCode }}');">
+                <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+            </a>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script defer src="{{ asset('bundles/portaladmin/script/document/add-new-doc.js') }}"></script>
+    <script src="{{ asset('bundles/portaladmin/script/slug-form/slug-form.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/portaladmin/css/slug.css') }}" media="screen" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block body %}
+    {% if form is defined %}
+        <input id="data_document" type="hidden" data-instance-code="{{ instanceCode }}" data-document-id="{{ document.id }}">
+        {{ form_start(form) }}
+
+        <div class="form-group">
+            <div class="col-md-3 text-right">{{ form_label(form.category) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+                <div class="errors">
+                    {% for error in form.category.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-3 text-right">{{ form_label(form.title) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                <div class="errors">
+                    {% for error in form.title.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        {% if slug %}
+            <div class="form-group">
+                {% set subDomain = (instanceCode == 'main') ? '' : instanceCode ~ '.' %}
+                <div class="col-sm-3 text-right">{{ form_label(form.isLinkOnId) }}</div>
+                <div class="col-sm-9">
+                    <div class="add-link-container">
+                        <div class="add-link-id-con">
+                            {{ form_widget(form.isLinkOnId) }}
+                        </div>
+                        <div class="add-link-con2 add-link-con1  {{ document.isLinkOnId ? '' : 'hidden-link' }}">
+                            {{ protocol ~ '://' ~ subDomain }}{{ app.request.getHttpHost }}{{ path('document_show', {'id': document.id}) }}
+                        </div>
+                        <div class="add-link-con3 {{ document.isLinkOnId ? '' : 'hidden-link' }}">
+                            <a class="btn btn-success" id="button_copy_link_id" title="{{ 'click_to_copy'|trans }}">
+                                <i class="fa fa-copy"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="errors">
+                        {% for error in form.isLinkOnId.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        {% endif %}
+        <div id="view_slug" class="{{ document.isLinkOnId ? 'hidden-link' : '' }}">
+        {% if slug %}
+            <div class="form-group">
+                <div class="col-md-3 text-right">{{ form_label(form.slug) }}</div>
+                <div class="col-sm-9">
+                    <div class="add-link-container">
+                        <div class="add-link-con1">
+                            {% set subDomain = (instanceCode == 'main') ? '' : instanceCode ~ '.' %}
+                            {{ protocol ~ '://' ~ subDomain }}{{ app.request.getHttpHost }}{{ path('document_show_slug') }}/
+                            <input type="hidden" id="input_copy_ref"
+                                   value="{{ protocol ~ '://' ~ subDomain }}{{ app.request.getHttpHost }}{{ path('document_show_slug', {slug: document.slug}) }}">
+                        </div>
+                        <div class="add-link-con2">
+                            {{ form_widget(form.slug, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="add-link-con3">
+                            <a class="btn btn-success" id="button_copy_ref" title="{{ 'click_to_copy'|trans }}">
+                                <i class="fa fa-copy"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="errors">
+                        {% for error in form.slug.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        {% endif %}
+        </div>
+        <div class="form-group">
+            <div class="col-md-3 text-right">{{ form_label(form.content) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+                <div class="errors">
+                    {% for error in form.content.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-3 text-right">{{ form_label(form.menuNode) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.menuNode) }}
+                <div class="errors">
+                    {% for error in form.menuNode.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-3 text-right">{{ form_label(form.isPublished) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.isPublished) }}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ 'publish_date'|trans }}</div>
+            <div class="col-sm-9">
+                {% if form.publishedAt is defined %}
+                    {{ form_widget(form.publishedAt, {'attr': {'class': 'form-control js-datepicker'}}) }}
+                    <div class="errors">
+                        {% for error in form.publishedAt.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="add-link-container">
+                        {{ form.vars.value.publishedAt ? form.vars.value.publishedAt|date('d.m.Y') : '' }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-3 text-right">{{ form_label(form.documentNumber) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.documentNumber, {'attr': {'class': 'form-control'}}) }}
+                <div class="errors">
+                    {% for error in form.documentNumber.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-3 text-right">{{ form_label(form.approvalDate) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.approvalDate, {'attr': {'class': 'form-control js-datepicker'}}) }}
+                <div class="errors">
+                    {% for error in form.approvalDate.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-3 text-right">{{ 'Attachment'|trans }}</div>
+            <div class="col-sm-9">
+                <div class="previews" data-prototype="{{ form_widget(form.attachments.vars.prototype)|e('html_attr') }}">
+                    {% for attachment in form.attachments %}
+                        {# TODO: solve the problem with deleting files #}
+                        <div class="preview-form{{ attachment.vars.data.originalFileName ? '' : ' new' }}" {{ attachment.vars.data.preview is null ? 'style="display: none;"' : '' }}>
+                            <div class="col-sm-4">
+                                <i class="file-icon {{ attachment.vars.data ? attachment.vars.data.originalFileName|split('.')|last : 'doc' }}"></i>
+                                {% if attachment.vars.data.previewFileUrl is defined %}
+                                    <a href="{{ asset(attachment.vars.data.previewFileUrl) }}" class="color-grey">
+                                        {{ attachment.vars.data.originalFileName }}
+                                        <small>({{ attachment.vars.data.preview }})</small>
+                                    </a>
+                                {% endif %}
+                                {{ form_widget(attachment.file.file) }}
+                            </div>
+                            <div class="col-sm-8">
+                                {{ form_label(attachment.description) }}
+                                {{ form_widget(attachment.description, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(attachment.description) }}
+                                {{ form_label(attachment.file) }}
+                                {{ form_widget(attachment.file) }}
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        {% for error in attachment.file.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                        {#{% for error in attachment.file.vars.errors.form.parent.parent.parent.errors %}#}
+                            {#<div class="alert alert-danger">{{ error.message }}</div>#}
+                        {#{% endfor %}#}
+                    {% endfor %}
+                </div>
+                <div>
+                    <button id="btn_add_photo" class="btn btn-sm btn-success btn_add_photo" type="button" name="btn_add_photo">
+                        <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+                    </button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-3 text-right">{{ form_label(form.documentType) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.documentType, {'attr': {'class': 'form-control'}}) }}
+                <div class="errors">
+                    {% for error in form.documentType.vars.errors %}
+                        <div class="alert alert-danger">{{ error.message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-3 text-right">{{ form_label(form.tags) }}</div>
+            <div class="col-sm-9">
+                {{ form_widget(form.tags) }}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-3"></div>
+            <div class="col-sm-9">
+                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-success'}}) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+    {% endif %}
+    <br>
+{#    {{form.vars.value.id}}, {{instanceCode}}, {{constant('Portal\\HelperBundle\\Entity\\Log::ENTITY_TYPE_EVENT'))}}#}
+{% endblock %}
+
+{% block history %}
+    {% if form.vars.value.id is defined and form.vars.value.id %}
+        {{ entityLog.renderHistory(form.vars.value.id, instanceCode, constant('Portal\\HelperBundle\\Entity\\Log::ENTITY_TYPE_DOCUMENT'))|raw }}
+    {% endif %}
+{% endblock %}

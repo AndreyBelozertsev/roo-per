@@ -1,0 +1,1119 @@
+admin_instance:
+    path: /instance/{instanceCode}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:Default:instance, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+
+#feedbackForm
+admin_instance_feedback_viewall:
+    path: /instance/{instanceCode}/feedbackform/list{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:FeedbackFormAdmin:list, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_feedback_form_create:
+    path: /instance/{instanceCode}/feedbackform/create{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:FeedbackFormAdmin:create, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_feedback_form_delete:
+    path: /instance/{instanceCode}/feedbackform/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:FeedbackFormAdmin:delete, id: "0", trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_feedback_category_viewall:
+    path: /instance/{instanceCode}/feedbackform-category/list{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:FeedbackCategoryAdmin:list, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_feedback_category_edit:
+    path: /instance/{instanceCode}/feedbackform-category/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:FeedbackCategoryAdmin:edit, id: "0", trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_feedback_category_create:
+    path: /instance/{instanceCode}/feedbackform-category/create{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:FeedbackCategoryAdmin:create, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_feedback_category_delete:
+    path: /instance/{instanceCode}/feedbackform-category/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:FeedbackCategoryAdmin:delete, id: "0", trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+admin_instance_feedback_form_esia:
+    path: /instance/{instanceCode}/feedbackform/esia{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:FeedbackFormAdmin:getVisibleFields, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+#articleForm
+admin_instance_article_form_create:
+    path: /instance/{instanceCode}/article/{cat}/create{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:ArticleAdmin:create, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        cat: \d+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_article_form_edit:
+    path: /instance/{instanceCode}/article/{cat}/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:ArticleAdmin:edit, id: "0", trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        cat: \d+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_article_list:
+    path: /instance/{instanceCode}/article/{cat}/list{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:ArticleAdmin:list, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        cat: \d+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_article_delete:
+    path: /instance/{instanceCode}/article/{cat}/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:ArticleAdmin:delete, id: "0", trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        cat: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_article_restore:
+    path: /instance/{instanceCode}/article/{cat}/restore/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:ArticleAdmin:restore, id: "0", trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        cat: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+#headForm
+admin_instance_head_form_create:
+    path: /instance/{instanceCode}/head/create{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:HeadAdmin:create, trailingSlash: "/", instanceCode: "main", instanceCode: "main" }
+    requirements:
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_head_form_edit:
+    path: /instance/{instanceCode}/head/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:HeadAdmin:edit, id: "0", trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_head_list:
+    path: /instance/{instanceCode}/head/list{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:HeadAdmin:list, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_head_form_delete:
+    path: /instance/{instanceCode}/head/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:HeadAdmin:delete, id: "0", trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+        
+admin_instance_head_form_restore:
+    path: /instance/{instanceCode}/head/restore/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:HeadAdmin:restore, id: "0", trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_head_sort:
+    path: /instance/{instanceCode}/head/sort/{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:HeadAdmin:sort, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_head_checked_on_id:
+    path: /instance/{instanceCode}/head/json-checked-id/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:HeadAdmin:checkedOnId, trailingSlash: "/" }
+    requirements:
+        menuNodeId: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+#documents
+admin_instance_document_view_all:
+    path: /instance/{instanceCode}/document/view-all{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:DocumentAdmin:viewAll, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_document_edit:
+    path: /instance/{instanceCode}/document/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:DocumentAdmin:edit, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        id: \d+
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_document_delete:
+    path: /instance/{instanceCode}/document/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:DocumentAdmin:delete, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        id: \d+
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_document_restore:
+    path: /instance/{instanceCode}/document/restore/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:DocumentAdmin:restore, id: "0", trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_document_checked_on_id:
+    path: /instance/{instanceCode}/document/json-checked-id/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:DocumentAdmin:checkedOnId, trailingSlash: "/" }
+    requirements:
+        menuNodeId: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+#document category
+admin_instance_document_category_view_all:
+    path: /instance/{instanceCode}/document-category/view-all{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:DocumentCategoryAdmin:viewAll, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+
+admin_instance_document_category_edit:
+    path: /instance/{instanceCode}/document-category/edit/{documentCategoryId}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:DocumentCategoryAdmin:edit, trailingSlash: "/" }
+    requirements:
+        documentCategoryId: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+
+admin_instance_document_category_delete:
+    path: /instance/{instanceCode}/document-category/delete/{documentCategoryId}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:DocumentCategoryAdmin:delete, trailingSlash: "/" }
+    requirements:
+        documentCategoryId: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+#Interview
+admin_instance_interview_form_create:
+    path: /instance/{instanceCode}/interview/create{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InterviewAdmin:create, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_interview_list:
+    path: /instance/{instanceCode}/interview/list{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InterviewAdmin:list, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_interview_form_edit:
+    path: /instance/{instanceCode}/interview/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InterviewAdmin:edit, id: "0", trailingSlash: "/"  }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+        
+admin_instance_interview_form_delete:
+    path: /instance/{instanceCode}/interview/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InterviewAdmin:delete, id: "0", trailingSlash: "/"  }
+    requirements:
+        id: \d+
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_interview_form_restore:
+    path: /instance/{instanceCode}/interview/restore/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InterviewAdmin:restore, id: "0", trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_interview_result:
+    path: /instance/{instanceCode}/interview/result/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InterviewAdmin:result, id: "0", trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+
+admin_instance_interview_result_voting:
+    path: /instance/{instanceCode}/interview/result-voting/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InterviewAdmin:resultVoting, id: "0", trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+
+admin_instance_interview_export_xls:
+    path: /instance/{instanceCode}/interview/export-xls/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InterviewAdmin:exportXls, id: "0", trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+#Quiz
+admin_instance_quiz_form_create:
+    path: /instance/{instanceCode}/quiz/create{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:QuizAdmin:create, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_quiz_list:
+    path: /instance/{instanceCode}/quiz/list{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:QuizAdmin:list, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_quiz_form_edit:
+    path: /instance/{instanceCode}/quiz/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:QuizAdmin:edit, id: "0", trailingSlash: "/"  }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_quiz_form_delete:
+    path: /instance/{instanceCode}/quiz/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:QuizAdmin:delete, id: "0", trailingSlash: "/"  }
+    requirements:
+        id: \d+
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+#WidgetForm
+admin_instance_widget_form_create:
+    path: /instance/{instanceCode}/widget/create{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:WidgetToPanelAdmin:create, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_widget_sort:
+    path: /instance/{instanceCode}/widget/sort{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:WidgetToPanelAdmin:sort, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_widget_form_edit:
+    path: /instance/{instanceCode}/widget/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:WidgetToPanelAdmin:edit, id: "0", trailingSlash: "/" }
+    requirements:
+        id: \d+
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_widget_viewall:
+    path: /instance/{instanceCode}/widget/list{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:WidgetToPanelAdmin:list, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_widget_form_delete:
+    path: /instance/{instanceCode}/widget/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:WidgetToPanelAdmin:delete, id: "0", trailingSlash: "/" }
+    requirements:
+        id: \d+
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+        
+admin_instance_widget_param_edit:
+    path: /instance/{instanceCode}/widget-param/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:WidgetParamAdmin:edit, trailingSlash: "/" }
+    requirements:
+        id: \d+
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+#Internet resources
+admin_instance_internet_resources_index:
+    path: /instance/{instanceCode}/internet-resources/index{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InternetResourcesAdmin:index, trailingSlash: "/" }
+    requirements:
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_internet_resources_edit:
+    path: /instance/{instanceCode}/internet-resources/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InternetResourcesAdmin:edit, trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_internet_resources_delete:
+    path: /instance/{instanceCode}/internet-resources/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InternetResourcesAdmin:delete, trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+        
+# banner
+admin_instance_banner_index:
+    path: /instance/{instanceCode}/banner/index{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:BannerAdmin:list, trailingSlash: "/" }
+    requirements:
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_banner_edit:
+    path: /instance/{instanceCode}/banner/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:BannerAdmin:edit, trailingSlash: "/", id: "0" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_banner_delete:
+    path: /instance/{instanceCode}/banner/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:BannerAdmin:delete, trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+# slider
+admin_instance_slider_index:
+    path: /instance/{instanceCode}/slider/index{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:SliderAdmin:list, trailingSlash: "/" }
+    requirements:
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_slider_edit:
+    path: /instance/{instanceCode}/slider/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:SliderAdmin:edit, trailingSlash: "/", id: "0"}
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_slider_delete:
+    path: /instance/{instanceCode}/slider/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:SliderAdmin:delete, trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+#Inform page
+admin_instance_inform_page_list:
+    path: /instance/{instanceCode}/inform-page/list{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InformPageAdmin:list, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_inform_page_create:
+    path: /instance/{instanceCode}/inform-page/create{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InformPageAdmin:create, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_inform_page_template_create:
+    path: /instance/{instanceCode}/inform-page/template-create{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InformPageAdmin:templateCreate, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_inform_page_edit:
+    path: /instance/{instanceCode}/inform-page/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InformPageAdmin:edit, trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_inform_page_delete:
+    path: /instance/{instanceCode}/inform-page/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InformPageAdmin:delete, trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+#fileUploader
+get-file-uploader:
+    path: /get-file-uploader
+    defaults: { _controller: PortalAdminBundle:Attachment:getUploader }
+    options:
+        expose: true
+
+file_upload:
+    path: /file-upload
+    defaults: { _controller: PortalAdminBundle:Attachment:upload }
+    options:
+        expose: true
+
+#structure
+admin_instance_structure_index:
+    path: /instance/{instanceCode}/structure/list{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:StructureAdmin:index, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+#structure json
+admin_instance_structure_json:
+    path: /instance/{instanceCode}/structure/json{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:StructureAdmin:getStructure, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_structure_content:
+    path: /instance/{instanceCode}/structure/json-content{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:StructureAdmin:getListContent, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+#structure move
+admin_instance_structure_move:
+    path: /instance/{instanceCode}/structure/move{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:StructureAdmin:moveStructure, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+#structure move
+admin_instance_structure_rename:
+    path: /instance/{instanceCode}/structure/rename{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:StructureAdmin:renameStructure, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+#structure move
+admin_instance_structure_delete:
+    path: /instance/{instanceCode}/structure/delete{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:StructureAdmin:deleteStructure, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_structure_new:
+    path: /instance/{instanceCode}/structure/new{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:StructureAdmin:new, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+#admin_instance_structure_edit:
+#    path: /instance/{instanceCode}/structure/edit/{id}{trailingSlash}
+#    defaults: { _controller: PortalAdminBundle:StructureAdmin:edit, trailingSlash: "/" }
+#    methods: [GET, POST]
+#    requirements:
+#        trailingSlash: "[/]{0,1}"
+#        instanceCode: \w+
+
+#structure restore
+admin_instance_structure_restore:
+    path: /instance/{instanceCode}/structure/restore{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:StructureAdmin:restoreStructure, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+#event page
+admin_instance_event_index:
+    path: /instance/{instanceCode}/event/list{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:EventAdmin:index, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_event_edit:
+    path: /instance/{instanceCode}/event/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:EventAdmin:edit, trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_event_delete:
+    path: /instance/{instanceCode}/event/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:EventAdmin:delete, trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+#tag page
+admin_instance_tag_index:
+    path: /instance/{instanceCode}/tag/list{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:TagAdmin:index, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_tag_edit:
+    path: /instance/{instanceCode}/tag/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:TagAdmin:edit, trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_tag_delete:
+    path: /instance/{instanceCode}/tag/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:TagAdmin:delete, trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+#document tag page
+admin_instance_doc_tag_index:
+    path: /instance/{instanceCode}/document_tag/list{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:DocumentTagAdmin:index, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_doc_tag_edit:
+    path: /instance/{instanceCode}/document_tag/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:DocumentTagAdmin:edit, trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_doc_tag_delete:
+    path: /instance/{instanceCode}/document_tag/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:DocumentTagAdmin:delete, trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+#menu node && menu
+admin_instance_menu_node_viewall:
+    path: /instance/{instanceCode}/menu-node/view-all{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MenuNodeAdmin:viewAll, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_menu_node_edit:
+    path: /instance/{instanceCode}/menu-node/edit/{menuNodeId}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MenuNodeAdmin:edit, trailingSlash: "/" }
+    requirements:
+        menuNodeId: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_menu_node_delete:
+    path: /instance/{instanceCode}/menu-node/delete/{menuNodeId}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MenuNodeAdmin:delete, trailingSlash: "/" }
+    requirements:
+        menuNodeId: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_menu_node_checked_on_id:
+    path: /instance/{instanceCode}/menu-node/json-checked-id/{menuNodeId}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MenuNodeAdmin:checkedOnId, trailingSlash: "/" }
+    requirements:
+        menuNodeId: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_menu_viewall:
+    path: /instance/{instanceCode}/menu/view-all{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MenuAdmin:viewAll, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+
+admin_instance_menu_edit:
+    path: /instance/{instanceCode}/menu/edit/{menuId}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MenuAdmin:edit, trailingSlash: "/" }
+    requirements:
+        menuId: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+
+admin_instance_menu_delete:
+    path: /instance/{instanceCode}/menu/delete/{menuId}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MenuAdmin:delete, trailingSlash: "/" }
+    requirements:
+        menuId: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+#PhotoReport
+admin_instance_photo_report_view_all:
+    path: /instance/{instanceCode}/photo-report/view-all{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:PhotoReportAdmin:viewAll, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_photo_report_edit:
+    path: /instance/{instanceCode}/photo-report/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:PhotoReportAdmin:edit, trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_photo_report_delete:
+    path: /instance/{instanceCode}/photo-report/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:PhotoReportAdmin:delete, id: "0", trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_photo_report_restore:
+    path: /instance/{instanceCode}/photo-report/restore/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:PhotoReportAdmin:restore, id: "0", trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+#VideoReport
+admin_instance_video_report_view_all:
+    path: /instance/{instanceCode}/video-report/view-all{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:VideoReportAdmin:viewAll, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_video_report_edit:
+    path: /instance/{instanceCode}/video-report/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:VideoReportAdmin:edit, trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_video_report_delete:
+    path: /instance/{instanceCode}/video-report/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:VideoReportAdmin:delete, id: "0", trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+#file library
+admin_instance_file_library:
+    path: /instance/{instanceCode}/file-library/list{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:FileLibrary:listFiles, trailingSlash: "/" }
+    requirements:
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+#document attachment files
+admin_instance_file_manager_document:
+    path: /instance/{instanceCode}/file-library/document-attachment{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:FileLibrary:listDocumetnFiles, trailingSlash: "/" }
+    requirements:
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+#file DELETE
+admin_instance_delete_file:
+    path: /instance/{instanceCode}/file-library/delete{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:FileLibrary:delete, trailingSlash: "/" }
+    requirements:
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+#typo report
+admin_instance_typo_report_view_all:
+    path: /instance/{instanceCode}/typo-report/view-all{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:TypoReportAdmin:viewAll, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+
+#options
+admin_instance_option_view_all:
+    path: /instance/{instanceCode}/option/view-all{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:Option:viewAll, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+
+admin_instance_option_update:
+    path: /instance/{instanceCode}/option/update{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:Option:update, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+
+#ckeditor file uploader
+admin_instance_file_upload:
+    path: /instance/{instanceCode}/file_upload{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:FileUpload:upload, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+#site name
+admin_instance_site_name_edit:
+    path: /instance/{instanceCode}/site-name/edit{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:InstanceAdmin:editSiteName, trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+
+#Material
+admin_instance_material_view_all:
+    path: /instance/{instanceCode}/material/view-all{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MaterialAdminControler:list, trailingSlash: "/" }
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_material_edit:
+    path: /instance/{instanceCode}/material/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MaterialAdminControler:edit, trailingSlash: "/" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_material_delete:
+    path: /instance/{instanceCode}/material/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MaterialAdminControler:delete, id: "0", trailingSlash: "/" }
+    requirements:
+        id: \d+
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+#post
+admin_instance_post_view_all:
+    path: /instance/{instanceCode}/post/view-all{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:PostAdmin:list, trailingSlash: "/", instanceCode: "main"}
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_post_create:
+    path: /instance/{instanceCode}/post/create{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:PostAdmin:create, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_post_edit:
+    path: /instance/{instanceCode}/post/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:PostAdmin:edit, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_post_delete:
+    path: /instance/{instanceCode}/post/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:PostAdmin:delete, id: "0", trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_post_restore:
+    path: /instance/{instanceCode}/post/restore/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:PostAdmin:restore, id: "0", trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+#feedback
+admin_instance_feedback_list:
+    path: /instance/{instanceCode}/feedback/list{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:FeedbackAdmin:list, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+
+admin_instance_feedback_create:
+    path: /instance/{instanceCode}/feedback/create{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:FeedbackAdmin:create, trailingSlash : "/" }
+    requirements:
+        instanceCode: \w+
+        trailingSlash : "[/]{0,1}"
+
+admin_instance_feedback_edit:
+    path: /instance/{instanceCode}/feedback/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:FeedbackAdmin:edit, trailingSlash : "/" }
+    requirements:
+        id: \d+
+        instanceCode: \w+
+        trailingSlash : "[/]{0,1}"
+
+#magazine_newspaper
+admin_instance_magazine_newspaper_view_all:
+    path: /instance/{instanceCode}/magazine-newspaper/view-all{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MagazineNewspaperAdmin:list, trailingSlash: "/", instanceCode: "main"}
+    requirements:
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_magazine_newspaper_create:
+    path: /instance/{instanceCode}/magazine-newspaper/create{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MagazineNewspaperAdmin:create, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        instanceCode: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_magazine_newspaper_edit:
+    path: /instance/{instanceCode}/magazine-newspaper/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MagazineNewspaperAdmin:edit, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+        instanceCode: \w+
+    options:
+        expose: true
+
+admin_instance_magazine_newspaper_delete:
+    path: /instance/{instanceCode}/magazine-newspaper/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MagazineNewspaperAdmin:delete, id: "0", trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_magazine_newspaper_restore:
+    path: /instance/{instanceCode}/magazine-newspaper/restore/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MagazineNewspaperAdmin:restore, id: "0", trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true

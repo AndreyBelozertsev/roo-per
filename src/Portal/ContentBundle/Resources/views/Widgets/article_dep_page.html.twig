@@ -1,0 +1,34 @@
+{% if articleList is defined and articleList is not empty %}
+    <div class="title">{{ 'news'|trans() }}</div>
+    <div class="tabs__content tabs__content_active" data-time="{{ ignoreTime }}"
+         data-artcount="{{ article_count }}"
+         data-catid="1" data-showbtn="1" data-page="{{ currentPage }}" data-date="{{ date }}" data-start-page="{{ startPage }}">
+        <div class="flex_space">
+            {% for article in articleList %}
+                <div class="news-box" data-id="{{ article.article_id }}">
+                    <a href="{{ path('article_show',{ id: article.article_id }) }}" class="news-box__link">
+                        <img src="{{ asset(article.article_file_url|thumbImage|existsImage ) }}">
+                    </a>
+                    <div class="news-box__info">
+                        <a href="{{ path('article_show',{ id: article.article_id }) }}" class="news-box__title">
+                            {{ article.article_title }}
+                        </a>
+                        <div class="news-box__content">{{ article.article_subtitle }}</div>
+                        <div class="clearfix">
+                            <div class="news-box__eye">
+                                {{ article.article_manual_views_counter ?: article.article_views_counter }}
+                            </div>
+                            <div class="news-box__date">{{ article.article_published_at|date('d.m.Y') }}</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% if article_count / constant('Portal\\ContentBundle\\Entity\\FeedbackFormAttachment::MAX_FILE_ATTACHMENT') >= currentPage %}
+            <a id="get-more" href="#" class="download get-more-articles-dep-page" data-locale="{{ app.request.locale }}">
+                {{ 'show_more'|trans() }}
+            </a>
+        {% endif %}
+        <div class="pagination clearfix">{{ pagination|raw }}</div>
+    </div>
+{% endif %}

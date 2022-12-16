@@ -1,0 +1,60 @@
+{% for child in form %}
+    {% if child.vars.name == '_token' or child.vars.name == 'pageId' %}
+        {{ form_widget(child) }}
+    {% else %}
+        <div class="form-group">
+            <div class="col-sm-3 text-right">{{ form_label(child) }}</div>
+            <div class="col-sm-9">
+                {% if child.vars.name == 'attachment' %}
+                    <script src="{{ asset('bundles/portaladmin/RCropper/dist/rcrop.min.js') }}"></script>
+                    <script src="{{ asset('bundles/portaladmin/script/crop-image/crop-image-attachment.js') }}"></script>
+                    <link href="{{ asset('bundles/portaladmin/RCropper/dist/rcrop.min.css') }}" media="screen" rel="stylesheet" type="text/css">
+                    <div class="preview-form">
+                        <div class="rcrop-wrapper">
+                            <img id="loadImg" class="preview-image"
+                                 src="{{ (template is defined and template.attachment) ? template.attachment.previewFileUrl : '' }}">
+                        </div>
+                        {{ form_widget(form.attachment) }}
+                    </div>
+                    <div class="errors">
+                        {% for error in form.attachment.file.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+
+                {% elseif child.vars.name == 'mapCode' %}
+                    {% include 'PortalAdminBundle:Yandex:yandexMap.html.twig' with {
+                        'inputId': child.vars.id,
+                        'inputVal': child.vars.value,
+                        'balloonTxt': custom_fields.page_title is defined ? custom_fields.page_title : ''
+                    } only %}
+
+                {% elseif child.vars.name == 'content' %}
+                    {{ form_widget(child) }}
+
+                {% elseif child.vars.name == 'contentTable' %}
+                    {% include 'PortalAdminBundle:InformPage:contentTable.html.twig' %}
+
+                {% elseif child.vars.name == 'address' %}
+                    {{ form_widget(child, {'attr': {'class': 'form-control'} }) }}
+                    {% include 'PortalAdminBundle:Yandex:yandexMap.html.twig' with {
+                        'inputId': child.vars.id,
+                        'inputVal': child.vars.value,
+                        'balloonTxt': custom_fields.page_title is defined ? custom_fields.page_title : ''
+                    } only %}
+
+                {% elseif child.vars.name == 'map' %}
+                    <div id="site-map"></div>
+                    <script src="{{ asset('bundles/portaladmin/js/site-map.js') }}"></script>
+
+                {% elseif child.vars.name == 'submit' %}
+                    {{ form_widget(child, {'attr': {'class': 'btn btn-success'} }) }}
+
+                {% else %}
+                    {{ form_widget(child, {'attr': {'class': 'form-control'} }) }}
+                {% endif %}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    {% endif %}
+{% endfor %}

@@ -1,0 +1,8 @@
+<div class="template-form-wrp">
+    {% include 'PortalAdminBundle:InformPage:createTemplateForm.html.twig' %}
+</div>
+<script>
+    $('textarea').each(function() {
+        CKEDITOR.replace(this);
+    });
+</script>

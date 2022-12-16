@@ -1,0 +1,17 @@
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {#<link rel="stylesheet" href="{{ asset('bundles/portaladmin/portal-style.css') }}">#}
+    <link rel="stylesheet" href="{{ asset('bundles/portaladmin/portal-style.css') }}">
+    {#<link rel="stylesheet" href="{{ asset('app/src/Portal/AdminBundle/Resources/public/portal-style.css') }}">#}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#<script>#}
+        {#alert("!!!!");#}
+    {#</script>#}
+{% endblock %}

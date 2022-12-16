@@ -1,0 +1,17 @@
+{% for article in articleList %}
+    <a href="{{ path('article_show', { 'id': article.id }) }}" class="news__item">
+        <div class="news__img"><img src="{{ asset(article.preview_file_url|thumbImage) }}"></div>
+        <div class="news__topic">{{ attribute(article, 'cat_title_' ~ app.request.locale) }}</div>
+        <div class="news__title">
+            {{ attribute(article, 'title_' ~ app.request.locale)|sliceFullWord(95) }}
+        </div>
+        <div class="news__info clearfix">
+            {#<div class="news__views icons_eye-blue">{{ article.views_counter }}</div>#}
+            {% if article.comments  > 0 %}
+                    <div class="news__coment icons_message-blue">{{ article.comments }}</div>
+            {% endif %}
+            <div class="news__date">{{ article.created_at|date|localizeddate('full', 'none', app.request.locale, null, 'd MMMM yyyy' ) }}</div>
+        </div>
+    </a>
+    <!--.news__item-->
+{% endfor %}

@@ -1,0 +1,50 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'site_name_form.action_edit'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'site_name_form.action_edit'|trans }}
+{% endblock %}
+
+{#{% block topbuttons %}{% endblock %}#}
+    {#<a class="btn btn-success" href="{{ path('admin_admin_instance_viewall') }}"><i class="glyphicon glyphicon-repeat"></i>#}
+        {#{{ 'come_back'|trans }}#}
+    {#</a>#}
+        {#<a class="btn btn-warning" href="#" onclick="adminPage.instance.removeItem({{instanceId}})"><i class="glyphicon glyphicon-trash"></i>#}
+            {#{{ 'delete'|trans }}#}
+        {#</a>#}
+{#{% endblock %}#}
+
+{% block body %}
+    <form name="form" method="post">
+    {{ form_start(form) }}
+        <div id="form-body" class="clearfix">
+            <div class="form-group">
+                <div class="col-sm-3">
+                    {{ form_label(form.siteName) }}
+                </div>
+                <div class="col-sm-9">
+                    {{ form_widget(form.siteName, {'attr':{'class':'form-control'} }) }}
+                    <div class="errors">
+                        {% for error in form.siteName.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                </div>
+                <div class="col-sm-9">
+                    {{ form_widget(form.save, {'attr':{'class':'btn btn-success'} }) }}
+                </div>
+            </div>
+        </div>
+    {{ form_end(form) }}
+    </form>
+{% endblock %}
+
+

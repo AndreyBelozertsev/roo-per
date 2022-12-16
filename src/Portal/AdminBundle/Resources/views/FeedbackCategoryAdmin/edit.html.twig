@@ -1,0 +1,49 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'feedback_category_form.action_edit'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'feedback_category_form.action_edit'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permission_codes = permissions.code() %}
+
+{% block topbuttons %}
+    <a class="btn btn-success" href="{{ path('admin_instance_feedback_category_viewall', { 'instanceCode': instanceCode}) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\FeedbackCategory::PERMISSIONS_FEEDBACK_CATEGORY')['create'] in permission_codes %}
+        <a class="btn btn-success" href="{{ path('admin_instance_feedback_category_create', { 'instanceCode': instanceCode }) }}">
+            <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+        </a>
+    {% endif %}
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\FeedbackCategory::PERMISSIONS_FEEDBACK_CATEGORY')['delete'] in permission_codes %}
+        <a class="btn btn-warning" onclick="adminPage.feedbackCategory.removeItem({{ feedbackCategory.id }}, '{{ instanceCode }}');">
+            <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <div id="form-body" class="clearfix">
+        <input type="hidden" value="{{ instanceCode }}" id="instanceCode">
+        {% include 'PortalAdminBundle:FeedbackCategoryAdmin:includeForm.html.twig' %}
+        <div class="form-group">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+                <div id="btn_article" class="form-actions">
+                    <button id="btn_edit" class="btn btn-success" type="submit" name="btn_edit">
+                        <i class="glyphicon glyphicon-floppy-disk"></i> {{ 'save'|trans }}
+                    </button>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

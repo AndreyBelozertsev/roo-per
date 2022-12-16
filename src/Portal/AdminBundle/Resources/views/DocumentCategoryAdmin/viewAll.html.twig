@@ -1,0 +1,56 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'document_category.title'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'all_categoryes'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+
+{% block topbuttons %}
+    {% if sa or 'create_document_category' in permissions.code() %}
+        <a href="{{ path('admin_instance_document_category_edit', {documentCategoryId: 0, 'instanceCode': instanceCode}) }}"
+           class="btn btn-success">
+            <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <table class="table table-striped table-middle-aligned">
+        <thead>
+            <tr>
+                <th>{{ 'document_form.title'|trans }}</th>
+                <th>{{ 'action'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dc in pagerFanta.currentPageResults %}
+            <tr>
+                <td>{{ dc.title }}</td>
+                <td>
+                    {% if sa or 'edit_document_category' in permissions.code() %}
+                        <a href="{{ path('admin_instance_document_category_edit', { 'documentCategoryId':dc.id, 'instanceCode':instanceCode }) }}"
+                           class="btn btn-sm btn-primary">
+                            <i class="glyphicon glyphicon-edit"></i> {{ 'edit'|trans }}
+                        </a>
+                    {% endif %}
+                    {% if sa or 'delete_document_category' in permissions.code() %}
+                        <a onclick="adminPage.documentCategory.removeItem({{ dc.id }}, '{{instanceCode}}');"
+                           class="btn btn-sm btn-warning">
+                            <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagerfanta">
+        {{ pagerfanta(pagerFanta, 'twitter_bootstrap3') }}
+    </div>
+{% endblock %}

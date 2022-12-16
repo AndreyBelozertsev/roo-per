@@ -1,0 +1,39 @@
+{{ form_start(form) }}
+<div class="form-group">
+    <div class="col-sm-3 text-right">{{ 'title'|trans }}</div>
+    <div class="col-sm-9">
+        <input value="{{ page.title }}" name="pageTitle" class="form-control" type="text" required>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-3 text-right">{{ 'template_page'|trans }}</div>
+    <div class="col-sm-9">
+        <input value="{{ constant('Portal\\ContentBundle\\Entity\\Page::TEMPLATE_LIST')[page.templateId]|trans }}" type="text" class="form-control" disabled>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-3 text-right">{{ 'slug'|trans }}</div>
+    <div class="col-sm-9">
+        <div class="add-link-container">
+            <div class="add-link-con1">
+                {% set subDomain = (instanceCode == 'main') ? '' : instanceCode ~ '.' %}
+                {{ protocol ~ '://' ~ subDomain }}{{ app.request.getHttpHost }}{{ path('inform_page_slug') }}/
+                <input value="{{ protocol ~ '://' ~ subDomain }}{{ app.request.getHttpHost }}{{ path('inform_page_slug', { slug: page.slug }) }}"
+                       id="input_copy_ref" type="hidden">
+            </div>
+            <div class="add-link-con2">
+                <input value="{{ page.slug }}" name="pageSlug" class="form-control" id="admin_article_slug" type="text" required>
+            </div>
+            <div class="add-link-con3">
+                <a id="button_copy_ref" class="btn btn-success" title="{{ 'click_to_copy'|trans }}">
+                    <i class="fa fa-copy"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'PortalAdminBundle:InformPage:templateFormUni.html.twig' %}
+{{ form_end(form) }}

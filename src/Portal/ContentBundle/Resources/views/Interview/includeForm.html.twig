@@ -1,0 +1,41 @@
+<input type="hidden" name="numQuestion" value="{{ numQuestion }}">
+<input type="hidden" name="questionId" value="{{ question.id }}">
+<input type="hidden" name="answer_token" value="{{ answerToken }}">
+<div class="quiz__text-list">{% if question.isRequired %}<span id="question_required">*</span>{% endif %}
+    {{ question.content }}
+</div>
+{% if question.description %}
+    <div class="info">
+        <div class="info__img-text">
+            {{ question.description|raw }}
+        </div>
+    </div>
+{% endif %}
+{% if question.questionType == 1 %}
+    {% for answer in question.answers %}
+        <div class="quiz__column">
+            <input type="radio" id="answer_{{answer.id}}" class=" answer" name="answer_id[]" value="{{ answer.id }}">
+            <label for="answer_{{answer.id}}" class="label"><span class="checkbox-text">{{ answer.content }}</span></label>
+        </div>
+    {% endfor %}
+{% elseif question.questionType == 2 %}
+    {% for answer in question.answers %}
+        <div class="quiz__column">
+            <input type="checkbox" id="answer_{{answer.id}}" class="checkbox answer" name="answer_id[]" value="{{ answer.id }}">
+            <label for="answer_{{answer.id}}" class="label"><span class="checkbox-text">{{ answer.content }}</span></label>
+        </div>
+    {% endfor %}
+{% elseif question.questionType == 3 %}
+    <div class="quiz__column">
+        <select name="answer_select" data-placeholder="Выберите категорию" tabindex="2" class="answer-select chosen-select page-form__pole">
+            <option value=""></option>
+            {% for answer in question.answers %}
+                <option value="{{ answer.id }}">{{ answer.content }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% elseif question.questionType == 4 %}
+    <div class="quiz__column quiz__column_40">
+        <textarea class="quiz__textarea" name="content"></textarea>
+    </div>
+{% endif %}

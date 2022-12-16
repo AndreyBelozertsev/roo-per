@@ -1,0 +1,98 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} |
+    {% if add is defined and add %}
+        {{ 'users_form.add'|trans }}
+    {% else %}
+        {{ 'users_form.edit'|trans }}
+    {% endif %}
+    {{ 'users_form.users'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {% if id is defined and id > 0 %}
+        {{ 'user_roles_form.edit'|trans }}
+    {% else %}
+        {{ 'user_roles_form.add'|trans }}
+    {% endif %}
+    {{ 'user_roles_form.roles'|trans }}
+{% endblock %}
+
+{% block topbuttons %}
+    <a class="btn btn-success" href="{{ path('admin_admin_role_viewall') }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+    {% if id is defined and id > 0 %}
+        <a class="btn btn-warning" href="#" onclick="adminPage.userRole.removeItem({{ id }});">
+            <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <form name="form" method="post">
+        {{ form_start(form) }}
+        <div id="form-body" class="clearfix">
+
+            <div class="form-group">
+                <div class="col-sm-3">
+                    {{ form_label(form.code) }}
+                </div>
+                <div class="col-sm-9">
+                    {{ form_widget(form.code, {'attr':{'class':'form-control'} }) }}
+                    <div class="errors">
+                        {% for error in form.code.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    {{ form_label(form.label) }}
+                </div>
+                <div class="col-sm-9">
+                    {{ form_widget(form.label, {'attr':{'class':'form-control'} }) }}
+                    <div class="errors">
+                        {% for error in form.label.vars.errors %}
+                            <div class="alert alert-danger">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+                <table class="table">
+                    <thead>
+                    <th>{{ 'user_roles_form.permissions'|trans }}</th>
+                    <th></th>
+                    </thead>
+                    <tbody>
+                    {% for permission in permissionsList %}
+                        <tr>
+                            <td>
+                                {{ permission.label }}
+                            </td>
+                            <td>
+                                <input name="rolePermissions[]" type="checkbox" value="{{ permission.id }}" {% if permission.id in rolePermissionIds %}checked{% endif %} />
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                </div>
+                <div class="col-sm-9">
+                    {{ form_widget(form.submit, {'attr':{'class':'btn btn-success'} }) }}
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </form>
+{% endblock %}
+
+

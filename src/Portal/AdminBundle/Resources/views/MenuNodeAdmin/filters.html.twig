@@ -1,0 +1,16 @@
+<div id="reportFilter" class="well">
+    <div class="clearfix">
+        <div class="form-group clearfix col-lg-5">
+            <label>{{ 'menu_page.menu_node_title'|trans }}:</label>
+            <input id="filterTitle" name="filterTitle" class="form-control" type="text" placeholder="{{ 'label'|trans }}"
+                   value="{{ filterParams.filterTitle is defined ? filterParams.filterTitle : '' }}"/>
+        </div>
+    </div>
+
+    <input type="hidden" name="instanceCode" value="{{ instanceCode }}">
+    <button id="filterBtn" class="btn btn-sm btn-primary">{{ 'filter'|trans }}</button>
+</div>
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/portaladmin/js/menu-node-filter.js') }}"></script>
+{% endblock %}

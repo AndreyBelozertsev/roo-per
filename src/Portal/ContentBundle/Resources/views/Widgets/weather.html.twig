@@ -1,0 +1,29 @@
+<div class="weather-informer weather">
+{% if weather.error is defined %}
+    {{ weather.error }}
+{% else %}
+    {% for w in weather.data %}
+        {% if loop.first %}
+        <div class="weather-head weather__head">
+            <div class="weather-select weather__select">
+                <div class="weather__text-inform">
+                    <span class="weather__temp">{{ w.temperature.air.avg.C }}&#176;</span>
+                    Сегодня
+                    <span>{{ weather.cities[w.city] }}</span>
+                    <span class="weather__precipitation" title="{{ w.description.full }}">{{ w.description.full }}</span>
+                </div>
+                {% if weather.cities is not empty %}
+                <div class="weather__select-box">
+                    <select name="weather-city" class="weather__select-list">
+                        {% for id, city in weather.cities %}
+                            <option value="{{ id }}" {{ w.city == id ? 'selected' : '' }}>{{ city }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+</div>

@@ -1,0 +1,58 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}{{ parent() }} | {{ 'user_permissions_form.menu_title'|trans }}{% endblock %}
+{% block pageheader %}
+    {{ 'user_permissions_form.action_list'|trans }}
+{% endblock %}
+
+{% block topbuttons %}
+    <a class="btn btn-success" href="{{ path('admin_admin_permission_edit', {id:0 }) }}"><i class="glyphicon glyphicon-plus-sign"></i>
+        {{ 'user_permissions_form.add_new'|trans }}
+    </a>
+{% endblock %}
+
+{% block body %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Код</th>
+            <th>Наименование</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for permission in permissionsList %}
+            <tr>
+                <td>
+                    {% if permission.isSystem == false %}
+                        <a href="{{ path('admin_admin_permission_edit', {id:permission.id }) }}">
+                    {% endif %}
+                       {{permission.code}}
+                    {% if permission.isSystem == false %}
+                        </a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if permission.isSystem == false %}
+                    <a href="{{ path('admin_admin_permission_edit', {id:permission.id }) }}">
+                        {% endif %}
+                        {{permission.label}}
+                        {% if permission.isSystem == false %}
+                    </a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if permission.isSystem == false %}
+                        <button class="btn btn-warning" href="#" onclick="adminPage.userPermission.removeItem({{permission.id}})">
+                            <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}</button>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

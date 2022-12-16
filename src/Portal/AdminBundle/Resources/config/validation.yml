@@ -1,0 +1,416 @@
+Portal\ContentBundle\Entity\FeedbackForm:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            em: 'customer'
+            fields: titleUk
+            groups: [new, edit]
+            message: 'field.titleUk.unique'
+    properties:
+        titleUk:
+            - NotBlank:
+                message: 'feedback_form.label.not_blank'
+                groups: [new, edit]
+            - Length:
+                max: 255
+                maxMessage: 'field.too_much'
+                groups: [new, edit]
+        titleRu:
+            - NotBlank:
+                message: 'feedback_form.label.not_blank'
+                groups: [new, edit]
+            - Length:
+                max: 255
+                maxMessage: 'field.too_much'
+                groups: [new, edit]
+        titleEn:
+            - NotBlank:
+                message: 'feedback_form.label.not_blank'
+                groups: [new, edit]
+            - Length:
+                max: 255
+                maxMessage: 'field.too_much'
+                groups: [new, edit]
+        emailResponsible:
+            - NotBlank:
+                message: 'feedback_form.email_responsible.not_blank'
+                groups: [new, edit]
+            - Email:
+                message: 'feedback_form.email_responsible.email'
+                checkMX: true
+                groups: [new, edit]
+        messageSuccess:
+            - NotBlank:
+                message: 'feedback_form.message_success.not_blank'
+                groups: [new, edit]
+            - Length:
+                max: 1000
+                maxMessage: 'feedback_form.too_much'
+                groups: [new, edit]
+        messageError:
+            - NotBlank:
+                message: 'feedback_form.message_error.not_blank'
+                groups: [new, edit]
+            - Length:
+                max: 1000
+                maxMessage: 'feedback_form.too_much'
+                groups: [new, edit]
+
+Portal\ContentBundle\Entity\Article:
+#    constraints:
+#        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+#            em: 'customer'
+#            fields: title
+#            groups: [new, edit]
+#            message: 'article.title.unique'
+    properties:
+        titleUk:
+            - NotBlank:
+                  message: 'article.title.not_blank'
+            - Length:
+                  max: 1000
+                  maxMessage: 'field.too_much'
+        titleRu:
+            - NotBlank:
+                  message: 'article.title.not_blank'
+            - Length:
+                  max: 1000
+                  maxMessage: 'field.too_much'
+        titleEn:
+            - NotBlank:
+                  message: 'article.title.not_blank'
+            - Length:
+                  max: 1000
+                  maxMessage: 'field.too_much'
+        attachment:
+            - Valid: ~
+        media:
+            - Valid: ~
+Portal\ContentBundle\Entity\ArticleAttachment:
+    properties:
+        file:
+            - File:
+                maxSize: 30Mi
+                maxSizeMessage: 'file.to_big'
+                mimeTypes: [image/jpeg,image/png]
+                mimeTypesMessage: 'file.wrong_type'
+                groups: [new, edit]
+            - NotNull:
+                message: 'file.not_null'
+                groups: [new]
+Portal\ContentBundle\Entity\ArticleMediaAttachment:
+    properties:
+        file:
+            - File:
+                maxSize: 800Mi
+                maxSizeMessage: 'file.to_big'
+                mimeTypes: [video/mpeg,video/mp4,video/avi,video/mkv,audio/mpeg,audio/ogg,audio/x-ms-wma,audio/aac,audio/ac3,audio/dts,audio/flac,application/octet-stream]
+                mimeTypesMessage: 'file.wrong_type'
+                groups: [new, edit]
+
+Portal\ContentBundle\Entity\Post:
+    properties:
+        titleUk:
+            - NotBlank:
+                message: 'field.not_blank'
+            - Length:
+                max: 1000
+                maxMessage: 'field.too_much'
+        titleRu:
+            - Length:
+                max: 1000
+                maxMessage: 'field.too_much'
+        titleEn:
+            - Length:
+                max: 1000
+                maxMessage: 'field.too_much'
+        contentUk:
+            - NotBlank:
+                message: 'field.not_blank'
+        contentRu:
+            - NotBlank:
+                message: 'field.not_blank'
+        contentEn:
+            - NotBlank:
+                message: 'field.not_blank'
+        userNameUk:
+            - Length:
+                max: 255
+                maxMessage: 'field.too_much'
+        userNameRu:
+            - Length:
+                max: 255
+                maxMessage: 'field.too_much'
+        userNameEn:
+            - Length:
+                max: 255
+                maxMessage: 'field.too_much'
+        userPositionUk:
+            - Length:
+                max: 255
+                maxMessage: 'field.too_much'
+        userPositionRu:
+            - Length:
+                max: 255
+                maxMessage: 'field.too_much'
+        userPositionEn:
+            - Length:
+                max: 255
+                maxMessage: 'field.too_much'
+        attachment:
+            - Valid: ~
+Portal\ContentBundle\Entity\PostAttachment:
+    properties:
+        file:
+            - File:
+                maxSize: 30Mi
+                maxSizeMessage: 'file.to_big'
+                mimeTypes: [image/jpeg,image/png]
+                mimeTypesMessage: 'file.wrong_type'
+            - NotNull:
+                message: 'file.not_null'
+                groups: [new]
+
+Portal\UserBundle\Entity\User:
+#    constraints:
+#        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+#            fields: username
+#            errorPath: username
+#            groups: [rest, profile]
+    properties:
+        username:
+            - NotBlank: { message: 'users_form.not_blank' }
+            - Length:
+                min: 2
+                max: 255
+        email:
+            - NotBlank: {  }
+            - Length:
+                min: 2
+                max: 255
+            - Email: {  }
+        firstName:
+            - NotBlank: {  }
+        lastName:
+            - NotBlank: {  }
+        phone:
+            - NotBlank: { groups: [add, edit] }
+#        plainPassword:
+#            - Portal\UserBundle\Validator\Constraints\CustomPasswordStrength: {  }
+        password:
+            - Portal\UserBundle\Validator\Constraints\CustomPasswordStrength: { groups: [add] }
+
+
+Portal\ContentBundle\Entity\DocumentCategory:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            em: 'customer'
+            fields: title
+            groups: [new, edit]
+            message: 'field.unique'
+    properties:
+        title:
+            - NotBlank:
+                message: 'field.not_blank'
+                groups: [new, edit]
+            - Length:
+                max: 255
+                maxMessage: 'field.too_much'
+                groups: [new, edit]
+
+Portal\ContentBundle\Entity\MenuNode:
+#    constraints:
+#        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+#            em: 'customer'
+#            fields: [title, menu]
+#            message: 'menu_node.label.unique'
+    properties:
+        title:
+            - NotBlank:
+                message: 'menu_node.label.not_blank'
+        menu:
+            - NotBlank:
+                message: 'menu_node.menu.not_blank'
+        slug:
+            - NotBlank:
+                message: 'menu_node.slug.not_blank'
+                groups: [edit]
+            - Length:
+                max: 150
+                maxMessage: 'field.too_much'
+                
+Portal\ContentBundle\Entity\WidgetToPanel:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            em: 'customer'
+            fields: [title]
+            message: 'field.unique'
+    properties:
+        title:
+            - NotBlank:
+                message: 'field.not_blank'
+            - Length:
+                max: 150
+                maxMessage: 'field.too_much'
+        widgetId:
+            - NotBlank:
+                message: 'field.not_blank'
+        panelId:
+            - NotBlank:
+                message: 'field.not_blank'
+
+Portal\ContentBundle\Entity\Menu:
+    properties:
+        title:
+            - NotBlank:
+                message: 'field.not_blank'
+            - Length:
+                max: 255
+                maxMessage: 'field.too_much'
+
+Portal\ContentBundle\Entity\PhotoReport:
+#    constraints:
+#        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+#            em: 'customer'
+#            fields: title
+#            groups: [new, edit]
+#            message: 'photo_report.title.unique'
+    properties:
+        title:
+            - NotBlank:
+                message: 'photo_report.title.not_blank'
+                groups: [new, edit]
+            - Length:
+                max: 255
+                maxMessage: 'field.too_much'
+                groups: [new, edit]
+        attachments:
+            - Valid: ~
+Portal\ContentBundle\Entity\PhotoReportAttachment:
+    properties:
+        file:
+            - File:
+                maxSize: 30Mi
+                maxSizeMessage: 'file.to_big'
+                mimeTypes: [image/jpeg,image/png]
+                mimeTypesMessage: 'file.wrong_type'
+                groups: [new, edit]
+Portal\ContentBundle\Entity\VideoReport:
+#    constraints:
+#        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+#            em: 'customer'
+#            fields: title
+#            groups: [new, edit]
+#            message: 'field.unique'
+    properties:
+        title:
+            - NotBlank:
+                message: 'photo_report.title.not_blank'
+                groups: [new, edit]
+            - Length:
+                max: 255
+                maxMessage: 'field.too_much'
+                groups: [new, edit]
+        attachment:
+            - Valid: ~
+Portal\ContentBundle\Entity\VideoReportAttachment:
+    properties:
+        file:
+            - File:
+                maxSize: 800Mi
+                maxSizeMessage: 'file.to_big'
+                mimeTypes: [video/mpeg,video/mp4,video/ogg,video/webm,video/x-flv]
+                mimeTypesMessage: 'file.wrong_type'
+                groups: [new, edit]
+            - NotNull:
+                message: 'file.not_null'
+                groups: [new]
+
+
+Portal\ContentBundle\Entity\ArticleSubscribe:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [email, instance]
+            errorPath: email
+            message: 'subs.not_unique'
+    properties:
+        email:
+            - NotBlank:
+                message: 'field.not_blank'
+            - Email:
+                message: 'subs.email_not_valid'
+                checkMX: true
+
+Portal\ContentBundle\Entity\SystemMode:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [code]
+            errorPath: code
+            message: 'system_mode.not_unique'
+    properties:
+        code:
+            - NotBlank:
+                message: 'system_mode.not_blank'
+        notificationMessage:
+            - NotBlank:
+                message: 'system_mode.not_blank'
+        modeMessage:
+            - NotBlank:
+                message: 'system_mode.not_blank'
+
+Portal\UserBundle\Entity\Permission:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [code]
+            message: 'field.unique'
+    properties:
+        code:
+            - NotBlank:
+                message: 'field.not_blank'
+        label:
+           - NotBlank:
+                message: 'field.not_blank'
+
+Portal\UserBundle\Entity\Role:
+    properties:
+        code:
+            - NotBlank:
+                message: 'field.not_blank'
+        label:
+           - NotBlank:
+                message: 'field.not_blank'
+
+Portal\ContentBundle\Entity\ArticleCategory:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: titleRu
+            message: 'field.unique'
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: titleUk
+            message: 'field.unique'
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: titleEn
+            message: 'field.unique'
+    properties:
+        titleUk:
+            - NotBlank:
+                message: 'field.not_blank'
+            - Length:
+                max: 255
+                maxMessage: 'field.too_much'
+        titleRu:
+            - NotBlank:
+                message: 'field.not_blank'
+            - Length:
+                max: 255
+                maxMessage: 'field.too_much'
+        titleEn:
+            - NotBlank:
+                message: 'field.not_blank'
+            - Length:
+                max: 255
+                maxMessage: 'field.too_much'
+Portal\ContentBundle\Entity\Feedback:
+    properties:
+        contentUk:
+            - NotBlank:
+                  message: 'field.not_blank'

@@ -1,0 +1,27 @@
+{% if message is defined %}{{ message ?: '' }}{% endif %}
+
+{% if videoReportList is defined %}
+    {% set prevDate = '' %}
+    <div>
+    {% for item in videoReportList %}
+        {% set currDate = item.video_report_published_at|date|localizeddate('none', 'none', app.request.locale, null, 'LLLL y') %}
+        {% if prevDate != currDate %}
+            {% if not loop.first %}
+                </div>
+            {% endif %}
+            <div class="media-blocks flex_space" data-date="{{ item.video_report_published_at|date('m.Y') }}">
+            <div class="title-date">
+                {{ item.video_report_published_at|date|localizeddate('none', 'none', app.request.locale, null, 'LLLL y') }}
+                {{ 'year'|trans() }}
+            </div>
+            {% set prevDate = currDate %}
+        {% endif %}
+        <div class="media flex_item">
+            {% include 'PortalContentBundle:VideoReport:video_item.html.twig' %}
+        </div>
+        {% if loop.last %}
+            </div>
+        {% endif %}
+    {% endfor %}
+    </div>
+{% endif %}

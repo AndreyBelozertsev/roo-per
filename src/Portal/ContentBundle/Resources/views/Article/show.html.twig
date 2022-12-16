@@ -1,0 +1,109 @@
+{% extends 'PortalContentBundle::base.html.twig' %}
+
+{% block meta %}
+    <meta property="og:image" content="{{ asset(article.attachment.previewFileUrl) }}" />
+    <meta property="og:title" content="{{ attribute(article, 'title' ~ app.request.locale) }}" />
+    {#<meta property="og:description" content="{{  }}" />#}
+{% endblock %}
+
+{% block info_page %}
+    <div class="info-page">
+        <div class="info-page__posit">
+            <div class="bread-crumbs">
+                <ul>
+                    <li><a href="{{ path('portal_content_homepage') }}">{{ 'Home'|trans }}</a></li>
+                    <li>
+                        <a href="{{ path('view_all_articles', { 'cat': article.category.id }) }}">
+                            {{ attribute(article.category, 'title' ~ app.request.locale) }}
+                        </a>
+                    </li>
+                    <li>{{ attribute(article, 'title' ~ app.request.locale)|sliceFullWord(50) }}</li>
+                </ul>
+            </div>
+            <div class="info-page__posit-box clearfix">
+                <div class="info-page__right">
+                    <div class="title-page">{{ attribute(article, 'title' ~ app.request.locale) }}</div>
+                    <div class="info-page__sub-info clearfix">
+                        <div class="info-page__topic">{{ attribute(article.category, 'title' ~ app.request.locale) }}</div>
+                        <div class="info-page__date icons_calendar-blue">{{ article.createdAt|date|localizeddate('full', 'none', app.request.locale, null, 'd MMMM yyyy' ) }}</div>
+                        <div class="info-page__coment icons_message-blue">{{ article.comments|length|pluralize('Comments_plural'|trans) }}</div>
+                        {#<div class="info-page__views icons_eye-blue">{{ article.viewsCounter|pluralize('Views_plural'|trans) }}</div>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="content content_catalog">
+        <div class="content__text">
+            <img src="{{ asset(article.attachment.previewFileUrl) }}" class="content__title_img">
+            {{ attribute(article, 'content' ~ app.request.locale)|raw }}
+            <div class="content__small-text">{{ 'position'|trans }}.</div>
+        </div>
+    </div>
+
+    <div class="comments">
+        <div class="comments__top">
+            <div class="comments__social">
+                {{ share.render(asset(article.attachment.previewFileUrl), attribute(article, 'title' ~ app.request.locale))|raw }}
+            </div>
+            <div class="comments__info">
+                {#<div class="comments__view icons_eye-blue">{{ article.viewsCounter|pluralize('Views_plural'|trans) }}</div>#}
+                <div class="comments__coment icons_message-blue">{{ article.comments|length|pluralize('Comments_plural'|trans) }}</div>
+            </div>
+        </div>
+        <div class="comments__form-top">
+            <div class="comments__title">{{ 'Comments_'|trans }} ({{ article.comments|length }})</div>
+            <div class="comments__add-coment icons_message-black">{{ 'Post comment'|trans }}</div>
+        </div>
+
+        {% if thanks is defined %}
+            <div class="content__message-form">{{ thanks|trans }}</div>
+        {% else %}
+            {% set open = formOpened is defined ? ' comments__form_open' : '' %}
+            {{ form_start(form, {'attr': {'class': 'comments__form' ~ open }}) }}
+            <div class="comments__form-row">
+                <div class="comments__form-lable">{{ 'Name'|trans }}</div>
+                {{ form_widget(form.name, {'attr': {'class': 'comments__form__pole'}}) }}
+                {% for error in form.name.vars.errors %}
+                    <div class="comments__form-error">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+            <div class="comments__form-row">
+                <div class="comments__form-lable">{{ 'Comment'|trans }}</div>
+                {{ form_widget(form.text, {'attr': {'class': 'comments__form__pole comments__form__pole_textarea'}}) }}
+                {% for error in form.text.vars.errors %}
+                    <div class="comments__form-error">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+            <div class="comments__form-row">
+                <div class="comments__form-lable">{{ 'CAPCHA'|trans }}</div>
+                {{ form_widget(form.captcha, {'attr': {'class': 'comments__form__pole'}}) }}
+                {% for error in form.captcha.vars.errors %}
+                    <div class="comments__form-error">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+            <div class="comments__form-row">
+                <input class="button" type="submit" value="{{ 'Send'|trans }}"/>
+            </div>
+            {{ form_end(form) }}
+        {% endif %}
+    </div>
+
+    {% for comment in article.comments %}
+        <div class="discussion">
+            <div class="discussion__left">
+                <div class="discussion__icon icons_user"></div>
+            </div>
+            <div class="discussion__right">
+                <div class="discussion__top">
+                    <div class="discussion__title">{{ comment.name }}</div>
+                    <div class="discussion__date">{{ comment.createdAt|date('d.m.Y') }}</div>
+                </div>
+                <div class="discussion__text">{{ comment.text|raw }}</div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

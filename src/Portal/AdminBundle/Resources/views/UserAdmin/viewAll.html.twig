@@ -1,0 +1,50 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | {{ 'users_form.menu_title'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'users_form.action_list'|trans }}
+{% endblock %}
+
+{% block topbuttons %}
+    <a class="btn btn-success" href="{{ path('admin_admin_user_edit', { userId:0 }) }}">
+        <i class="glyphicon glyphicon-plus-sign"></i> {{ 'users_form.add_new'|trans }}
+    </a>
+{% endblock %}
+
+{% block body %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ФИО</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('admin_admin_user_edit', {userId:user.id }) }}">
+                            {{ user.firstName }} {{ user.middleName }} {{ user.lastName }}
+                        </a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <button class="btn btn-warning" href="#" onclick="adminPage.user.removeItem({{ user.id }})">
+                            <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+                        </button>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

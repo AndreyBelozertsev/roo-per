@@ -1,0 +1,23 @@
+#sortable {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 40%;
+}
+
+#sortable li {
+    font-size: 1em;
+    display: block;
+    height: auto;
+    margin: 0 3px 3px 3px;
+    padding: 3px 1em;
+    cursor: move;
+    border: 1px solid #0078bf;
+    background-color: #d9edf7;
+    position: relative;
+}
+
+#sortable li span {
+    position: absolute;
+    margin-left: -1.3em;
+}

@@ -1,0 +1,86 @@
+{% extends 'PortalContentBundle::base.html.twig' %}
+
+{% block main_news %}
+    {% if slider is not empty %}
+        <div class="main-news">
+            {% if slider.attachment is not empty %}
+                <div class="main-news__img">
+                    <div class="main-news__shadow"></div>
+                    <img src="{{ asset(slider.attachment.previewFileUrl) }}">
+                </div>
+            {% endif %}
+            <div class="main-news__info">
+                <div class="main-news__topic">{{ attribute(slider.category, 'title' ~ app.request.locale) }}</div>
+                <a href="{{ path('article_show', {'id': slider.id}) }}" class="main-news__title">{{ attribute(slider, 'title' ~ app.request.locale) }}</a>
+                <div class="main-news__bottom clearfix"></div>
+                {#<div class="main-news__views icons_eye-white">{{ slider.viewsCounter|pluralize('Views_plural'|trans) }}</div>#}
+                {% if slider.comments|length > 0 %}
+                    <div class="main-news__coment icons_message-white">{{ slider.comments|length|pluralize('Comments_plural'|trans) }}</div>
+                {% endif %}
+                <div class="main-news__date icons_calendar-white">{{ slider.publishedAt|localizeddate('long', 'none', app.request.locale ) }} </div>
+                
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block main_grid %}
+    <div class="tabs">
+        {% if categoryList is not empty %}
+            <ul class="tabs__caption" data-url="{{ path('get_more_articles') }}">
+                {% for catId,category in categoryList %}
+                    <li {{ loop.first ? 'class="active"' : '' }} data-category="{{ catId }}">{{ category }}</li>
+                {% endfor %}
+            </ul>
+            {% for catId,category in categoryList %}
+                <div class="tabs__content{% if loop.first %} active{% endif %}" data-category="{{ catId }}">
+                    {% set articleList = articleWidget.renderArticleByCategory(catId, 0) %}
+                    {% set articleCount = articleWidget.renderArticleCount(catId) %}
+                    <div class="news">
+                        {% if loop.first %}{% include'@PortalContent/Article/articleList.html.twig' %}{% endif %}
+                    </div>
+                    <!--.news-->
+                    <div class="news-nav clearfix">
+                        {% if articleCount > constant('Portal\\ContentBundle\\Entity\\Article::PAGE_PAGINATION_LIMIT') %}
+                            <div class="button button_gray get_more_article button_fl_left" data-page="{{ 1 }}" data-cat="{{ catId }}">
+                                {{ 'Show more'|trans }}
+                            </div>
+                        {% endif %}
+                        <a href="{{ path('view_all_articles', { 'cat': catId }) }}" class="go-section icons_arrow-go-section go-section_fl_right">
+                            {{ 'Go to section'|trans }}
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block personal_opinion %}
+    <div class="personal-opinion">
+        <div class="personal-opinion__title">
+            <div class="personal-opinion__text-title">
+                <span class="personal-opinion__text">{{ 'Opinion'|trans }}</span>
+            </div>
+            <div class="personal-opinion__bg-title"></div>
+        </div>
+    </div>
+    <div class="owl-my-style">
+        <div class="owl-carousel owl-theme">
+            {% for opinion in opinionList %}
+                <div class="item">
+                    <div class="quote">
+                        <div class="quote__img"><img src="{{ asset(opinion.attachment.previewFileUrl|thumbImage) }}"></div>
+                        <a href="{{ path('post_show', { 'id': opinion.id }) }}" class="quote__title">
+                            {{ attribute(opinion, 'title' ~ app.request.locale) }}
+                        </a>
+                        <div class="quote__name">{{ attribute(opinion, 'userName' ~ app.request.locale) }}</div>
+                        <div class="quote__position">{{ attribute(opinion, 'userPosition' ~ app.request.locale) }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <a href="{{ path('post') }}" class="button button_top">{{ 'Go to section'|trans }}</a>
+        <!--.button-->
+    </div>
+{% endblock %}

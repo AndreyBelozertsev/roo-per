@@ -1,0 +1,73 @@
+{% extends isDepartment ? 'PortalContentBundle::depBase.html.twig' : 'PortalContentBundle::innerPageBase.html.twig' %}
+
+{% block title %}
+    {{ title }} | {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="title _sample">{{ title }}</div>
+<div class="text-page">
+    {% if beforeText is defined and beforeText is not empty %}
+        <div class="content _sample">{{ beforeText|raw }}</div>
+    {% endif %}
+    <div data-length={{ itemsStructure.video_reports|length }}></div>
+    {% if itemsStructure.childs is defined and itemsStructure.childs is not empty %}
+        {% for child in itemsStructure.childs %}
+            <div class="text-page__block">
+                <a href="{{ path('structure', {'id': child.id}) }}" class="text-page__link-block text-page__desk">
+                    {{ child.title }}
+                </a>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+{% set route = 'video_report_show' %}
+
+{#{% if itemsStructure.video_reports is not empty %}#}
+        {% set prevDate = 0 %}
+        {% if itemsStructure.video_reports|length < 3 %}
+            {% set topEnd = itemsStructure.video_reports|length %}
+        {% else %}
+            {% set topEnd = 3 %}
+        {% endif %}
+        {% for item in itemsStructure.video_reports %}
+            {% if loop.first %}
+<div class="media-top">
+    <div class="media _big">
+        {% endif %}
+        {% if not loop.first and loop.index < 4 %}
+        <div class="media _horizontal">
+            {% endif %}
+            {% if loop.index > 3 %}
+            {% set currDate = item.video_report_published_at|date|localizeddate('none', 'none', app.request.locale, null, 'LLLL y') %}
+            {% if prevDate != currDate or loop.index == 4 %}
+            {% set prevDate = currDate %}
+            {{ loop.index > 4 ? '</div>' : '' }}
+            <div class="media-blocks flex_space" data-date="{{ item.video_report_published_at|date('m.Y') }}">
+                <div class="title-date">{{ currDate }} {{ 'year'|trans }}</div>
+                {% endif %}
+                <div class="media flex_item">
+                    {% endif %}
+                    {% set width = loop.first ? '576' : null %}
+                    {% set height = loop.first ? '320' : null %}
+                    {% include 'PortalContentBundle:VideoReport:video_item.html.twig' %}
+                </div>
+                {% if loop.first %}
+                <div class="media-top__right">
+                    {% endif %}
+                    {% if loop.index == topEnd %}
+                </div>
+            </div>
+            {% endif %}
+            {% if loop.last and loop.index > 3 %}
+        </div>
+        {% if itemsStructure.video_reports|length < videoReportCount %}
+            <a id="get-more-reports" href="#" class="download tolltip" title="{{ 'click_to_view'|trans }}"  data-structure-id="{{ structureId }}"
+               data-count="{{ videoReportCount }}" data-locale="{{ app.request.locale }}" data-url="load_next_structure_video_report">
+                {{ 'show_more'|trans }}
+            </a>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+{#{% endif %}#}
+{% endblock %}

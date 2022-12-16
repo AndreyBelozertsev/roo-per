@@ -1,0 +1,151 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'video_report_form.action_edit'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'video_report_form.action_edit'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permission_codes = permissions.getCode() %}
+
+{% block topbuttons %}
+    <a class="btn btn-success back-to-list" href="{{ path('admin_instance_video_report_view_all', { 'instanceCode': instanceCode }) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+    {% if form.menuNode.vars.value and (sa or 'edit_structure' in permissions.getCode()) %}
+        <a class="btn btn-success" href="{{ path('admin_instance_structure_index', {
+            'instanceCode': instanceCode,
+            'selected_node': form.menuNode.vars.value
+        }) }}">
+            <i class="glyphicon glyphicon-share-alt"></i> {{ 'to_structure'|trans }}
+        </a>
+    {% endif %}
+    {% if form.vars.value.id %}
+        {% if sa or 'create_video_report' in permission_codes %}
+            <a class="btn btn-success" href="{{ path('admin_instance_video_report_edit', {'id': 0, 'instanceCode': instanceCode}) }}">
+                <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+            </a>
+        {% endif %}
+        {% if sa or 'delete_video_report' in permission_codes or videoReport.author == app.user.id %}
+            <a class="btn btn-warning" onclick="adminPage.videoReport.removeItem({{ videoReport.id }}, '{{ instanceCode }}');">
+                <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+            </a>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <div class="form-group">
+        <div class="col-sm-3 text-right">{{ form_label(form.title) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+            <div class="errors">
+                {% for error in form.title.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right">{{ form_label(form.description) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            <div class="errors">
+                {% for error in form.description.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3 text-right">{{ form_label(form.menuNode) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.menuNode) }}
+            <div class="errors">
+                {% for error in form.menuNode.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+    <div class="col-sm-3 text-right">{{ form_label(form.publishedAt) }}</div>
+    <div class="col-sm-9">
+        {{ form_widget(form.publishedAt, {'attr': {'class': 'form-control js-datepicker'}}) }}
+        <div class="errors">
+            {% for error in form.publishedAt.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+    <div class="form-group">
+        <div class="col-sm-3 text-right">{{ form_label(form.isPublished) }}</div>
+        <div class="col-sm-9">
+            {{ form_widget(form.isPublished) }}
+            <div class="errors">
+                {% for error in form.isPublished.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    {#<div class="form-group">#}
+        {#<div class="col-sm-3 text-right">{{ form_label(form.tags) }}</div>#}
+        {#<div class="col-sm-9">#}
+            {#{{ form_widget(form.tags) }}#}
+        {#</div>#}
+        {#<div class="clearfix"></div>#}
+    {#</div>#}
+    <div class="form-group">
+        <div class="col-sm-3 text-right">{{ form_label(form.attachment) }}</div>
+        <div class="col-sm-9 video_upload">
+            <div class="col-sm-6">
+                <video id="video" poster="{{ thumb }}" controls>
+                    {% if videoReport.attachment %}
+                        <source src="{{ asset(videoReport.attachment.previewFileUrl) }}" type="{{ videoReport.attachment.fileType }}">
+                    {% else %}
+                        <source src="" type="">
+                    {% endif %}
+                </video>
+                {{ form_widget(form.attachment.file) }}
+            </div>
+            <div class="col-sm-6">
+                <canvas id="canvas" style="background-image: url('{{ thumb }}')"></canvas>
+                <button id="create_thumb" type="button">{{ 'make_thumb'|trans }}</button>
+                {{ 'or'|trans }} <button id="open_thumb_btn" type="button">{{ 'select_image'|trans }}</button>
+                <input id="open_thumb" type="file" accept="image/jpeg, image/png">
+                <input id="video_thumb" name="video_thumb" type="hidden">
+            </div>
+            <div class="errors">
+                {% for error in form.attachment.file.vars.errors %}
+                    <div class="alert alert-danger">{{ error.message }}</div>
+                {% endfor %}
+            </div>
+            <script src="{{ asset('bundles/portaladmin/js/video-thumbs.js') }}"></script>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+            {{ form_widget(form.submit, {'attr': {'class': 'btn btn-success' }}) }}
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+    <br>
+{% endblock %}
+
+{% block history %}
+    {{ entityLog.renderHistory(videoReport.id, instanceCode, constant('Portal\\HelperBundle\\Entity\\Log::ENTITY_TYPE_VIDEO_REPORT'))|raw }}
+{% endblock %}

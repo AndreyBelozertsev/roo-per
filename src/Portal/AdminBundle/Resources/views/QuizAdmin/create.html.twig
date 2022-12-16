@@ -1,0 +1,45 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'quiz_form.action_create'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'quiz_form.action_create'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+
+{% block topbuttons %}
+    <a class="btn btn-success" href="{{ path('admin_instance_quiz_list', { 'instanceCode': instanceCode }) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\Quiz::PERMISSIONS_QUIZ')['create'] in permissions.code() %}
+        <a class="btn btn-success" href="{{ path('admin_instance_quiz_form_create', { 'instanceCode': instanceCode }) }}">
+            <i class="glyphicon glyphicon-plus-sign"></i> {{ 'quiz_form.add_new'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+        <div id="form-body" class="clearfix">
+            {% include 'PortalAdminBundle:QuizAdmin:includeForm.html.twig' %}
+            <div class="form-group">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-9">
+                    <div id="btn_quiz" class="form-actions">
+                        <button id="btn_create_quiz" class="btn btn-success" type="submit" name="btn_create_quiz">
+                            <i class="glyphicon glyphicon-floppy-disk"></i> {{ 'save'|trans }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/portaladmin/script/quiz-form/quiz-embed-form.js') }}"></script>
+{% endblock %}

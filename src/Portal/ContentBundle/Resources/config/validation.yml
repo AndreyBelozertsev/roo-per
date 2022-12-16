@@ -1,0 +1,16 @@
+Portal\ContentBundle\Entity\FeedbackFormValue:
+    properties:
+        previews:
+            - Count:
+                max: 10
+                maxMessage: 'feedback_form_value.previews.max'
+            - Valid: ~
+Portal\ContentBundle\Entity\FeedbackFormAttachment:
+    properties:
+        file:
+            - File:
+                maxSize: 10Mi
+                maxSizeMessage: 'file.to_big'
+                mimeTypes: [application/octet-stream,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.ms-office,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.oasis.opendocument.text,application/vnd.oasis.opendocument.spreadsheet,application/pdf,application/rtf,text/richtext,text/rtf,application/x-rtf,text/csv,text/plain,image/jpeg,image/png,image/gif]
+                mimeTypesMessage: 'file.wrong_type'
+                groups: [Default,email_phone_validation]

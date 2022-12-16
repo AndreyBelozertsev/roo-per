@@ -1,0 +1,66 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'inform_page.list'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'inform_page.list'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permission_codes = permissions.code() %}
+{% set allowEdit = constant('Portal\\ContentBundle\\Entity\\Page::PERMISSIONS_INFORM_PAGE')['edit'] in permission_codes %}
+
+{% block topbuttons %}
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\Page::PERMISSIONS_INFORM_PAGE')['create'] in permission_codes %}
+        <a class="btn btn-success" href="{{ path('admin_instance_inform_page_create', { 'instanceCode': instanceCode }) }}">
+            <i class="glyphicon glyphicon-plus-sign"></i> {{ 'add_new'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <table class="table table-striped table-middle-aligned">
+        <thead>
+            <tr>
+                <th>{{ 'title'|trans }}</th>
+                <th>{{ 'inform_page.type'|trans }}</th>
+                <th>{{ 'action'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for page in pagerFanta.currentPageResults %}
+            <tr>
+                <td>
+                    {% if sa or allowEdit or page.author_id == app.user.id %}
+                        <a href="{{ path('admin_instance_inform_page_edit', { 'id': page.page_id, 'instanceCode': instanceCode }) }}">
+                            {{ page.page_title }}
+                        </a>
+                    {% else %}
+                        {{ page.page_title }}
+                    {% endif %}
+                </td>
+                <td>{{ constant('Portal\\ContentBundle\\Entity\\Page::TEMPLATE_LIST')[page.page_template_id]|trans }}</td>
+                <td>
+                    {% if sa or allowEdit or page.author_id == app.user.id %}
+                        <a class="btn btn-sm btn-primary" href="{{ path('admin_instance_inform_page_edit', { 'id': page.page_id, 'instanceCode': instanceCode }) }}">
+                            <i class="glyphicon glyphicon-edit"></i> {{ 'edit'|trans }}
+                        </a>
+                    {% endif %}
+                    {% if sa or constant('Portal\\ContentBundle\\Entity\\Page::PERMISSIONS_INFORM_PAGE')['delete'] in permission_codes
+                        or page.author_id == app.user.id %}
+                        <a class="btn btn-sm btn-warning" onclick="adminPage.informPage.removeItem({{ page.page_id }}, '{{ instanceCode }}');">
+                            <i class="glyphicon glyphicon-trash"></i> {{ 'delete'|trans }}
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="pagerfanta">
+        {{ pagerfanta(pagerFanta, 'twitter_bootstrap3') }}
+    </div>
+{% endblock %}

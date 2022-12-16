@@ -1,0 +1,43 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'feedback_form.action_edit'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'feedback_form.action_create'|trans }}
+{% endblock %}
+
+{% block topbuttons %}
+    <a class="btn btn-success " href="{{ path('admin_instance_feedback_viewall', {'instanceCode' : instanceCode}) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+    {% if form.menuNode.vars.value and ('edit_structure' in permissions.getCode() or is_granted('ROLE_SUPER_ADMIN')) %}
+        <a class="btn btn-success" href="{{ path('admin_instance_structure_index', {
+            'instanceCode' : app.request.get('instanceCode'),
+            'selected_node' : form.menuNode.vars.value
+        }) }}">
+            <i class="glyphicon glyphicon-share-alt"></i> {{ 'to_structure'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <div id="form-body" class="clearfix">
+        {% include 'PortalAdminBundle:FeedbackFormAdmin:includeForm.html.twig' %}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/portaladmin/script/sort-selected/sort-selected-style.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/portaladmin/script/feedback-form/select-for-esia.js') }}"></script>
+    <script src="{{ asset('bundles/portaladmin/jquery-ui/jquery-ui.js') }}"></script>
+    <script defer src="{{ asset('bundles/portaladmin/script/sort-selected/sort-selected.js') }}"></script>
+{% endblock %}

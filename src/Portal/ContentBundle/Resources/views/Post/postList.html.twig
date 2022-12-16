@@ -1,0 +1,12 @@
+{% block content %}
+        {% for post in postList %}
+            <div class="quote">
+                <div class="quote__img"><img src="{{ asset(post.preview_file_url|thumbImage) }}"></div>
+                <a href="{{ path('post_show', { 'id': post.id }) }}" class="quote__title">
+                    {{ attribute(post, 'title_' ~ app.request.locale) }}
+                </a>
+                <div class="quote__name">{{ attribute(post, 'user_name_' ~ app.request.locale) }}</div>
+                <div class="quote__position">{{ attribute(post, 'user_position_' ~ app.request.locale) }}</div>
+            </div>
+        {% endfor %}
+{% endblock %}

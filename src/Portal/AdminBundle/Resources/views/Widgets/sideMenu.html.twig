@@ -1,0 +1,58 @@
+<ul class="nav nav-stacked">
+    {% set route = app.request.get('_route') %}
+    {% set category = app.request.get('cat') %}
+
+    {% if route starts with 'admin_admin' %}
+        <li class="navbar-header {% if route starts with 'admin_admin_comment' %}active{% endif %}">
+            <a href="{{ path('admin_admin_comment_viewall') }}">{{ 'comments'|trans }}</a>
+        </li>
+        <li class="navbar-header {% if route starts with 'admin_instance_feedback' and not (route starts with 'admin_instance_feedback_category') %}active{% endif %}">
+            <a href="{{ path('admin_admin_feedback_form_edit', {'id': 1}) }}">
+                {{ 'feedback_form.menu_title'|trans }}
+            </a>
+        </li>
+        <li class="navbar-header {% if route starts with 'admin_admin_socialnetwork' %}active{% endif %}">
+            <a href="{{ path('admin_admin_socialnetwork_list') }}">{{ 'social_networks'|trans }}</a>
+        </li>
+        <li class="navbar-header {% if route starts with 'admin_admin_category' %}active{% endif %}">
+            <a href="{{ path('admin_admin_category_viewall') }}">{{ 'category'|trans }}</a>
+        </li>
+        <li class="navbar-header {% if route starts with 'admin_admin_param' %}active{% endif %}">
+            <a href="{{ path('admin_admin_param_list') }}">{{ 'params'|trans }}</a>
+        </li>
+    {% elseif route starts with 'admin_instance' %}
+        {% set instanceCode = app.request.get('instanceCode') %}
+        {% if sa or 'create_article' in permissions or 'edit_article' in permissions or 'delete_article' in permissions %}
+            <li class="navbar-header {% if route starts with 'admin_instance_article' %}active{% endif %}">
+                <a data-toggle="collapse" data-target="#instanceTab" href="javascript:void(0);">
+                    {{ 'article_form.all_article'|trans }}
+                    <i class="fa {% if route starts with 'admin_instance_article' %}fa-angle-up{% else %}fa-angle-down{% endif %}"></i>
+                </a>
+                <ul id="instanceTab" class="nav nav-stacked collapse {% if route starts with 'admin_instance_article' %}in{% endif %}">
+                    {% for cat in category_list %}
+                    <li class="navbar-header {% if route starts with 'admin_instance_article' and category == cat.id %}active{% endif %}">
+                        <a href="{{ path('admin_instance_article_list', { 'cat': cat.id }) }}">
+                            {{ cat.titleRu }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endif %}
+        <li class="navbar-header {% if route starts with 'admin_instance_magazine_newspaper' %}active{% endif %}">
+            <a href="{{ path('admin_instance_magazine_newspaper_view_all', { 'instanceCode': instanceCode}) }}">
+                {{ 'magazine_newspaper_form.menu_title'|trans }}
+            </a>
+        </li>
+        <li class="navbar-header {% if route starts with 'admin_instance_post' %}active{% endif %}">
+            <a href="{{ path('admin_instance_post_view_all', { 'instanceCode': instanceCode}) }}">
+                {{ 'post_form.opinion'|trans }}
+            </a>
+        </li>
+        <li class="navbar-header {% if route starts with 'admin_instance_feedback' and not (route starts with 'admin_instance_feedback_category') %}active{% endif %}">
+            <a href="{{ path('admin_instance_feedback_edit', {'id': 1, 'instanceCode': instanceCode}) }}">
+                {{ 'feedback.menu_title'|trans }}
+            </a>
+        </li>
+    {% endif %}
+</ul>

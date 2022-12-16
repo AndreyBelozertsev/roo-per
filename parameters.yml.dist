@@ -1,0 +1,61 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database_driver: pdo_pgsql
+    database_driver2: pdo_pgsql
+
+    database_host: 10.150.250.94
+    database_user: portal
+    database_password: portal
+    database_name: portal
+    database_port: 5432
+
+    slave_database_host: 10.150.250.96
+    slave_database_user: portal
+    slave_database_password: portal
+    slave_database_name: portal
+    slave_database_port: 5432
+
+    slave_2_database_host: 10.150.250.154
+    slave_2_database_user: portal
+    slave_2_database_password: portal
+    slave_2_database_name: portal
+    slave_2_database_port: 5432
+
+    database_host2: 10.150.250.94
+    database_port2: 5432
+    database_name2: portal
+    database_user2: portal
+    database_password2: portal
+
+    # You should uncomment this if you want use pdo_sqlite
+    # database_path: "%kernel.root_dir%/data.db3"
+
+    mailer_auth_mode: login
+    mailer_port: 465
+    mailer_encryption: ssl
+    mailer_transport: smtp
+    mailer_host: smtp.yandex.ru
+    mailer_user:       ~
+    mailer_password:   ~
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    site_name: portal_symfony.local
+    instance_code: main
+    admin_prefix: admin-portal
+    migration_dir: app/DoctrineMigrations
+
+    esia_public_certificate_file: portal.crt
+    esia_private_certificate_file: portal.key
+    esia_key_pass_phrase: null
+    esia_signature_dir: /home/user/www/portal/esia/sign
+    esia_client_id: <client_id>
+    esia_client_secret: <client_secret>
+    esia_infos_url: https://esia.gosuslugi.ru/rs/prns
+    esia_authorization_url: https://esia.gosuslugi.ru/aas/oauth2/ac
+    esia_access_token_url: https://esia.gosuslugi.ru/aas/oauth2/te
+
+    protocol: 'http'

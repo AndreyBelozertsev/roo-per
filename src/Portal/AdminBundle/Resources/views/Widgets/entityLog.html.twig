@@ -1,0 +1,6 @@
+<div class="page-header">{{ 'entity_log'|trans }}</div>
+{% if listChanges is defined and listChanges is not empty %}
+    {% for changeMessage in listChanges %}
+        {{ changeMessage | raw }}<br>
+    {% endfor %}
+{% endif %}

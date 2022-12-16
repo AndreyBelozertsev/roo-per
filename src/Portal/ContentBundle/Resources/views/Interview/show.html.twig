@@ -1,0 +1,150 @@
+{% extends isDepartment ? 'PortalContentBundle::depBase.html.twig' : 'PortalContentBundle::innerPageBase.html.twig' %}
+
+{#{% block pageTitle %}
+    {% if errorMessage is defined %} {{errorMessage}} {% endif %}
+    {{ 'interview.title'|trans() }}
+{% endblock %}#}
+
+{% block headerPanel %}
+    {{ panelWidget.renderPanel('header-panel', 'interview_page')|raw }}
+{% endblock %}
+
+{% block sideBar %}
+{#    {{parent()}}#}
+    {{ panelWidget.renderPanel('side-panel', 'interview_page')|raw }}
+{% endblock %}
+{#{% block sideBar %}{{parent()}}{% endblock %}#}
+
+{% block beforeContentBlock %}
+    {{ panelWidget.renderPanel('before-content-panel', 'interview_page')|raw }}
+{% endblock %}
+
+{% block bottomPanel %}
+    {{ panelWidget.renderPanel('bottom-panel', 'interview_page')|raw }}
+{% endblock %}
+
+{% block footerSocialPanel %}
+    {{ panelWidget.renderPanel('footer-panel', 'interview_page')|raw }}
+{% endblock %}
+
+{% block content %}
+    <div class="tabs-content__white">
+        <div class="title _sample">{{ 'interview_form.menu_title'|trans() }}</div>
+        {% if user %}
+            <div class="quiz">
+                <div class="quiz__header clearfix">
+                    <div class="quiz__title quiz__left">{{ interview.title }}</div>
+                    <div class="quiz__number quiz__right">
+                            <span id="num_question" class="quiz__number-first">{{ numQuestion }}</span>/
+                            <span id="count_question" class="quiz__number-second">{{ countQuestions }}</span>
+                        </div>
+                </div>
+                <div class="quiz__question">{{ interview.subTitle }}</div>
+                {% if interview.description %}
+                    <div class="">
+                        <div class="info__img-text  info__img-text_justify">
+                            {{ interview.description|raw }}
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="quiz__inform clearfix">
+                    <div class="quiz__open quiz__left">
+                            {{ 'interview.interview_open'|trans() }}
+                            <span class="quiz__date">{{ interview.dateStart|date('d.m.Y') }}</span>
+                            {{ 'interview.interview_close'|trans() }}
+                            <span class="quiz__date">{{ interview.dateEnd|date('d.m.Y') }}</span>
+                        </div>
+                    <div class="quiz__required-questions quiz__right">
+                            {{ 'interview.question_required'|trans() }}<span>*</span>
+                        </div>
+                </div>
+                <div class="quiz__body">
+                    <div class="quiz__text">
+                        <div id="interview_view">
+                            <form class="page-form" id="form_question" action="{{ path('interview_next_question') }}">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                <input type="hidden" name="uniqueId" value="{{ uniqueId }}">
+                                <input type="hidden" name="interviewId" value="{{ interviewId }}">
+                                {% if userId is defined %}
+                                    <input type="hidden" name="userId" value="{{ userId }}">
+                                {% endif %}
+                                <div id="form_field_question">
+                                    {% include 'PortalContentBundle:Interview:includeForm.html.twig' %}
+                                </div>
+                                <div class="quiz__footer clearfix">
+                                    <button id="submit_next_question" type="submit" value="{{ 'interview.next'|trans() }}"
+                                                data-interview-id="{{ interview.id }}" data-num-question="{{ numQuestion }}"
+                                                class="quiz__button quiz__left">
+                                            {{ 'interview.next'|trans() }}
+                                        </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="quiz">
+                <div class="quiz__header clearfix">
+                    <div class="quiz__title quiz__left">{{ interview.title }}</div>
+                </div>
+                <div class="">
+                    <div class="info__img-text info__img-text_justify">
+                        {{ interview.messageNotRegisteredUser|raw }}
+                    </div>
+                </div>
+                <a href="{{ path('interview_login_esia', {'slug' : interview.slug}) }}" class="button _blue">
+                    <b>{{ 'interview.esia_login'|trans() }}</b>
+                </a>
+
+            </div>
+        {% endif %}
+        <div class="quiz-separator"></div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            $('form[id="form_question"]').on('submit', function (e) {
+                e.preventDefault();
+                var checked = true;
+                if ($('#question_required').length > 0) {
+                    checked = false;
+                    if ($('.answer').length > 0) {
+                        if ($('.answer:checkbox:checked').length > 0 || $('.answer:radio:checked').length > 0) {
+                            checked = true;
+                        }
+                    }
+                    if ($('.answer-select option:selected').val()) {
+                        checked = true;
+                    }
+                }
+
+                if (checked) {
+                    $.post(Routing.generate('interview_next_question'),
+                        $(this).serialize(),
+                        function (response) {
+                            if (response.status === true) {
+                                var ffq = $('#form_field_question');
+                                ffq.html(response.content);
+                                $('#num_question').html($('input[name="numQuestion"]').val());
+                                ffq.find('select').chosen();
+                            }
+                            if (response.isFinish === true) {
+                                location.href = Routing.generate('interview_result', {
+                                    id: response.id,
+                                    isFinish: true,
+                                });
+                            }
+                        }, 'json'
+                    )
+                } else {
+                    var error = Translator.trans('interview.checked_question');
+                    alert(error);
+                }
+            });
+        });
+    </script>
+{% endblock %}

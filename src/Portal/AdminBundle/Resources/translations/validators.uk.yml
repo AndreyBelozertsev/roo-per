@@ -1,0 +1,90 @@
+feedback_form:
+  label.not_blank: Не должно быть пустым
+  message_error.not_blank: Не должно быть пустым
+  message_success.not_blank: Не должно быть пустым
+  label.unique: Введите уникальное значение
+  email_responsible.not_blank: Не должно быть пустым
+  email_responsible.email: Данный адрес {{ value }} является некорректным email адресом
+  too_much: 'Максимальное количество символов: {{ limit }}'
+article:
+  title.not_blank: Не должно быть пустым
+  title.unique: Введите уникальное значение
+  slug.not_blank: Не должно быть пустым
+head:
+  title.not_blank: Не должно быть пустым
+  title.unique: Введите уникальное значение
+  slug.not_blank: Не должно быть пустым
+  email: Данный адрес {{ value }} является некорректным email адресом
+banner:
+  title.unique: Введите уникальное значение
+event:
+  title.unique: Введите уникальное значение
+  slug.not_blank: Не должно быть пустым
+
+interview:
+  title.not_blank: Не должно быть пустым
+  subtitle.not_blank: Не должно быть пустым
+  title.unique: Введите уникальное значение
+  description.too_much: Максимальное количество символов {{ limit }}
+  questions:
+    min: Необходимо добавить вопросы, минимум {{ limit }}
+interview_question:
+  content.not_blank: Не должно быть пустым
+  description.too_much: Максимальное количество символов {{ limit }}
+  answers:
+    min: Необходимо добавить варианты ответов, минимум {{ limit }}
+    max: Вариантов ответов не должно привышать {{ limit }}
+
+widget_to_panel:
+  label.not_blank: Не должно быть пустым
+  label.unique: Введите уникальное значение
+users_form:
+    validation.password: Пароль недостаточно надежный
+    repeat_password_error: Пароли не совпадают
+    username_not_blank: Логин не может быть пустым
+field:
+  not_blank: Поле не может быть пустым
+  too_much: Поле слишком большое
+  not_date: Необходимо установить дату
+  unique: Введите уникальное значение
+  not_integer: Данные {{ value }} не являются числом
+
+photo_report:
+  title.unique: Фоторепортаж {{ value }} уже существует выберите другое название
+  title.not_blank: Поле не должно быть пустым
+
+system_mode:
+  not_blank: Поле не может быть пустым
+  not_unique: Введите уникальное значение
+
+file:
+  to_big: Слишком большой файл. Максимально допустимый размер {{ limit }}MB
+  wrong_type: Недопустимый тип файла
+  not_null: Необходимо выбрать изображение
+  not_empty: Необходимо выбрать файл
+
+document:
+  slug.not_blank: Не должно быть пустым
+  title.unique: Введите уникальное значение
+  category.not_blank: Не должно быть пустым
+  document_number.not_blank: Не должно быть пустым
+  approval_date.not_blank: Не должно быть пустым
+  document_type.not_blank: Не должно быть пустым
+  title.not_blank: Не должно быть пустым
+menu_node:
+  slug.not_blank: Не должно быть пустым
+  label.unique: Введите уникальное значение
+  label.not_blank: Не должно быть пустым
+  menu.not_blank: Не должно быть пустым
+  route.not_blank: Не должно быть пустым
+
+quiz:
+  criterion:
+    min: Минимальное значение должно составлять {{ limit }}
+    max: Максимальное значение должно составлять {{ limit }}
+  questions:
+    min: Необходимо добавить вопросы, минимум {{ limit }}
+quiz_question:
+  answers:
+    min: Необходимо добавить варианты ответов, минимум {{ limit }}
+    max: Вариантов ответов не должно привышать {{ limit }}

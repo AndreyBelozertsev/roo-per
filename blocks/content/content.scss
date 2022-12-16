@@ -1,0 +1,165 @@
+.content
+{
+    &_catalog
+    {
+        display: flex;
+
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+
+        @media (max-width: 1170px)
+        {
+            justify-content: space-around;
+        }
+    }
+
+    .quote
+    {
+        margin-bottom: 20px;
+    }
+
+    blockquote
+    {
+        margin: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+
+        border-left: 3px solid $red;
+
+        strong
+        {
+            color: $red;
+        }
+    }
+
+    &__message-form
+    {
+        font-size: 18px;
+
+        padding: 0 20px;
+
+        color: $gray-dark;
+    }
+
+    &__text
+    {
+        font-size: 160%;
+        line-height: 1.7;
+
+        margin-bottom: 30px;
+        padding-bottom: 50px;
+
+        color: $gray-dark;
+        border-bottom: 1px solid $gray-light-medium;
+
+        //width: 100%;
+
+        p
+        {
+            padding: 0 10px;
+
+            &:first-child
+            {
+                margin-top: 0;
+            }
+
+            a
+            {
+                word-wrap: break-word;
+            }
+        }
+
+        ul
+        {
+            margin: 20px 0;
+            padding: 0;
+
+            list-style: none;
+
+            li
+            {
+                position: relative;
+
+                padding: 10px 0 10px 20px;
+
+                &::before
+                {
+                    position: absolute;
+                    top: 19px;
+                    left: 0;
+
+                    width: 6px;
+                    height: 6px;
+
+                    content: '';
+
+                    border-radius: 6px;
+                    background: $red;
+                }
+            }
+        }
+
+        img
+        {
+            display: block;
+
+            width: 100% !important;
+            height: auto !important;
+            margin: 0 auto;
+        }
+    }
+
+    &__img-text
+    {
+        font-size: 12px;
+
+        margin: 0 auto 20px;
+
+        text-align: center;
+
+        color: $gray;
+    }
+
+    &__title_img
+    {
+        margin-top: 0;
+    }
+
+    &__contact-info
+    {
+        font-size: 16px;
+
+        margin-top: -10px;
+        margin-left: 20px;
+
+        color: $gray-dark;
+    }
+
+    &__title
+    {
+        font-size: 22px;
+        font-weight: bold;
+        //margin-top: 10px;
+
+        margin: 15px 0 5px;
+
+        color: $gray-dark;
+    }
+
+    .comments__form
+    {
+        margin-top: 40px;
+        padding: 0;
+    }
+
+    &__small-text
+    {
+        font-size: 12px;
+
+        margin: 50px 0 0;
+
+        color: $gray;
+    }
+}

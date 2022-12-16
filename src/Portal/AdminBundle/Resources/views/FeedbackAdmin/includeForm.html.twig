@@ -1,0 +1,41 @@
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.contentUk) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.contentUk, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.contentUk.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.contentRu) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.contentRu, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.contentRu.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.contentEn) }}</div>
+    <div class="col-sm-10">
+        {{ form_widget(form.contentEn, {'attr': {'class': 'form-control'}}) }}
+        <div class="errors">
+            {% for error in form.contentEn.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <div class="col-sm-2 text-right">{{ form_label(form.isFormShown) }}</div>
+    <div class="col-sm-10">{{ form_widget(form.isFormShown) }}</div>
+    <div class="clearfix"></div>
+</div>

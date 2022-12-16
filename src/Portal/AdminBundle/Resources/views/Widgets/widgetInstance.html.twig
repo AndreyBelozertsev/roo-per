@@ -1,0 +1,101 @@
+{#{% if instanceList is defined %}#}
+    {#<li class="dropdown {% if app.request.get('_route') starts with "admin_instance" and app.request.get('instanceCode') != constant('Portal\\AdminBundle\\Entity\\Instance::MAIN_SITE_INSTANCE_CODE') %}active{% endif %}">#}
+        {#<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">{{ 'instances'|trans }}<span class="caret"></span></a>#}
+        {#<ul class="dropdown-menu ">#}
+            {#{% for instance in instanceList %}#}
+                {#<li class="{% if app.request.get('_route') starts with "admin_instance" and app.request.get('instanceCode') == instance.code %}active{% endif %}">#}
+                    {#<a href="{{ path("admin_instance", {'instanceCode': instance.code}) }}" class="dropdown-nav-menu-item-custom">{{ instance.title }}</a>#}
+                {#</li>#}
+            {#{% endfor %}#}
+        {#</ul>#}
+    {#</li>#}
+{#{% endif %}#}
+
+
+<style>
+
+    .adm-top-link {
+        float: left;
+        margin-top: 6px;
+    }
+
+    .chosen-drop {
+        min-width: 400px;
+    }
+
+    .chosen-select_adm-top {}
+
+    .chosen-select_adm-top + .chosen-container {}
+
+    .chosen-container-single .chosen-default {
+        font-family: "Roboto Condensed",sans-serif;
+        font-size: 14px;
+        color: #fff;
+    }
+
+    .chosen-container-single .chosen-single {
+        background: transparent !important;
+    }
+
+    .chosen-container-active.chosen-with-drop .chosen-single {
+        font-size: 14px;
+        color: #fff;
+        border: 0;
+        box-shadow: none;
+    }
+
+    .chosen-container-active .chosen-single, .chosen-container-single .chosen-single {
+        font-size: 14px;
+        border: 0;
+        box-shadow: none;
+        color: #fff;
+    }
+
+    .chosen-container-single .chosen-single span {
+        font-family: "Roboto Condensed",sans-serif;
+        font-size: 14px;
+    }
+
+    .chosen-container-single .chosen-single div b {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin-left: 2px;
+        vertical-align: middle;
+        border-top: 4px solid;
+        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
+        background: none;
+    }
+</style>
+
+
+<script>
+    $(function(){
+        // bind change event to select
+        $('#dynamic_select').on('change', function () {
+            var url = $(this).val(); // get selected value
+            if (url) { // require a URL
+                window.location = url; // redirect
+            }
+            return false;
+        });
+    });
+</script>
+
+<div class="adm-top-link">
+    {% if instanceList is defined %}
+        <select class="chosen-select chosen-select_adm-top" name="" id="dynamic_select" data-placeholder="{{ 'instances'|trans }}" tabindex="2">
+            <option value=""></option>
+            {% for instance in instanceList %}
+                <option {% if app.request.get('_route') starts with "admin_instance" and app.request.get('instanceCode') == instance.code %}selected="selected"{% endif %} value="{{ path("admin_instance", {'instanceCode': instance.code}) }}">{{ instance.title }}</option>
+            {% endfor %}
+        </select>
+    {% endif %}
+</div>
+
+
+
+
+
+

@@ -1,0 +1,49 @@
+<div class="title">{{ title }}</div>
+<div class="tabs-photo-video" style="max-height:none">
+    <div class="tabs__content tabs__content_active">
+        <div class="owl-carousel owl-theme owl-photo owl-loaded">
+            {#{% for item in data.graphql.user.edge_owner_to_timeline_media.edges %}#}
+            {% for item in data.entry_data.ProfilePage.0.graphql.user.edge_owner_to_timeline_media.edges %}
+                <div class="item">
+                    <div class="owl-photo__photo" style="height:auto">
+                        <a href="https://www.instagram.com/p/{{ item.node.shortcode }}/?taken-by={{ account }}"
+                           class="owl-photo__link" target="_blank">
+                            {#<img src="{{ item.node.display_url }}" alt="">#}
+                            <img src="{{ item.node.thumbnail_resources.2.src }}" alt="">
+                        </a>
+                        {#<div class="owl-photo__date">{{ item.node.taken_at_timestamp|date('d.m.Y') }}</div>#}
+                    </div>
+                    <a href="https://www.instagram.com/p/{{ item.node.shortcode }}/?taken-by={{ account }}"
+                       class="owl-photo__title" target="_blank">
+                        {{ item.node.edge_media_to_caption.edges.0.node.text|sliceFullWord(100, true) }}
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        dots: false,
+        margin: 10,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1,
+                nav: true
+            },
+            600: {
+                items: 3,
+                nav: false
+            },
+            1000: {
+                items: 4,
+                nav: true,
+                loop: false,
+                margin: 20
+            }
+        }
+    });
+</script>

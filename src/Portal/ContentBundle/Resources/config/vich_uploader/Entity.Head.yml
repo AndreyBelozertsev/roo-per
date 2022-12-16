@@ -1,0 +1,7 @@
+Portal\ContentBundle\Entity\Head:
+  file:
+    mapping:            head_preview_attachment_mapping
+    filename_property:  preview
+    size:               fileSize
+    mime_type:          fileType
+    original_name:      originalFileName

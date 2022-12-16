@@ -1,0 +1,91 @@
+<a href="{{ path('admin_instance_menu_node_edit', {'instanceCode': instanceCode, 'menuNodeId': structureId}) }}"
+   class="btn btn-success btn-sm">
+    <i class="fa fa-edit"></i> {{ 'bloc_structure.edit'|trans }}
+</a>
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permission_codes = permissions.getCode() %}
+{% set arr = [] %}
+
+{% if sa or constant('Portal\\ContentBundle\\Entity\\MenuNode::PERMISSIONS_STRUCTURE')['create'] in permission_codes %}
+    {% set arr = arr|merge([{
+        path: path('admin_instance_menu_node_edit', {'instanceCode': instanceCode, 'menuNodeId': 0, 'structureId': structureId}),
+        text: 'bloc_structure.create_structure'|trans
+    }]) %}
+{% endif %}
+
+{% if template == 'article' and (sa or constant('Portal\\ContentBundle\\Entity\\Article::PERMISSIONS_ARTICLE')['create'] in permission_codes) %}
+    {% set arr = arr|merge([{
+        path: path('admin_instance_article_form_create', {'instanceCode': instanceCode, 'menuNodeId': structureId}),
+        text: 'bloc_structure.create_article'|trans
+    }]) %}
+{% endif %}
+
+{% if template == 'head' and (sa or constant('Portal\\ContentBundle\\Entity\\Head::PERMISSIONS_HEAD')['create'] in permission_codes) %}
+    {% set arr = arr|merge([{
+        path: path('admin_instance_head_form_create', {'instanceCode': instanceCode, 'menuNodeId': structureId}),
+        text: 'bloc_structure.create_head'|trans
+    }]) %}
+{% endif %}
+
+{% if template == 'event' and (sa or constant('Portal\\ContentBundle\\Entity\\Event::PERMISSIONS_EVENT')['create'] in permission_codes) %}
+    {% set arr = arr|merge([{
+        path: path('admin_instance_event_edit', {'instanceCode': instanceCode, 'id': 0, 'menuNodeId': structureId}),
+        text: 'bloc_structure.create_event'|trans
+    }]) %}
+{% endif %}
+
+{% if template == 'photo_report' and (sa or constant('Portal\\ContentBundle\\Entity\\PhotoReport::PERMISSIONS_PHOTO_REPORT')['create'] in permission_codes) %}
+    {% set arr = arr|merge([{
+        path: path('admin_instance_photo_report_edit', {'instanceCode': instanceCode, 'id': 0, 'menuNodeId': structureId}),
+        text: 'bloc_structure.create_photo_report'|trans
+    }]) %}
+{% endif %}
+
+{% if template == 'video_report' and (sa or constant('Portal\\ContentBundle\\Entity\\VideoReport::PERMISSIONS_VODEO_REPORT')['create'] in permission_codes) %}
+    {% set arr = arr|merge([{
+        path: path('admin_instance_video_report_edit', {'instanceCode': instanceCode, 'id': 0, 'menuNodeId': structureId}),
+        text: 'bloc_structure.create_video_report'|trans
+    }]) %}
+{% endif %}
+
+{% if template == 'document' or template == 'simple' or template is null %}
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\Document::PERMISSIONS_DOCUMENT')['create'] in permission_codes %}
+        {% set arr = arr|merge([{
+            path: path('admin_instance_document_edit', {'instanceCode': instanceCode, 'id': 0, 'menuNodeId': structureId}),
+            text: 'bloc_structure.create_document'|trans
+        }]) %}
+    {% endif %}
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\FeedbackForm::PERMISSIONS_FEEDBACK_FORM')['create'] in permission_codes %}
+        {% set arr = arr|merge([{
+            path: path('admin_instance_feedback_form_create', {'instanceCode': instanceCode, 'menuNodeId': structureId}),
+            text: 'bloc_structure.create_feedback_form'|trans
+        }]) %}
+    {% endif %}
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\Interview::PERMISSIONS_INTERVIEW')['create'] in permission_codes %}
+        {% set arr = arr|merge([{
+            path: path('admin_instance_interview_form_create', {'instanceCode': instanceCode, 'menuNodeId': structureId}),
+            text: 'bloc_structure.create_interview'|trans
+        }]) %}
+    {% endif %}
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\Quiz::PERMISSIONS_QUIZ')['create'] in permission_codes %}
+        {% set arr = arr|merge([{
+            path: path('admin_instance_quiz_form_create', {'instanceCode': instanceCode, 'menuNodeId': structureId}),
+            text: 'bloc_structure.create_quiz'|trans
+        }]) %}
+    {% endif %}
+{% endif %}
+{% if arr is not empty %}
+    <div class="btn-group" role="group">
+        <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ 'bloc_structure.create_in_structure'|trans }} <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            {% for item in arr %}
+                <li>
+                    <a class="dropdown-item" href="{{ item.path }}">{{ item.text }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

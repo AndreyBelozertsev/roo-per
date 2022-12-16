@@ -1,0 +1,31 @@
+{% if eventList is not empty %}
+    {% for event in eventList %}
+        {% if event.original_instance_code is defined and event.original_instance_code %}
+            {% set href = protocol ~ '://' ~  event.original_instance_code ~ '.' ~ site_name ~ path('event_show', { 'id': event.original_event_id }) %}
+            {% set img = event.original_file_path %}
+        {% else %}
+            {% set href = path('event_show', { 'id': event.event_id }) %}
+            {% set img = event.file_url %}
+        {% endif %}
+        <div class="scrol-box__item">
+            <a href="{{ href }}" class="scrol-box__info{{ event.file_url ? '' : ' scrol-box__info_noimg' }}" title="{{ event.event_title }}">
+                {% if img %}
+                    <img src="{{ asset(img) }}" alt="{{ event.event_title }}">
+                {% endif %}
+                <div class="scrol-box__title-text">{{ event.event_title|striptags }}</div>
+                <div class="scrol-box__title-date">
+                    {{ event.event_start_date|date('d.m.Y') }}
+                    {{ (event.event_start_date == event.event_end_date) ? '' : ' - ' ~ event.event_end_date|date('d.m.Y') }}
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="scrol-box__item">
+        <a href="#" class="scrol-box__info scrol-box__info_noimg" title="{{ 'no_events_at_day'|trans }}">
+            <div class="scrol-box__title-text">{{ 'no_events_at_day'|trans }}</div>
+            <div class="scrol-box__title-date">{{ 'now'|date('d.m.Y') }}</div>
+        </a>
+    </div>
+{% endif %}
+{#{{ event.event_start_date|date|localizeddate('none', 'none', app.request.locale, null, 'd MMMM YYYY г.') }}#}

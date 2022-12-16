@@ -1,0 +1,3 @@
+log:
+  article:
+    user_%username%_add_new_article: Пользователь %username% добавил новую новость

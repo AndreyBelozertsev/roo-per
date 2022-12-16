@@ -1,0 +1,64 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | {{ 'feedback_form.sort'|trans }}
+{% endblock %}
+
+{% block pageheader %}
+    {{ 'feedback_form.sort'|trans }}
+{% endblock %}
+
+{% set sa = is_granted('ROLE_SUPER_ADMIN') %}
+{% set permission_codes = permissions.code() %}
+{% set allowEdit = constant('Portal\\ContentBundle\\Entity\\WidgetToPanel::PERMISSIONS_WIDGET')['edit'] in permission_codes %}
+
+{% block topbuttons %}
+    <a class="btn btn-success" href="{{ path('admin_instance_widget_viewall', {'instanceCode': instanceCode}) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+    {% if sa or constant('Portal\\ContentBundle\\Entity\\WidgetToPanel::PERMISSIONS_WIDGET')['create'] in permission_codes %}
+        <a class="btn btn-success" href="{{ path('admin_instance_widget_form_create', {'instanceCode': instanceCode}) }}">
+            <i class="glyphicon glyphicon-plus-sign"></i> {{ 'widget_to_panel_form.add_new'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    
+    <div id="" class="clearfix">
+        <input type="hidden" name="sort_order" value="{#{{ widgetList|join(',') }}#}">
+        <input type="hidden" name="instance_code" value="{{instanceCode}}">
+        <div class="form-group">
+            <div class="col-sm-3">{{ 'widget_to_panel_form.do_sort'|trans }}</div>
+            <div class="col-sm-9">
+                <ul id="sortable">
+                    {% for widget in widgetList %}
+                        <li id="{{ widget.widget_to_panel_id }}">{{ widget.widget2panel_label }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+                <button class="btn btn-success form-submit">{{ 'widget_to_panel_form.save_sort'|trans }}</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    
+{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/portaladmin/script/sort-selected/sort-selected-style.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/portaladmin/jquery-ui/jquery-ui.js') }}"></script>
+    <script defer src="{{ asset('bundles/portaladmin/script/sort-selected/sort-order.js') }}"></script>
+    <script src="{{ asset('bundles/portaladmin/js/sort-widget.js') }}"></script>
+{% endblock %}

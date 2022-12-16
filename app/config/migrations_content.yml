@@ -1,0 +1,5 @@
+doctrine_migrations: 
+    dir_name: "%kernel.project_dir%/app/DoctrineMigrations/Content"
+    namespace: App\DoctrineMigrations\Content
+    table_name: migration_versions
+    name: Application_Migrations_Content

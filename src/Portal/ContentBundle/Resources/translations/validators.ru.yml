@@ -1,0 +1,19 @@
+feedback_form_value:
+  email_or_phone_blank: 'Проверьте поля телефона или e-mail адреса. Одно из полей должно быть заполнено'
+  not_blank: 'Не должно быть пустым'
+  too_much: 'Максимальное количество символов: {{ limit }}'
+  captcha_error: 'CAPTCHA: проверка не пройдена, повторите попытку'
+  agree: 'Необходимо дать согласие'
+#  subject.not_blank: Не должно быть пустым
+#  message.not_blank: Не должно быть пустым
+#  author.not_blank: Не должно быть пустым
+#  email.not_blank: Не должно быть пустым
+#  phone.not_blank: Не должно быть пустым
+  email.email: 'Данный адрес {{ value }} является некорректным email адресом'
+  category: 'Необходимо выбрать категорию'
+  previews:
+    max: 'Количество прикрепленных файлов не должно привышать {{ limit }}'
+
+subs:
+  email_not_valid: 'Не правильный e-mail'
+  not_unique: 'Вы уже подписаны на данную рассылку'

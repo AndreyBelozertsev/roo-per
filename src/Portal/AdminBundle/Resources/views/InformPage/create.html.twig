@@ -1,0 +1,20 @@
+{% extends 'PortalAdminBundle::adminBase.html.twig' %}
+
+{% block pageheader %}
+    {{ 'inform_page.new'|trans }}
+{% endblock %}
+
+{% block topbuttons %}
+    <a class="btn btn-success" href="{{ path('admin_instance_inform_page_list', {'instanceCode': instanceCode}) }}">
+        <i class="glyphicon glyphicon-repeat"></i> {{ 'come_back'|trans }}
+    </a>
+{% endblock %}
+
+{% block body %}
+    <div class="page-form-wrp">
+        {% include 'PortalAdminBundle:InformPage:createForm.html.twig' %}
+    </div>
+
+    <script src="{{ asset('bundles/portaladmin/js/create-form.js') }}"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+{% endblock %}

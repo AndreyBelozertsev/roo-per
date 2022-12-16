@@ -1,0 +1,72 @@
+{% extends isDepartment ? 'PortalContentBundle::depBase.html.twig' : 'PortalContentBundle::innerPageBase.html.twig' %}
+
+{% block title %}
+    {{ title }} | {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="title _sample">{{ title }}</div>
+    <div class="text-page">
+        {% if beforeText is defined and beforeText is not empty %}
+            <div class="content _sample">{{ beforeText|raw }}</div>
+        {% endif %}
+        {% if itemsStructure.childs is defined and itemsStructure.childs is not empty %}
+            {% for child in itemsStructure.childs %}
+                <div class="text-page__block">
+                    <a href="{{ path('structure', {'id': child.id}) }}" class="text-page__link-block text-page__desk">
+                        {{ child.title }}
+                    </a>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    {% set route = 'photo_report_show' %}
+    {% set prevDate = 0 %}
+    {% if itemsStructure.photo_reports|length < 3 %}
+        {% set topEnd = itemsStructure.photo_reports|length %}
+    {% else %}
+        {% set topEnd = 3 %}
+    {% endif %}
+    {% for item in itemsStructure.photo_reports %}
+        {% if loop.first %}
+            <div class="media-top">
+                <div class="media _big" data-loop="{{ loop.index }}">
+        {% endif %}
+        {% if not loop.first and loop.index < 4 %}
+            <div class="media _horizontal">
+        {% endif %}
+        {% if loop.index > 3 %}
+            {% set currDate = item.photo_report_published_at|date|localizeddate('none', 'none', app.request.locale, null, 'LLLL y') %}
+            {% if prevDate != currDate or loop.index == 4 %}
+                {% set prevDate = currDate %}
+                {{ loop.index > 4 ? '</div>' : '' }}
+                <div class="media-blocks flex_space" data-date="{{ item.photo_report_published_at|date('m.Y') }}">
+                    <div class="title-date">{{ currDate }} {{ 'year'|trans }}</div>
+            {% endif %}
+                <div class="media flex_item">
+        {% endif %}
+            {% include 'PortalContentBundle:PhotoReport:photo_item.html.twig' %}
+            </div>
+        {% if loop.first %}
+                <div class="media-top__right">
+                    {% endif %}
+                    {% if loop.index == topEnd %}
+                </div>
+            </div>
+        {% endif %}
+        {% if loop.last and loop.index > 3 %}
+            </div>
+            {% if itemsStructure.photo_reports|length < photoReportCount %}
+                <a id="get-more-reports" href="#" class="download" data-structure-id="{{ structureId }}"
+                   data-count="{{ photoReportCount }}" data-locale="{{ app.request.locale }}" data-url="load_next_structure_photo_report">
+                    {{ 'show_more'|trans }}
+                </a>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    <div class="text-page">
+        {% if afterText is defined and afterText is not empty %}
+            <div class="content _sample">{{ afterText|raw }}</div>
+        {% endif %}
+    </div>
+{% endblock %}

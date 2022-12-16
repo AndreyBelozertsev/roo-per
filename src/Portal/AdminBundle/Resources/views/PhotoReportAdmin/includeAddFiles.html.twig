@@ -1,0 +1,55 @@
+<div class="form-group">
+    <div class="existing-files">
+        {% for attachment in form.attachments %}
+            <div class="preview-form {{ attachment.isDeleted.vars.checked ? 'disabled-item' : '' }}"
+                 data-preview-index="{{ loop.index-1 }}">
+                <div class="col-sm-3 text-right">
+                    <img src="{{ asset(attachment.file.vars.object.previewFileUrl) }}">
+                </div>
+                <div class="col-sm-9">
+                    <div class="controls">
+                        {{ form_label(attachment.fileDescriptionUk) }}
+                        {{ form_widget(attachment.fileDescriptionUk) }}
+                        {{ form_errors(attachment.fileDescriptionUk) }}
+                        {{ form_label(attachment.fileDescriptionRu) }}
+                        {{ form_widget(attachment.fileDescriptionRu) }}
+                        {{ form_errors(attachment.fileDescriptionRu) }}
+                        {{ form_label(attachment.fileDescriptionEn) }}
+                        {{ form_widget(attachment.fileDescriptionEn) }}
+                        {{ form_errors(attachment.fileDescriptionEn) }}
+                        {{ form_widget(attachment.isDeleted) }}
+                        {{ form_label(attachment.isDeleted) }}
+                        {{ form_widget(attachment.file.file, {'attr':{'style':'display:none'} }) }}
+                        {{ form_widget(attachment) }}
+                    </div>
+                    <button class="restore">{{ 'restore'|trans }}</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            {% for error in attachment.file.vars.errors %}
+                <div class="alert alert-danger">{{ error.message }}</div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+    <div class="previews" data-prototype="{{ form_widget(form.attachments.vars.prototype)|e('html_attr') }}"></div>
+    <div id="drop_area" class="form-control">
+        <span>{{ 'drpo_file_here'|trans }}</span>
+        <input id="fileInput" type="file" accept="{{ form.attachments.vars.prototype.file.vars.attr.accept }}"
+               name="{{ form.attachments.vars.full_name }}[][file][file]" data-max-file-size="30000000"
+               data-instance-code="{{ instanceCode }}" data-id="{{ form.vars.value.id }}" multiple="multiple">
+    </div>
+</div>
+
+<script>
+    $('.disabled-item .restore').on('click', function(e) {
+        e.preventDefault();
+        var item = $(this).closest('.disabled-item');
+        item.find('input.disabled-chk').prop('checked', false);
+        item.removeClass('disabled-item');
+    });
+    $('[id $= StartX]').remove();
+    $('[id $= StartY]').remove();
+    $('[id $= Width]').remove();
+    $('[id $= Height]').remove();
+</script>

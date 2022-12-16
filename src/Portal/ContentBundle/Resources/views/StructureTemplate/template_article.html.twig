@@ -1,0 +1,77 @@
+{#<div class="tabs-content_news-horizontal">#}
+    {#<div class="flex_space">#}
+        {#{% for item in items %}#}
+            {#<div class="news-box" data-id="{{ item.id }}">#}
+                {#{% if item.originalArticleId is defined and item.originalArticleId %}#}
+                    {#{% set item_id = item.originalArticleId %}#}
+                {#{% else %}#}
+                    {#{% set item_id = item.id %}#}
+                {#{% endif %}#}
+
+                {#{% if item.originalInstanceCode is defined and item.originalInstanceCode %}#}
+                    {#{% set href = 'https://' ~  item.originalInstanceCode ~ '.' ~ site_name ~ path(route, { id:item_id }) %}#}
+                {#{% else %}#}
+                    {#{% set href = path(route, { id: item_id }) %}#}
+                {#{% endif %}#}
+
+                {#<a href="{{ href }}" class="news-box__link " title="{{ 'click_to_view'|trans }}">#}
+                    {#{% if item.attachment.previewFileUrl is defined %}#}
+                    {#{% if item.attachment is defined %}#}
+                        {#<img src="{{ asset(item.attachment.previewFileUrl|thumbImage ) }}">#}
+                        {#<img src="{{ asset(item.attachment ) }}">#}
+                    {#{% else %}#}
+                        {#<img src="{{ asset('bundles/portalcontent/image/image.png') }}">#}
+                    {#{% endif %}#}
+                {#</a>#}
+                {#<div class="news-box__info">#}
+                    {#<a href="{{ href }}" class="news-box__title" title="{{ 'click_to_view'|trans }}">#}
+                        {#{{ item.title|sliceFullWord(180, true) }}#}
+                    {#</a>#}
+                    {#{% if item.content is defined %}#}
+                        {#<div class="news-box__content">{{ item.content|striptags|sliceFullWord(150)|raw }}</div>#}
+                    {#{% endif %}#}
+                    {#{% if item.content is not defined and item.description is defined %}#}
+                        {#<div class="news-box__content">{{ item.description|striptags|sliceFullWord(150)|raw }}</div>#}
+                    {#{% endif %}#}
+                    {#<div class="news-box__content">{{ article.article_subtitle|sliceFullWord(150, true) }}</div>#}
+                    {#<div class="clearfix">#}
+                        {#<div class="news-box__eye">#}
+                            {#{% if item.manualViewsCounter is defined and item.viewsCounter is defined %}#}
+                                {#{{ item.manualViewsCounter ?: item.viewsCounter }}#}
+                            {#{% endif %}#}
+                        {#</div>#}
+                        {#<div class="news-box__date">{{ item.published_at|date('d.m.Y') }}</div>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+        {#{% endfor %}#}
+    {#</div>#}
+{#</div>#}
+<div class="tabs-content_news-horizontal tabs__content tabs__content_active"
+     data-time="{{ ignoreTime }}" data-artcount="{{ article_count }}" data-catid="1" data-showbtn="1">
+    <div class="flex_space">
+        {% for article in items %}
+            <div class="news-box" data-id="{{ article.article_id }}">
+                <a href="{{ path('article_show', {'id': article.article_id}) }}" class="news-box__link" title="{{ 'click_to_view'|trans }}">
+                    <img src="{{ asset(article.article_file_url|thumbImage) }}">
+                </a>
+                <div class="news-box__info">
+                    <a href="{{ path('article_show', {'id': article.article_id}) }}" class="news-box__title" title="{{ 'click_to_view'|trans }}">
+                        {{ article.article_title|sliceFullWord(180, true) }}
+                    </a>
+                    {#<div class="news-box__content">{{ article.article_content|striptags|sliceFullWord(150)|raw }}</div>#}
+                    <div class="news-box__content">{{ article.article_subtitle|sliceFullWord(150, true) }}</div>
+                    <div class="clearfix">
+                        <div class="news-box__eye">
+                            {{ article.article_manual_views_counter ?: article.article_views_counter }}
+                        </div>
+                        <div class="news-box__date">{{ article.article_published_at|date('d.m.Y') }}</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <a id="get-more" href="#" class="download" title="{{ 'click_to_view'|trans }}" data-locale="{{ app.request.locale }}">
+        {{ 'show_more'|trans }}
+    </a>
+</div>

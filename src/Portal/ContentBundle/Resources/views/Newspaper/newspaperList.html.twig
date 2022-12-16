@@ -1,0 +1,9 @@
+{% block content %}
+        {% for newspaper in newspaperList %}
+            <div class="magazine-newspaper__item">
+                <div class="magazine-newspaper__img"><img src="{{ asset(newspaper.preview_file_url|thumbImage) }}"></div>
+                <a target="_blank" href="{{ asset(newspaper.file) }}" class="magazine-newspaper__title icons_download">{{ attribute(newspaper, 'title_' ~ app.request.locale) }}</a>
+            </div>
+        {% endfor %}
+{% endblock %}
+

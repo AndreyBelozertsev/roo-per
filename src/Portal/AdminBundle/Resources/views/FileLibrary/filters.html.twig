@@ -1,0 +1,41 @@
+{#TODO: rewrite on symfony of form!#}
+<div id="filterFile" class="well">
+    <div class="clearfix">
+        <div class="form-group clearfix col-lg-5">
+            <label>{{ 'sort'|trans }}:</label>
+            <select id="filterSort" class="chosen-select" name="sort">
+                <option value="asc">{{ 'sort_by_asc'|trans }}</option>
+                <option value="desc">{{ 'sort_by_desc'|trans }}</option>
+            </select>
+        </div>
+
+        <div class="form-group clearfix col-lg-3">
+            <label>{{ 'extension'|trans }}:</label>
+            <select id="filterExtension" class="chosen-select" name="extension">
+                <option value="">{{ 'select_extension'|trans }}</option>
+                {% for key, item in extension %}
+                    <option value="{{ item }}">{{ key }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group clearfix  col-lg-3">
+            <label>{{ 'extension_by_type'|trans }}:</label>
+            <select id="filterType" class="chosen-select" name="type">
+                <option value="">{{ 'select_type'|trans }}</option>
+                {% for type in extension_type %}
+                    <option value="{{ type }}">{{ type|trans() }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <input type="hidden" name="instanceCode" value="{{ instanceCode }}">
+    <button id="selecctall" class="btn btn-sm btn-primary" data-route="{{ app.request.get('_route') }}">
+        {{ 'filter'|trans }}
+    </button>
+</div>
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/portaladmin/js/file-filter.js') }}"></script>
+{% endblock %}

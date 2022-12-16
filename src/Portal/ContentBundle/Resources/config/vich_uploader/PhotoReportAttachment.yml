@@ -1,0 +1,7 @@
+Portal\ContentBundle\Entity\PhotoReportAttachment:
+  file:
+    mapping:            photo_report_attachment_mapping
+    filename_property:  preview
+#    size:               size
+#    mime_type:          fileType
+#    original_name:      originalFileName
