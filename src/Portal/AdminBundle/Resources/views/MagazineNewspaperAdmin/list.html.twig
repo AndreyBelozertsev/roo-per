@@ -26,6 +26,7 @@
             <th>{{ 'title'|trans }}</th>
             <th>{{ 'magazine_newspaper_form.type_of'|trans }}</th>
             <th>{{ 'is_published'|trans }}</th>
+            <th>{{ 'additional'|trans }}</th>
             <th>{{ 'action'|trans }}</th>
         </tr>
         </thead>
@@ -56,6 +57,13 @@
                 </td>
                 <td>{{ magazine_newspaper.typeOf|trans }}</td>
                 <td>{{ magazine_newspaper.isPublished ? '<i class="glyphicon glyphicon-ok"></i>' : '' }}</td>
+                <td>
+                    {% if magazine_newspaper.typeOf == 'magazine' %}
+                        <a href="{{ path('admin_instance_magazine_article_list', { 'magazine': magazine_newspaper.id }) }}" class="btn btn-sm btn-primary">
+                            <i class="glyphicon glyphicon-edit"></i> {{ 'magazine_article_form.all_article'|trans }}
+                        </a>
+                    {% endif %}
+                </td>
                 <td>
                     {% if sa %}
                         <a href="{{ path('admin_instance_magazine_newspaper_edit', { 'id': magazine_newspaper.id }) }}" class="btn btn-sm btn-primary">

@@ -12,7 +12,13 @@ class WidgetCategoryList extends AbstractWidgets
     function getList()
     {
         $em = $this->container->get('doctrine')->getManager();
-        $result = $em->getRepository('PortalContentBundle:ArticleCategory')->findBy(['isPublished' => true]);
+        $result = $em->getRepository('PortalContentBundle:ArticleCategory')->findBy([
+            'isPublished' => true,
+            'showInMenu'=> true
+        ],
+        [
+            'sort' => 'DESC'
+        ]);
 
         foreach ($result as $cat) {
             /** @var ArticleCategory $cat */
@@ -29,7 +35,7 @@ class WidgetCategoryList extends AbstractWidgets
                     break;
             }
         }
-
+        
         return $arrParams ?? [];
     }
 }

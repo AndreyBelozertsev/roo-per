@@ -24,6 +24,7 @@
         <tr>
             <th>{{ 'title'|trans }}</th>
             <th>{{ 'published'|trans }}</th>
+            <th>{{ 'sort'|trans }}</th>
             <th>{{ 'action'|trans }}</th>
         </tr>
         </thead>
@@ -36,6 +37,7 @@
                     </a>
                 </td>
                 <td><i class="glyphicon glyphicon-{{ cat.isPublished ? 'ok' : 'minus' }}"></i></td>
+                <td>{{ cat.sort }}</td>
                 <td>
                     <a href="{{ path('admin_admin_category_edit', { 'id': cat.id }) }}" class="btn btn-sm btn-primary">
                         <i class="glyphicon glyphicon-edit"></i> {{ 'edit'|trans }}

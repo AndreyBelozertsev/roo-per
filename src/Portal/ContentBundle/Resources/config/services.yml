@@ -26,8 +26,14 @@ services:
     article_manager:
         class: Portal\ContentBundle\Model\ArticleManager
         arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+    magazine_article_manager:
+        class: Portal\ContentBundle\Model\MagazineArticleManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
     customer_article_manager:
         class: Portal\ContentBundle\Model\ArticleManager
+        arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
+    customer_magazine_article_manager:
+        class: Portal\ContentBundle\Model\MagazineArticleManager
         arguments: ["@doctrine.orm.customer_entity_manager", "@service_container"]
     head_manager:
         class: Portal\ContentBundle\Model\HeadManager

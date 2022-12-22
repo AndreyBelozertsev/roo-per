@@ -25,7 +25,7 @@ class SocialNetworkType extends AbstractType
                 'label' => 'social_network.link',
             ])
             ->add('sort', IntegerType::class, [
-                'label' => 'social_network.number_order',
+                'label' => 'sort',
                 'required' => false
             ])
             ->add('prefix', TextType::class, [

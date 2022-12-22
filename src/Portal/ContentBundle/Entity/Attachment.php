@@ -21,6 +21,11 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *     "post_attachment" = "PostAttachment",
  *     "magazine_newspaper_attachment" = "MagazineNewspaperAttachment",
  *     "magazine_newspaper_document_attachment" = "MagazineNewspaperDocumentAttachment",
+ *     "article_categoty_icon_attachment" = "ArticleCategoryIconAttachment",
+ *     "article_categoty_thumbnail_attachment" = "ArticleCategoryThumbnailAttachment",
+ *     "magazine_article_attachment" = "MagazineArticleAttachment", 
+ *     "magazine_article_media_attachment" = "MagazineArticleMediaAttachment", 
+ *     "photo_report_attachment" = "PhotoReportAttachment",
  * })
  *
  * @Vich\Uploadable
@@ -95,10 +100,12 @@ abstract class Attachment
     const TYPE_MEDIA = 6;
     const TYPE_PHOTOREPORT = 7;
     const TYPE_SOCIALNETWORK = 8;
+    const TYPE_MAGAZINE_ARTICLES = 9;
 
     const PATH_BANNERS = 'banners/';
     const PATH_DOCUMENTS = 'documents/';
     const PATH_ARTICLES = 'articles/';
+    const PATH_MAGAZINE_ARTICLES = 'magazine-articles/';
     const PATH_EVENTS = 'events/';
     const PATH_PAGES = 'pages/';
     const PATH_MEDIA = 'media/';
@@ -119,7 +126,8 @@ abstract class Attachment
         self::TYPE_PAGES => self::PATH_PAGES,
         self::TYPE_MEDIA => self::PATH_MEDIA,
         self::TYPE_PHOTOREPORT => self::PATH_PHOTOREPORT,
-        self::TYPE_SOCIALNETWORK => self::PATH_SOCIALNETWORK
+        self::TYPE_SOCIALNETWORK => self::PATH_SOCIALNETWORK,
+        self::TYPE_MAGAZINE_ARTICLES => self::PATH_MAGAZINE_ARTICLES
     ];
 
     const PERMISSIONS_FILE_LIB = [

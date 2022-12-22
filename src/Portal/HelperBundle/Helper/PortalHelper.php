@@ -213,6 +213,9 @@ class PortalHelper
             case Attachment::TYPE_MEDIA:
                 $path = $fileDir . Attachment::PATH_MEDIA;
                 break;
+            case Attachment::TYPE_MAGAZINE_ARTICLES:
+                $path = $fileDir . Attachment::PATH_MAGAZINE_ARTICLES;
+                break;
             default:
                 $path = null;
         }

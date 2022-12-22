@@ -46,6 +46,7 @@ if (strpos($_SERVER['REQUEST_URI'], 'admin-portal/instance') !== false) {
     $kernel = new AppKernel('dev', true);
 }
 $kernel->boot();
+
 //$kernel->loadClassCache();
 //Request::setTrustedProxies(['192.0.0.1', '10.0.0.0/8'], Request::HEADER_X_FORWARDED_ALL);
 $request = Request::createFromGlobals();

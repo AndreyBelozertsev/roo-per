@@ -39,7 +39,7 @@ class AppKernel extends Kernel
         $this->debug = (bool) $debug;
         $this->rootDir = $this->getRootDir();
         $this->name = $this->getName();
-
+        
         if ($this->debug) {
             $this->startTime = microtime(true);
         }

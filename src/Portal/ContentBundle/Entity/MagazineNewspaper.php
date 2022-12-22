@@ -3,6 +3,7 @@
 namespace Portal\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * MagazineNewspaper
@@ -44,6 +45,11 @@ class MagazineNewspaper
      * @ORM\Column(name="title_en", type="string", length=255, nullable=true)
      */
     private $titleEn;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Portal\ContentBundle\Entity\MagazineArticle", mappedBy="magazine", cascade={"persist", "remove"})
+     */
+    private $magazineArticles;
 
     /**
      * @var string
@@ -93,6 +99,7 @@ class MagazineNewspaper
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->magazineArticles = new ArrayCollection();
     }
 
     /**
@@ -175,6 +182,39 @@ class MagazineNewspaper
     public function getTitleEn()
     {
         return $this->titleEn;
+    }
+
+        /**
+     * @return Collection|Article[]
+     */
+    public function getMagazineArticle()
+    {
+        return $this->magazineArticles;
+    }
+
+    /**
+     * Add article
+     *
+     * @param MagazineArticle $magazineArticle
+     * @return MagazineNewspaper
+     */
+    public function addMagazineArticle(MagazineArticle $magazineArticle)
+    {
+        $this->magazineArticles[] = $magazineArticle;
+        $magazineArticle->setMagazine($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove magazineArticle
+     *
+     * @param MagazineArticle $magazineArticle
+     */
+    public function removeMagazineArticle(MagazineArticle $magazineArticle)
+    {
+        $this->magazineArticles->remove($magazineArticle);
+        $magazineArticle->setMagazine(null);
     }
 
     /**

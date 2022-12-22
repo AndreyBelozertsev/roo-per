@@ -16,7 +16,7 @@ class CategoryAdminController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         return $this->render('PortalAdminBundle:ArticleCategoryAdmin:list.html.twig', [
-            'category' => $em->getRepository('PortalContentBundle:ArticleCategory')->findAll()
+            'category' => $em->getRepository('PortalContentBundle:ArticleCategory')->findBy([],['sort'=>'ASC'])
         ]);
     }
 
@@ -47,7 +47,7 @@ class CategoryAdminController extends Controller
                 $flashBag->add('error_message', $this->get('translator')->trans('wrong_data'));
             }
         }
-
+        
         return $this->render('PortalAdminBundle:ArticleCategoryAdmin:create.html.twig', [
             'form' => $form->createView(),
             'category' => $category
@@ -89,7 +89,7 @@ class CategoryAdminController extends Controller
                 $flashBag->add('error_message', $this->get('translator')->trans('wrong_data'));
             }
         }
-
+        
         return $this->render('PortalAdminBundle:ArticleCategoryAdmin:create.html.twig', [
             'form' => $form->createView(),
             'category' => $category

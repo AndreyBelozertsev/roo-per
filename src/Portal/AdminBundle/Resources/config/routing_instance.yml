@@ -1117,3 +1117,53 @@ admin_instance_magazine_newspaper_restore:
         trailingSlash: "[/]{0,1}"
     options:
         expose: true
+
+
+#MagazineArticleForm
+admin_instance_magazine_article_form_create:
+    path: /instance/{instanceCode}/magazine_article/{magazine}/create{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MagazineArticleAdmin:create, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        cat: \d+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_magazine_article_form_edit:
+    path: /instance/{instanceCode}/magazine_article/{magazine}/edit/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MagazineArticleAdmin:edit, id: "0", trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        cat: \d+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_magazine_article_list:
+    path: /instance/{instanceCode}/magazine_article/{magazine}/list{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MagazineArticleAdmin:list, trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        cat: \d+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_magazine_article_delete:
+    path: /instance/{instanceCode}/magazine_article/{magazine}/delete/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MagazineArticleAdmin:delete, id: "0", trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        cat: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true
+
+admin_instance_magazine_article_restore:
+    path: /instance/{instanceCode}/magazine_article/{magazine}/restore/{id}{trailingSlash}
+    defaults: { _controller: PortalAdminBundle:MagazineArticleAdmin:restore, id: "0", trailingSlash: "/", instanceCode: "main" }
+    requirements:
+        id: \d+
+        cat: \w+
+        trailingSlash: "[/]{0,1}"
+    options:
+        expose: true

@@ -2,14 +2,15 @@
 
 namespace Portal\AdminBundle\Form;
 
-use Portal\ContentBundle\Entity\PhotoReportAttachment;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Portal\ContentBundle\Entity\PhotoReportAttachment;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class AttachmentFormForUploadImageType extends AbstractType
 {
@@ -23,6 +24,11 @@ class AttachmentFormForUploadImageType extends AbstractType
                     'class' => 'load-img-button'
                 ],
                 'allow_delete' => false,
+                'required' => false
+            ])
+            ->add('sort', IntegerType::class, [
+                'label' => 'sort',
+                'attr' => ['class' => 'form-control'],
                 'required' => false
             ])
             ->add('fileDescriptionUk', TextType::class, [

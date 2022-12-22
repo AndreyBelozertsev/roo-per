@@ -56,11 +56,39 @@ class ArticleCategory
      */
     private $isPublished = true;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="show_in_menu", type="boolean", nullable=true, options={"default":0})
+     */
+    private $showInMenu = false;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sort", type="integer", nullable=true, options={"default" : 500})
+     */
+    private $sort;
+
 
     public function __construct()
     {
         $this->articles = new ArrayCollection();
     }
+
+    /**
+     * @var ArticleCategoryIconAttachment
+     *
+     * @ORM\OneToOne(targetEntity="ArticleCategoryIconAttachment", mappedBy="articleCategory", cascade={"persist", "remove"})
+     */
+    private $icon_attachment;
+
+    /**
+     * @var ArticleCategoryThumbnailAttachment
+     *
+     * @ORM\OneToOne(targetEntity="ArticleCategoryThumbnailAttachment", mappedBy="articleCategory", cascade={"persist", "remove"})
+     */
+    private $thumbnail_attachment;
 
     /**
      * Get id.
@@ -200,9 +228,100 @@ class ArticleCategory
         return $this->isPublished;
     }
 
+    /**
+     * Set showInMenu.
+     *
+     * @param boolean $showInMenu
+     * @return ArticleCategory
+     */
+    public function setShowInMenu($showInMenu)
+    {
+        $this->showInMenu = $showInMenu;
+
+        return $this;
+    }
+
+    /**
+     * Get showInMenu.
+     *
+     * @return bool
+     */
+    public function getShowInMenu()
+    {
+        return $this->showInMenu;
+    }
+
+    /**
+     * Set sort.
+     *
+     * @param boolean $sort
+     * @return ArticleCategory
+     */
+    public function setSort($sort)
+    {
+        $this->sort = $sort;
+
+        return $this;
+    }
+
+    /**
+     * Get sort.
+     *
+     * @return bool
+     */
+    public function getSort()
+    {
+        return $this->sort;
+    }
 
     public function __toString()
     {
         return (string)$this->titleRu;
+    }
+
+    /**
+     * @param ArticleCategoryIconAttachment $icon_attachment
+     *
+     * @return ArticleCategory
+     */
+    public function setIconAttachment(ArticleCategoryIconAttachment $icon_attachment)
+    {
+        $this->icon_attachment = $icon_attachment;
+        $icon_attachment->setArticleCategory($this);
+
+        return $this;
+    }
+
+    /**
+     * Get icon_attachment
+     *
+     * @return ArticleCategoryIconAttachment
+     */
+    public function getIconAttachment()
+    {
+        return $this->icon_attachment;
+    }
+
+        /**
+     * @param ArticleCategoryThumbnailAttachment $thumbnail_attachment
+     *
+     * @return ArticleCategory
+     */
+    public function setThumbnailAttachment(ArticleCategoryThumbnailAttachment $thumbnail_attachment)
+    {
+        $this->thumbnail_attachment = $thumbnail_attachment;
+        $thumbnail_attachment->setArticleCategory($this);
+
+        return $this;
+    }
+
+    /**
+     * Get thumbnail_attachment
+     *
+     * @return ArticleCategoryThumbnailAttachment
+     */
+    public function getThumbnailAttachment()
+    {
+        return $this->thumbnail_attachment;
     }
 }

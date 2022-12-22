@@ -410,6 +410,7 @@ instance_category_form:
   edit: Редактирование
   instance_categories: категории сайта
   remove_instance_category: Удаление категории сайта
+  show_in_menu: Отобра
 
 widget_param:
   title: Настройка параметров виджета

@@ -5,85 +5,51 @@ namespace Portal\ContentBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Attachment
+ * Class ArticleCategoryIconAttachment
+ * @package Portal\ContentBundle\Entity
  *
- * @ORM\Table(name="photo_report_attachment")
- * @ORM\Entity(repositoryClass="Portal\ContentBundle\Repository\PhotoReportAttachmentRepository")
+ * @ORM\Table(name="article_category_icon_attachment")
+ * @ORM\Entity(repositoryClass="Portal\ContentBundle\Repository\ArticleCategoryIconAttachmentRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class PhotoReportAttachment extends Attachment
+class ArticleCategoryIconAttachment extends Attachment
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="sort", type="integer", nullable=true, options={"default":"500"})
+     * @ORM\OneToOne(targetEntity="ArticleCategory", inversedBy="icon_attachment")
+     * @ORM\JoinColumn(name="article_category_id", referencedColumnName="id")
      */
-    private $sort;
-
-    /**
-     * @var PhotoReport
-     *
-     * @ORM\ManyToOne(targetEntity="PhotoReport", inversedBy="attachments")
-     * @ORM\JoinColumn(name="photo_report_id", referencedColumnName="id")
-     */
-    private $photoReport;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_deleted", type="boolean", nullable=true, options={"default":0})
-     */
-    private $isDeleted;
+    private $articleCategory;
 
     /**
      * @var integer
-     *
      */
     private $cropStartX;
 
     /**
      * @var integer
-     *
      */
     private $cropStartY;
 
     /**
      * @var integer
-     *
      */
     private $cropWidth;
 
     /**
      * @var integer
-     *
      */
     private $cropHeight;
 
-//    public static $ALLOWED_FILE_TYPES = [
-//        'image/jpeg',
-//        'image/png',
-//        'image/bmp',
-//    ];
-
-//    const MAX_FILE_SIZE = 10485760;
-
-    public function __toString()
-    {
-        return (string)parent::getId();
-    }
-
     /**
-     * Get id
-     *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -91,75 +57,27 @@ class PhotoReportAttachment extends Attachment
     }
 
     /**
-     * Set photoReport
-     *
-     * @param PhotoReport $photoReport
-     *
-     * @return PhotoReportAttachment
+     * @return ArticleCategory
      */
-    public function setPhotoReport(PhotoReport $photoReport = null)
+    public function getArticleCategory()
     {
-        $this->photoReport = $photoReport;
-
-        return $this;
+        return $this->articleCategory;
     }
 
     /**
-     * Get photoReport
-     *
-     * @return \Portal\ContentBundle\Entity\photoReport
+     * @param mixed $articleCategory
      */
-    public function getPhotoReport()
+    public function setArticleCategory($articleCategory)
     {
-        return $this->photoReport;
+        $this->articleCategory = $articleCategory;
     }
 
     /**
-     * Set sort
-     *
-     * @param integer $sort
-     *
-     * @return PhotoReportAttachment
+     * @return string
      */
-    public function setSort($sort)
+    public function __toString()
     {
-        $this->sort = $sort;
-
-        return $this;
-    }
-
-    /**
-     * Get sort
-     *
-     * @return integer
-     */
-    public function getSort()
-    {
-        return $this->sort;
-    }
-
-    /**
-     * Set isDeleted
-     *
-     * @param boolean $isDeleted
-     *
-     * @return PhotoReportAttachment
-     */
-    public function setIsDeleted($isDeleted)
-    {
-        $this->isDeleted = $isDeleted;
-
-        return $this;
-    }
-
-    /**
-     * Get isDeleted
-     *
-     * @return bool
-     */
-    public function getIsDeleted()
-    {
-        return $this->isDeleted;
+        return (string)$this->getArticleCategory()->getId();
     }
 
     /**

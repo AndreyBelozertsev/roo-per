@@ -49,6 +49,13 @@
                 {{ 'post_form.opinion'|trans }}
             </a>
         </li>
+        {% if sa or 'create_photo_report' in permissions or 'edit_photo_report' in permissions or 'delete_photo_report' in permissions %}
+            <li class="navbar-header {% if route starts with 'admin_instance_photo_report' %}active{% endif %}">
+                <a href="{{ path('admin_instance_photo_report_edit', { 'id': 1, 'instanceCode': instanceCode}) }}">
+                    {{ 'photo_report_form.menu_title'|trans }}
+                </a>
+            </li>
+        {% endif %}
         <li class="navbar-header {% if route starts with 'admin_instance_feedback' and not (route starts with 'admin_instance_feedback_category') %}active{% endif %}">
             <a href="{{ path('admin_instance_feedback_edit', {'id': 1, 'instanceCode': instanceCode}) }}">
                 {{ 'feedback.menu_title'|trans }}

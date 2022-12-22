@@ -56,6 +56,10 @@ query_error: Ошибка запроса
 params: Параметры сайта
 Is published: Публиковать
 published: Опубликовано
+icon: Иконка
+additional: Дополнительно
+magazine_title: Заголовок журнала
+sort: Порядок сортировки
 
 error_page:
   text_404: Страница не найдена
@@ -70,6 +74,16 @@ article_form:
   action_list: Список новостей
   restore: Восстановление новости
   show_in_slider: Отображать в слайдере на главной
+
+magazine_article_form:
+  all_article: Все статьи
+  menu_title: Статьи
+  action_create: Создать статью
+  action_edit: Редактировать статью
+  delete_title: Удаление статьи
+  action_list: Список статей
+  restore: Восстановление статьи
+  number_order: Порядок сотртировки
 
 photo_report_form:
   menu_title: Фотогалерея
@@ -99,7 +113,6 @@ feedback_form:
   add_new: Добавить новую форму
   title: Заголовок
   delete_title: Удаление формы обратной связи
-  sort: Порядок сортировки
   visible: Доступные поля
   message_error: При отправке сообщения произошла ошибка.
   message_success: Ваше сообщение успешно отправлено.
@@ -142,12 +155,12 @@ post_form:
 article_category:
   delete_title: Удаление раздела новостей
   action_list: Управление разделами новостей
+  show_in_menu: Добавить в главное меню
 
 social_network:
   action_list: 'Список социальных сетей'
   action_create: Создать информацию о социальных сетей
   action_edit: Редактировать информацию о социальных сетей
-  number_order: Порядковий номер
   link: Ссылка
   name: Название
   prefix: Префикс
@@ -162,3 +175,6 @@ magazine_newspaper_form:
   magazine_file: Файл газеты или журнала
   type_of: Тип публикации
   magazine: журнал
+  
+article_category_form:
+  show_in_menu: Добавить в главное меню
