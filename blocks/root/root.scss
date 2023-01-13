@@ -1,0 +1,109 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: $font-family;
+    // font-weight: normal;
+    font-style: normal;
+    // color: $b-color;
+}
+
+a {text-decoration: none;}
+ul {list-style: none;}
+
+body {
+    max-width: 100%;
+
+    &.lock {
+        overflow: hidden;
+    }
+}
+
+html {
+    &.lock {
+        overflow: hidden;
+    }
+}
+
+.section {
+    padding-left: 15px;
+    padding-right: 15px;
+
+    &--filled {
+        padding-left: 15px;
+        padding-right: 15px;
+        background-color: $base-900;
+    }
+}
+
+.container {
+    max-width: $max-width;
+    margin-left: auto;
+    margin-right: auto;
+    padding: unset;
+}
+
+main {
+    @media (min-width: 994px) {
+        margin-left: 56px;
+    }
+}
+
+
+.t-crop {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &--one-l {
+        -webkit-line-clamp: 1;
+    }
+
+    &--two-l {
+        -webkit-line-clamp: 2;
+    }
+
+    &--tree-l {
+        -webkit-line-clamp: 3;
+    }
+
+    &--four-l {
+        -webkit-line-clamp: 4;
+    }
+}
+
+@font-face {
+    font-family: 'Inter-Light';
+    src: url(/fonts/Inter-Light.ttf) format('truetype');
+
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter-Regular';
+    src: url(../fonts/Inter-Regular.ttf);
+
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter-Medium';
+    src: url(/fonts/Inter-Medium.ttf);
+
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter-SemiBold';
+    src: url(/fonts/Inter-SemiBold.ttf);
+
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter-Bold';
+    src: url(/fonts/Inter-Bold.ttf);
+
+    font-style: normal;
+}

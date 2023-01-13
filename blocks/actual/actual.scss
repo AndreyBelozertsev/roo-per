@@ -1,0 +1,214 @@
+.actual {
+    margin-top: 50px;
+
+    &-info {
+        display: flex;
+        flex-direction: column;
+
+        gap: 10px;
+
+        h2 {
+            font-weight: 700;
+            font-size: 22px;
+
+            color: $primmary-bg;
+        }
+
+        span {
+            font-weight: 700;
+            font-size: 18px;
+            color: $primmary-600;
+        }
+    }
+
+    &-wrap {
+        margin-top: 25px;
+
+        display: grid;
+        grid-template-areas:
+            "item-1"
+            "item-2"
+            "item-3"
+            "item-4"
+            "item-5"
+            "item-6";
+        gap: 12px;
+
+        @media (min-width: 475px) {
+            grid-template-areas:
+            "item-1 item-1"
+            "item-2 item-3"
+            "item-4 item-5"
+            "item-6 item-6";
+        }
+    }
+
+    &-wrap__item1 {
+        grid-area: item-1;
+    }
+    &-wrap__item2 {
+        grid-area: item-2;
+    }
+    &-wrap__item3 {
+        grid-area: item-3;
+    }
+    &-wrap__item4 {
+        grid-area: item-4;
+    }
+    &-wrap__item5 {
+        grid-area: item-5;
+    }
+    &-wrap__item6 {
+        grid-area: item-6;
+    }
+
+    &-wrap__item {
+        position: relative;
+
+        // width: 100%;
+        height: 350px;
+
+        border-radius: 13px;
+        overflow: hidden;
+
+        &::before {
+            position: absolute;
+
+            content: '';
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+            z-index: 2;
+            transition: .3s;
+        }
+
+        &:hover &-img {
+            img {
+                transform: scale(1.1);
+            }
+        }
+    }
+
+    &-wrap__item-info {
+        position: absolute;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+        z-index: 3;
+
+        span {
+            position: absolute;
+
+            top: 15px;
+            right: 15px;
+
+            padding: 8px 12px;
+
+            background-color: $accent;
+            border-radius: 5px;
+            
+            font-size: 14px;
+            color: #F7F9FC;
+
+            @media (min-width: 1024px) {
+                top: 24px;
+                right: 24px;
+
+                border-radius: 8px;
+            }
+        }
+
+        p {
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 22px;
+            color: #F7F9FC;
+
+            padding-right: 30px;
+            margin-left: 15px;
+            margin-bottom: 15px;
+
+            @media (min-width: 1024px) {
+                font-size: 20px;
+                line-height: 24px;
+
+                margin-left: 24px;
+                margin-bottom: 24px;
+            }
+        }
+    }
+
+    &-wrap__item-img {
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+
+        img {
+            width: 100%;
+            height: 100%;
+
+            background-size: 100%; /* Современные браузеры */
+
+            object-fit: cover;
+            object-position: top;
+            transition: .5s;
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .actual {
+        margin-top: 160px;
+
+        &-info {
+            flex-direction: row;
+            justify-content: space-between;
+
+            h2 {
+                font-size: 32px;
+            }
+
+            span {
+                font-size: 24px;
+            }
+        }
+
+        &-wrap {
+            margin-top: 74px;
+            grid-template-areas:
+                "item-1 item-1 item-2 item-3"
+                "item-4 item-5 item-2 item-3"
+                "item-4 item-5 item-6 item-6";
+            gap: 24px;
+        }
+
+        &-wrap__item1,
+        &-wrap__item6 {
+            height: 280px;
+        }
+
+        &-wrap__item2,
+        &-wrap__item3,
+        &-wrap__item4,
+        &-wrap__item5 {
+            height: 400px;
+        }
+    }
+}

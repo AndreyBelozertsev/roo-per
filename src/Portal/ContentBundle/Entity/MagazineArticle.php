@@ -237,6 +237,11 @@ class MagazineArticle
     private $isSearchIndexed = true;
 
     /**
+     * @ORM\OneToMany(targetEntity="Portal\ContentBundle\Entity\Comment", mappedBy="magazineArticle", cascade={"persist"})
+     */
+    private $comments;
+
+    /**
      * Constructor
      */
     public function __construct()

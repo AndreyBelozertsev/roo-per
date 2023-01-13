@@ -4,415 +4,320 @@ include ../blocks/head/head
 doctype html
 html
     +head
-    body.page
-
-
-
-        .header.clearfix
-            a(href="/").logo
-
-            .mobile-nav
-                .mobile-nav__button
-                .mobile-nav__menu
-                    ul.mobile-nav__list
-                        li.mobile-nav__item
-                        li.mobile-nav__item
-                            b.mobile-submenu__button
-                            a(href="#").mobile-nav__link Розділи
-                            .mobile-submenu.mobile-submenu-category
-                                ul.mobile-submenu__list
-                                    li.mobile-submenu__item
-                                        a(href="#").mobile-submenu__link Політика
-                                    li.mobile-submenu__item
-                                        a(href="#").mobile-submenu__link Новини
-                                    li.mobile-submenu__item
-                                        a(href="#").mobile-submenu__link Суспільство
-                                    li.mobile-submenu__item
-                                        a(href="#").mobile-submenu__link Культура і традиції
-                                    li.mobile-submenu__item
-                                        a(href="#").mobile-submenu__link Літературна сторінка
-                                    li.mobile-submenu__item
-                                        a(href="#").mobile-submenu__link Відома постать
-                                    li.mobile-submenu__item
-                                        a(href="#").mobile-submenu__link їжа
-
-                            a(href="#").mobile-nav__link Головна
-                        li.mobile-nav__item
-                            a(href="#").mobile-nav__link Особиста думка
-                        li.mobile-nav__item
-                            b.mobile-submenu__button
-                            a(href="#").mobile-nav__link Журнали та газети
-                            .mobile-submenu.mobile-submenu-magazine-article
-                                ul.mobile-submenu__list
-                                    li.mobile-submenu__item
-                                        a(href="#").mobile-submenu__link Журнали
-                                    li.mobile-submenu__item
-                                        a(href="#").mobile-submenu__link Газети
-                        li.mobile-nav__item
-                            a(href="#").mobile-nav__link Зворотний зв'язок
-
-
-
-
-
-
-            .nav.clearfix
-                ul.nav__list
-                    li.nav__item
-                        a(href="#").nav__link Головна
-                    li.nav__item
-                        a(href="#").nav__link Розділи
-                        .submenu
-                            ul.submenu__list
-                                li.submenu__item
-                                    a(href="#").submenu__link Політика
-                                li.submenu__item
-                                    a(href="#").submenu__link Новини
-                                li.submenu__item
-                                    a(href="#").submenu__link Суспільство
-                                li.submenu__item
-                                    a(href="#").submenu__link Культура і традиції
-                                li.submenu__item
-                                    a(href="#").submenu__link Літературна сторінка
-                                li.submenu__item
-                                    a(href="#").submenu__link Відома постать
-                                li.submenu__item
-                                    a(href="#").submenu__link їжа
-                    li.nav__item
-                        a(href="#").nav__link Особиста думка
-                    li.nav__item
-                        a(href="#").nav__link Журнали та газети
-                        .submenu
-                            ul.submenu__list
-                                li.submenu__item
-                                    a(href="#").submenu__link Журнали
-                                li.submenu__item
-                                    a(href="#").submenu__link Газети
-                    li.nav__item
-                        a(href="#").nav__link Зворотний зв'язок
-
-            .social-networks.clearfix
-                a(href="#").social-networks__item.social-networks__item_tg.icons_tg
-                a(href="#").social-networks__item.social-networks__item_vk.icons_vk
-                .search__icon.search__icon_open
-
-            .search.search_header
-                .search__box
-                    input(type="text" placeholder='Search').search__pole
-                    input(type="button").search__button.search__icon.search__icon_search
-
-            .languages
-                .languages__selected.icons_lang-black ua
-                .languages__nav
-                    a(href="#").languages__item ua
-                    a(href="#").languages__item rus
-                    a(href="#").languages__item eng
-
-
+    body
+        .sidebar
+            .sidebar-wrap 
+                .sidebar-wrap__functions
+                    .sidebar-wrap__search-btn
+                        img(src="./public/img/search.svg", alt="")
+                    .sidebar-wrap__lang
+                        img(src="./public/img/GlobeSimple.svg", alt="")
+                        span.selected RU
+                    ul.sidebar-wrap__lang-switch
+                        li.sidebar-wrap__lang-switch__point
+                            img(src="./public/img/pointer.svg", alt="")
+                        li.sidebar-wrap__lang-switch__item
+                            a(href="#")
+                                span.option RU
+                        li.sidebar-wrap__lang-switch__item
+                            a(href="#")
+                                span.option UA
+                .sidebar-wrap__menu
+                    span
+                ul.sidebar-wrap__socials
+                    li 
+                        a(href="/") 
+                            img(src="./public/img/vk-line-icon.svg", alt="")
+                    li 
+                        a(href="/") 
+                            img(src="./public/img/TelegramLogo.svg", alt="")
         //.header
-
-        .wrapper
-            .wrapper__left
-
-                .main-news
-                    .main-news__img
-                        .main-news__shadow
-                        img(src='/public/img/big-image.jpg')
-                    .main-news__info
-                        .main-news__topic Культура і традиції
-                        a(href="#").main-news__title Славутський вертеп свідчить про зародження театрального мистецтва України
-                        .main-news__bottom.clearfix
-                        .main-news__views.icons_eye-white 483 Переглядів
-                        .main-news__coment.icons_message-white 20 Коментарів
-                        .main-news__date.icons_calendar-white 9 Січня 2019
-
-                //.main-news
-
-                .tabs
-                    ul.tabs__caption
-                        li.active Новини
-                        li Політика
-                        li Суспільство
-                        li Культура i традицiї
-                        li Літературна сторінка
-                        li Відома постать
-                        li Їжа
-
-                    .tabs__content.active
-
-                        .news
-                            .news__item
-                                .news__img
-                                    img(src='/public/img/001.jpg')
-                                .news__topic Новини
-                                a(href="#").news__title Славутський вертеп свідчить про зародження театрального мистецтва України
-                                .news__info.clearfix
-                                    .news__views.icons_eye-blue 290
-                                    .news__coment.icons_message-blue 20
-                                    .news__date 16 Cічня 2019
-                            //.news__item
-
-                            .news__item
-                                .news__img
-                                    img(src='/public/img/001.jpg')
-                                .news__topic Новини
-                                a(href="#").news__title Славутський вертеп свідчитьпро зародження театрального мистецтва України про зародження театрального мистецтва України про зародження театрального мистецтва України про зародження театрального мистецтва України
-                                .news__info.clearfix
-                                    .news__views.icons_eye-blue 290
-                                    .news__coment.icons_message-blue 20
-                                    .news__date 16 Cічня 2019
-                            //.news__item
-
-                            .news__item
-                                .news__img
-                                    img(src='/public/img/001.jpg')
-                                .news__topic Новини
-                                a(href="#").news__title Славутський вертеп свідчитьпро зародження театрального мистецтва України про зародження театрального мистецтва України про зародження театрального мистецтва України про зародження театрального мистецтва України
-                                .news__info.clearfix
-                                    .news__views.icons_eye-blue 290
-                                    .news__coment.icons_message-blue 20
-                                    .news__date 16 Cічня 2019
-                            //.news__item
-
-                            .news__item
-                                .news__img
-                                    img(src='/public/img/001.jpg')
-                                .news__topic Новини
-                                a(href="#").news__title Славутський вертеп свідчить про зародження театрального мистецтва України
-                                .news__info.clearfix
-                                    .news__views.icons_eye-blue 290
-                                    .news__coment.icons_message-blue 20
-                                    .news__date 16 Cічня 2019
-                            //.news__item
-
-                            .news__item
-                                .news__img
-                                    img(src='/public/img/001.jpg')
-                                .news__topic Новини
-                                a(href="#").news__title Славутський вертеп свідчитьпро зародження театрального мистецтва України про зародження театрального мистецтва України про зародження театрального мистецтва України про зародження театрального мистецтва України
-                                .news__info.clearfix
-                                    .news__views.icons_eye-blue 290
-                                    .news__coment.icons_message-blue 20
-                                    .news__date 16 Cічня 2019
-                            //.news__item
-
-                            .news__item
-                                .news__img
-                                    img(src='/public/img/001.jpg')
-                                .news__topic Новини
-                                a(href="#").news__title Славутський вертеп свідчитьпро зародження театрального мистецтва України про зародження театрального мистецтва України про зародження театрального мистецтва України про зародження театрального мистецтва України
-                                .news__info.clearfix
-                                    .news__views.icons_eye-blue 290
-                                    .news__coment.icons_message-blue 20
-                                    .news__date 16 Cічня 2019
-                            //.news__item
-
-                            .news__item
-                                .news__img
-                                    img(src='/public/img/001.jpg')
-                                .news__topic Новини
-                                a(href="#").news__title Славутський вертеп свідчить про зародження театрального мистецтва України
-                                .news__info.clearfix
-                                    .news__views.icons_eye-blue 290
-                                    .news__coment.icons_message-blue 20
-                                    .news__date 16 Cічня 2019
-                            //.news__item
-
-                            .news__item
-                                .news__img
-                                    img(src='/public/img/001.jpg')
-                                .news__topic Новини
-                                a(href="#").news__title Славутський вертеп свідчитьпро зародження театрального мистецтва України про зародження театрального мистецтва України про зародження театрального мистецтва України про зародження театрального мистецтва України
-                                .news__info.clearfix
-                                    .news__views.icons_eye-blue 290
-                                    .news__coment.icons_message-blue 20
-                                    .news__date 16 Cічня 2019
-                            //.news__item
-
-                            .news__item
-                                .news__img
-                                    img(src='/public/img/001.jpg')
-                                .news__topic Новини
-                                a(href="#").news__title Славутський вертеп свідчитьпро зародження театрального мистецтва України про зародження театрального мистецтва України про зародження театрального мистецтва України про зародження театрального мистецтва України
-                                .news__info.clearfix
-                                    .news__views.icons_eye-blue 290
-                                    .news__coment.icons_message-blue 20
-                                    .news__date 16 Cічня 2019
-                            //.news__item
+        // nav
+        nav.menu 
+            .menu-wrap 
+                .menu-wrap-logo
+                    a(href="/")
+                        img(src="./public/img/menu-logo.svg", alt="")
+                ul.menu-nav__list
+                    li.menu-nav__item  
+                        a(href="/") Объективный взгляд
+                    li.menu-nav__item  
+                        a(href="/") Страницы истории
+                    li.menu-nav__item  
+                        a(href="/") Не политика
+                    li.menu-nav__item  
+                        a(href="/") #СловоДня
+                    li.menu-nav__item  
+                        a(href="/") Новости
+                    li.menu-nav__item  
+                        a(href="/") Известная фигура
+                    li.menu-nav__item  
+                        a(href="/") Наш эксклюзив
+                    li.menu-nav__item  
+                        a(href="/") Наша общая победа
+                    li.menu-nav__item  
+                        a(href="/") Фотогалерея
+                    li.menu-nav__item  
+                        a(href="/") Обратная связь
+        .search
+            .search-wrap 
+                .search-wrap-logo
+                    a(href="/")
+                        img(src="./public/img/menu-logo.svg", alt="")
+                .search-wrap__container
+                    .search-wrap__container-field
+                        a(href="/") 
+                            img(src="./public/img/search-input.svg", alt="")
+                        input(type="text", placeholder="Поиск", id="myInput")
+                    button(class="search-wrap__container-btn", onclick="document.getElementById('myInput').value = '' ") Отменить
 
 
-                        //.news
-
-                        .news-nav
-                            .button Показати бIльше
-                            a(href="#").go-section.icons_arrow-go-section Перейти до роздiлу
-
-
-
-
-                    .tabs__content 2
-                    .tabs__content 3
-                    .tabs__content 4
-                    .tabs__content 5
-
-
-
-
-                .personal-opinion
-                    .personal-opinion__title
-                        .personal-opinion__text-title
-                            span.personal-opinion__text Особиста думка
-                        .personal-opinion__bg-title
-
-                .owl-my-style
-                    .owl-carousel.owl-theme
-                        .item
-                            .quote
-                                .quote__img
-                                    img(src='/public/img/pic.jpg')
-                                a(href="#").quote__title Славутський вертеп свідчить про зародження театрального мистецтва України
-                                .quote__name Иван Иванов
-                                .quote__position Редактор этого сайта
-                        .item
-                            .quote
-                                .quote__img
-                                    img(src='/public/img/pic.jpg')
-                                a(href="#").quote__title Славутський вертеп свідчить про зародження театрального мистецтва України
-                                .quote__name Иван Иванов
-                                .quote__position Редактор этого сайта
-
-                        .item
-                            .quote
-                                .quote__img
-                                    img(src='/public/img/pic.jpg')
-                                a(href="#").quote__title Славутський вертеп свідчить про зародження театрального мистецтва України
-                                .quote__name Иван Иванов
-                                .quote__position Редактор этого сайта
-
-                        .item
-                            .quote
-                                .quote__img
-                                    img(src='/public/img/pic.jpg')
-                                a(href="#").quote__title Славутський вертеп свідчить про зародження театрального мистецтва України
-                                .quote__name Иван Иванов
-                                .quote__position Редактор этого сайта
-
-
-                    .button.button_top
-                        a(href="#") Показати бIльше
-
-
-
-
-                    //.button
-
-            //.wrapper__left
-
-
-
-            .wrapper__right
-                .last-news
-                    .last-news__title.icons_clock Останні новини
-
-                    .last-news__block
-                        .last-news__date 16 Cічня 2019
-                        a(href="#").last-news__text Серія коротких відеоісторій про українських майстрів та майстринь, які живуть своєю справою
-
-                    .last-news__block
-                        .last-news__date 16 Cічня 2019
-                        a(href="#").last-news__text Серія коротких відеоісторій про українських майстрів та майстринь, які живуть своєю справою
-
-                    .last-news__block
-                        .last-news__date 16 Cічня 2019
-                        a(href="#").last-news__text Серія коротких відеоісторій про українських майстрів та майстринь, які живуть своєю справою
-
-                    .last-news__block
-                        .last-news__date 16 Cічня 2019
-                        a(href="#").last-news__text Серія коротких відеоісторій про українських майстрів та майстринь, які живуть своєю справою
-
-                    .last-news__block
-                        .last-news__date 16 Cічня 2019
-                        a(href="#").last-news__text Серія коротких відеоісторій про українських майстрів та майстринь, які живуть своєю справою
-
-                    .last-news__block
-                        .last-news__date 16 Cічня 2019
-                        a(href="#").last-news__text Серія коротких відеоісторій про українських майстрів та майстринь, які живуть своєю справою
-
-                    .last-news__block
-                        .last-news__date 16 Cічня 2019
-                        a(href="#").last-news__text Серія коротких відеоісторій про українських майстрів та майстринь, які живуть своєю справою
-
-                    .last-news__block
-                        .last-news__date 16 Cічня 2019
-                        a(href="#").last-news__text Серія коротких відеоісторій про українських майстрів та майстринь, які живуть своєю справою
-
-                    .last-news__block
-                        .last-news__date 16 Cічня 2019
-                        a(href="#").last-news__text Серія коротких відеоісторій про українських майстрів та майстринь, які живуть своєю справою
-
-                    .last-news__block
-                        .last-news__date 16 Cічня 2019
-                        a(href="#").last-news__text Серія коротких відеоісторій про українських майстрів та майстринь, які живуть своєю справою
-
-
-                //.last-news
-
-                .inform-block
-                    .inform-block__pic Image
-                    .inform-block__pic Image
-                    .inform-block__pic Image
-
-
-            //.wrapper__right
-
-        //.wrapper
-
-        .contacts-below.clearfix
-            a(href="#").logo-small
-            a(href="#").logo-second
-            .button.button_text_red.button_left зВОРОТНIЙ зв'язок
-            .social-bottom.clearfix
-                a(href="#").social-bottom__item.icons_tg-bl
-                a(href="#").social-bottom__item.icons_vk-bl
-            .contacts-below__inform
-                .contacts-below__phone Опиисание
-                .contacts-below__phone Главный редактор
-                .contacts-below__addres г. Симферополь, ул. Название 00
-                .contacts-below__addres +79780000000
-                .contacts-below__email
-                    a(href="#") info@mail.ru
-                .age-limit
-                    span 16+
-        //.contacts-below
-
-
-
-        .footer
-
-            .footer__nav-posit
-                .footer__nav-bg
-                    .footer__nav
-                        ul
-                            li
-                                a(href="#") Новини
-                            li
-                                a(href="#") Політика
-                            li
-                                a(href="#") Суспільство
-                            li
-                                a(href="#") Культура i традицiї
-                            li
-                                a(href="#") Літературна сторінка
-                            li
-                                a(href="#") Відома постать
-                            li
-                                a(href="#") Їжа
-
-            .footer__info.clearfix
-                .footer__copright 2018 © Украинская община Крыма. Все права защищены.
-                .footer__link Разработка -
-                    a(href="#") ГУП РК «Крымтехнологии»
-
-        //.footer
-
-        .up-button.icons_arrow-up-white
+        main
+            section.section
+                .container
+                    .logo-wrap 
+                        a(href="/") 
+                            img(src="./public/img/logo.svg", alt="")
+            section.section
+                .container 
+                    .category-wrap 
+                        ul.category-wrap__carousel 
+                            li.category-wrap__item 
+                                a(href="/")
+                                    img(src="./public/img/Icon_News.svg", alt="")
+                                    span Новости
+                                    img(src="./public/img/slide1.png", alt="", class="category-wrap__item-bg")
+                            li.category-wrap__item 
+                                a(href="/")
+                                    img(src="./public/img/Icon_Persona.svg", alt="")
+                                    span Новости2
+                                    img(src="./public/img/slide2.png", alt="", class="category-wrap__item-bg")
+                            li.category-wrap__item 
+                                a(href="/")
+                                    img(src="./public/img/Icon_shooting-stars.svg", alt="")
+                                    span Новост3
+                                    img(src="./public/img/slide3.png", alt="", class="category-wrap__item-bg")
+                            li.category-wrap__item 
+                                a(href="/")
+                                    img(src="./public/img/Icon_star.svg", alt="")
+                                    span Новости4
+                                    img(src="./public/img/slide4.png", alt="", class="category-wrap__item-bg")
+                            li.category-wrap__item 
+                                a(href="/")
+                                    img(src="./public/img/Icon_eye.svg", alt="")
+                                    span Новости5
+                                    img(src="./public/img/slide5.png", alt="", class="category-wrap__item-bg")
+                            li.category-wrap__item 
+                                a(href="/")
+                                    img(src="./public/img/Icon_ruin.svg", alt="")
+                                    span Новости6
+                                    img(src="./public/img/slide6.png", alt="", class="category-wrap__item-bg")
+                            li.category-wrap__item 
+                                a(href="/")
+                                    img(src="./public/img/Icon_wheel.svg", alt="")
+                                    span Новости7
+                                    img(src="./public/img/slide7.png", alt="", class="category-wrap__item-bg")
+                            li.category-wrap__item 
+                                a(href="/")
+                                    img(src="./public/img/Icon_church.svg", alt="")
+                                    span Новости8
+                                    img(src="./public/img/slide8.png", alt="", class="category-wrap__item-bg")
+                            li.category-wrap__item 
+                                a(href="/")
+                                    img(src="./public/img/Icon_quotation.svg", alt="")
+                                    span Новости9
+                                    img(src="./public/img/slide9.png", alt="", class="category-wrap__item-bg")
+                            li.category-wrap__item 
+                                a(href="/")
+                                    img(src="./public/img/Icon_camera.svg", alt="")
+                                    span Новости10
+                                    img(src="./public/img/slide10.png", alt="", class="category-wrap__item-bg")
+                            li.category-wrap__item 
+                                a(href="/")
+                                    img(src="./public/img/Icon_mail.svg", alt="")
+                                    span Новости11
+                                    img(src="./public/img/slide11.png", alt="", class="category-wrap__item-bg")
+                            li.category-wrap__item 
+                                a(href="/")
+                                    img(src="./public/img/Icon_newspaper.svg", alt="")
+                                    span Новости12
+                                    img(src="./public/img/slide12.png", alt="", class="category-wrap__item-bg")
+                            li.category-wrap__item 
+                                a(href="/")
+                                    img(src="./public/img/Icon_Opinion.svg", alt="")
+                                    span Новости13
+                                    img(src="./public/img/slide13.png", alt="", class="category-wrap__item-bg")
+            section.section
+                .container
+                    .actual 
+                        .actual-info 
+                            h2 Актуальные публикации
+                            span 26 декабря 2022, Пн
+                        ul.actual-wrap 
+                            li.actual-wrap__item.actual-wrap__item1
+                                a(href="/" class="actual-wrap__item-info") 
+                                    span Новости
+                                    p Подвижной состав автобусов в Крыму к 2023 году обновится не менее чем на 75%
+                                a(href="/" class="actual-wrap__item-img")
+                                    img(src="./public/img/grid1.png", alt="")
+                            li.actual-wrap__item.actual-wrap__item2
+                                a(href="/" class="actual-wrap__item-info") 
+                                    span Объективный взгляд
+                                    p Война с памятниками: очередной жертвой Киева стал памятник Пушкина в Днепропетровске
+                                a(href="/" class="actual-wrap__item-img")
+                                    img(src="./public/img/grid2.png", alt="")
+                            li.actual-wrap__item.actual-wrap__item3
+                                a(href="/" class="actual-wrap__item-info") 
+                                    span Страницы истории
+                                    p Как Петр I научил Россию праздновать Новый год по-другому
+                                a(href="/" class="actual-wrap__item-img")
+                                    img(src="./public/img/grid3.png", alt="")
+                            li.actual-wrap__item.actual-wrap__item4
+                                a(href="/" class="actual-wrap__item-info") 
+                                    span Известная фигура
+                                    p Как Украина борется с генералом Ватутиным
+                                a(href="/" class="actual-wrap__item-img")
+                                    img(src="./public/img/grid4.png", alt="")
+                            li.actual-wrap__item.actual-wrap__item5
+                                a(href="/" class="actual-wrap__item-info") 
+                                    span Наш эксклюзив
+                                    p Вадим Волченко: «Любой отдых в Крыму оставляет незабываемые впечатления»
+                                a(href="/" class="actual-wrap__item-img")
+                                    img(src="./public/img/grid5.png", alt="")
+                            li.actual-wrap__item.actual-wrap__item6
+                                a(href="/" class="actual-wrap__item-info") 
+                                    span Наша общая Победа
+                                    p Подвиг советских десантников под Керчью
+                                a(href="/" class="actual-wrap__item-img")
+                                    img(src="./public/img/grid6.png", alt="")
+            section.section
+                .container
+                    .journal 
+                        .journal-info 
+                            h2 Журнал «Крым Сегодня»
+                            span Читайте в номере
+                        .journal-wrap  
+                            .journal-wrap__archive
+                                .journal-wrap__archive-img
+                                    img(src="./public/img/base.png", alt="")
+                                    img(src="./public/img/book.png", alt="")
+                                    img(src="./public/img/base.png", alt="")
+                                    img(src="./public/img/book.png", alt="")
+                                    img(src="./public/img/shadows.png", alt="")
+                                .journal-wrap__archive-action 
+                                    a(href="/") Смотреть
+                                    a(href="/") Архив журналов
+                            ul.journal-wrap__news 
+                                li.journal-wrap__news-item 
+                                    .journal-wrap__news-img
+                                        img(src="./public/img/grid7.png", alt="")
+                                    .journal-wrap__news-info 
+                                        span 01 августа 2022
+                                        a(href="/", class="t-crop t-crop--four-l") Путешествие по страницам истории Евпатории 
+                                        a(href="/" class="journal-wrap__news-more") Подробнее
+                                            img(src="./public/img/arrow-red.svg", alt="")
+                                li.journal-wrap__news-item 
+                                    .journal-wrap__news-img
+                                        img(src="./public/img/grid8.png", alt="")
+                                    .journal-wrap__news-info 
+                                        span 08 августа 2022
+                                        a(href="/", class="t-crop t-crop--four-l") Семен Дуван. Человек, который превратил Евпаторию в «Русскую Ниццу»
+                                        a(href="/" class="journal-wrap__news-more") Подробнее
+                                            img(src="./public/img/arrow-red.svg", alt="")
+                                li.journal-wrap__news-item 
+                                    .journal-wrap__news-img
+                                        img(src="./public/img/grid9.png", alt="")
+                                    .journal-wrap__news-info 
+                                        span 04 августа 2022
+                                        a(href="/", class="t-crop t-crop--four-l") Амбициозные инвестпроекты, которые реализуются в Крыму
+                                        a(href="/" class="journal-wrap__news-more") Подробнее
+                                            img(src="./public/img/arrow-red.svg", alt="")
+                                li.journal-wrap__news-item 
+                                    .journal-wrap__news-img
+                                        img(src="./public/img/grid10.png", alt="")
+                                    .journal-wrap__news-info 
+                                        span 05 августа 2022
+                                        a(href="/", class="t-crop t-crop--four-l") Юрий Гоцанюк: «Крым открыт и готов к приему гостей»
+                                        a(href="/" class="journal-wrap__news-more") Подробнее
+                                            img(src="./public/img/arrow-red.svg", alt="")
+                                li.journal-wrap__news-item 
+                                    .journal-wrap__news-img
+                                        img(src="./public/img/grid8.png", alt="")
+                                    .journal-wrap__news-info 
+                                        span 08 августа 2022
+                                        a(href="/", class="t-crop t-crop--four-l") Семен Дуван. Человек, который превратил Евпаторию в «Русскую Ниццу»
+                                        a(href="/" class="journal-wrap__news-more") Подробнее
+                                            img(src="./public/img/arrow-red.svg", alt="")
+                                li.journal-wrap__news-item 
+                                    .journal-wrap__news-img
+                                        img(src="./public/img/grid9.png", alt="")
+                                    .journal-wrap__news-info 
+                                        span 04 августа 2022
+                                        a(href="/", class="t-crop t-crop--four-l") Амбициозные инвестпроекты, которые реализуются в Крыму
+                                        a(href="/" class="journal-wrap__news-more") Подробнее
+                                            img(src="./public/img/arrow-red.svg", alt="")
+                                li.journal-wrap__news-item 
+                                    .journal-wrap__news-img
+                                        img(src="./public/img/grid10.png", alt="")
+                                    .journal-wrap__news-info 
+                                        span 05 августа 2022
+                                        a(href="/", class="t-crop t-crop--four-l") Юрий Гоцанюк: «Крым открыт и готов к приему гостей»
+                                        a(href="/" class="journal-wrap__news-more") Подробнее
+                                            img(src="./public/img/arrow-red.svg", alt="")
+            section  
+                .gallery   
+                    .gallery-title
+                        h2 Фотогалерея
+                    ul.gallery-wrap
+                        li.gallery-wrap__item 
+                            span Крымская Каппадокия
+                            img(src="./public/img/gallery1.png", alt="")
+                        li.gallery-wrap__item 
+                            span В гостях у тишины
+                            img(src="./public/img/gallery2.png", alt="")
+                        li.gallery-wrap__item 
+                            span Балаклава
+                            img(src="./public/img/gallery3.png", alt="")
+            footer.section--filled 
+                .container 
+                    .footer 
+                        .footer-head 
+                            .footer-head__logo
+                                img(src="./public/img/footer-logo.svg", alt="")
+                            .footer-head__age
+                                p 16+
+                        .footer-menu
+                            .footer-menu__item-logo
+                                a(href="/") 
+                                    img(src="./public/img/logo-gromada.svg", alt="")
+                            ul.footer-menu__list 
+                                li.footer-menu__list-item 
+                                    a(href="/") Новости
+                                li.footer-menu__list-item 
+                                    a(href="/") Известная фигура
+                                li.footer-menu__list-item 
+                                    a(href="/") Наш эксклюзив
+                                li.footer-menu__list-item 
+                                    a(href="/") Наша общая победа
+                            ul.footer-menu__list 
+                                li.footer-menu__list-item 
+                                    a(href="/") Объективный взгляд
+                                li.footer-menu__list-item 
+                                    a(href="/") Страницы истории
+                                li.footer-menu__list-item 
+                                    a(href="/") Не политика
+                                li.footer-menu__list-item 
+                                    a(href="/") #СловоДня
+                            .footer-menu__contacts 
+                                .footer-menu__contacts-title 
+                                    h2 Контакты
+                                ul.footer-menu__list 
+                                    li.footer-menu__list-item
+                                        p г. Симферополь, ул. Самокиша, 30
+                                    li.footer-menu__list-item 
+                                        a(href="tel:+79789247717") +7 (978) 924-77-17
+                                    li.footer-menu__list-item 
+                                        a(href="mail:ukrcrimea@mail.ru") ukrcrimea@mail.ru
+                        .footer-license
+                            p Информационное агентство "Крым сегодня", регистрация Роскомнадзора - ИА №ФС 77-78535 от 29 июня 2020 года. Главный редактор - Анастасия Сергеевна Гридчина
+                            p 2022 © Переяславська рада 2.0. Все права защищены
