@@ -61,4 +61,35 @@ class MagazineController extends Controller
 
         return new JsonResponse($arrParams);
     }
+
+    /**
+     * Show page
+     * @param Request $request
+     * @param $id
+     * @return Response
+     */
+    public function showAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $magazine = $em->getRepository('PortalContentBundle:MagazineNewspaper')->findOneBy([
+            'id' => $id,
+            'type_of' => 'magazine',
+            'isPublished' => true,
+            'isDeleted' => false
+        ]);
+
+        if (!$magazine instanceof MagazineNewspaper) {
+            throw $this->createNotFoundException(
+                $this->get('translator')->trans('error_page.text_404')
+            );
+        }
+
+        $arrParams['magazine'] = $magazine;
+
+        $arrParams['magazineArticleList'] = $em->getRepository('PortalContentBundle:MagazineArticle')->getMagazineArticleList($magazine->getId());
+
+        $response = $this->render('PortalContentBundle:Magazine:show.html.twig', $arrParams);
+
+        return $response;
+    }
 }

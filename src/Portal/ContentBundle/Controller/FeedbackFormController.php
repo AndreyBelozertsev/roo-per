@@ -2,26 +2,27 @@
 
 namespace Portal\ContentBundle\Controller;
 
-use Gregwar\CaptchaBundle\Type\CaptchaType;
 use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityRepository;
+use Portal\ContentBundle\Entity\Feedback;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 use Portal\ContentBundle\Entity\FeedbackForm;
-use Portal\ContentBundle\Form\FeedbackFormAttachmentType;
-use Portal\ContentBundle\Entity\FeedbackCategory;
-use Portal\ContentBundle\Entity\FeedbackFormValue;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Portal\ContentBundle\Entity\FeedbackCategory;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Portal\ContentBundle\Entity\FeedbackFormValue;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
-use Portal\ContentBundle\Entity\Feedback;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Portal\ContentBundle\Form\FeedbackFormAttachmentType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class FeedbackFormController extends Controller
 {
@@ -212,7 +213,7 @@ class FeedbackFormController extends Controller
             'required' => false,
         ]);
         if ($isAgree) {
-            $form->add('agree', 'checkbox', [
+            $form->add('agree', CheckboxType::class, [
                 'mapped' => false,
                 'label' => 'feedback_form_value.agree',
                 'required' => true,

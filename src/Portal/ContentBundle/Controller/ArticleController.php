@@ -96,34 +96,4 @@ class ArticleController extends Controller
 
         return $this->render('PortalContentBundle:Article:depNews.html.twig', $arrParams);
     }
-
-    /**
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function getMoreArticlesAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getRepository('PortalContentBundle:Article');
-        $cat = (int)$request->get('cat');
-        $page = (int)$request->get('page');
-
-        $list = $this->render('PortalContentBundle:Article:articleList.html.twig', [
-            'articleList' => $em->getPaginatedList($cat, $page),
-        ])->getContent();
-        $page++;
-
-        $countArticle = $em->getArticleCount($cat);
-        $shown = Article::PAGE_PAGINATION_LIMIT * ($page);
-        $totalPages = ceil($countArticle / Article::PAGE_PAGINATION_LIMIT);
-
-        $pagination = new Pagination($this->container);
-        $paginationRender = $pagination->render($page, $totalPages, 'view_all_articles', ['cat' => $cat]);
-
-        return new JsonResponse([
-            'list' => $list,
-            'page' => $page,
-            'hideButton' => ($shown >= $countArticle),
-            'pagination' => $paginationRender
-        ]);
-    }
 }

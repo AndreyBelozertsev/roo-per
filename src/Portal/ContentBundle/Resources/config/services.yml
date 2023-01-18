@@ -535,3 +535,15 @@ services:
         arguments: ["@param"]
         tags:
             - { name: twig.extension }
+
+    gallery:
+        class: Portal\ContentBundle\Widgets\WidgetGallery
+        arguments: ["@session", "@doctrine.orm.entity_manager"]
+        calls:
+            - [ setContainer,[ "@service_container" ] ]
+
+    twig.extension.gallery:
+        class: Portal\ContentBundle\Extensions\GalleryTwigExtension
+        arguments: ["@gallery"]
+        tags:
+            - { name: twig.extension }

@@ -19,21 +19,24 @@ class WidgetCategoryList extends AbstractWidgets
         [
             'sort' => 'DESC'
         ]);
-
+      
         foreach ($result as $cat) {
             /** @var ArticleCategory $cat */
             $id = $cat->getId();
             switch ($this->container->get('request_stack')->getCurrentRequest()->getLocale()) {
                 case 'uk':
-                    $arrParams[$id] = $cat->getTitleUk();
+                    $arrParams[$id]['title'] = $cat->getTitleUk();
                     break;
                 case 'ru':
-                    $arrParams[$id] = $cat->getTitleRu();
+                    $arrParams[$id]['title'] = $cat->getTitleRu();
                     break;
                 case 'en':
-                    $arrParams[$id] = $cat->getTitleEn();
+                    $arrParams[$id]['title'] = $cat->getTitleEn();
                     break;
             }
+            $arrParams[$id]['icon'] =  $cat->getIconAttachment()->getPreviewFileUrl();
+            $arrParams[$id]['thumbnail'] =  $cat->getThumbnailAttachment()->getPreviewFileUrl();
+
         }
         
         return $arrParams ?? [];

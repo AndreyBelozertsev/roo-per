@@ -28,6 +28,7 @@ class UserController extends Controller
      */
     public function editAction($userId)
     {
+        
         $request = $this->get("request_stack")->getCurrentRequest();
 
         $newWorker = false;
@@ -56,11 +57,15 @@ class UserController extends Controller
             'instanceList' => $instanceList,
             'validation_groups' => $validation_groups,
         ]);
-
+       
+        
         if ($request->isMethod('POST')) {
+            
             $form->submit($request->request->get($form->getName()));
             $validationErrors = $this->get('validator')->validate($form);
             if ($form->isSubmitted() && count($validationErrors) == 0) {
+              
+                
                 //system
                 $factory = $this->get('security.encoder_factory');
                 $encoder = $factory->getEncoder($worker);
@@ -68,14 +73,16 @@ class UserController extends Controller
                 $worker = $form->getData();
 
                 $userManager = $this->get('fos_user.user_manager');
+               
                 if ($newWorker) {
                     $password = $encoder->encodePassword($form->getData()->getPassword(), $worker->getSalt());
+            
                     $worker->setPassword($password);
                     $worker->setEnabled(TRUE);
 
                     $worker->addRole('ROLE_OPERATOR');
                 }
-
+                
                 // Update User
                 $userManager->updateUser($worker);
 

@@ -61,7 +61,7 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
      * Latest news
      * @return array
      */
-    public function getPopularArticleList()
+    public function getLastArticleList()
     {
         $dc = $this->getEntityManager()->getConnection();
         $sql = 'SELECT
@@ -69,8 +69,14 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
                   a.title_uk AS article_title_uk,
                   a.title_ru AS article_title_ru,
                   a.title_en AS article_title_en,
-                  a.published_at AS article_published_at
+                  a.published_at AS article_published_at,
+                  att.preview_file_url AS thumbnail,
+                  ac.title_uk AS category_title_uk,
+                  ac.title_ru AS category_title_ru,
+                  ac.title_en AS category_title_en
                 FROM article AS a
+                    INNER JOIN article_attachment a_a ON a_a.article_id = a.id
+                    INNER JOIN attachment AS att ON att.id = a_a.id
                     LEFT JOIN article_category ac ON a.category_id = ac.id
                 WHERE a.is_published IS TRUE AND a.is_deleted IS NOT TRUE AND ac.is_published IS TRUE
                 ORDER BY a.published_at DESC
@@ -196,22 +202,5 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
         $dc = $this->getEntityManager()->getConnection();
 
         return (int)$dc->executeQuery($sql, ['str' => $str])->fetchColumn();
-    }
-
-    /**
-     * @return Article
-     */
-    public function getShowInSlider()
-    {
-        $qb = $this->createQueryBuilder('a')
-            ->leftJoin('a.category', 'ac')
-            ->andWhere('a.showInSlider = true')
-            ->andWhere('a.isPublished = true')
-            ->andWhere('a.isDeleted = false')
-            ->andWhere('ac.isPublished = true')
-            ->orderBy('a.createdAt', 'DESC')
-            ->setMaxResults(1);
-
-        return $qb->getQuery()->getResult()[0] ?? null;
     }
 }

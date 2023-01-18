@@ -20,7 +20,7 @@ class Article
     const TABLE_NAME = 'article';
     const ARTICLES_LIMIT_ON_MAIN_PAGE = 6;
     const ARTICLES_LIMIT_ON_SUBDOMAIN_PAGE = 10;
-    const POPULAR_ARTICLES_LIMIT_ON_NEWS_PAGE = 9;
+    const POPULAR_ARTICLES_LIMIT_ON_NEWS_PAGE = 6;
     const SAME_CATEGORY_ARTICLES_LIMIT_ON_BOTTOM_PAGE = 6;
     const RELATED_NEWS_LIMIT = 10;
     const PAGE_PAGINATION_LIMIT = 9;
@@ -253,13 +253,6 @@ class Article
      * @ORM\Column(name="related", type="string", length=1000, nullable=true)
      */
     private $related;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="show_in_slider", type="boolean", nullable=true)
-     */
-    private $showInSlider = false;
 
     /**
      * @var bool
@@ -780,30 +773,6 @@ class Article
     public function getRelated()
     {
         return $this->related;
-    }
-
-    /**
-     * Set showInSlider
-     *
-     * @param boolean $showInSlider
-     *
-     * @return Article
-     */
-    public function setShowInSlider($showInSlider)
-    {
-        $this->showInSlider = $showInSlider;
-
-        return $this;
-    }
-
-    /**
-     * Get showInSlider
-     *
-     * @return bool
-     */
-    public function getShowInSlider()
-    {
-        return $this->showInSlider;
     }
 
     /**

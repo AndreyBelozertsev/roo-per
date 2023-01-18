@@ -8,6 +8,7 @@ Last: Last
 Last_page: Last page
 Next_page: Next page
 thanks_for_comment: Thank you for your comment, it will be published after being moderated!
+Contacts: Contacts
 
 Home: Home
 Category: Category
@@ -15,7 +16,13 @@ Opinion: Personal opinion
 Magazine: Magazines
 Newspaper: Newspapers
 Magazine_newspaper: Magazines and newspapers
+'Сurrent articles': Сurrent articles
+'Crimea Today Magazine': Crimea Today Magazine
+'Read in the issue of the magazine': Read in the issue of the magazine
 Gallery: Photo Gallery
+'More detailed': More detailed
+Download: Download
+'Archive of magazines': Archive of magazines
 Feedback: Feedback
 'Go to section': Go to section
 'Show more': Show more
@@ -80,3 +87,6 @@ feedback_form_value:
     max: 'The number of attached files should not exceed'
 
 copy_message: '<br/><br/>The use of text and photo materials "Pereyaslav Council 2.0" is possible only on condition of registration of a hyperlink to the material posted on the Pereyaslav Council 2.0 Internet resource. <br/> Source: '
+Search: Search
+Cancel: Cancel
+No results: No results

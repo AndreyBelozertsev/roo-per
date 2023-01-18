@@ -46,17 +46,17 @@ document.addEventListener('DOMContentLoaded', function () {
             menu.classList.toggle('active');
         });
     
-        option.forEach(o => {
-            o.addEventListener('click', () => {
-                selected.innerHTML = o.innerHTML;
-                select.classList.remove('active');
-                menu.classList.remove('active');
-                option.forEach(o => {
-                    o.classList.remove('active')
-                });
-                option.classList.add('active');
-            });
-        });
+        // option.forEach(o => {
+        //     o.addEventListener('click', () => {
+        //         selected.innerHTML = o.innerHTML;
+        //         select.classList.remove('active');
+        //         menu.classList.remove('active');
+        //         option.forEach(o => {
+        //             o.classList.remove('active')
+        //         });
+        //         option.classList.add('active');
+        //     });
+        // });
     };
     
     Select();

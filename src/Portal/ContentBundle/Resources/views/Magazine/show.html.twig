@@ -1,0 +1,54 @@
+{% extends 'PortalContentBundle::base.html.twig' %}
+
+{% block meta %}
+    <meta property="og:image" content="{{ asset(magazine.attachment.previewFileUrl|thumbImage) }}" />
+    <meta property="og:title" content="{{ attribute(magazine, 'title' ~ app.request.locale) }}" />
+    {#<meta property="og:description" content="{{  }}" />#}
+{% endblock %}
+
+{% block info_page %}
+    <div class="info-page">
+        <div class="info-page__posit">
+            <div class="bread-crumbs">
+                <ul>
+                    <li><a href="{{ path('portal_content_homepage') }}">{{ 'Home'|trans }}</a></li>
+                    <li><a href="{{ path('magazine') }}">{{ 'Magazine'|trans }}</a></li>
+                    <li>{{ attribute(magazine, 'title' ~ app.request.locale)|sliceFullWord(50) }}</li>
+                </ul>
+            </div>
+            <div class="info-page__posit-box clearfix">
+                <div class="info-page__left">
+                    <div class="info-page__quotes">
+                        <div class="info-page__img"><img src="{{ asset(magazine.attachment.previewFileUrl|thumbImage) }}"></div>
+                    </div>
+                </div>
+                <div class="info-page__right">
+                    <div class="title-page">{{ attribute(magazine, 'title' ~ app.request.locale) }}</div>
+                    <div class="info-page__sub-info clearfix">
+                        <div class="info-page__date icons_calendar-blue">{{ magazine.createdAt|date|localizeddate('full', 'none', app.request.locale, null, 'd MMMM yyyy' ) }}</div>
+                        {#<div class="info-page__views icons_eye-blue">{{ post.viewsCounter|pluralize('Views_plural'|trans) }}</div>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% if magazineArticleList %}
+        <ul>
+            {% for article in magazineArticleList %}
+                <li> 
+                    <div>
+                        <img src="{{ article.preview_file_url }}" alt="{{ attribute(article, 'title_' ~ app.request.locale) }}">
+                    </div>
+                    <div> 
+                        <span>{{ article.created_at|date|localizeddate('full', 'none', app.request.locale, null, 'd MMMM yyyy' ) }}</span>
+                        <a href="{{ path('magazine_article_show', { 'id': article.id }) }}">{{ attribute(article, 'title_' ~ app.request.locale) }}</a>
+                        <a href="{{ path('magazine_article_show', { 'id': article.id }) }}">{{ 'More detailed'|trans }}<img src="./themes/public/img/arrow-red.svg" alt=""></a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

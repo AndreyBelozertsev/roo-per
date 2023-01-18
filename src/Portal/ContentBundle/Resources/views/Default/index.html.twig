@@ -1,86 +1,124 @@
 {% extends 'PortalContentBundle::base.html.twig' %}
 
-{% block main_news %}
-    {% if slider is not empty %}
-        <div class="main-news">
-            {% if slider.attachment is not empty %}
-                <div class="main-news__img">
-                    <div class="main-news__shadow"></div>
-                    <img src="{{ asset(slider.attachment.previewFileUrl) }}">
-                </div>
-            {% endif %}
-            <div class="main-news__info">
-                <div class="main-news__topic">{{ attribute(slider.category, 'title' ~ app.request.locale) }}</div>
-                <a href="{{ path('article_show', {'id': slider.id}) }}" class="main-news__title">{{ attribute(slider, 'title' ~ app.request.locale) }}</a>
-                <div class="main-news__bottom clearfix"></div>
-                {#<div class="main-news__views icons_eye-white">{{ slider.viewsCounter|pluralize('Views_plural'|trans) }}</div>#}
-                {% if slider.comments|length > 0 %}
-                    <div class="main-news__coment icons_message-white">{{ slider.comments|length|pluralize('Comments_plural'|trans) }}</div>
-                {% endif %}
-                <div class="main-news__date icons_calendar-white">{{ slider.publishedAt|localizeddate('long', 'none', app.request.locale ) }} </div>
-                
+{% block top_menu %}
+    <section class="section">
+        <div class="container"> 
+            <div class="category-wrap"> 
+                <ul class="category-wrap__carousel"> 
+                    {% for id, category in categoryList %}
+                        <li class="category-wrap__item">
+                            <a href="{{ path('view_all_articles', {'cat': id}) }}">
+                                <img src="{{ category.icon }}" srcset="{{ category.icon }}" alt="{{ category.title }}">
+                                <span>{{ category.title }}</span>
+                                <img src="{{ category.thumbnail }}" alt="{{ category.title }}" class="category-wrap__item-bg">
+                            </a>
+                        </li>
+                    {% endfor %}
+                    <li class="category-wrap__item">
+                        <a href="{{ path('post') }}">
+                            <img src="/themes/public/img/Icon_Opinion.svg" alt="{{ 'Opinion'|trans }}">
+                            <span>{{ 'Opinion'|trans }}</span>
+                            <img src="./themes/public/img/slide13.png" alt="{{ 'Opinion'|trans }}" class="category-wrap__item-bg">
+                        </a>
+                    </li>
+                    <li class="category-wrap__item">
+                        <a href="{{ path('newspaper') }}">
+                            <img src="/themes/public/img/Icon_newspaper.svg" alt="{{ 'Newspaper'|trans }}">
+                            <span>{{ 'Newspaper'|trans }}</span>
+                            <img src="/themes/public/img/slide12.png" alt="{{ 'Newspaper'|trans }}" class="category-wrap__item-bg">
+                        </a>
+                    </li>
+                    <li class="category-wrap__item">
+                        <a href="{{ path('photo_report_show', {'id': 1}) }}">
+                            <img src="./themes/public/img/Icon_camera.svg" alt="{{ 'Gallery'|trans }}">
+                            <span>{{ 'Gallery'|trans }}</span>
+                            <img src="/themes/public/img/slide10.png" alt="{{ 'Gallery'|trans }}" class="category-wrap__item-bg">
+                        </a>
+                    </li>   
+                    <li class="category-wrap__item">
+                        <a href="{{ path('feedback_page', {'id': 1}) }}">
+                            <img src="/themes/public/img/Icon_mail.svg" alt="{{ 'Feedback'|trans }}">
+                            <span>{{ 'Feedback'|trans }}</span>
+                            <img src="/themes/public/img/slide11.png" alt="{{ 'Feedback'|trans }}" class="category-wrap__item-bg">
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
+    </section>
+{% endblock %}
+
+{% block last_news %}
+
+    {% set articleList = articleWidget.renderLastNews %}
+        <section class="section">
+            <div class="container">
+                <div class="actual"> 
+                    <div class="actual-info"> 
+                        <h2>{{ 'Сurrent articles'|trans }}</h2>
+                        <span>{{ 'now'|date|localizeddate('full', 'none', app.request.locale, null, 'd MMMM yyyy' ) }}</span>
+                    </div>
+                    <ul class="actual-wrap">
+                        {% for article in articleList %}
+                            <li class="actual-wrap__item actual-wrap__item{{ loop.index }}">
+                                <a href="{{ path('article_show', { 'id': article.article_id }) }}" class="actual-wrap__item-info">
+                                    <span>{{ attribute(article, 'category_title_' ~ app.request.locale) }}</span>
+                                    <p>{{ attribute(article, 'article_title_' ~ app.request.locale) }}</p>
+                                </a>
+                                <a href="{{ path('article_show', { 'id': article.article_id }) }}" class="actual-wrap__item-img">
+                                    <img src="{{ asset(article.thumbnail) }}" alt="{{ attribute(article, 'article_title_' ~ app.request.locale) }}">
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+{% endblock %}
+
+{% block new_magazine %}
+    {% if newMagazine %}
+        <section class="section">
+            <div class="container">
+                <div class="journal"> 
+                    <div class="journal-info"> 
+                        <h2>{{ 'Crimea Today Magazine'|trans }}</h2>
+                        <span>{{ 'Read in the issue of the magazine'|trans }}</span>
+                    </div>
+                    <div class="journal-wrap"> 
+                        <div class="journal-wrap__archive">
+                            <div class="journal-wrap__archive-img">
+                                <img src="./themes/public/img/base.png" alt="">
+                                <img src="{{ newMagazine.preview_file_url }}" alt="">
+                                <img src="./themes/public/img/base.png" alt="">
+                                <img src="{{ newMagazine.preview_file_url }}" alt="">
+                                <img src="./themes/public/img/shadows.png" alt="">
+                            </div>
+                            <div class="journal-wrap__archive-action"> <a target="_blank" href="{{ newMagazine.file }}">{{ 'Download'|trans }}</a><a href="{{ path('magazine') }}">{{ 'Archive of magazines'|trans }}</a></div>
+                        </div>
+                        {% if magazineArticleList  %}
+                            <ul class="journal-wrap__news"> 
+                                {% for article in magazineArticleList %}
+                                    <li class="journal-wrap__news-item"> 
+                                        <div class="journal-wrap__news-img">
+                                            <img src="{{ article.preview_file_url }}" alt="">
+                                        </div>
+                                        <div class="journal-wrap__news-info"> 
+                                            <span>{{ article.created_at|date|localizeddate('full', 'none', app.request.locale, null, 'd MMMM yyyy' ) }}</span>
+                                            <a href="{{ path('magazine_article_show', { 'id': article.id }) }}" class="t-crop t-crop--four-l">{{ attribute(article, 'title_' ~ app.request.locale) }}</a>
+                                            <a href="{{ path('magazine_article_show', { 'id': article.id }) }}" class="journal-wrap__news-more">{{ 'More detailed'|trans }}<img src="./themes/public/img/arrow-red.svg" alt=""></a>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
     {% endif %}
 {% endblock %}
 
-{% block main_grid %}
-    <div class="tabs">
-        {% if categoryList is not empty %}
-            <ul class="tabs__caption" data-url="{{ path('get_more_articles') }}">
-                {% for catId,category in categoryList %}
-                    <li {{ loop.first ? 'class="active"' : '' }} data-category="{{ catId }}">{{ category }}</li>
-                {% endfor %}
-            </ul>
-            {% for catId,category in categoryList %}
-                <div class="tabs__content{% if loop.first %} active{% endif %}" data-category="{{ catId }}">
-                    {% set articleList = articleWidget.renderArticleByCategory(catId, 0) %}
-                    {% set articleCount = articleWidget.renderArticleCount(catId) %}
-                    <div class="news">
-                        {% if loop.first %}{% include'@PortalContent/Article/articleList.html.twig' %}{% endif %}
-                    </div>
-                    <!--.news-->
-                    <div class="news-nav clearfix">
-                        {% if articleCount > constant('Portal\\ContentBundle\\Entity\\Article::PAGE_PAGINATION_LIMIT') %}
-                            <div class="button button_gray get_more_article button_fl_left" data-page="{{ 1 }}" data-cat="{{ catId }}">
-                                {{ 'Show more'|trans }}
-                            </div>
-                        {% endif %}
-                        <a href="{{ path('view_all_articles', { 'cat': catId }) }}" class="go-section icons_arrow-go-section go-section_fl_right">
-                            {{ 'Go to section'|trans }}
-                        </a>
-                    </div>
-                </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-{% endblock %}
-
-{% block personal_opinion %}
-    <div class="personal-opinion">
-        <div class="personal-opinion__title">
-            <div class="personal-opinion__text-title">
-                <span class="personal-opinion__text">{{ 'Opinion'|trans }}</span>
-            </div>
-            <div class="personal-opinion__bg-title"></div>
-        </div>
-    </div>
-    <div class="owl-my-style">
-        <div class="owl-carousel owl-theme">
-            {% for opinion in opinionList %}
-                <div class="item">
-                    <div class="quote">
-                        <div class="quote__img"><img src="{{ asset(opinion.attachment.previewFileUrl|thumbImage) }}"></div>
-                        <a href="{{ path('post_show', { 'id': opinion.id }) }}" class="quote__title">
-                            {{ attribute(opinion, 'title' ~ app.request.locale) }}
-                        </a>
-                        <div class="quote__name">{{ attribute(opinion, 'userName' ~ app.request.locale) }}</div>
-                        <div class="quote__position">{{ attribute(opinion, 'userPosition' ~ app.request.locale) }}</div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-        <a href="{{ path('post') }}" class="button button_top">{{ 'Go to section'|trans }}</a>
-        <!--.button-->
-    </div>
+{% block photo_gallery %}
+    {{ galleryWidget.render()|raw }}
 {% endblock %}

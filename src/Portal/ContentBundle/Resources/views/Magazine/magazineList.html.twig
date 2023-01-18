@@ -2,7 +2,8 @@
         {% for magazine in magazineList %}
             <div class="magazine-newspaper__item">
                 <div class="magazine-newspaper__img"><img src="{{ asset(magazine.preview_file_url|thumbImage) }}"></div>
-                <a target="_blank" href="{{ asset(magazine.file) }}" class="magazine-newspaper__title icons_download">{{ attribute(magazine, 'title_' ~ app.request.locale) }}</a>
+                <a href="{{ path('magazine_show',{id : magazine.id}) }}">{{ attribute(magazine, 'title_' ~ app.request.locale) }}</a>
+                <a target="_blank" href="{{ asset(magazine.file) }}" class="magazine-newspaper__title icons_download">Скачать</a>
             </div>
         {% endfor %}
 {% endblock %}

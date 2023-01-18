@@ -1,0 +1,17 @@
+{% if photoReportList %}
+    <section> 
+        <div class="gallery">  
+            <div class="gallery-title">
+                <h2>{{ 'Gallery'|trans }}</h2>
+            </div>
+            <ul class="gallery-wrap">
+                {% for photo in photoReportList %}
+                <li class="gallery-wrap__item"> 
+                    <span>{{ attribute(photo, 'photo_report_attachment_description_' ~ app.request.locale) }}</span>
+                    <img src="{{ photo.pr_att_file_url }}" alt="">
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endif %}

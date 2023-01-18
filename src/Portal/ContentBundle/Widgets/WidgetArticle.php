@@ -12,10 +12,10 @@ class WidgetArticle extends AbstractWidgets
      * Latest news widget
      * @return mixed
      */
-    function renderPopularNews()
+    function renderLastNews()
     {
         return $this->container->get('doctrine')->getRepository('PortalContentBundle:Article')
-            ->getPopularArticleList();
+            ->getLastArticleList();
     }
 
     /**

@@ -55,6 +55,12 @@ class Comment
     private $post;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Portal\ContentBundle\Entity\MagazineArticle", inversedBy="comments")
+     * @ORM\JoinColumn(name="magazine_article_id", referencedColumnName="id")
+     */
+    private $magazineArticle;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")

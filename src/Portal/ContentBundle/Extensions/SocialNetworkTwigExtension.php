@@ -5,7 +5,7 @@ namespace Portal\ContentBundle\Extensions;
 use Portal\ContentBundle\Widgets\WidgetSocialNetwork;
 
 /**
- * Class ArticleTwigExtension
+ * Class SocialNetworkTwigExtension
  * @package Portal\ContentBundle\Extensions
  */
 class SocialNetworkTwigExtension extends \Twig_Extension

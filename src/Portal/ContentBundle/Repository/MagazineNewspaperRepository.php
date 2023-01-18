@@ -57,4 +57,26 @@ class MagazineNewspaperRepository extends \Doctrine\ORM\EntityRepository
 
         return $count ?? false;
     }
+    
+    public function getLastMagazine()
+    {
+        /**
+         * @return array
+         */
+        $dc = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT m_n.id, att.preview_file_url,
+                    m_n.title_uk,  m_n.title_ru, m_n.title_en,
+                    m_n.created_at, doc.preview_file_url as file
+                FROM magazine_newspaper AS m_n
+                    INNER JOIN magazine_newspaper_attachment AS m_n_a ON m_n_a.magazine_newspaper_id = m_n.id
+                    INNER JOIN attachment AS att ON att.id = m_n_a.id
+                    INNER JOIN magazine_newspaper_document_attachment AS m_n_d_a ON m_n_d_a.magazine_newspaper_id = m_n.id
+                    INNER JOIN attachment AS doc ON doc.id = m_n_d_a.id
+                WHERE m_n.is_deleted IS FALSE AND m_n.is_published IS TRUE 
+                ORDER BY m_n.created_at DESC
+                LIMIT 1
+        ';
+
+        return $dc->fetchAll($sql)[0] ?: null;
+    }
 }

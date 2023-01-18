@@ -11,22 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PhotoReportController extends Controller
 {
-    public function photoListAction()
-    {
-        $arrParams['isDepartment'] = false;
-
-        $instanceCode = $this->get('kernel')->getInstance();
-        if ($instanceCode !== null) {
-            // department page
-            $arrParams['isDepartment'] = true;
-            $arrParams['depTitle'] = $this->get('instance_manager')->getPageTitle($instanceCode);
-        }
-        $arrParams['photoReportCount'] = $this->get('customer_photo_report_manager')->getPhotoReportListCount();
-        $arrParams['photoReportList'] = $this->get('customer_photo_report_manager')->getPhotoReportList(PhotoReport::PHOTO_REPORT_LIMIT_ON_PAGE);
-
-        return $this->render('PortalContentBundle:PhotoReport:photo_list.html.twig', $arrParams);
-    }
-
     /**
      * @param Request $request
      * @param $id
@@ -61,23 +45,4 @@ class PhotoReportController extends Controller
         return $response;
     }
 
-    public function getNextPhotoReportAction(Request $request)
-    {
-        $photoReportList = $this->get('customer_photo_report_manager')->getPhotoReportList(
-            PhotoReport::PHOTO_REPORT_LIMIT_ON_PAGE,
-            (int)$request->get('shown')
-        );
-        if (false !== $photoReportList) {
-            $arrJson['listCount'] = sizeof($photoReportList);
-            $arrParams['photoReportList'] = $photoReportList;
-        } else {
-            $arrParams['message'] = $this->get('translator')->trans('no_records');
-        }
-        $arrJson['content'] = $this->render(
-            'PortalContentBundle:PhotoReport:show_next_photo.html.twig',
-            $arrParams ?? []
-        )->getContent();
-
-        return new JsonResponse($arrJson);
-    }
 }

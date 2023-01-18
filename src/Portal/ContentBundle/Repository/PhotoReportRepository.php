@@ -25,6 +25,7 @@ class PhotoReportRepository extends \Doctrine\ORM\EntityRepository
             . ' INNER JOIN photo_report_attachment AS pr_att ON pr.id = pr_att.photo_report_id'
             . ' INNER JOIN attachment AS att ON att.id = pr_att.id'
             . ' WHERE pr.id = ' . (int)$id . ' AND pr_att.is_deleted IS FALSE'
+            . ' ORDER BY pr_att.sort ASC'
         ;
 
         return $dc->fetchAll($sql) ?: false;

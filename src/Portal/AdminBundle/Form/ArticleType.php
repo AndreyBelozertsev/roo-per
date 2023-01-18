@@ -48,9 +48,6 @@ class ArticleType extends AbstractType
             ->add('isPublished', CheckboxType::class, [
                 'label' => 'to_public',
                 'required' => false,
-            ])->add('showInSlider', CheckboxType::class, [
-                'label' => 'article_form.show_in_slider',
-                'required' => false
             ]);
     }
 

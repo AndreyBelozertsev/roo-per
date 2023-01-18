@@ -1,8 +1,9 @@
-<div class="social-networks clearfix">
+<ul class="sidebar-wrap__socials">
     {% for socialNetwork in socialNetworks %}
-        <a href="http://{{ socialNetwork.link }}" title="{{ socialNetwork.name }}" target="_blank"
-           class="social-networks__item social-networks__item_{{ socialNetwork.prefix }} icons_{{ socialNetwork.prefix }}">
-        </a>
+        <li> 
+            <a href="http://{{ socialNetwork.link }}" title="{{ socialNetwork.name }}" target="_blank"> 
+                <img src="/themes/public/img/{{ socialNetwork.prefix }}-icon.svg" alt="{{ socialNetwork.name }}">
+            </a>
+        </li>
     {% endfor %}
-    <div class="search__icon search__icon_open"></div>
-</div>
+</ul>

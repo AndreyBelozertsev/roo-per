@@ -196,4 +196,26 @@ class MagazineArticleRepository extends \Doctrine\ORM\EntityRepository
 
         return (int)$dc->executeQuery($sql, ['str' => $str])->fetchColumn();
     }
+
+    public function getMagazineArticleList(int $magazine)
+    {
+        /**
+         * @return array
+         */
+        $dc = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT m_a.id, att.preview_file_url,
+                    m_a.title_uk,  m_a.title_ru, m_a.title_en,
+                    m_a.views_counter, m_a.created_at
+                FROM magazine_article AS m_a
+                    INNER JOIN magazine_article_attachment m_a_a ON m_a_a.magazine_article_id = m_a.id
+                    INNER JOIN attachment AS att ON att.id = m_a_a.id
+                WHERE m_a.magazine_id = :magazine AND m_a.is_deleted IS FALSE AND m_a.is_published IS TRUE
+                GROUP BY m_a.id, att.preview_file_url
+                ORDER BY m_a.sort DESC
+        ';
+
+        return $dc->fetchAll($sql, ['magazine' => $magazine]) ?: [];
+    }
+
+    
 }
