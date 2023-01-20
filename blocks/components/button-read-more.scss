@@ -1,0 +1,39 @@
+.component{
+    &-read-more{
+        position: absolute;
+
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        //bottom: 24px;
+
+        font-size: 14px;
+        color: $accent;
+        transition: .3s;
+
+        &::after {
+            position: absolute;
+
+            content: '';
+
+            width: 0;
+            height: 2px;
+
+            bottom: -5px;
+
+            background-color: $accent;
+            transition: width 0.3s ease-out;
+        }
+
+        &:hover {
+            &::after {
+                width: 92%;
+                
+            }
+        }
+        &-wrap{
+            position: relative;
+        }
+    }
+}

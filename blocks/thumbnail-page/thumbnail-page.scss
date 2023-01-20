@@ -1,0 +1,11 @@
+.thumbnail-page{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+    
+
+    &__img-wrap{
+        border-radius: 12px;
+        overflow: hidden;
+    }
+}

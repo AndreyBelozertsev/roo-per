@@ -1,0 +1,253 @@
+include ../blocks/head/head
+
+
+doctype html
+html
+    +head
+    body
+        .sidebar
+            .sidebar-wrap 
+                .sidebar-wrap__functions
+                    .sidebar-wrap__search-btn
+                        img(src="./public/img/search.svg", alt="")
+                    .sidebar-wrap__lang
+                        img(src="./public/img/GlobeSimple.svg", alt="")
+                        span.selected RU
+                    ul.sidebar-wrap__lang-switch
+                        li.sidebar-wrap__lang-switch__point
+                            img(src="./public/img/pointer.svg", alt="")
+                        li.sidebar-wrap__lang-switch__item
+                            a(href="#")
+                                span.option RU
+                        li.sidebar-wrap__lang-switch__item
+                            a(href="#")
+                                span.option UA
+                .sidebar-wrap__menu
+                    span
+                ul.sidebar-wrap__socials
+                    li 
+                        a(href="/") 
+                            img(src="./public/img/vk-icon.svg", alt="")
+                    li 
+                        a(href="/") 
+                            img(src="./public/img/tg-icon.svg", alt="")
+        //.header
+        // nav
+        nav.menu 
+            .menu-wrap 
+                .menu-wrap-logo
+                    a(href="/")
+                        img(src="./public/img/menu-logo.svg", alt="")
+                ul.menu-nav__list
+                    li.menu-nav__item  
+                        a(href="/") Объективный взгляд
+                    li.menu-nav__item  
+                        a(href="/") Страницы истории
+                    li.menu-nav__item  
+                        a(href="/") Не политика
+                    li.menu-nav__item  
+                        a(href="/") #СловоДня
+                    li.menu-nav__item  
+                        a(href="/") Новости
+                    li.menu-nav__item  
+                        a(href="/") Известная фигура
+                    li.menu-nav__item  
+                        a(href="/") Наш эксклюзив
+                    li.menu-nav__item  
+                        a(href="/") Наша общая победа
+                    li.menu-nav__item  
+                        a(href="/") Фотогалерея
+                    li.menu-nav__item  
+                        a(href="/") Обратная связь
+        .search
+            .search-wrap 
+                .search-wrap-logo
+                    a(href="/")
+                        img(src="./public/img/menu-logo.svg", alt="")
+                .search-wrap__container
+                    .search-wrap__container-field
+                        a(href="/") 
+                            img(src="./public/img/search-input.svg", alt="")
+                        input(type="text", placeholder="Поиск", id="myInput")
+                    button(class="search-wrap__container-btn", onclick="document.getElementById('myInput').value = '' ") Отменить
+
+        main
+            section.section
+                .container
+                    .logo-wrap 
+                        a(href="/") 
+                            img(src="./public/img/logo.svg", alt="")
+            section.info-page
+                .container
+                    div.bread-crumbs
+                        ul
+                            li
+                                a(href="/") Главная
+                            li Новости
+            section.section
+                .container 
+                    .title-page 
+                            h1 Новости  
+            section.section 
+                .container
+                    .article-list
+                        .article-list__item
+                            .article-list__item-wrap
+                                .article-list__item-wrap-image
+                                    a(href="/article-single.html")
+                                        img(src="./public/img/grid1.png", alt="")
+                                .article-list__item-wrap-information
+                                    .article-list__item-wrap-information-date
+                                        span 18 января 2023
+                                    .article-list__item-wrap-information-title
+                                        a(href="/article-single.html")
+                                            h2 Семен Дуван. Человек, который превратил Евпаторию в «Русскую Ниццу»
+                                    div(class="article-list__item-wrap-information-button component-read-more-wrap")
+                                        a(href="/article-single.html" class="component-read-more") Подробнее
+                                                img(src="./public/img/arrow-red.svg", alt="")
+                        .article-list__item
+                            .article-list__item-wrap
+                                .article-list__item-wrap-image
+                                    a(href="/article-single.html")
+                                        img(src="./public/img/grid2.png", alt="")
+                                .article-list__item-wrap-information
+                                    .article-list__item-wrap-information-date
+                                        span 18 января 2023
+                                    .article-list__item-wrap-information-title
+                                        a(href="/article-single.html")
+                                            h2 Юрий Гоцанюк: «Крым открыт и готов к приему гостей»
+                                    div(class="article-list__item-wrap-information-button component-read-more-wrap")
+                                        a(href="/article-single.html" class="component-read-more") Подробнее
+                                                img(src="./public/img/arrow-red.svg", alt="")
+                        .article-list__item
+                            .article-list__item-wrap
+                                .article-list__item-wrap-image
+                                    a(href="/article-single.html")
+                                        img(src="./public/img/grid3.png", alt="")
+                                .article-list__item-wrap-information
+                                    .article-list__item-wrap-information-date
+                                        span 18 января 2023
+                                    .article-list__item-wrap-information-title
+                                        a(href="/article-single.html")
+                                            h2 Семен Дуван. Человек, который превратил Евпаторию в «Русскую Ниццу» 
+                                    div(class="article-list__item-wrap-information-button component-read-more-wrap")
+                                        a(href="/article-single.html" class="component-read-more") Подробнее
+                                                img(src="./public/img/arrow-red.svg", alt="")
+                        .article-list__item
+                            .article-list__item-wrap
+                                .article-list__item-wrap-image
+                                    a(href="/article-single.html")
+                                        img(src="./public/img/grid4.png", alt="")
+                                .article-list__item-wrap-information
+                                    .article-list__item-wrap-information-date
+                                        span 18 января 2023
+                                    .article-list__item-wrap-information-title
+                                        a(href="/article-single.html")
+                                            h2 Юрий Гоцанюк: «Крым открыт и готов к приему гостей»
+                                    div(class="article-list__item-wrap-information-button component-read-more-wrap")
+                                        a(href="/article-single.html" class="component-read-more") Подробнее
+                                                img(src="./public/img/arrow-red.svg", alt="")
+                        .article-list__item
+                            .article-list__item-wrap
+                                .article-list__item-wrap-image
+                                    a(href="/article-single.html")
+                                        img(src="./public/img/grid5.png", alt="")
+                                .article-list__item-wrap-information
+                                    .article-list__item-wrap-information-date
+                                        span 18 января 2023
+                                    .article-list__item-wrap-information-title
+                                        a(href="/article-single.html")
+                                            h2 Юрий Гоцанюк: «Крым открыт и готов к приему гостей»
+                                    div(class="article-list__item-wrap-information-button component-read-more-wrap")
+                                        a(href="/article-single.html" class="component-read-more") Подробнее
+                                                img(src="./public/img/arrow-red.svg", alt="")
+                        .article-list__item
+                            .article-list__item-wrap
+                                .article-list__item-wrap-image
+                                    a(href="/article-single.html")
+                                        img(src="./public/img/grid6.png", alt="")
+                                .article-list__item-wrap-information
+                                    .article-list__item-wrap-information-date
+                                        span 18 января 2023
+                                    .article-list__item-wrap-information-title
+                                        a(href="/article-single.html")
+                                            h2 Юрий Гоцанюк: «Крым открыт и готов к приему гостей»
+                                    div(class="article-list__item-wrap-information-button component-read-more-wrap")
+                                        a(href="/article-single.html" class="component-read-more") Подробнее
+                                                img(src="./public/img/arrow-red.svg", alt="")
+
+                .pagination
+                    ul
+                        li.pagination__item.pagination__item_first
+                            a(href='#').pagination__link В начало
+
+                        li.pagination__item
+                            a(href='#').pagination__link.pagination__link_arrow_left
+
+                        li.pagination__item
+                            a(href='#').pagination__link 1
+
+                        li.pagination__item.pagination__item_current-page 2
+
+                        li.pagination__item
+                            a(href='#').pagination__link 3
+
+                        li.pagination__item
+                            a(href='#').pagination__link 4
+
+                        li.pagination__item
+                            a(href='#').pagination__link 5
+
+                        li.pagination__item
+                            a(href='#').pagination__link 6
+
+                        li.pagination__item
+                            a(href='#').pagination__link.pagination__link_arrow_right
+
+                        li.pagination__item.pagination__item_last
+                            a(href='#').pagination__link В конец
+            footer.section--filled 
+                .container 
+                    .footer 
+                        .footer-head 
+                            .footer-head__logo
+                                img(src="./public/img/footer-logo.svg", alt="")
+                            .footer-head__age
+                                p 16+
+                        .footer-menu
+                            .footer-menu__item-logo
+                                a(href="/") 
+                                    img(src="./public/img/logo-gromada.svg", alt="")
+                            ul.footer-menu__list 
+                                li.footer-menu__list-item 
+                                    a(href="/") Новости
+                                li.footer-menu__list-item 
+                                    a(href="/") Известная фигура
+                                li.footer-menu__list-item 
+                                    a(href="/") Наш эксклюзив
+                                li.footer-menu__list-item 
+                                    a(href="/") Наша общая победа
+                            ul.footer-menu__list 
+                                li.footer-menu__list-item 
+                                    a(href="/") Объективный взгляд
+                                li.footer-menu__list-item 
+                                    a(href="/") Страницы истории
+                                li.footer-menu__list-item 
+                                    a(href="/") Не политика
+                                li.footer-menu__list-item 
+                                    a(href="/") #СловоДня
+                                li.footer-menu__list-item 
+                                    a(href="/photo-report.html") Галерея
+                            .footer-menu__contacts 
+                                .footer-menu__contacts-title 
+                                    h2 Контакты
+                                ul.footer-menu__list 
+                                    li.footer-menu__list-item
+                                        p г. Симферополь, ул. Самокиша, 30
+                                    li.footer-menu__list-item 
+                                        a(href="tel:+79789247717") +7 (978) 924-77-17
+                                    li.footer-menu__list-item 
+                                        a(href="mail:ukrcrimea@mail.ru") ukrcrimea@mail.ru
+                        .footer-license
+                            p Информационное агентство "Крым сегодня", регистрация Роскомнадзора - ИА №ФС 77-78535 от 29 июня 2020 года. Главный редактор - Анастасия Сергеевна Гридчина
+                            p 2022 © Переяславська рада 2.0. Все права защищены
