@@ -1,0 +1,265 @@
+include ../blocks/head/head
+
+
+doctype html
+html
+    +head
+    body
+        .sidebar
+            .sidebar-wrap 
+                .sidebar-wrap__functions
+                    .sidebar-wrap__search-btn
+                        img(src="./public/img/search.svg", alt="")
+                    .sidebar-wrap__lang
+                        img(src="./public/img/GlobeSimple.svg", alt="")
+                        span.selected RU
+                    ul.sidebar-wrap__lang-switch
+                        li.sidebar-wrap__lang-switch__point
+                            img(src="./public/img/pointer.svg", alt="")
+                        li.sidebar-wrap__lang-switch__item
+                            a(href="#")
+                                span.option RU
+                        li.sidebar-wrap__lang-switch__item
+                            a(href="#")
+                                span.option UA
+                .sidebar-wrap__menu
+                    span
+                ul.sidebar-wrap__socials
+                    li 
+                        a(href="/") 
+                            img(src="./public/img/vk-icon.svg", alt="")
+                    li 
+                        a(href="/") 
+                            img(src="./public/img/tg-icon.svg", alt="")
+        //.header
+        // nav
+        nav.menu 
+            .menu-wrap 
+                .menu-wrap-logo
+                    a(href="/")
+                        img(src="./public/img/menu-logo.svg", alt="")
+                ul.menu-nav__list
+                    li.menu-nav__item  
+                        a(href="/") Объективный взгляд
+                    li.menu-nav__item  
+                        a(href="/") Страницы истории
+                    li.menu-nav__item  
+                        a(href="/") Не политика
+                    li.menu-nav__item  
+                        a(href="/") #СловоДня
+                    li.menu-nav__item  
+                        a(href="/") Новости
+                    li.menu-nav__item  
+                        a(href="/") Известная фигура
+                    li.menu-nav__item  
+                        a(href="/") Наш эксклюзив
+                    li.menu-nav__item  
+                        a(href="/") Наша общая победа
+                    li.menu-nav__item  
+                        a(href="/") Фотогалерея
+                    li.menu-nav__item  
+                        a(href="/") Обратная связь
+        .search
+            .search-wrap 
+                .search-wrap-logo
+                    a(href="/")
+                        img(src="./public/img/menu-logo.svg", alt="")
+                .search-wrap__container
+                    .search-wrap__container-field
+                        a(href="/") 
+                            img(src="./public/img/search-input.svg", alt="")
+                        input(type="text", placeholder="Поиск", id="myInput")
+                    button(class="search-wrap__container-btn", onclick="document.getElementById('myInput').value = '' ") Отменить
+
+        main
+            section.section
+                .container
+                    .logo-wrap 
+                        a(href="/") 
+                            img(src="./public/img/logo.svg", alt="")
+            section.info-page
+                .container
+                    div.bread-crumbs
+                        ul
+                            li
+                                a(href="/") Главная
+                            li
+                                a(href="/article-category.html") Особое мнение
+                            li Вадим Волченко: Крым опередил остальные регионы России по числу аттестованных экскурсоводов
+            section.section 
+                .container
+                    .thumbnail-page-post
+                        .thumbnail-page__img-wrap-post
+                            img(src="./public/img/grid5.png", alt="")
+            section.section
+                .container
+                    .post-description
+                        .post-description__name
+                            span Вадим Волченко
+                        .post-description__position
+                            span Министр курортов и туризма Крыма
+
+            section.section
+                .container 
+                    .title-page 
+                            h1 Вадим Волченко: Крым опередил остальные регионы России по числу аттестованных экскурсоводов 
+
+            section.section 
+                .container
+                    .content.content_catalog
+
+                    .content.content__text
+
+                        p Отметим, что согласно письму Минтруда России от 4 апреля 2016 г. N 14-0/10/В-2253 «По вопросам
+                            | применения профессиональных стандартов» профессиональные стандарты носят комплексный характер и
+                            | раскрывают необходимые для выполнения работником трудовые функции, знания и умения. Требования к
+                            | квалификации сотрудников, которые содержатся в профстандартах, обязательны для работодателя в
+                            | случаях, установленных Трудовым Кодексом России или иными нормативными правовыми актами.
+                            | Наименование должностей, профессий, специальностей и квалификационные требования к ним должны
+                            | соответствовать аналогичной информации, указанной в квалификационных справочниках или
+                            | профессиональных стандартах, если, в соответствии с ТК РФ или иными федеральными законами, с
+                            | выполнением работ по этим должностям, профессиям, специальностям связано предоставление
+                            | компенсаций и льгот, либо наличие ограничений. В других случаях эти требования являются
+                            | рекомендательными.
+
+                        p Каждый веб-разработчик знает, что такое текст-«рыба». Текст этот, несмотря на название, не имеет
+                            | никакого отношения к обитателям водоемов. Используется он веб-дизайнерами для вставки на
+                            | интернет-страницы и демонстрации внешнего вида контента, просмотра шрифтов, абзацев, отступов и т.д.
+                            | Так как цель применения такого текста исключительно демонстрационная, то и смысловую нагрузку ему
+                            | нести совсем необязательно. Более того, нечитабельность текста сыграет на руку при оценке качества
+                            | восприятия макета.
+                        blockquote
+                            p На территории перед средней школой №11 будут установлены памятник военным, мемориальные плиты с именами евпаторийцев. 
+                            |Также на территории сквера будут размещены малые архитектурные формы и элементы благоустройства", - отметила мэр.
+
+                        ul
+                            li Каждый веб-разработчик знает, что такое текст-«рыба».
+                            li Текст этот, несмотря на название, не имеет никакого отношения к обитателям водоемов.
+                            li Используется он веб-дизайнерами для вставки на интернет-страницы и демонстрации внешнего вида контента
+                            li Самым известным «рыбным» текстом является знаменитый Lorem ipsum.
+                            li Lorem ipsum на сайтах и проектах, ориентированных на кириллический контент
+
+                        p Трудовым Кодексом России или иными нормативными правовыми актами. Наименование должностей,
+                            | профессий, специальностей и квалификационные требования к ним должны соответствовать аналогичной
+                            | информации, указанной в квалификационных справочниках или профессиональных стандартах, если, в
+                            | соответствии с ТК РФ или иными федеральными законами, с выполнением работ по этим должностям,
+                            | профессиям, специальностям связано предоставление компенсаций и льгот, либо наличие ограничений.
+                            | В других случаях эти требования являются рекомендательными.
+
+                            img(src='/public/img/cont-img.jpg')
+                            .content__img-text Описание фотографи
+
+                            p Каждый веб-разработчик знает, что такое текст-«рыба». Текст этот, несмотря на название, не имеет
+                            | никакого отношения к обитателям водоемов. Используется он веб-дизайнерами для вставки на
+                            | интернет-страницы и демонстрации внешнего вида контента, просмотра шрифтов, абзацев, отступов и т.д.
+                            | Так как цель применения такого текста исключительно демонстрационная, то и смысловую нагрузку ему
+                            | нести совсем необязательно. Более того, нечитабельность текста сыграет на руку при оценке качества
+                            | восприятия макета.
+
+                        p Самым известным «рыбным» текстом является знаменитый Lorem ipsum. Считается, что впервые его
+                            | применили в книгопечатании еще в XVI веке. Своим появлением Lorem ipsum обязан древнеримскому
+                            | философу Цицерону, ведь именно из его трактата «О пределах добра и зла» средневековый книгопечатник
+                            | вырвал отдельные фразы и слова, получив текст-«рыбу», широко используемый и по сей день. Конечно,
+                            | возникают некоторые вопросы, связанные с использованием Lorem ipsum на сайтах и проектах,
+                            | ориентированных на кириллический контент – написание символов на латыни и на кириллице значительно
+                            | различается.
+                    .content__small-text Позиция редакции может быть озвучена только главным редактором. Мнение авторов и приглашенных гостей может не совпадать с позицией нашей редакции.
+   
+            section.section
+                .container 
+                    .comments
+                    .comments__top
+                        .comments__social
+                            img(src='/public/img/soc.png')
+                        .comments__info
+                            .comments__view.icons_eye-blue 483 Переглядів
+                            .comments__coment.icons_message-blue 20 Коментарів
+
+                    .comments__form-top
+                        .comments__title Коментарі (20)
+                        .comments__add-coment.icons_message-black Залишити коментар
+
+                    form.comments__form
+                        .comments__form-row
+                            .comments__form-lable Iм'я
+                            .comments__form-error
+                                | Поле не заполнено
+                            input(type='text').comments__form__pole
+                        .comments__form-row
+                            .comments__form-lable Коментар
+                            textarea.comments__form__pole.comments__form__pole_textarea
+                        .comments__form-row
+                            | CAPCHA
+                        .comments__form-row
+                            .button Надіслати
+            section.section
+                .container 
+                    .discussion
+                        .discussion__left
+                            .discussion__icon.icons_user
+
+                        .discussion__right
+                            .discussion__top
+                                .discussion__title Иван Иванов
+                                .discussion__date 12.01.2019
+                            .discussion__text Самым известным «рыбным» текстом является знаменитый Lorem ipsum. Считается, что впервые
+                                | его применили в книгопечатании еще в XVI веке. Своим появлением Lorem ipsum обязан
+                                | древнеримскому философу Цицерону..
+
+                    .discussion
+                        .discussion__left
+                            .discussion__icon.icons_user
+
+                        .discussion__right
+                            .discussion__top
+                                .discussion__title Иван Иванов
+                                .discussion__date 12.01.2019
+                            .discussion__text Самым известным «рыбным» текстом является знаменитый Lorem ipsum. Считается, что впервые
+                                | его применили в книгопечатании еще в XVI веке. Своим появлением Lorem ipsum обязан
+                                | древнеримскому философу Цицерону..
+
+                    .discussion
+                        .discussion__left
+                            .discussion__icon.icons_user
+
+                        .discussion__right
+                            .discussion__top
+                                .discussion__title Иван Иванов
+                                .discussion__date 12.01.2019
+                            .discussion__text Самым известным «рыбным» текстом является знаменитый Lorem ipsum. Считается, что впервые
+                                | его применили в книгопечатании еще в XVI веке. Своим появлением Lorem ipsum обязан
+                                | древнеримскому философу Цицерону..
+
+                    .discussion
+                        .discussion__left
+                            .discussion__icon.icons_user
+
+                        .discussion__right
+                            .discussion__top
+                                .discussion__title Иван Иванов
+                                .discussion__date 12.01.2019
+                            .discussion__text Самым известным «рыбным» текстом является знаменитый Lorem ipsum. Считается, что впервые
+                                | его применили в книгопечатании еще в XVI веке. Своим появлением Lorem ipsum обязан
+                                | древнеримскому философу Цицерону..
+
+            footer.section--filled 
+                .container 
+                    .footer 
+                        .footer-head 
+                            .footer-head__logo
+                                //img(src="./public/img/footer-logo.svg", alt="")
+                            .footer-head__age
+                                p 16+
+                        .footer-menu
+                            .footer-menu__item-logo1
+                                a(href="/") 
+                                    img(src="./public/img/logo1.svg", alt="")
+                            .footer-menu__item-logo2
+                                a(href="/") 
+                                    img(src="./public/img/logo2.svg", alt="")
+                            .footer-menu__item-logo3
+                                a(href="/") 
+                                    img(src="./public/img/logo3.svg", alt="")
+                        .footer-license
+                            p Информационное агентство "Крым сегодня", регистрация Роскомнадзора - ИА №ФС 77-78535 от 29 июня 2020 года. Главный редактор - Анастасия Сергеевна Гридчина
+                            p 2022 © Переяславська рада 2.0. Все права защищены

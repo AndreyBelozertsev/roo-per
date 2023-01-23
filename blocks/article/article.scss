@@ -4,16 +4,17 @@
 
     &__item{
         width: 100%;
-        &-wrap{
+        &-wrap, &-wrap-post{
             padding: 0 15px 35px 15px;
 
-            &-image{
+            &-image, &-image-post{
                 border-radius: 12px 12px 0 0;
                 overflow: hidden;
                 a{
                     display: block;
                     height: 215px;
                     overflow: hidden;
+                    position: relative;
                 }
                 img{
                     width:100%;
@@ -24,10 +25,42 @@
                     
                 }
             }
+             &-image-post{
+                overflow: visible;
+                a{
+                    width: 215px;
+                    margin: 0 auto;
+                    overflow: visible;
+                }
+                img{
+                    object-position: top;
+                    border-radius: 50%;
+                }
+            }
+            &-image-post a::before {
+                position: absolute;
+                z-index: 20;
+                top: -2px;
+                left: -2px;
+                display: block;
+                width: 44px;
+                height: 44px;
+                content: '';
+                border: 2px solid #fff;
+                border-radius: 42px;
+                background: #d2113a url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAMCAMAAACKnBfWAAAALVBMVEX///////////////////////////////////////////////////////////+g0jAFAAAADnRSTlMAESIzRFVmd4iZu8zd7hkznE4AAABSSURBVHjaVcpLEoAwCAPQ0I/Qarn/cYXo1JHNG5IAcmgDwq41KMvdR7zX4/C8Bnud1LZG51bOv+BSkQHlsnzWxZga0IMBoIUzVLZcWyqHgGpJbjbvBWNXQkTaAAAAAElFTkSuQmCC) no-repeat 50% 50%;
+            }
             &-information{
                 padding:15px 15px 35px 15px;
                 border-radius:  0 0 12px 12px;
                 &-date{
+                    padding-bottom:15px;
+                    span{
+                        font-size: 12px;
+                        color: $primmary-700;
+                    }
+                }
+                &-position{
                     padding-bottom:15px;
                     span{
                         color: $primmary-700;
@@ -42,11 +75,7 @@
                 }
             }
         }
-        &:hover .article-list__item-wrap-information    
-        {
-            box-shadow: 0 5px 12px 0 rgba(0 0 0 /25%);
-        }
-        &:hover .article-list__item-wrap-image img 
+        &:hover .article-list__item-wrap-image-post img 
         {
             scale: 1.2;
         }
@@ -57,4 +86,8 @@
             width: 25%;
         }
     }
+    &__item-wrap:hover .article-list__item-wrap-information    
+        {
+            box-shadow: 0 5px 12px 0 rgba(0 0 0 /25%);
+        }
 }   

@@ -1,0 +1,12 @@
+.post-description{
+    padding-bottom: 15px;
+    &__name{
+        font-size: 22px;
+        padding-bottom: 15px;
+    }
+    &__position{
+        color: $gray;
+        padding-bottom: 15px;
+    }
+    
+}

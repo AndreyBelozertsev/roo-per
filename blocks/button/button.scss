@@ -1,0 +1,99 @@
+.button
+{
+    font-size: 14px;
+
+    display: inline-block;
+
+    padding: 15px 35px;
+
+    cursor: pointer;
+    text-transform: uppercase;
+
+    color: $gray-dark;
+    border: 1px solid $gray-light-medium;
+    border-radius: 12px;
+    background: none;
+
+    &_fl_left
+    {
+        float: left;
+
+        @media (max-width: 430px)
+        {
+            float: none;
+
+            margin: 10px;
+        }
+    }
+
+    &_border_no
+    {
+        border: none;
+    }
+
+    a
+    {
+        text-decoration: none;
+
+        color: $gray-dark;
+
+        &:hover
+        {
+            text-decoration: none;
+
+            color: $white;
+        }
+    }
+
+    &:hover
+    {
+        text-decoration: none;
+
+        color: $white;
+        border-color: $red;
+        background: $red;o
+
+        a
+        {
+            text-decoration: none;
+
+            color: $white;
+        }
+    }
+
+    &_text
+    {
+        &_red
+        {
+            color: $red;
+            background: $gray-light;
+        }
+    }
+
+    &_left
+    {
+        margin-top: 20px;
+        margin-right: 50px;
+
+        @media (max-width: 525px)
+        {
+            margin: 20px 10px;
+        }
+    }
+
+    &_center
+    {
+        margin: 10px auto 0;
+    }
+
+    &_top
+    {
+        margin-top: 15px;
+        padding: 14px 20px;
+    }
+
+    &_posit-box
+    {
+        text-align: center;
+    }
+}

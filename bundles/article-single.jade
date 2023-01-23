@@ -155,50 +155,101 @@ html
                             | ориентированных на кириллический контент – написание символов на латыни и на кириллице значительно
                             | различается.
                     .content__small-text Позиция редакции может быть озвучена только главным редактором. Мнение авторов и приглашенных гостей может не совпадать с позицией нашей редакции.
-   
+            section.section
+                .container 
+                    .comments
+                    .comments__top
+                        .comments__social
+                            img(src='/public/img/soc.png')
+                        .comments__info
+                            .comments__view.icons_eye-blue 483 Переглядів
+                            .comments__coment.icons_message-blue 20 Коментарів
+
+                    .comments__form-top
+                        .comments__title Коментарі (20)
+                        .comments__add-coment.icons_message-black Залишити коментар
+
+                    form.comments__form
+                        .comments__form-row
+                            .comments__form-lable Iм'я
+                            .comments__form-error
+                                | Поле не заполнено
+                            input(type='text').comments__form__pole
+                        .comments__form-row
+                            .comments__form-lable Коментар
+                            textarea.comments__form__pole.comments__form__pole_textarea
+                        .comments__form-row
+                            | CAPCHA
+                        .comments__form-row
+                            .button Надіслати
+            section.section
+                .container 
+                    .discussion
+                        .discussion__left
+                            .discussion__icon.icons_user
+
+                        .discussion__right
+                            .discussion__top
+                                .discussion__title Иван Иванов
+                                .discussion__date 12.01.2019
+                            .discussion__text Самым известным «рыбным» текстом является знаменитый Lorem ipsum. Считается, что впервые
+                                | его применили в книгопечатании еще в XVI веке. Своим появлением Lorem ipsum обязан
+                                | древнеримскому философу Цицерону..
+
+                    .discussion
+                        .discussion__left
+                            .discussion__icon.icons_user
+
+                        .discussion__right
+                            .discussion__top
+                                .discussion__title Иван Иванов
+                                .discussion__date 12.01.2019
+                            .discussion__text Самым известным «рыбным» текстом является знаменитый Lorem ipsum. Считается, что впервые
+                                | его применили в книгопечатании еще в XVI веке. Своим появлением Lorem ipsum обязан
+                                | древнеримскому философу Цицерону..
+
+                    .discussion
+                        .discussion__left
+                            .discussion__icon.icons_user
+
+                        .discussion__right
+                            .discussion__top
+                                .discussion__title Иван Иванов
+                                .discussion__date 12.01.2019
+                            .discussion__text Самым известным «рыбным» текстом является знаменитый Lorem ipsum. Считается, что впервые
+                                | его применили в книгопечатании еще в XVI веке. Своим появлением Lorem ipsum обязан
+                                | древнеримскому философу Цицерону..
+
+                    .discussion
+                        .discussion__left
+                            .discussion__icon.icons_user
+
+                        .discussion__right
+                            .discussion__top
+                                .discussion__title Иван Иванов
+                                .discussion__date 12.01.2019
+                            .discussion__text Самым известным «рыбным» текстом является знаменитый Lorem ipsum. Считается, что впервые
+                                | его применили в книгопечатании еще в XVI веке. Своим появлением Lorem ipsum обязан
+                                | древнеримскому философу Цицерону..
             
             footer.section--filled 
                 .container 
                     .footer 
                         .footer-head 
                             .footer-head__logo
-                                img(src="./public/img/footer-logo.svg", alt="")
+                                //img(src="./public/img/footer-logo.svg", alt="")
                             .footer-head__age
                                 p 16+
                         .footer-menu
-                            .footer-menu__item-logo
+                            .footer-menu__item-logo1
                                 a(href="/") 
-                                    img(src="./public/img/logo-gromada.svg", alt="")
-                            ul.footer-menu__list 
-                                li.footer-menu__list-item 
-                                    a(href="/") Новости
-                                li.footer-menu__list-item 
-                                    a(href="/") Известная фигура
-                                li.footer-menu__list-item 
-                                    a(href="/") Наш эксклюзив
-                                li.footer-menu__list-item 
-                                    a(href="/") Наша общая победа
-                            ul.footer-menu__list 
-                                li.footer-menu__list-item 
-                                    a(href="/") Объективный взгляд
-                                li.footer-menu__list-item 
-                                    a(href="/") Страницы истории
-                                li.footer-menu__list-item 
-                                    a(href="/") Не политика
-                                li.footer-menu__list-item 
-                                    a(href="/") #СловоДня
-                                li.footer-menu__list-item 
-                                    a(href="/photo-report.html") Галерея
-                            .footer-menu__contacts 
-                                .footer-menu__contacts-title 
-                                    h2 Контакты
-                                ul.footer-menu__list 
-                                    li.footer-menu__list-item
-                                        p г. Симферополь, ул. Самокиша, 30
-                                    li.footer-menu__list-item 
-                                        a(href="tel:+79789247717") +7 (978) 924-77-17
-                                    li.footer-menu__list-item 
-                                        a(href="mail:ukrcrimea@mail.ru") ukrcrimea@mail.ru
+                                    img(src="./public/img/logo1.svg", alt="")
+                            .footer-menu__item-logo2
+                                a(href="/") 
+                                    img(src="./public/img/logo2.svg", alt="")
+                            .footer-menu__item-logo3
+                                a(href="/") 
+                                    img(src="./public/img/logo3.svg", alt="")
                         .footer-license
                             p Информационное агентство "Крым сегодня", регистрация Роскомнадзора - ИА №ФС 77-78535 от 29 июня 2020 года. Главный редактор - Анастасия Сергеевна Гридчина
                             p 2022 © Переяславська рада 2.0. Все права защищены
