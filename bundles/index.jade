@@ -64,12 +64,12 @@ html
                 .search-wrap-logo
                     a(href="/")
                         img(src="./public/img/menu-logo.svg", alt="")
-                .search-wrap__container
+                form.search-wrap__container 
                     .search-wrap__container-field
                         a(href="/") 
                             img(src="./public/img/search-input.svg", alt="")
                         input(type="text", placeholder="Поиск", id="myInput")
-                    button(class="search-wrap__container-btn", onclick="document.getElementById('myInput').value = '' ") Отменить
+                    button.search-wrap__container-btn Найти
 
 
         main
@@ -199,11 +199,8 @@ html
                         .journal-wrap  
                             .journal-wrap__archive
                                 .journal-wrap__archive-img
-                                    img(src="./public/img/base.png", alt="")
                                     img(src="./public/img/book.png", alt="")
-                                    img(src="./public/img/base.png", alt="")
                                     img(src="./public/img/book.png", alt="")
-                                    img(src="./public/img/shadows.png", alt="")
                                 .journal-wrap__archive-action 
                                     a(href="/") Смотреть
                                     a(href="/magazine-list.html") Архив журналов

@@ -134,33 +134,33 @@ class MagazineArticleController extends Controller
         return $this->render('PortalContentBundle:MagazineArticle:depNews.html.twig', $arrParams);
     }
 
-    /**
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function getMoreMagazineArticlesAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getRepository('PortalContentBundle:MagazineArticle');
-        $magazine = (int)$request->get('magazine');
-        $page = (int)$request->get('page');
+    // /**
+    //  * @param Request $request
+    //  * @return JsonResponse
+    //  */
+    // public function getMoreMagazineArticlesAction(Request $request)
+    // {
+    //     $em = $this->getDoctrine()->getRepository('PortalContentBundle:MagazineArticle');
+    //     $magazine = (int)$request->get('magazine');
+    //     $page = (int)$request->get('page');
 
-        $list = $this->render('PortalContentBundle:MagazineArticle:magazineArticleList.html.twig', [
-            'magazineArticleList' => $em->getPaginatedList($magazine, $page),
-        ])->getContent();
-        $page++;
+    //     $list = $this->render('PortalContentBundle:MagazineArticle:magazineArticleList.html.twig', [
+    //         'magazineArticleList' => $em->getPaginatedList($magazine, $page),
+    //     ])->getContent();
+    //     $page++;
 
-        $countMagazineArticle = $em->getArticleCount($magazine);
-        $shown = MagazineArticle::PAGE_PAGINATION_LIMIT * ($page);
-        $totalPages = ceil($countMagazineArticle / MagazineArticle::PAGE_PAGINATION_LIMIT);
+    //     $countMagazineArticle = $em->getArticleCount($magazine);
+    //     $shown = MagazineArticle::PAGE_PAGINATION_LIMIT * ($page);
+    //     $totalPages = ceil($countMagazineArticle / MagazineArticle::PAGE_PAGINATION_LIMIT);
 
-        $pagination = new Pagination($this->container);
-        $paginationRender = $pagination->render($page, $totalPages, 'view_all_magazine_articles', ['magazine' => $magazine]);
+    //     $pagination = new Pagination($this->container);
+    //     $paginationRender = $pagination->render($page, $totalPages, 'view_all_magazine_articles', ['magazine' => $magazine]);
 
-        return new JsonResponse([
-            'list' => $list,
-            'page' => $page,
-            'hideButton' => ($shown >= $countArticle),
-            'pagination' => $paginationRender
-        ]);
-    }
+    //     return new JsonResponse([
+    //         'list' => $list,
+    //         'page' => $page,
+    //         'hideButton' => ($shown >= $countArticle),
+    //         'pagination' => $paginationRender
+    //     ]);
+    // }
 }

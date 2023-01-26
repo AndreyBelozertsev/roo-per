@@ -1,31 +1,34 @@
 {% extends 'PortalContentBundle::base.html.twig' %}
 
 {% block info_page %}
-    <div class="info-page">
-        <div class="info-page__posit">
-            <div class="bread-crumbs">
-                <ul>
-                    <li><a href="{{ path('portal_content_homepage') }}">{{ 'Home'|trans }}</a></li>
-                    <li>{{ 'Magazine'|trans }}</li>
-                </ul>
-            </div>
-            <div class="title-page">{{ 'Magazine'|trans }}</div>
+    <section class="info-page">
+        <div class="container">
+          <div class="bread-crumbs">
+            <ul>
+                <li><a href="{{ path('portal_content_homepage') }}">{{ 'Home'|trans }}</a></li>
+                <li>{{ 'Magazine'|trans }}</li>
+            </ul>
+          </div>
         </div>
-    </div>
+    </section>
+    <section class="section">
+        <div class="container"> 
+            <div class="title-page"> 
+                <h1>{{ 'Magazine'|trans }}</h1>
+            </div>
+        </div>
+    </section>
 {% endblock %}
 
 {% block content %}
-    <div class="content content_catalog">
-        {% include 'PortalContentBundle:Magazine:magazineList.html.twig' %}
-
-    </div>
-    <!--.content-->
-    {% if hideButton == false %}
-        <div class="button_posit-box get-more-magazines" data-page="{{ currentPage }}">
-            <div class="button button_center">{{ 'Show more'|trans }}</div>
+    <section class="section"> 
+        <div class="container">
+            <div class="magazine-newspaper-list">
+                {% include 'PortalContentBundle:Magazine:magazineList.html.twig' %}
+            </div>
         </div>
-    {% endif %}
-    <div class="pagination clearfix">
-        {{ pagination|raw }}
-    </div>
+        <div class="pagination">
+            {{ pagination|raw }}
+        </div>
+    </section>  
 {% endblock %}

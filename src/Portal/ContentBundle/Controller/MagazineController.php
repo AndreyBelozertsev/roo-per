@@ -37,30 +37,30 @@ class MagazineController extends Controller
         return $this->render('PortalContentBundle:Magazine:index.html.twig', $arrParams);
     }
 
-    /**
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function getMoreMagazinesAction(Request $request)
-    {
-        $currentPage = (int)$request->get('page') ?: 1;
-        $magazineRep = $this->get('doctrine')->getRepository('PortalContentBundle:MagazineNewspaper');
+    // /**
+    //  * @param Request $request
+    //  * @return JsonResponse
+    //  */
+    // public function getMoreMagazinesAction(Request $request)
+    // {
+    //     $currentPage = (int)$request->get('page') ?: 1;
+    //     $magazineRep = $this->get('doctrine')->getRepository('PortalContentBundle:MagazineNewspaper');
 
-        $totalPages = ceil($magazineRep->getCount('magazine') / MagazineNewspaper::PAGE_PAGINATION_LIMIT);
+    //     $totalPages = ceil($magazineRep->getCount('magazine') / MagazineNewspaper::PAGE_PAGINATION_LIMIT);
 
-        $arrParams['magazineList'] = $this->render('PortalContentBundle:Magazine:magazineList.html.twig', [
-            'magazineList' => $magazineRep->getPaginatedList($currentPage, 'magazine'),
-        ])->getContent();
+    //     $arrParams['magazineList'] = $this->render('PortalContentBundle:Magazine:magazineList.html.twig', [
+    //         'magazineList' => $magazineRep->getPaginatedList($currentPage, 'magazine'),
+    //     ])->getContent();
 
-        $currentPage++;
-        $arrParams['page'] = $currentPage;
-        $arrParams['hideButton'] = ($currentPage >= $totalPages);
+    //     $currentPage++;
+    //     $arrParams['page'] = $currentPage;
+    //     $arrParams['hideButton'] = ($currentPage >= $totalPages);
 
-        $pagination = new Pagination($this->container);
-        $arrParams['pagination'] = $pagination->render($currentPage, $totalPages, 'magazine');
+    //     $pagination = new Pagination($this->container);
+    //     $arrParams['pagination'] = $pagination->render($currentPage, $totalPages, 'magazine');
 
-        return new JsonResponse($arrParams);
-    }
+    //     return new JsonResponse($arrParams);
+    // }
 
     /**
      * Show page

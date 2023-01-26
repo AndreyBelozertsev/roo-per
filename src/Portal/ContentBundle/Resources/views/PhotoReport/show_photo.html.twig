@@ -2,15 +2,19 @@
 
 {% block info_page %}
     <section class="info-page">
-        <div class="info-page__posit">
+        <div class="container">
             <div class="bread-crumbs">
                 <ul>
                     <li><a href="{{ path('portal_content_homepage') }}">{{ 'Home'|trans }}</a></li>
                     <li>{{ 'Gallery'|trans }}</li>
                 </ul>
             </div>
-            <div class="info-page__right">
-                <div class="title-page">{{ 'Gallery'|trans }}</div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container"> 
+            <div class="title-page"> 
+                <h1>{{ 'Gallery'|trans }}</h1>
             </div>
         </div>
     </section>

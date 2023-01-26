@@ -71,7 +71,6 @@ html
                         input(type="text", placeholder="Поиск", id="myInput")
                     button.search-wrap__container-btn Найти
 
-
         main
             section.section
                 .container
@@ -84,29 +83,52 @@ html
                         ul
                             li
                                 a(href="/") Главная
-                            li Галерея
+                            li Обратная связь
             section.section
                 .container 
                     .title-page 
-                            h1 Галерея  
-            section  
-                div
-                    ul.gallery-wrap
-                        li.gallery-wrap__item 
-                            span Крымская Каппадокия
-                            img(src="./public/img/gallery1.png", alt="")
-                        li.gallery-wrap__item 
-                            span В гостях у тишины
-                            img(src="./public/img/gallery2.png", alt="")
-                        li.gallery-wrap__item 
-                            span Балаклава
-                            img(src="./public/img/gallery3.png", alt="")
+                            h1 Обратная связь  
+            section.section 
+                .container
+                    .content
+
+                        .content__contact-info
+
+                            .content__title Контакти
+
+                            | Текстова інформація
+
+                            .content__title Адреса
+
+                            | Текстова інформація
+
+
+                        form.comments__form.comments__form_open
+                            .content__title Форма зворотного зв'язку
+                            .comments__form-row
+                                .comments__form-lable Iм'я
+                                .comments__form-error
+                                    | Поле не заполнено
+                                input(type='text').comments__form__pole
+                            .comments__form-row
+                                .comments__form-lable E-mail
+                                input(type='text').comments__form__pole
+                            .comments__form-row
+                                .comments__form-lable Коментар
+                                textarea.comments__form__pole.comments__form__pole_textarea
+                            .comments__form-row
+                                | CAPCHA
+                            .comments__form-row
+                                a(href='#modal1').open_modal.button Надіслати
+                    
+
+
             footer.section--filled 
                 .container 
                     .footer 
                         .footer-head 
                             .footer-head__logo
-                                //img(src="./public/img/footer-logo.svg", alt="")
+                               // img(src="./public/img/footer-logo.svg", alt="")
                             .footer-head__age
                                 p 16+
                         .footer-menu
@@ -122,3 +144,12 @@ html
                         .footer-license
                             p Информационное агентство "Крым сегодня", регистрация Роскомнадзора - ИА №ФС 77-78535 от 29 июня 2020 года. Главный редактор - Анастасия Сергеевна Гридчина
                             p 2022 © Переяславська рада 2.0. Все права защищены
+
+        #modal1.modal_div.clearfix
+            span.modal_close
+            .modal_div__content
+                | Форма отправнена
+
+        #overlay
+
+        .up-button.icons_arrow-up-white

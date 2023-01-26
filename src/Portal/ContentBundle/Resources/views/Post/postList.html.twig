@@ -1,12 +1,27 @@
 {% block content %}
         {% for post in postList %}
-            <div class="quote">
-                <div class="quote__img"><img src="{{ asset(post.preview_file_url|thumbImage) }}"></div>
-                <a href="{{ path('post_show', { 'id': post.id }) }}" class="quote__title">
-                    {{ attribute(post, 'title_' ~ app.request.locale) }}
-                </a>
-                <div class="quote__name">{{ attribute(post, 'user_name_' ~ app.request.locale) }}</div>
-                <div class="quote__position">{{ attribute(post, 'user_position_' ~ app.request.locale) }}</div>
+            <div class="article-list__item">
+                <div class="article-list__item-wrap-post">
+                    <div class="article-list__item-wrap-image-post">
+                        <a href="{{ path('post_show', { 'id': post.id }) }}"><img src="{{ asset(post.preview_file_url|thumbImage) }}" alt=""></a>
+                    </div>
+                    <div class="article-list__item-wrap-information">
+                        <div class="article-list__item-wrap-information-title">
+                            <a href="{{ path('post_show', { 'id': post.id }) }}">
+                                <h2>{{ attribute(post, 'title_' ~ app.request.locale) }}</h2>
+                            </a>
+                        </div>
+                        <div class="article-list__item-wrap-information-name">
+                            <span>{{ attribute(post, 'user_name_' ~ app.request.locale) }}</span>
+                        </div>
+                        <div class="article-list__item-wrap-information-position">
+                            <span>{{ attribute(post, 'user_position_' ~ app.request.locale) }}</span>
+                        </div>
+                        <div class="article-list__item-wrap-information-button component-read-more-wrap">
+                            <a href="{{ path('post_show', { 'id': post.id }) }}" class="component-read-more">{{ 'More detailed'|trans }}<img src="/themes/public/img/arrow-red.svg" alt=""></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         {% endfor %}
 {% endblock %}

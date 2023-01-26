@@ -4,6 +4,8 @@ namespace Portal\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * MagazineArticle
@@ -711,6 +713,43 @@ class MagazineArticle
     public function geIsSearchIndexed()
     {
         return $this->isSearchIndexed;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments()
+    {
+        $criteria = Criteria::create();
+        $criteria->where(Criteria::expr()->eq('isPublished', true));
+
+        return $this->comments->matching($criteria);
+    }
+
+    /**
+     * Add comment
+     *
+     * @param Comment $comment
+     *
+     * @return MagazineArticle
+     */
+    public function addComments(Comment $comment)
+    {
+        $this->comments[] = $comment;
+        $comment->setMagazineArticle($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param Comment $comment
+     */
+    public function removeComments(Comment $comment)
+    {
+        $this->comments->remove($comment);
+        $comment->MagazineArticle(null);
     }
 
     /**

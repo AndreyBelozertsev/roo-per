@@ -130,6 +130,9 @@
         margin-left: 20px;
 
         color: $gray-dark;
+        & h1{
+            margin: 16px 0;
+        }
     }
 
     &__title

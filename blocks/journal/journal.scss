@@ -56,49 +56,68 @@
             max-width: 270px;
         }
 
-        img:not(:nth-child(5)) {
+        // img:not(:nth-child(5)) {
+        //     right: 50%;
+        //     translate: 50%;
+        // }
+
+        // img:nth-child(1) {
+        //     z-index: 4;
+        // }
+
+        // img:nth-child(2) {
+
+        //     mix-blend-mode: multiply;
+        //     opacity: 0.9;
+
+        //     z-index: 5;
+        // }
+
+        // img:nth-child(3) {
+        //     transform: rotate(21deg);
+
+        //     z-index: 2;
+        // }
+
+        // img:nth-child(4) {
+        //     mix-blend-mode: multiply;
+        //     opacity: 0.9;
+            
+        //     transform: rotate(20deg);
+        //     z-index: 3;
+        // }
+
+        // img:nth-child(5) {
+        //     top: 40px;
+
+        //     max-width: 337px;       
+
+        //     right: 62%;
+        //     translate: 50%;
+
+        //     z-index: 1;
+
+        //     mix-blend-mode: multiply;
+        // }
+
+        
+        img {
             right: 50%;
+            top:40px;
             translate: 50%;
+            box-shadow: 36px 26px 20px -2px rgb(0 0 0 / 38%);
         }
 
         img:nth-child(1) {
-            z-index: 4;
-        }
-
-        img:nth-child(2) {
-
-            mix-blend-mode: multiply;
-            opacity: 0.9;
-
+            transform: rotate(-21deg);
             z-index: 5;
         }
 
-        img:nth-child(3) {
-            transform: rotate(21deg);
-
+        img:nth-child(2) {
             z-index: 2;
+            right: 45%;
         }
 
-        img:nth-child(4) {
-            mix-blend-mode: multiply;
-            opacity: 0.9;
-            
-            transform: rotate(20deg);
-            z-index: 3;
-        }
-
-        img:nth-child(5) {
-            top: 40px;
-
-            max-width: 337px;       
-
-            right: 62%;
-            translate: 50%;
-
-            z-index: 1;
-
-            mix-blend-mode: multiply;
-        }
     }
 
     &-wrap__archive-action {
@@ -170,7 +189,7 @@
             display: block;
             column-count: 2;
 
-            overflow: scroll;
+            overflow: hidden;
             counter-reset: items;
         }
     }
@@ -333,7 +352,7 @@
         }
 
         &-wrap__archive-img {
-            margin-top: 38px;
+            margin-top: 58px;
 
             img {
                 max-width: 407px;

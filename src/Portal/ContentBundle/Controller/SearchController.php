@@ -44,37 +44,37 @@ class SearchController extends Controller
         return $this->render('PortalContentBundle:Article:search.html.twig', $arrParams);
     }
 
-    /**
-     * Show more results button.
-     *
-     * @param Request $request
-     * @return JsonResponse
-     * @throws \Doctrine\DBAL\DBALException
-     */
-    public function getMoreResultsAction(Request $request)
-    {
-        $queryStr = $request->get('str');
-        $page = (int)$request->get('page');
+    // /**
+    //  * Show more results button.
+    //  *
+    //  * @param Request $request
+    //  * @return JsonResponse
+    //  * @throws \Doctrine\DBAL\DBALException
+    //  */
+    // public function getMoreResultsAction(Request $request)
+    // {
+    //     $queryStr = $request->get('str');
+    //     $page = (int)$request->get('page');
 
-        $rep = $this->getDoctrine()->getRepository('PortalContentBundle:Article');
+    //     $rep = $this->getDoctrine()->getRepository('PortalContentBundle:Article');
 
-        $list = $this->render('PortalContentBundle:Article:articleList.html.twig', [
-            'articleList' => $rep->searchArticle($queryStr, $page),
-        ])->getContent();
-        $page++;
+    //     $list = $this->render('PortalContentBundle:Article:articleList.html.twig', [
+    //         'articleList' => $rep->searchArticle($queryStr, $page),
+    //     ])->getContent();
+    //     $page++;
 
-        $articleCount = $rep->countSearchArticle($queryStr);
-        $shown = Article::PAGE_PAGINATION_LIMIT * ($page);
-        $totalPages = ceil($articleCount / Article::PAGE_PAGINATION_LIMIT);
+    //     $articleCount = $rep->countSearchArticle($queryStr);
+    //     $shown = Article::PAGE_PAGINATION_LIMIT * ($page);
+    //     $totalPages = ceil($articleCount / Article::PAGE_PAGINATION_LIMIT);
 
-        $pagination = new Pagination($this->container);
-        $paginationRender = $pagination->render($page, $totalPages, 'search', ['str' => $queryStr]);
+    //     $pagination = new Pagination($this->container);
+    //     $paginationRender = $pagination->render($page, $totalPages, 'search', ['str' => $queryStr]);
 
-        return new JsonResponse([
-            'list' => $list,
-            'page' => $page,
-            'hideButton' => ($shown >= $articleCount),
-            'pagination' => $paginationRender
-        ]);
-    }
+    //     return new JsonResponse([
+    //         'list' => $list,
+    //         'page' => $page,
+    //         'hideButton' => ($shown >= $articleCount),
+    //         'pagination' => $paginationRender
+    //     ]);
+    // }
 }

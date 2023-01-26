@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let searchBtn = document.querySelector('.sidebar-wrap__search-btn');
     let search = document.querySelector('.search');
-    let closeSearch = document.querySelector('.search-wrap__container-btn');
+    //let closeSearch = document.querySelector('.search-wrap__container-btn');
 
     if (searchBtn) {
         searchBtn.addEventListener('click', () => {
@@ -29,11 +29,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     };
     
-    closeSearch.addEventListener('click', () => {
-        search.classList.remove('active');
-        searchBtn.classList.toggle('active');
-        $('html').toggleClass('lock');
-    });
+    // closeSearch.addEventListener('click', () => {
+    //     search.classList.remove('active');
+    //     searchBtn.classList.toggle('active');
+    //     $('html').toggleClass('lock');
+    // });
 
     function Select() {
         const select = document.querySelector('.sidebar-wrap__lang');

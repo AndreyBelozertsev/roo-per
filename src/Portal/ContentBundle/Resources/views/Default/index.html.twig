@@ -88,11 +88,11 @@
                     <div class="journal-wrap"> 
                         <div class="journal-wrap__archive">
                             <div class="journal-wrap__archive-img">
-                                <img src="./themes/public/img/base.png" alt="">
+                                <!-- <img src="/themes/public/img/base.png" alt=""> -->
                                 <img src="{{ newMagazine.preview_file_url }}" alt="">
-                                <img src="./themes/public/img/base.png" alt="">
+                                <!-- <img src="/themes/public/img/base.png" alt=""> -->
                                 <img src="{{ newMagazine.preview_file_url }}" alt="">
-                                <img src="./themes/public/img/shadows.png" alt="">
+                                <!-- <img src="/themes/public/img/shadows.png" alt=""> -->
                             </div>
                             <div class="journal-wrap__archive-action"> <a target="_blank" href="{{ newMagazine.file }}">{{ 'Download'|trans }}</a><a href="{{ path('magazine') }}">{{ 'Archive of magazines'|trans }}</a></div>
                         </div>
@@ -106,7 +106,9 @@
                                         <div class="journal-wrap__news-info"> 
                                             <span>{{ article.created_at|date|localizeddate('full', 'none', app.request.locale, null, 'd MMMM yyyy' ) }}</span>
                                             <a href="{{ path('magazine_article_show', { 'id': article.id }) }}" class="t-crop t-crop--four-l">{{ attribute(article, 'title_' ~ app.request.locale) }}</a>
-                                            <a href="{{ path('magazine_article_show', { 'id': article.id }) }}" class="journal-wrap__news-more">{{ 'More detailed'|trans }}<img src="./themes/public/img/arrow-red.svg" alt=""></a>
+                                            <div class="component-read-more-wrap">
+                                                <a href="{{ path('magazine_article_show', { 'id': article.id }) }}" class="component-read-more">{{ 'More detailed'|trans }}<img src="/themes/public/img/arrow-red.svg" alt=""></a>
+                                            </div>
                                         </div>
                                     </li>
                                 {% endfor %}

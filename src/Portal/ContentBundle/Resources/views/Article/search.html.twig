@@ -1,57 +1,79 @@
 {% extends 'PortalContentBundle::base.html.twig' %}
 
 {% block info_page %}
-    <div class="info-page">
-        <div class="info-page__posit">
+    {% set queryStr = app.request.get('str') %}
+
+    <section class="info-page">
+        <div class="container">
             <div class="bread-crumbs">
                 <ul>
                     <li><a href="{{ path('portal_content_homepage') }}">{{ 'Home'|trans }}</a></li>
                     <li>{{ 'Search'|trans }}</li>
                 </ul>
             </div>
-            <div class="title-page">{{ 'Search'|trans }}</div>
         </div>
-    </div>
+    </section>
+    <section class="section">
+        <div class="container"> 
+            <div class="title-page">
+                {% if queryStr %}
+                    <h1>{{ 'Search results on demand'|trans }}: {{ queryStr }}</h1>
+                {% else %}
+                    <h1>{{ 'Search'|trans }}</h1>
+                 {% endif %}
+            </div>
+        </div>
+    </section>
 {% endblock %}
 
 {% block content %}
     {% set queryStr = app.request.get('str') %}
-
-    <div class="search">
-        <div class="search__box">
-            <input type="text" placeholder="{{ 'Search'|trans }}" class="search__pole" value="{{ queryStr }}">
-            <input type="button" class="search__button search__icon search__icon_search">
+    <section class="section">
+        <div class="container"> 
+            <div class="search-page">
+                <div class="search-page__box">
+                    <input type="text" placeholder="{{ 'Search'|trans }}" class="search-page__pole" value="{{ queryStr }}">
+                    <input type="button" class="search-page__button search-page__icon search-page__icon_search">
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div class="content content_catalog">
-        {% if articleList is not empty %}
-            {% for article in articleList %}
-                <a href="{{ path('article_show', { 'id': article.id }) }}"  class="news__item">
-                    <div class="news__img"><img src="{{ asset(article.preview_file_url|thumbImage) }}"></div>
-                    <div class="news__topic">{{ 'Search'|trans }}</div>
-                    <div class="news__title">{{ attribute(article, 'title_' ~ app.request.locale) }}</div>
-                    <div class="news__info clearfix">
-                        <div class="news__coment icons_message-blue">{{ article.comments }}</div>
-                        <div class="news__date">
-                            {{ article.created_at|date|localizeddate('full', 'none', app.request.locale, null, 'd MMMM yyyy') }}
+    <section class="section"> 
+        <div class="container">
+            {% if articleList is not empty %}
+                <div class="article-list">
+                    {% for article in articleList %}
+                        <div class="article-list__item">
+                            <div class="article-list__item-wrap">
+                                <div class="article-list__item-wrap-image">
+                                    <a href="{{ path('article_show', { 'id': article.id }) }}">
+                                        <img src="{{ asset(article.preview_file_url|thumbImage) }}" alt="">
+                                    </a>
+                                </div>
+                                <div class="article-list__item-wrap-information">
+                                    <div class="article-list__item-wrap-information-date">
+                                        <span>{{ article.created_at|date|localizeddate('full', 'none', app.request.locale, null, 'd MMMM yyyy' ) }}</span>
+                                    </div>
+                                    <div class="article-list__item-wrap-information-title">
+                                        <a href="{{ path('article_show', { 'id': article.id }) }}">
+                                            <h2>{{ attribute(article, 'title_' ~ app.request.locale) }}</h2>
+                                        </a>
+                                    </div>
+                                    <div class="article-list__item-wrap-information-button component-read-more-wrap">
+                                        <a href="{{ path('article_show', { 'id': article.id }) }}" class="component-read-more">{{ 'More detailed'|trans }}<img src="/themes/public/img/arrow-red.svg" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </a>
-                <!--.news__item-->
-            {% endfor %}
-        {% else %}
-            <h2>{{ 'No results'|trans }}</h2>
-        {% endif %}
-    </div>
-
-    {% if hideButton == false %}
-        <div class="button_posit-box get-more-search-results" data-page="{{ currentPage }}" data-str="{{ queryStr }}"
-             data-url="{{ path('get_more_results') }}">
-            <div class="button button_center">{{ 'Show more'|trans }}</div>
+                    {% endfor %}
+                </div>
+            {% elseif queryStr %}
+                <h2>{{ 'No results'|trans }}</h2>
+            {% endif %}
+            <div class="pagination">
+                {{ pagination|raw }}
+            </div>
         </div>
-    {% endif %}
-    <div class="pagination clearfix">
-        {{ pagination|raw }}
-    </div>
+    </section>
 {% endblock %}

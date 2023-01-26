@@ -4,3 +4,23 @@
         font-size: 32px;
     }
 }
+
+.sub-title-page__date
+{
+    font-size: 12px;
+
+    padding-left: 29px;
+
+    color: $gray;
+
+    padding-bottom: 25px;
+
+    & span{
+        vertical-align: middle;
+    }
+
+    @media (max-width: 830px)
+    {
+        margin: 0 0 10px 0;
+    }
+}

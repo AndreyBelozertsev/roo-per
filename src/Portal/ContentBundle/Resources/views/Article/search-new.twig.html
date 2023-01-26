@@ -1,43 +1,54 @@
 {% extends 'PortalContentBundle::base.html.twig' %}
 
-{% block meta %}
-    <meta property="og:image" content="{{ asset(magazine.attachment.previewFileUrl|thumbImage) }}" />
-    <meta property="og:title" content="{{ attribute(magazine, 'title' ~ app.request.locale) }}" />
-    {#<meta property="og:description" content="{{  }}" />#}
-{% endblock %}
-
 {% block info_page %}
+    {% set queryStr = app.request.get('str') %}
+
     <section class="info-page">
         <div class="container">
             <div class="bread-crumbs">
                 <ul>
                     <li><a href="{{ path('portal_content_homepage') }}">{{ 'Home'|trans }}</a></li>
-                    <li><a href="{{ path('magazine') }}">{{ 'Magazine'|trans }}</a></li>
-                    <li>{{ attribute(magazine, 'title' ~ app.request.locale)|sliceFullWord(50) }}</li>
+                    <li>{{ 'Search'|trans }}</li>
                 </ul>
             </div>
         </div>
     </section>
     <section class="section">
         <div class="container"> 
-            <div class="title-page"> 
-                <h1>{{ attribute(magazine, 'title' ~ app.request.locale) }}</h1>
+            <div class="title-page">
+                {% if queryStr %}
+                    <h1>{{ 'Search results on demand'|trans }}: {{ queryStr }}</h1>
+                {% else %}
+                    <h1>{{ 'Search'|trans }}</h1>
+                 {% endif %}
             </div>
         </div>
     </section>
 {% endblock %}
 
 {% block content %}
+    {% set queryStr = app.request.get('str') %}
+    <section class="section">
+        <div class="container"> 
+            <form class="search-page" method="GET" action="{{ path('search') }}">
+                <div class="search-page__box">
+                    <input type="text" placeholder="{{ 'Search'|trans }}" class="search-page__pole" value="{{ queryStr }}">
+                    <input type="submit" class="search-page__button search-page__icon search-page__icon_search">
+                </div>
+            </form>
+        </div>
+    </section>
+
     <section class="section"> 
         <div class="container">
-            {% if magazineArticleList %}
+            {% if articleList is not empty %}
                 <div class="article-list">
-                    {% for article in magazineArticleList %}
+                    {% for article in articleList %}
                         <div class="article-list__item">
                             <div class="article-list__item-wrap">
                                 <div class="article-list__item-wrap-image">
-                                    <a href="{{ path('magazine_article_show', { 'id': article.id }) }}">
-                                        <img src="{{ article.preview_file_url }}" alt="{{ attribute(article, 'title_' ~ app.request.locale) }}">
+                                    <a href="{{ path('article_show', { 'id': article.id }) }}">
+                                        <img src="{{ asset(article.preview_file_url|thumbImage) }}" alt="">
                                     </a>
                                 </div>
                                 <div class="article-list__item-wrap-information">
@@ -45,19 +56,24 @@
                                         <span>{{ article.created_at|date|localizeddate('full', 'none', app.request.locale, null, 'd MMMM yyyy' ) }}</span>
                                     </div>
                                     <div class="article-list__item-wrap-information-title">
-                                        <a href="{{ path('magazine_article_show', { 'id': article.id }) }}">
+                                        <a href="{{ path('article_show', { 'id': article.id }) }}">
                                             <h2>{{ attribute(article, 'title_' ~ app.request.locale) }}</h2>
                                         </a>
                                     </div>
                                     <div class="article-list__item-wrap-information-button component-read-more-wrap">
-                                        <a href="{{ path('magazine_article_show', { 'id': article.id }) }}" class="component-read-more">{{ 'More detailed'|trans }}<img src="/themes/public/img/arrow-red.svg"></a>
+                                        <a href="{{ path('article_show', { 'id': article.id }) }}" class="component-read-more">{{ 'More detailed'|trans }}<img src="/themes/public/img/arrow-red.svg" alt=""></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
                 </div>
+            {% else %}
+                <h2>{{ 'No results'|trans }}</h2>
             {% endif %}
+            <div class="pagination">
+                {{ pagination|raw }}
+            </div>
         </div>
     </section>
 {% endblock %}

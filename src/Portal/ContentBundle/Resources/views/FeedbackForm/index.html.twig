@@ -1,24 +1,33 @@
 {% extends 'PortalContentBundle::base.html.twig' %}
 
 {% block info_page %}
-    <div class="info-page">
-        <div class="info-page__posit">
-            <div class="bread-crumbs">
-                <ul>
-                    <li><a href="#">{{ 'Home'|trans }}</a></li>
-                    <li>{{ 'Feedback'|trans }}</li>
-                </ul>
-            </div>
-            <div class="title-page">{{ 'Feedback'|trans }}</div>
+    <section class="info-page">
+        <div class="container">
+          <div class="bread-crumbs">
+            <ul>
+              <li><a href="/">Главная</a></li>
+              <li>{{ 'Feedback'|trans }}</li>
+            </ul>
+          </div>
         </div>
-    </div>
+    </section>
+    <section class="section">
+        <div class="container"> 
+          <div class="title-page"> 
+            <h1>{{ 'Feedback'|trans }}</h1>
+          </div>
+        </div>
+    </section>
 {% endblock %}
 
 {% block content %}
-    <div class="content__contact-info">
-        {{ feedback.content|raw }}
+<section class="section"> 
+    <div class="container">
+        <div class="content__contact-info">
+            {{ feedback.content|raw }}
+        </div> 
     </div>
-
+</section>
     {%  if (feedback.isFormShown) %}
         {% include 'PortalContentBundle:FeedbackForm:form.html.twig' %}
     {% endif %}

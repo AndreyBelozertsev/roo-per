@@ -28,15 +28,15 @@ post_show:
     options:
         expose: true
 
-get_more_posts:
-    path: /{_locale}{trailingSlashLang}post/get-more-post{trailingSlash}
-    defaults: { _controller: PortalContentBundle:Post:getPosts, page: "0", trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
-    requirements:
-        trailingSlash : "[/]{0,1}"
-        trailingSlashLang : "[/]{0,1}"
-        _locale: "%available_lang%"
-    options:
-        expose: true
+# get_more_posts:
+#     path: /{_locale}{trailingSlashLang}post/get-more-post{trailingSlash}
+#     defaults: { _controller: PortalContentBundle:Post:getPosts, page: "0", trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+#     requirements:
+#         trailingSlash : "[/]{0,1}"
+#         trailingSlashLang : "[/]{0,1}"
+#         _locale: "%available_lang%"
+#     options:
+#         expose: true
 
 # magazine-newspaper
 magazine-newspaper:
@@ -71,15 +71,15 @@ magazine_show:
     options:
         expose: true
 
-get_more_magazines:
-    path: /{_locale}{trailingSlashLang}magazine-newspaper/magazine/get-more-magazines{trailingSlash}
-    defaults: { _controller: PortalContentBundle:Magazine:getMoreMagazines, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
-    requirements:
-        trailingSlash : "[/]{0,1}"
-        trailingSlashLang : "[/]{0,1}"
-        _locale: "%available_lang%"
-    options:
-        expose: true
+# get_more_magazines:
+#     path: /{_locale}{trailingSlashLang}magazine-newspaper/magazine/get-more-magazines{trailingSlash}
+#     defaults: { _controller: PortalContentBundle:Magazine:getMoreMagazines, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+#     requirements:
+#         trailingSlash : "[/]{0,1}"
+#         trailingSlashLang : "[/]{0,1}"
+#         _locale: "%available_lang%"
+#     options:
+#         expose: true
 
 magazine_article_show:
     path: /{_locale}{trailingSlashLang}magazine-article/show/{id}{trailingSlash}
@@ -103,15 +103,15 @@ newspaper:
     options:
         expose: true
 
-get_more_newspapers:
-    path: /{_locale}{trailingSlashLang}magazine-newspaper/newspaper/get-more-newspapers{trailingSlash}
-    defaults: { _controller: PortalContentBundle:Newspaper:getMoreNewspapers, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
-    requirements:
-        trailingSlash : "[/]{0,1}"
-        trailingSlashLang : "[/]{0,1}"
-        _locale: "%available_lang%"
-    options:
-        expose: true
+# get_more_newspapers:
+#     path: /{_locale}{trailingSlashLang}magazine-newspaper/newspaper/get-more-newspapers{trailingSlash}
+#     defaults: { _controller: PortalContentBundle:Newspaper:getMoreNewspapers, trailingSlash : "/", trailingSlashLang: "/", _locale: "%locale%" }
+#     requirements:
+#         trailingSlash : "[/]{0,1}"
+#         trailingSlashLang : "[/]{0,1}"
+#         _locale: "%available_lang%"
+#     options:
+#         expose: true
 
 # articles
 article_show:

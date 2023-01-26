@@ -6,9 +6,12 @@
     {#<meta property="og:description" content="{{  }}" />#}
 {% endblock %}
 
-{% block info_page %}
-    <div class="info-page">
-        <div class="info-page__posit">
+{% block info_page %}    
+
+    {# magazineArticle.viewsCounter|pluralize('Views_plural'|trans) #}
+
+    <section class="info-page">
+        <div class="container">
             <div class="bread-crumbs">
                 <ul>
                     <li><a href="{{ path('portal_content_homepage') }}">{{ 'Home'|trans }}</a></li>
@@ -17,81 +20,106 @@
                     <li>{{ attribute(magazineArticle, 'title' ~ app.request.locale)|sliceFullWord(50) }}</li>
                 </ul>
             </div>
-            <div class="title-page">{{ 'Magazine'|trans }}</div>
         </div>
-    </div>
-                
-    <img src="{{ asset(magazineArticle.attachment.previewFileUrl|thumbImage) }}">
-    
-    {{ attribute(magazineArticle, 'title' ~ app.request.locale) }}
-    {{ magazineArticle.createdAt|date|localizeddate('full', 'none', app.request.locale, null, 'd MMMM yyyy' ) }}
-    {{ magazineArticle.viewsCounter|pluralize('Views_plural'|trans) }}
+    </section>
 
 {% endblock %}
 
 {% block content %}
-    {{ dump(magazineArticle) }}
-
-    <div class="comments">
-        <div class="comments__top">
-            <div class="comments__social">
-                {{ share.render(asset(magazineArticle.attachment.previewFileUrl|thumbImage), attribute(magazineArticle, 'title' ~ app.request.locale))|raw }}
+    <section class="section">
+        <div class="container"> 
+            <div class="title-page"> 
+                <h1>{{ attribute(magazineArticle, 'title' ~ app.request.locale) }}</h1>
             </div>
-            <div class="comments__info">
-                <div class="comments__view icons_eye-blue">{{ magazineArticle.viewsCounter|pluralize('Views_plural'|trans) }}</div>
-                <div class="comments__coment icons_message-blue">{{ comments|length|pluralize('Comments_plural'|trans) }}</div>
+            <div class="sub-title-page__date icons_calendar-blue">
+                <span>{{ magazineArticle.createdAt|date|localizeddate('full', 'none', app.request.locale, null, 'd MMMM yyyy' ) }}</span>
             </div>
         </div>
-        <div class="comments__form-top">
-            <div class="comments__title">{{ 'Comments_'|trans }} ({{ comments|length }})</div>
-            <div class="comments__add-coment icons_message-black">{{ 'Post comment'|trans }}</div>
+    </section>
+    <section class="section"> 
+        <div class="container">
+            <div class="thumbnail-page">
+                <div class="thumbnail-page__img-wrap"><img src="{{ asset(magazineArticle.attachment.previewFileUrl) }}" alt="{{ attribute(magazineArticle, 'title' ~ app.request.locale) }}"></div>
+            </div>
         </div>
-
-        {% if thanks is defined %}
-            <div class="content__message-form">{{ thanks|trans }}</div>
-        {% else %}
-            {% set open = formOpened is defined ? ' comments__form_open' : '' %}
-            {{ form_start(form, {'attr': {'class': 'comments__form' ~ open }}) }}
-            <div class="comments__form-row">
-                <div class="comments__form-lable">{{ 'Name'|trans }}</div>
-                {{ form_widget(form.name, {'attr': {'class': 'comments__form__pole'}}) }}
-                {% for error in form.name.vars.errors %}
-                    <div class="comments__form-error">{{ error.message }}</div>
-                {% endfor %}
-            </div>
-            <div class="comments__form-row">
-                <div class="comments__form-lable">{{ 'Comment'|trans }}</div>
-                {{ form_widget(form.text, {'attr': {'class': 'comments__form__pole comments__form__pole_textarea'}}) }}
-                {% for error in form.text.vars.errors %}
-                    <div class="comments__form-error">{{ error.message }}</div>
-                {% endfor %}
-            </div>
-            <div class="comments__form-row">
-                <div class="comments__form-lable">{{ 'CAPCHA'|trans }}</div>
-                {{ form_widget(form.captcha, {'attr': {'class': 'comments__form__pole'}}) }}
-                {% for error in form.captcha.vars.errors %}
-                    <div class="comments__form-error">{{ error.message }}</div>
-                {% endfor %}
-            </div>
-            <div class="comments__form-row">
-                <input class="button" type="submit" value="{{ 'Send'|trans }}"/>
-            </div>
-            {{ form_end(form) }}
-        {% endif %}
-    </div>
-
-    {% for comment in comments %}
-        <div class="discussion">
-            <div class="discussion__left">
-                <div class="discussion__icon icons_user"></div>
-            </div>
-            <div class="discussion__right">
-                <div class="discussion__top">
-                    <div class="discussion__title">{{ comment.name }}</div>
-                    <div class="discussion__date">{{ comment.createdAt|date('d.m.Y') }}</div>
+    </section>
+    <section class="section"> 
+        <div class="container">
+            <div class="content content_catalog"></div>
+                <div class="content content__text">
+                    {{ attribute(magazineArticle, 'content' ~ app.request.locale)|raw }}
+                    <div class="content__small-text">{{ 'position'|trans }}.</div>
                 </div>
-                <div class="discussion__text">{{ comment.text|raw }}</div>
+            </div>   
+        </div>
+    </section>
+    <section class="section">
+        <div class="container"> 
+            <div class="comments">
+                <div class="comments__top">
+                    <div class="comments__social">
+                        {{ share.render(asset(magazineArticle.attachment.previewFileUrl|thumbImage), attribute(magazineArticle, 'title' ~ app.request.locale))|raw }}
+                    </div>
+                    <div class="comments__info">
+                        <div class="comments__view icons_eye-blue">{{ magazineArticle.viewsCounter|pluralize('Views_plural'|trans) }}</div>
+                        <div class="comments__coment icons_message-blue">{{ comments|length|pluralize('Comments_plural'|trans) }}</div>
+                    </div>
+                </div>
+                <div class="comments__form-top">
+                    <div class="comments__title">{{ 'Comments_'|trans }} ({{ comments|length }})</div>
+                    <div class="comments__add-coment icons_message-black">{{ 'Post comment'|trans }}</div>
+                </div>
+
+                {% if thanks is defined %}
+                    <div class="content__message-form">{{ thanks|trans }}</div>
+                {% else %}
+                    {% set open = formOpened is defined ? ' comments__form_open' : '' %}
+                    {{ form_start(form, {'attr': {'class': 'comments__form' ~ open }}) }}
+                    <div class="comments__form-row">
+                        <div class="comments__form-lable">{{ 'Name'|trans }}</div>
+                        {{ form_widget(form.name, {'attr': {'class': 'comments__form__pole'}}) }}
+                        {% for error in form.name.vars.errors %}
+                            <div class="comments__form-error">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="comments__form-row">
+                        <div class="comments__form-lable">{{ 'Comment'|trans }}</div>
+                        {{ form_widget(form.text, {'attr': {'class': 'comments__form__pole comments__form__pole_textarea'}}) }}
+                        {% for error in form.text.vars.errors %}
+                            <div class="comments__form-error">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="comments__form-row">
+                        <div class="comments__form-lable">{{ 'CAPCHA'|trans }}</div>
+                        {{ form_widget(form.captcha, {'attr': {'class': 'comments__form__pole'}}) }}
+                        {% for error in form.captcha.vars.errors %}
+                            <div class="comments__form-error">{{ error.message }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="comments__form-row">
+                        <input class="button" type="submit" value="{{ 'Send'|trans }}"/>
+                    </div>
+                    {{ form_end(form) }}
+                {% endif %}
             </div>
         </div>
-    {% endfor %}
+    </section>
+    <section class="section"> 
+        <div class="container">
+            {% for comment in comments %}
+                <div class="discussion">
+                    <div class="discussion__left">
+                        <div class="discussion__icon icons_user"></div>
+                    </div>
+                    <div class="discussion__right">
+                        <div class="discussion__top">
+                            <div class="discussion__title">{{ comment.name }}</div>
+                            <div class="discussion__date">{{ comment.createdAt|date('d.m.Y') }}</div>
+                        </div>
+                        <div class="discussion__text">{{ comment.text|raw }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}

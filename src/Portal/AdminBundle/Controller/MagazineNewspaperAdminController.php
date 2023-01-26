@@ -30,7 +30,7 @@ class MagazineNewspaperAdminController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
-        $adapter = new ArrayAdapter($em->getRepository('PortalContentBundle:MagazineNewspaper')->findAll());
+        $adapter = new ArrayAdapter($em->getRepository('PortalContentBundle:MagazineNewspaper')->findBy([], ['id'=>'DESC']));
         $pagerfanta = new Pagerfanta($adapter);
         $pagerfanta->setMaxPerPage(PortalHelper::MAX_PER_PAGE_PAGINATION);
         $pagerfanta->setNormalizeOutOfRangePages(true);

@@ -1,9 +1,23 @@
 {% block content %}
-        {% for newspaper in newspaperList %}
-            <div class="magazine-newspaper__item">
-                <div class="magazine-newspaper__img"><img src="{{ asset(newspaper.preview_file_url|thumbImage) }}"></div>
-                <a target="_blank" href="{{ asset(newspaper.file) }}" class="magazine-newspaper__title icons_download">{{ attribute(newspaper, 'title_' ~ app.request.locale) }}</a>
+    {% for newspaper in newspaperList  %}
+        <div class="magazine-newspaper-list__item">
+            <div class="magazine-newspaper-list__item-wrap">
+                <div class="magazine-newspaper-list__item-wrap-image">
+                    <a href="{{ asset(newspaper.file) }}">
+                        <img src="{{ asset(newspaper.preview_file_url|thumbImage) }}" alt="{{ attribute(newspaper, 'title_' ~ app.request.locale) }}">
+                    </a>
+                </div>
+                <div class="magazine-newspaper-list__item-wrap-information">
+                    <div class="magazine-newspaper-list__item-wrap-information-date">
+                        <span>{{ newspaper.created_at|date|localizeddate('full', 'none', app.request.locale, null, 'd MMMM yyyy' ) }}</span>
+                    </div>
+                    <div class="magazine-newspaper-list__item-wrap-information-title">
+                        <a target="_blank"  href="{{ asset(newspaper.file) }}" class="icons_download">
+                            <h2>{{ attribute(newspaper, 'title_' ~ app.request.locale) }}</h2>
+                        </a>
+                    </div>
+                </div>
             </div>
-        {% endfor %}
+        </div>
+    {% endfor %}
 {% endblock %}
-

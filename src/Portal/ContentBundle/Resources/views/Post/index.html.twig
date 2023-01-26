@@ -1,31 +1,35 @@
 {% extends 'PortalContentBundle::base.html.twig' %}
 
 {% block info_page %}
-    <div class="info-page">
-        <div class="info-page__posit">
+    <section class="info-page">
+        <div class="container">
             <div class="bread-crumbs">
                 <ul>
                     <li><a href="{{ path('portal_content_homepage') }}">{{ 'Home'|trans }}</a></li>
                     <li>{{ 'Opinion'|trans }}</li>
                 </ul>
             </div>
-            <div class="title-page">{{ 'Opinion'|trans }}</div>
         </div>
-    </div>
+    </section>
+    <section class="section">
+        <div class="container"> 
+            <div class="title-page"> 
+                <h1>{{ 'Opinion'|trans }}</h1>
+            </div>
+        </div>
+    </section>
 {% endblock %}
 
 {% block content %}
-    <div class="content content_catalog">
-        {% include 'PortalContentBundle:Post:postList.html.twig' %}
-
-    </div>
-    <!--.content-->
-    {% if hideButton == false %}
-        <div class="button_posit-box get-more-posts" data-page="{{ currentPage }}">
-            <div class="button button_center">{{ 'Show more'|trans }}</div>
+    <section class="section"> 
+        <div class="container">
+            <div class="article-list">
+                {% include 'PortalContentBundle:Post:postList.html.twig' %}
+            </div>
+            <!--.content-->
+            <div class="pagination">
+                {{ pagination|raw }}
+            </div>
         </div>
-    {% endif %}
-    <div class="pagination clearfix">
-        {{ pagination|raw }}
-    </div>
+    </section>
 {% endblock %}

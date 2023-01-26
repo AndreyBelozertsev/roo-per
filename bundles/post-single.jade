@@ -64,12 +64,12 @@ html
                 .search-wrap-logo
                     a(href="/")
                         img(src="./public/img/menu-logo.svg", alt="")
-                .search-wrap__container
+                form.search-wrap__container 
                     .search-wrap__container-field
                         a(href="/") 
                             img(src="./public/img/search-input.svg", alt="")
                         input(type="text", placeholder="Поиск", id="myInput")
-                    button(class="search-wrap__container-btn", onclick="document.getElementById('myInput').value = '' ") Отменить
+                    button.search-wrap__container-btn Найти
 
         main
             section.section
@@ -102,7 +102,9 @@ html
             section.section
                 .container 
                     .title-page 
-                            h1 Вадим Волченко: Крым опередил остальные регионы России по числу аттестованных экскурсоводов 
+                            h1 Вадим Волченко: Крым опередил остальные регионы России по числу аттестованных экскурсоводов
+                    .sub-title-page__date.icons_calendar-blue
+                        span 16 ciчня 2020
 
             section.section 
                 .container
@@ -163,7 +165,7 @@ html
                             | возникают некоторые вопросы, связанные с использованием Lorem ipsum на сайтах и проектах,
                             | ориентированных на кириллический контент – написание символов на латыни и на кириллице значительно
                             | различается.
-                    .content__small-text Позиция редакции может быть озвучена только главным редактором. Мнение авторов и приглашенных гостей может не совпадать с позицией нашей редакции.
+                        .content__small-text Позиция редакции может быть озвучена только главным редактором. Мнение авторов и приглашенных гостей может не совпадать с позицией нашей редакции.
    
             section.section
                 .container 

@@ -70,12 +70,12 @@
     <div class="search">
       <div class="search-wrap"> 
         <div class="search-wrap-logo"><a href="/"><img src="/themes/public/img/menu-logo.svg" alt=""></a></div>
-        <div class="search-wrap__container">
-          <div class="search-wrap__container-field"><a href="/"> <img src="/themes/public/img/search-input.svg" alt=""></a>
-            <input type="text" placeholder="{{ 'Search'|trans }}" id="myInput">
-          </div>
-          <button onclick="document.getElementById('myInput').value = '' " class="search-wrap__container-btn">{{ 'Cancel'|trans }}</button>
-        </div>
+        <form class="search-wrap__container" method="GET" action="{{ path('search') }}"> 
+            <div class="search-wrap__container-field"><a href="/"> <img src="./public/img/search-input.svg" alt=""></a>
+                <input type="text" placeholder="Поиск" name="str" class="search__input" id="myInput">
+            </div>
+            <button class="search-wrap__container-btn">{{ 'Search'|trans }}</button>
+        </form>
       </div>
     </div>
     <main>
@@ -102,56 +102,22 @@
         {% block footer %}
 
         {% set params = paramWidget.getParams() %}
+        
         <footer class="section--filled"> 
             <div class="container"> 
                 <div class="footer"> 
                     <div class="footer-head"> 
                         <div class="footer-head__logo">
-                            <img src="/themes/public/img/footer-logo.svg" alt="">
+                            <!--img(src="./public/img/footer-logo.svg", alt="")-->
                         </div>
                         <div class="footer-head__age">
                             <p>{{ params.age }}</p>
                         </div>
                     </div>
                     <div class="footer-menu">
-                        <div class="footer-menu__item-logo">
-                            <a href="{{ path('portal_content_homepage') }}">
-                                <img src="/themes/public/img/logo-gromada.svg" alt="">
-                            </a>
-                        </div>
-                        <ul class="footer-menu__list"> 
-                            {% for id,category in categoryList %}
-                                <li class="footer-menu__list-item">
-                                    <a href="{{ path('view_all_articles', { 'cat': id }) }}">{{ category.title }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                        <ul class="footer-menu__list"> 
-                            <li class="footer-menu__list-item">
-                                <a href="{{ path('post') }}">{{ 'Opinion'|trans }}</a>
-                            </li>
-                            <li class="footer-menu__list-item">
-                                <a href="{{ path('newspaper') }}">{{ 'Newspaper'|trans }}</a>
-                            </li>
-                            <li class="footer-menu__list-item">
-                                <a href="{{ path('photo_report_show', {'id': 1}) }}">{{ 'Gallery'|trans }}</a>
-                            </li>  
-                            <li class="footer-menu__list-item">
-                                <a href="{{ path('feedback_page', {'id': 1}) }}">{{ 'Feedback'|trans }}</a>
-                            </li>
-                        </ul>
-                        <div class="footer-menu__contacts"> 
-                            <div class="footer-menu__contacts-title"> 
-                                <h2>{{ 'Contacts'|trans }}</h2>
-                            </div>
-                            <ul class="footer-menu__list"> 
-                                <li class="footer-menu__list-item">
-                                    <p>{{ params.address }}</p>
-                                </li>
-                                <li class="footer-menu__list-item"> <a href="tel:{{ params.phone }}">{{ params.phone }}</a></li>
-                                <li class="footer-menu__list-item"> <a href="mail:{{ params.email }}">{{ params.email }}</a></li>
-                            </ul>
-                        </div>
+                        <div class="footer-menu__item-logo1"><a href="/"> <img src="/themes/public/img/logo1.svg" alt=""></a></div>
+                        <div class="footer-menu__item-logo2"><a href="/"> <img src="/themes/public/img/logo2.svg" alt=""></a></div>
+                        <div class="footer-menu__item-logo3"><a href="/"> <img src="/themes/public/img/logo3.svg" alt=""></a></div>
                     </div>
                     <div class="footer-license">
                         <p>{{ params.description }}. {{ params.editor }}</p>
@@ -159,7 +125,7 @@
                     </div>
                 </div>
             </div>
-        </footer>
+          </footer>
         {% endblock %}
     </main>
   </body>

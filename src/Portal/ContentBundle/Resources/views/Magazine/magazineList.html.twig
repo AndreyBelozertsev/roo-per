@@ -1,9 +1,28 @@
 {% block content %}
-        {% for magazine in magazineList %}
-            <div class="magazine-newspaper__item">
-                <div class="magazine-newspaper__img"><img src="{{ asset(magazine.preview_file_url|thumbImage) }}"></div>
-                <a href="{{ path('magazine_show',{id : magazine.id}) }}">{{ attribute(magazine, 'title_' ~ app.request.locale) }}</a>
-                <a target="_blank" href="{{ asset(magazine.file) }}" class="magazine-newspaper__title icons_download">Скачать</a>
+    {% for magazine in magazineList %}
+        <div class="magazine-newspaper-list__item">
+            <div class="magazine-newspaper-list__item-wrap">
+                <div class="magazine-newspaper-list__item-wrap-image">
+                    <a href="{{ path('magazine_show',{id : magazine.id}) }}">
+                        <img src="{{ asset(magazine.preview_file_url|thumbImage) }}" alt="{{ attribute(magazine, 'title_' ~ app.request.locale) }}">
+                    </a>
+                </div>
+                <div class="magazine-newspaper-list__item-wrap-information">
+                    <div class="magazine-newspaper-list__item-wrap-information-date">
+                        <span>{{ magazine.created_at|date|localizeddate('full', 'none', app.request.locale, null, 'd MMMM yyyy' ) }}</span>
+                    </div>
+                    <div class="magazine-newspaper-list__item-wrap-information-title">
+                        <a target="_blank" href="{{ asset(magazine.file) }}" class="icons_download">
+                            <h2>{{ attribute(magazine, 'title_' ~ app.request.locale) }}</h2>
+                        </a>
+                    </div>
+                    <div class="magazine-newspaper-list__item-wrap-information-button component-read-more-wrap">
+                        <a href="{{ path('magazine_show',{id : magazine.id}) }}" class="component-read-more">{{ 'More detailed'|trans }}
+                            <img src="/themes/public/img/arrow-red.svg" alt="">
+                        </a>
+                    </div>
+                </div>
             </div>
-        {% endfor %}
+        </div>
+    {% endfor %}
 {% endblock %}

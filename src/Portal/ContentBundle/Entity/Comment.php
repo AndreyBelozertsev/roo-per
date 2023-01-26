@@ -156,6 +156,30 @@ class Comment
     }
 
     /**
+     * Set magazineArticle.
+     *
+     * @param MagazineArticle $magazineArticle
+     *
+     * @return Comment
+     */
+    public function setMagazineArticle($magazineArticle)
+    {
+        $this->magazineArticle = $magazineArticle;
+
+        return $this;
+    }
+
+    /**
+     * Get magazineArticle.
+     *
+     * @return MagazineArticle
+     */
+    public function getMagazineArticle()
+    {
+        return $this->magazineArticle;
+    }
+
+    /**
      * Set isPublished.
      *
      * @param bool $isPublished
