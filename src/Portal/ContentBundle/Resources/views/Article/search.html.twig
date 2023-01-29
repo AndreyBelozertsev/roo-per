@@ -30,12 +30,12 @@
     {% set queryStr = app.request.get('str') %}
     <section class="section">
         <div class="container"> 
-            <div class="search-page">
+            <form class="search-page" method="GET" action="{{ path('search') }}">
                 <div class="search-page__box">
-                    <input type="text" placeholder="{{ 'Search'|trans }}" class="search-page__pole" value="{{ queryStr }}">
-                    <input type="button" class="search-page__button search-page__icon search-page__icon_search">
+                    <input type="text" name="str" placeholder="{{ 'Search'|trans }}" class="search-page__pole" value="{{ queryStr }}">
+                    <button type="submit" class="search-page__button search-page__icon search-page__icon_search"></button>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
 

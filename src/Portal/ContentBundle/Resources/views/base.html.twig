@@ -21,6 +21,7 @@
     {% set categoryList = category_list.getList() %}
     {% set route_name = app.request.get('_route') %}
     {% set category_id = app.request.get('cat') %}
+
     <div class="sidebar">
         <div class="sidebar-wrap"> 
             <div class="sidebar-wrap__functions">
@@ -56,6 +57,9 @@
                 <a href="{{ path('post') }}">{{ 'Opinion'|trans }}</a>
             </li>
             <li class="menu-nav__item">
+                <a href="{{ path('magazine') }}">{{ 'Magazine'|trans }}</a>
+            </li>
+            <li class="menu-nav__item">
                 <a href="{{ path('newspaper') }}">{{ 'Newspaper'|trans }}</a>
             </li>
             <li class="menu-nav__item">
@@ -71,8 +75,8 @@
       <div class="search-wrap"> 
         <div class="search-wrap-logo"><a href="/"><img src="/themes/public/img/menu-logo.svg" alt=""></a></div>
         <form class="search-wrap__container" method="GET" action="{{ path('search') }}"> 
-            <div class="search-wrap__container-field"><a href="/"> <img src="./public/img/search-input.svg" alt=""></a>
-                <input type="text" placeholder="Поиск" name="str" class="search__input" id="myInput">
+            <div class="search-wrap__container-field"><a href="/"> <img src="/themes/public/img/search-input.svg" alt=""></a>
+                <input type="text" placeholder="{{ 'Search'|trans }}" name="str" class="search__input" id="myInput">
             </div>
             <button class="search-wrap__container-btn">{{ 'Search'|trans }}</button>
         </form>
@@ -82,7 +86,7 @@
         <section class="section">
             <div class="container">
                 <div class="logo-wrap">
-                    <a href="{{ path('portal_content_homepage') }}"> <img src="/themes/public/img/logo.svg"></a>
+                    <a href="{{ path('portal_content_homepage') }}"> <img src="/themes/public/img/logo.png"></a>
                 </div>
             </div>
         </section>
@@ -101,31 +105,32 @@
 
         {% block footer %}
 
-        {% set params = paramWidget.getParams() %}
-        
-        <footer class="section--filled"> 
-            <div class="container"> 
-                <div class="footer"> 
-                    <div class="footer-head"> 
-                        <div class="footer-head__logo">
-                            <!--img(src="./public/img/footer-logo.svg", alt="")-->
+            {% set params = paramWidget.getParams() %}
+            
+            <footer class="section--filled"> 
+                <div class="container"> 
+                    <div class="footer"> 
+                        <div class="footer-head"> 
+                            <div class="footer-head__logo">
+                                <!--img(src="./public/img/footer-logo.svg", alt="")-->
+                            </div>
+                            <div class="footer-head__age">
+                                <p>{{ params.age }}</p>
+                            </div>
                         </div>
-                        <div class="footer-head__age">
-                            <p>{{ params.age }}</p>
+                        <div class="footer-menu">
+                            <div class="footer-menu__item-logo1"><img src="/themes/public/img/logo1.svg" alt=""></div>
+                            <div class="footer-menu__item-logo2"><img src="/themes/public/img/logo2.svg" alt=""></div>
+                            <div class="footer-menu__item-logo3"><img src="/themes/public/img/logo3.svg" alt=""></div>
                         </div>
-                    </div>
-                    <div class="footer-menu">
-                        <div class="footer-menu__item-logo1"><a href="/"> <img src="/themes/public/img/logo1.svg" alt=""></a></div>
-                        <div class="footer-menu__item-logo2"><a href="/"> <img src="/themes/public/img/logo2.svg" alt=""></a></div>
-                        <div class="footer-menu__item-logo3"><a href="/"> <img src="/themes/public/img/logo3.svg" alt=""></a></div>
-                    </div>
-                    <div class="footer-license">
-                        <p>{{ params.description }}. {{ params.editor }}</p>
-                        <p>{{ 'now'|date('Y') }} © {{ 'site_title'|trans }}. {{ 'rights'|trans }}.</p>
+                        <div class="footer-license">
+                            <p>{{ params.description }}. {{ params.editor }}</p>
+                            <p>{{ 'now'|date('Y') }} © {{ 'site_title'|trans }}. {{ 'rights'|trans }}.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-          </footer>
+            </footer>
+
         {% endblock %}
     </main>
   </body>

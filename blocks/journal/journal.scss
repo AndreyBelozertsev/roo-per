@@ -53,7 +53,7 @@
             
             top: 60%;
 
-            max-width: 270px;
+            max-width: 210px;
         }
 
         // img:not(:nth-child(5)) {
@@ -355,27 +355,15 @@
             margin-top: 58px;
 
             img {
-                max-width: 407px;
+                max-width: 320px;
             }
 
-            img:nth-child(5) {
-                top: 13px;
-                right: 69%;
-
-                max-width: 575px;
-            }
 
             @media (min-width: 1366px) {
                 img {
-                    max-width: 431px;
+                    max-width: 338px;
                 }
 
-                img:nth-child(5) {
-                    top: 20px;
-                    right: 63%;
-
-                    max-width: 600px;
-                }
             }
         }
 

@@ -214,7 +214,10 @@ gulp.task('jsDev', ['cleanJs'], () => {
 gulp.task('js', ['cleanJs'], () => {
     return gulp.src(jsPath)
         .pipe(concat('script.js'))
-        .pipe(uglify())
+        .pipe(uglify().on('error', function(e){
+            console.log(e);
+            return this.end();
+         }))
         .pipe(gulp.dest(dest));
 });
 

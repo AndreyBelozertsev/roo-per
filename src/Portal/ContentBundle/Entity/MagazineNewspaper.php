@@ -13,7 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class MagazineNewspaper
 {
-    const PAGE_PAGINATION_LIMIT = 9;
+    const PAGE_PAGINATION_LIMIT = 12;
     const HOME_PAGE_LIMIT = 9;
 
     /**

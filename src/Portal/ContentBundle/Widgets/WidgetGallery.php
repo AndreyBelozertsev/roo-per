@@ -13,7 +13,7 @@ class WidgetGallery extends AbstractWidgets
     {
         $photoReportList = $this->container->get('doctrine')->getRepository('PortalContentBundle:PhotoReport')->getAttachmentListPhotoReportById(1);
         return $this->container->get('templating')
-            ->renderResponse('PortalContentBundle:Widgets:Gallery.html.twig', ['photoReportList' => $photoReportList])->getContent();
+            ->renderResponse('PortalContentBundle:Widgets:gallery.html.twig', ['photoReportList' => $photoReportList])->getContent();
     }
 
 }

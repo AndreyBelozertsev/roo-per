@@ -1,35 +1,135 @@
 <!DOCTYPE html>
 <html>
-<title>{{ 'site_title'|trans }}</title>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description"/>
-<meta name="keywords"/>
-<link rel="stylesheet" href="{{ asset('themes/public/style.css') }}"/>
-<script src="{{ asset('themes/public/script.js') }}"></script>
+<head>
+    <title>{{ 'site_title'|trans }}</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="{{ 'site_title'|trans }}"/>
+    <meta name="keywords" content="{{ 'site_title'|trans }}"/>
+    {% block meta %}{% endblock %}
+    <link rel="stylesheet" href="{{ asset('themes/public/style.css') }}"/>
+    <script src="{{ asset('themes/public/script.js') }}"></script>
+    <script src="{{ asset('themes/public/lib/lib.fotorama.js') }}"></script>
+    {# FOS Routing #}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    {# END FOS Routing #}
+    {{ include('@PortalContent/yandex_metrika.html.twig') }}
+</head>
+    {# block info_page #}{# endblock #}
+<body data-copy-message="{{ 'copy_message'|trans }}">
+    {% set categoryList = category_list.getList() %}
+    {% set route_name = app.request.get('_route') %}
+    {% set category_id = app.request.get('cat') %}
 
-<body class="page">
-<div class="header clearfix">
-    <a href="{{ path('portal_content_homepage') }}" class="logo"></a>
-    <div class="nav clearfix"></div>
-</div>
-<div class="wrapper">
-    <div style="text-align: center; width: 100%; margin: 50px 0 90px; font-size: 350%; color: #888;">
-        <h1>404</h1>
-        <h2>{{ 'error_page.text_404'|trans }}</h2>
-    </div>
-</div>
-<div class="footer">
-    <div class="footer__nav-posit">
-        <div class="footer__nav-bg">
-            <div class="footer__nav"></div>
+    <div class="sidebar">
+        <div class="sidebar-wrap"> 
+            <div class="sidebar-wrap__functions">
+                <div class="sidebar-wrap__search-btn">
+                    <img src="/themes/public/img/search.svg" alt="">
+                </div>
+                <div class="sidebar-wrap__lang">
+                    <img src="/themes/public/img/GlobeSimple.svg" alt="">
+                    <span class="selected">{{ app.request.locale == 'uk' ? 'ua' : app.request.locale  }}</span>
+                </div>
+                <ul class="sidebar-wrap__lang-switch">
+                    {% set route = app.request.attributes.get('_route') %}
+                    {% set route_params = app.request.attributes.get('_route_params')|merge(app.request.query.all()) %}
+                    <li class="sidebar-wrap__lang-switch__point"><img src="/themes/public/img/pointer.svg" alt=""></li>
+                    <li class="sidebar-wrap__lang-switch__item"><a href="{{ path(route, route_params|merge({ 'trailingSlashLang': '/', '_locale': 'ru' })) }}"><span class="option">RU</span></a></li>
+                    <li class="sidebar-wrap__lang-switch__item"><a href="{{ path(route, route_params|merge({ 'trailingSlashLang': '/', '_locale': 'uk' })) }}"><span class="option">UA</span></a></li>
+                </ul>
+            </div>
+            <div class="sidebar-wrap__menu"><span></span></div>
+            {{ socialNetworkWidget.render()|raw }}
         </div>
     </div>
-    <div class="footer__info clearfix">
-        <div class="footer__copright">2019 © {{ 'site_title'|trans }}. {{ 'rights'|trans }}.</div>
-        <div class="footer__link">{{ 'Development'|trans }} - <a href="https://krtech.ru/">ГУП РК «Крымтехнологии»</a>
-        </div>
+    <nav class="menu"> 
+      <div class="menu-wrap"> 
+        <div class="menu-wrap-logo"><a href="{{ path('portal_content_homepage') }}"><img src="/themes/public/img/menu-logo.svg" alt=""></a></div>
+        <ul class="menu-nav__list">
+            {% for id, category in categoryList %}
+                <li class="menu-nav__item">
+                    <a href="{{ path('view_all_articles', {'cat': id}) }}">{{ category.title }}</a>
+                </li>
+            {% endfor %}
+            <li class="menu-nav__item">
+                <a href="{{ path('post') }}">{{ 'Opinion'|trans }}</a>
+            </li>
+            <li class="menu-nav__item">
+                <a href="{{ path('magazine') }}">{{ 'Magazine'|trans }}</a>
+            </li>
+            <li class="menu-nav__item">
+                <a href="{{ path('newspaper') }}">{{ 'Newspaper'|trans }}</a>
+            </li>
+            <li class="menu-nav__item">
+                <a href="{{ path('photo_report_show', {'id': 1}) }}">{{ 'Gallery'|trans }}</a>
+            </li>  
+            <li class="menu-nav__item">
+                <a href="{{ path('feedback_page', {'id': 1}) }}">{{ 'Feedback'|trans }}</a>
+            </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="search">
+      <div class="search-wrap"> 
+        <div class="search-wrap-logo"><a href="/"><img src="/themes/public/img/menu-logo.svg" alt=""></a></div>
+        <form class="search-wrap__container" method="GET" action="{{ path('search') }}"> 
+            <div class="search-wrap__container-field"><a href="/"> <img src="/themes/public/img/search-input.svg" alt=""></a>
+                <input type="text" placeholder="{{ 'Search'|trans }}" name="str" class="search__input" id="myInput">
+            </div>
+            <button class="search-wrap__container-btn">{{ 'Search'|trans }}</button>
+        </form>
+      </div>
     </div>
-</div>
-</body>
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="logo-wrap">
+                    <a href="{{ path('portal_content_homepage') }}"> <img src="/themes/public/img/logo.svg"></a>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                <div style="text-align: center; width: 100%; margin: 50px 0 90px; font-size: 350%; color: #888;">
+                    <h1>404</h1>
+                    <h2>{{ 'error_page.text_404'|trans }}</h2>
+                </div>
+            </div>
+        </section>
+        
+
+
+        {% block footer %}
+
+            {% set params = paramWidget.getParams() %}
+            
+            <footer class="section--filled"> 
+                <div class="container"> 
+                    <div class="footer"> 
+                        <div class="footer-head"> 
+                            <div class="footer-head__logo">
+                                <!--img(src="./public/img/footer-logo.svg", alt="")-->
+                            </div>
+                            <div class="footer-head__age">
+                                <p>{{ params.age }}</p>
+                            </div>
+                        </div>
+                        <div class="footer-menu">
+                            <div class="footer-menu__item-logo1"><img src="/themes/public/img/logo1.svg" alt=""></div>
+                            <div class="footer-menu__item-logo2"><img src="/themes/public/img/logo2.svg" alt=""></div>
+                            <div class="footer-menu__item-logo3"><img src="/themes/public/img/logo3.svg" alt=""></div>
+                        </div>
+                        <div class="footer-license">
+                            <p>{{ params.description }}. {{ params.editor }}</p>
+                            <p>{{ 'now'|date('Y') }} © {{ 'site_title'|trans }}. {{ 'rights'|trans }}.</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        {% endblock %}
+    </main>
+  </body>
 </html>
